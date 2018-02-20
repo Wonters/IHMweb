@@ -1,19 +1,24 @@
 # coding=UTF-8
 from acbbs.tools.log import *
 
+from os.path import basename, splitext
+
 class dataBase(object):
+
+    class _simulate(object):
+        def __init__(self):
+            return
+
     def __init__(self, name = None, simulate = False):
-        """
+        self.logger = get_logger(splitext(basename(__file__))[0])
+        if simulate :
+            self.logger.info("Init dataBase in Simulate")
+            self._dev = self._simulate()
+        else :
+            self.logger.info("Init dataBase")
+            self.database = self.__openDataBase()
 
-
-        @param string name :
-        @param bool simulate :
-        @return  :
-        @author
-        """
-        pass
-
-    def writeDataBase(self, _kwargs):
+    def writeDataBase(self, **kwargs):
         """
 
 

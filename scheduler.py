@@ -4,12 +4,10 @@
 import argparse
 from acbbs.testcases.rxGainLNAs import *
 
-
 def main(args):
-    print "test"
     tcGainLNAs = rxGainLNAs()
     tcGainLNAsrxProgress = tcGainLNAs.getProgress()
-    print tcGainLNAsrxProgress
+    tcGainLNAs.run()
     exit(0)
 
 if __name__ == '__main__':

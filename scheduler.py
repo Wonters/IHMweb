@@ -8,6 +8,9 @@ def main(args):
     tcGainLNAs = rxGainLNAs()
     tcGainLNAsrxProgress = tcGainLNAs.getProgress()
     tcGainLNAs.run()
+
+    tcGainLNAs.test()
+
     exit(0)
 
 if __name__ == '__main__':

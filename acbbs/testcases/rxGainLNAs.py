@@ -15,3 +15,6 @@ class rxGainLNAs(baseTestCase):
 
     def run(self):
         pass
+
+    def test(self):
+        pass

@@ -1,5 +1,7 @@
 # coding=UTF-8
+
 from acbbs.tools.log import *
+from acbbs.tools.configurationFile import *
 
 from os.path import basename, splitext
 
@@ -12,11 +14,12 @@ class dataBase(object):
     def __init__(self, name = None, simulate = False):
         self.logger = get_logger(splitext(basename(__file__))[0])
         if simulate :
-            self.logger.info("Init dataBase in Simulate")
-            self._dev = self._simulate()
+            self.logger.debug("Init dataBase in Simulate")
         else :
-            self.logger.info("Init dataBase")
-            self.database = self.__openDataBase()
+            self.logger.debug("Init dataBase")
+
+        self.conf = configurationFile(file = splitext(basename(__file__))[0])
+        self.__openDataBase()
 
     def writeDataBase(self, **kwargs):
         """
@@ -40,10 +43,6 @@ class dataBase(object):
         pass
 
     def __openDataBase(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        pass
+        server = self.conf.getConfiguration("mongodb-ip")
+        port = self.conf.getConfiguration("mongodb-port")
+        self.logger.debug("Open MongoDB at : {0}:{1}".format(server, port))

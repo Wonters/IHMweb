@@ -1,0 +1,9 @@
+{
+  "dataBase":{
+    "mongodb-ip":"127.0.0.1",
+    "mongodb-port":"21037"
+  },
+  "rxGainLNAs":{
+    "test":""
+  }
+}

@@ -14,18 +14,12 @@ class configurationFile(object):
         else :
             self.logger.debug("Init configurationFile")
         self.file = file
+        self.__openConfigurationFile()
+
+    def getConfiguration(self):
+        self.logger.debug("Get configuration for \"{0}\"".format(self.file))
+        return self.json_data[self.file]
+
+    def __openConfigurationFile(self):
         with open("acbbs/configuration.json") as json_file:
             self.json_data = json.load(json_file)
-
-    def openConfigurationFile(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        pass
-
-    def getConfiguration(self, key = None):
-        self.logger.debug("Get configuration at \"{0}\"/\"{1}\":\"{2}\"".format(self.file, key, self.json_data[self.file][key]))
-        return self.json_data[self.file][key]

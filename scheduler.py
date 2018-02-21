@@ -2,14 +2,14 @@
 # coding=UTF-8
 
 import argparse
-from acbbs.testcases.rxGainLNAs import *
+from acbbs.testcases.genericTc import *
 
 def main(args):
-    tcGainLNAs = rxGainLNAs()
-    tcGainLNAsrxProgress = tcGainLNAs.getProgress()
-    tcGainLNAs.run()
+    tcGenericTc = genericTc()
+    progress = tcGenericTc.getProgress()
+    tcGenericTc.run()
 
-    tcGainLNAs.test()
+    #tcGenericTc.test()
 
     exit(0)
 

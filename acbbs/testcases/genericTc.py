@@ -6,6 +6,7 @@ from acbbs.drivers.ate.SpecAn import *
 from acbbs.drivers.ate.RFSigGen import *
 
 from os.path import basename, splitext
+from time import strftime
 
 class genericTc(baseTestCase):
     def __init__(self):
@@ -36,7 +37,7 @@ class genericTc(baseTestCase):
                         #start measurement
 
                         #write measures
-                        self.measures.append(self.__formatMeasures(temperature, vdd, power, "LNA", "ATTEN", "LNA", 456, 12, 12, 12))
+                        self.measures.append(self.__formatMeasures(temperature, vdd, power, "LNA", "ATTEN", "LNA", 456, 12, 12, vdd))
 
         #write measures in databsae
         self.db.writeDataBase(self.__formatDict(self.measures))
@@ -45,8 +46,8 @@ class genericTc(baseTestCase):
         return {
             "bench_informations":{
                 "version":"1.0.0",
-                "date":"2018_02_18",
-                "heure":"18:56:23"
+                "date":strftime("%Y_%m_%d"),
+                "heure":strftime("%H_%M_%S")
             },
             "tcConfiguration":{
                 "temperature":self.tcConf["temperature"],

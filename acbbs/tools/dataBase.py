@@ -6,8 +6,7 @@ from acbbs.tools.configurationFile import *
 from os.path import basename, splitext
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
-
-import time
+from time import strftime
 
 class dataBase(object):
 
@@ -30,7 +29,7 @@ class dataBase(object):
         self.dbConf = self.conf.getConfiguration()
 
         #collection name
-        self.collection = "{0}_{1}".format(collection, time.strftime("%Y_%m_%d_%H_%M_%S"))
+        self.collection = "{0}_{1}".format(collection, strftime("%Y_%m_%d_%H_%M_%S"))
 
         #open dataBase
         self.__openDataBase()

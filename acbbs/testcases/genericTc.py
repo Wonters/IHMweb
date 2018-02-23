@@ -5,15 +5,13 @@ from acbbs.drivers.dut import *
 from acbbs.drivers.ate.SpecAn import *
 from acbbs.drivers.ate.RFSigGen import *
 
-from time import strftime
-
 class genericTc(baseTestCase):
     def __init__(self):
         #legacy
         baseTestCase.__init__(self)
 
-        #create master key
-        self.__createMasterKey()
+        #create key
+        self.measuresKey = {}
 
     def run(self):
         #start loop
@@ -30,28 +28,25 @@ class genericTc(baseTestCase):
 
                         #write measures
                         self.__writeMeasure(dutID, "LNA", "ATTEN", "LNA", 456, 12, 12)
-                        pass
 
-            #write measures in databsae
-            self.db.writeDataBase(dutID, self.masterKey)
-
-    def __formatDict(self, measure):
-        return {
-            "bench_informations":{
-                "version":"1.0.0",
-                "date":strftime("%Y_%m_%d"),
-                "heure":strftime("%H_%M_%S")
-            },
-            "tcConfiguration":{
-                "temperature":self.tcConf["temperature"],
-                "voltage":self.tcConf["voltage"],
-                "power":self.tcConf["power"]
-            },
-            "measures":measure
-        }
+            #write measures in database
+            self.db.writeDataBase(dutID, self.__createMasterKey())
 
     def __writeMeasure(self, dutID, preamp0, preamp1, preamp2, baseband, irr, dPhase):
         pass
 
     def __createMasterKey(self):
-        self.masterKey = {self.date:""}
+        return {
+            self.date:{
+                "bench_informations":{
+                    "{0}_version".format(self.__class__.__name__):"1.0.0",
+                    "acbbs_version":"1.0.0"
+                },
+                "tcConfiguration":{
+                    "temperature":self.tcConf["temperature"],
+                    "voltage":self.tcConf["voltage"],
+                    "power":self.tcConf["power"]
+                },
+                "measures":self.measuresKey
+            }
+        }

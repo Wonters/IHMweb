@@ -5,7 +5,6 @@ from acbbs.drivers.dut import *
 from acbbs.drivers.ate.SpecAn import *
 from acbbs.drivers.ate.RFSigGen import *
 
-from os.path import basename, splitext
 from time import strftime
 
 class genericTc(baseTestCase):
@@ -13,15 +12,8 @@ class genericTc(baseTestCase):
         #legacy
         baseTestCase.__init__(self)
 
-        #init dataBase
-        self.db = dataBase(collection = splitext(basename(__file__))[0])
-
-        #get configuration testcases
-        self.conf = configurationFile(file = splitext(basename(__file__))[0])
-        self.tcConf = self.conf.getConfiguration()
-
-        #variables
-        self.measures = []
+        #create master key
+        self.__createMasterKey()
 
     def run(self):
         #start loop
@@ -37,10 +29,11 @@ class genericTc(baseTestCase):
                         #start measurement
 
                         #write measures
-                        self.measures.append(self.__formatMeasures(temperature, vdd, power, "LNA", "ATTEN", "LNA", 456, 12, 12, vdd))
+                        self.__writeMeasure(dutID, "LNA", "ATTEN", "LNA", 456, 12, 12)
+                        pass
 
-        #write measures in databsae
-        self.db.writeDataBase(self.__formatDict(self.measures))
+            #write measures in databsae
+            self.db.writeDataBase(dutID, self.masterKey)
 
     def __formatDict(self, measure):
         return {
@@ -57,58 +50,8 @@ class genericTc(baseTestCase):
             "measures":measure
         }
 
-    def __formatMeasures(self, temperature, vdd, power, preamp0, preamp1, preamp2, baseband, irr, dPhase, dGain):
-        return {
-            "data-input":{
-                "dut-id":"R2D2",
-                "tc-name":"genericTc",
-                "temperature":temperature,
-                "vdd":vdd,
-                "power":power
-            },
-            "ate-configuration":{
-                "ClimCham":{
-                    "reference":"xxxxxxxxx",
-                    "version":"xxxxxxxxx",
-                    "error":[],
-                    "temp_consigne":"20",
-                    "temp_real":"20.02",
-                    "humidity_consigne":"80",
-                    "humidity_real":"80.2"
-                },
-                "Swtch":{
-                    "reference":"xxxxxxxxx",
-                    "version":"xxxxxxxxx",
-                    "error":["57", "64"],
-                    "input":"2",
-                    "output":"1"
-                },
-                "DCPwr":{
-                    "reference":"xxxxxxxxx",
-                    "version":"xxxxxxxxx",
-                    "error":["57", "64"],
-                    "status":"ON",
-                    "current_consigne":"5",
-                    "current_real":"2.6",
-                    "voltage_consigne":"12.5",
-                    "voltage_real":"12.5"
-                },
-                "RFSigGen":{
-                    "reference":"xxxxxxxxx",
-                    "version":"xxxxxxxxx",
-                    "error":["57", "64"],
-                    "status":"ERROR",
-                    "power":"-90",
-                    "frequence":"869525000"
-                }
-            },
-            "data-output":{
-                "preamp0":preamp0,
-                "preamp1":preamp1,
-                "preamp2":preamp2,
-                "baseband":baseband,
-                "irr":irr,
-                "dPhase":dPhase,
-                "dGain":dGain
-            }
-        }
+    def __writeMeasure(self, dutID, preamp0, preamp1, preamp2, baseband, irr, dPhase):
+        pass
+
+    def __createMasterKey(self):
+        self.masterKey = {self.date:""}

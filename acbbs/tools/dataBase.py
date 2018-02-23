@@ -3,9 +3,8 @@
 from acbbs.tools.log import *
 from acbbs.tools.configurationFile import *
 
-from os.path import basename, splitext
 from pymongo import MongoClient
-from pymongo.errors import ServerSelectionTimeoutError
+from pymongo.errors import ServerSelectionTimeoutError, DuplicateKeyError
 from time import strftime
 
 class dataBase(object):
@@ -14,9 +13,9 @@ class dataBase(object):
         def __init__(self):
             return
 
-    def __init__(self, collection = None, simulate = False):
+    def __init__(self, file = None, simulate = False):
         #init logs
-        self.logger = get_logger(splitext(basename(__file__))[0])
+        self.logger = get_logger(self.__class__.__name__)
 
         #case of simulate
         if simulate :
@@ -25,30 +24,34 @@ class dataBase(object):
             self.logger.debug("Init dataBase")
 
         #get configuration dataBase
-        self.conf = configurationFile(file = splitext(basename(__file__))[0])
+        self.conf = configurationFile(file = self.__class__.__name__)
         self.dbConf = self.conf.getConfiguration()
 
         #collection name
-        self.collection = "{0}_{1}".format(collection, strftime("%Y_%m_%d_%H_%M_%S"))
+        self.file = file
 
         #open dataBase
         self.__openDataBase()
-        self.__createCollection()
 
         #create dictionnary
         self.bench_informations = {}
         self.configuration = {}
         self.measures = {}
 
-    def writeDataBase(self, measures):
-        post_id = self.db_collection.insert_one(measures).inserted_id
-        self.logger.debug("successful writing at id : {0}".format(post_id))
+    def writeDataBase(self, dutID, measures):
+        self.__openCollection(dutID)
+        try:
+            post_id = self.db_collection.insert_one(measures).inserted_id
+        except DuplicateKeyError as err:
+            self.logger.error(err)
+        else:
+            self.logger.debug("successful writing at id : {0}".format(post_id))
 
     def __openDataBase(self):
         #get server, port and database from json configuration file
         server = self.dbConf["mongodb-ip"]
         port = self.dbConf["mongodb-port"]
-        database = self.dbConf["mongodb-database"]
+        database = self.file
         maxSevSelDelay = self.dbConf["mongodb-maxSevSelDelay"]
         self.logger.debug("Open MongoDB database \"{0}\" at : {1}:{2}".format(database, server, port))
 
@@ -65,8 +68,8 @@ class dataBase(object):
         #open MongoDB database
         self.db = self.client[database]
 
-    def __createCollection(self):
-        self.logger.debug("Create collection {0}".format(self.collection))
+    def __openCollection(self, collection):
+        self.logger.debug("Create collection {0}".format(collection))
 
         #create collection
-        self.db_collection = self.db[self.collection]
+        self.db_collection = self.db[collection]

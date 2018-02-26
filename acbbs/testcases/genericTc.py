@@ -7,11 +7,7 @@ from acbbs.drivers.ate.RFSigGen import *
 
 class genericTc(baseTestCase):
     def __init__(self):
-        #legacy
         baseTestCase.__init__(self)
-
-        #create key
-        self.measuresKey = {}
 
     def run(self):
         #start loop
@@ -27,19 +23,68 @@ class genericTc(baseTestCase):
                         #start measurement
 
                         #write measures
-                        self.__writeMeasure(dutID, "LNA", "ATTEN", "LNA", 456, 12, 12)
+                        self.__writeMeasure({"temperature":temperature, "vdd":vdd, "power":power},
+                                            {"preamp0":"LNA", "preamp1":"ATTEN", "preamp2":"LNA", "irr":12})
 
             #write measures in database
-            self.db.writeDataBase(dutID, self.__createMasterKey())
+            self.db.writeDataBase(dutID, self.__createDocument())
 
-    def __writeMeasure(self, dutID, preamp0, preamp1, preamp2, baseband, irr, dPhase):
-        pass
+    def __writeMeasure(self, dataIn, dataOut):
+        self.allMeasures.append({
+            "data-input":{
+                "temperature":dataIn["temperature"],
+                "vdd":dataIn["vdd"],
+                "power":dataIn["power"]
+            },
+            "ate-configuration":{
+                "ClimCham":{
+                    "reference":"xxxxxxxxx",
+                    "version":"xxxxxxxxx",
+                    "error":[],
+                    "temp_consigne":"20",
+                    "temp_real":"20.02",
+                    "humidity_consigne":"80",
+                    "humidity_real":"80.2"
+                },
+                "Swtch":{
+                    "reference":"xxxxxxxxx",
+                    "version":"xxxxxxxxx",
+                    "error":["57", "64"],
+                    "input":"2",
+                    "output":"1"
+                },
+                "DCPwr":{
+                    "reference":"xxxxxxxxx",
+                    "version":"xxxxxxxxx",
+                    "error":["57", "64"],
+                    "status":"ON",
+                    "current_consigne":"5",
+                    "current_real":"2.6",
+                    "voltage_consigne":"12.5",
+                    "voltage_real":"12.5"
+                },
+                "RFSigGen":{
+                    "reference":"xxxxxxxxx",
+                    "version":"xxxxxxxxx",
+                    "error":["57", "64"],
+                    "status":"ERROR",
+                    "power":"-90",
+                    "frequence":"869525000"
+                }
+            },
+            "data-output":{
+                "preamp0":dataOut["preamp0"],
+                "preamp1":dataOut["preamp1"],
+                "preamp2":dataOut["preamp2"],
+                "irr":dataOut["irr"]
+            }
+        })
 
-    def __createMasterKey(self):
+    def __createDocument(self):
         return {
             self.date:{
                 "bench_informations":{
-                    "{0}_version".format(self.__class__.__name__):"1.0.0",
+                    "tc_version":"1.0.0",
                     "acbbs_version":"1.0.0"
                 },
                 "tcConfiguration":{
@@ -47,6 +92,6 @@ class genericTc(baseTestCase):
                     "voltage":self.tcConf["voltage"],
                     "power":self.tcConf["power"]
                 },
-                "measures":self.measuresKey
+                "measures":self.allMeasures
             }
         }

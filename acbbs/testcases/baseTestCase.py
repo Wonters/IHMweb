@@ -22,6 +22,9 @@ class baseTestCase(object):
         #get date key value
         self.date = strftime("%Y_%m_%d_%H_%M_%S")
 
+        #create measure list
+        self.allMeasures = []
+
     def getProgress(self):
         return self.progress
 

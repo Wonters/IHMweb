@@ -23,15 +23,16 @@ class genericTc(baseTestCase):
                         #start measurement
 
                         #write measures
-                        self.__writeMeasure({"temperature":temperature, "vdd":vdd, "power":power},
+                        self.__writeMeasure({"temperature":temperature, "vdd":vdd, "power":power, "dutID":dutID},
                                             {"preamp0":"LNA", "preamp1":"ATTEN", "preamp2":"LNA", "irr":12})
 
-            #write measures in database
-            self.db.writeDataBase(dutID, self.__createDocument())
+        #write measures in database
+        self.db.writeDataBase(self.__createDocument())
 
     def __writeMeasure(self, dataIn, dataOut):
         self.allMeasures.append({
             "data-input":{
+                "dutID":dataIn["dutID"],
                 "temperature":dataIn["temperature"],
                 "vdd":dataIn["vdd"],
                 "power":dataIn["power"]
@@ -82,16 +83,15 @@ class genericTc(baseTestCase):
 
     def __createDocument(self):
         return {
-            self.date:{
-                "bench_informations":{
-                    "tc_version":"1.0.0",
-                    "acbbs_version":"1.0.0"
-                },
-                "tcConfiguration":{
-                    "temperature":self.tcConf["temperature"],
-                    "voltage":self.tcConf["voltage"],
-                    "power":self.tcConf["power"]
-                },
-                "measures":self.allMeasures
-            }
+            "date":self.date,
+            "bench_informations":{
+                "tc_version":"1.0.0",
+                "acbbs_version":"1.0.0"
+            },
+            "tcConfiguration":{
+                "temperature":self.tcConf["temperature"],
+                "voltage":self.tcConf["voltage"],
+                "power":self.tcConf["power"]
+            },
+            "measures":self.allMeasures
         }

@@ -38,8 +38,8 @@ class dataBase(object):
         self.configuration = {}
         self.measures = {}
 
-    def writeDataBase(self, dutID, measures):
-        self.__openCollection(dutID)
+    def writeDataBase(self, measures):
+        self.__openCollection("futurNomTc")
         try:
             post_id = self.db_collection.insert_one(measures).inserted_id
         except DuplicateKeyError as err:

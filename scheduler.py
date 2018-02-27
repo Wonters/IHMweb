@@ -4,12 +4,20 @@
 import argparse
 from acbbs.testcases.genericTc import *
 
+import time
+
 def main(args):
-    tcGenericTc = genericTc()
-    progress = tcGenericTc.getProgress()
-    tcGenericTc.run()
+    threadGenericTc = genericTc()
+    threadGenericTc.start()
 
     #tcGenericTc.test()
+    while threadGenericTc.is_alive():
+        if threadGenericTc.getProgress() > 40 and threadGenericTc.getStatus() != "ABORTING":
+            threadGenericTc.abort()
+        print("progress : {0:.2f} Status = {1}".format(threadGenericTc.getProgress(), threadGenericTc.getStatus()))
+        time.sleep(0.5)
+
+    print("progress : {0:.2f} Status = {1}".format(threadGenericTc.getProgress(), threadGenericTc.getStatus()))
 
     exit(0)
 

@@ -4,10 +4,24 @@ from acbbs.tools.dataBase import *
 from acbbs.tools.log import *
 from acbbs.tools.configurationFile import *
 
-class baseTestCase(object):
+from threading import Thread
+
+class st():
+    NOT_RUNNING = "NOT_RUNNING"
+    STARTING = "STARTING"
+    RUNNING = "RUNNING"
+    ABORTING = "ABORTING"
+    FINISHED = "FINISHED"
+
+class baseTestCase(Thread):
     def __init__(self):
-        self.progress = None
-        self.status = None
+        #init thread
+        Thread.__init__(self)
+
+        #init var
+        self.progress = 0.0
+        self.status = st().NOT_RUNNING
+        self.iterationsNumber = 0.0
 
         #init logs
         self.logger = get_logger(self.__class__.__name__)
@@ -26,7 +40,7 @@ class baseTestCase(object):
         self.allMeasures = []
 
     def getProgress(self):
-        return self.progress
+        return (self.progress/self.iterationsNumber)*100.0
 
     def getStatus(self):
         return self.status
@@ -41,13 +55,8 @@ class baseTestCase(object):
         raise NotImplementedError()
 
     def abort(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        raise NotImplementedError()
+        self.logger.debug("Aborting \"{0}\"........".format(self.__class__.__name__))
+        self.status = st().ABORTING
 
     def tcInit(self):
         """

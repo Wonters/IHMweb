@@ -10,10 +10,9 @@ def main(args):
     threadGenericTc = genericTc()
     threadGenericTc.start()
 
-    #tcGenericTc.test()
     while threadGenericTc.is_alive():
-        if threadGenericTc.getProgress() > 40 and threadGenericTc.getStatus() != "ABORTING":
-            threadGenericTc.abort()
+        # if threadGenericTc.getProgress() > 40 :
+        #     threadGenericTc.abort()
         print("progress : {0:.2f} Status = {1}".format(threadGenericTc.getProgress(), threadGenericTc.getStatus()))
         time.sleep(0.5)
 

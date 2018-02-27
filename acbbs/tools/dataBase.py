@@ -39,7 +39,7 @@ class dataBase(object):
         self.measures = {}
 
     def writeDataBase(self, measures):
-        self.__openCollection("futurNomTc")
+        self.__openCollection(self.file)
         try:
             post_id = self.db_collection.insert_one(measures).inserted_id
         except DuplicateKeyError as err:
@@ -51,7 +51,7 @@ class dataBase(object):
         #get server, port and database from json configuration file
         server = self.dbConf["mongodb-ip"]
         port = self.dbConf["mongodb-port"]
-        database = self.file
+        database = self.dbConf["mongodb-database"]
         maxSevSelDelay = self.dbConf["mongodb-maxSevSelDelay"]
         self.logger.debug("Open MongoDB database \"{0}\" at : {1}:{2}".format(database, server, port))
 

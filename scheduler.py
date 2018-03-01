@@ -8,6 +8,7 @@ import time
 
 def main(args):
     threadGenericTc = genericTc()
+    threadGenericTc.tcInit()
     threadGenericTc.start()
 
     while threadGenericTc.is_alive():

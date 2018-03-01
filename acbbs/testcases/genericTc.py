@@ -1,11 +1,12 @@
 # coding=UTF-8
 
 from acbbs.testcases.baseTestCase import *
-from acbbs.drivers.dut import *
-from acbbs.drivers.ate.SpecAn import *
+from acbbs.drivers.ate.ClimCham import *
+from acbbs.drivers.ate.DCPwr import *
+from acbbs.drivers.ate.PwrMeter import *
 from acbbs.drivers.ate.RFSigGen import *
-
-import time
+from acbbs.drivers.ate.SpecAn import *
+from acbbs.drivers.ate.Swtch import *
 
 #simulation
 import random
@@ -24,18 +25,12 @@ class genericTc(baseTestCase):
         #update Status
         self.status = st().STARTING
 
-        #init script
-        self.logger.debug("Init \"{0}\"........".format(self.__class__.__name__))
-
-        #simulation
-        time.sleep(3)
-
         #update Status
         self.status = st().RUNNING
 
         #start loop
-        self.logger.debug("Start loop of \"{0}\"........".format(self.__class__.__name__))
-        for dutID in ['CAFE', 'BABE', 'R2D2', 'Z6PO', 'DRZ', 'FZAS', 'XXFE', 'TKKO', 'COZUX', 'LEJUXB', 'AKSUF', 'EAHSE']:
+        self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
+        for dutID in ['CAFE', 'BABE', 'R2D2', 'Z6PO']:
             #if status = ABORTING, finish iteration and break :
             if self.status is st().ABORTING:
                 continue
@@ -79,24 +74,38 @@ class genericTc(baseTestCase):
         #update Status
         self.status = st().FINISHED
 
+    def tcInit(self):
+        #update Status
+        self.status = st().INIT
+
+        #init script
+        self.logger.info("Init \"{0}\"".format(self.__class__.__name__))
+
+        #ate drivers init
+        self.ClimCham = ClimCham()
+        self.DCPwr = DCPwr()
+        self.PwrMeter = PwrMeter()
+        self.RFSigGen = RFSigGen()
+        self.SpecAn = SpecAn()
+        self.Swtch = Swtch()
+
+        #dut drivers init
+        self.dut = dut()
+
     def __writeMeasure(self, conf, result):
         return {
             "dut-id":conf["dutID"],
-            "date-measure":int(strftime("%Y%m%d%H%M%S")),
+            "date-measure":time.time(),
             "date-tc":self.date,
             "tc_version":self.tcVersion,
             "acbbs_version":self.conf.getVersion(),
-            "tcConfiguration":{
-                "temperature":self.tcConf["temperature"],
-                "voltage":self.tcConf["voltage"],
-                "power":self.tcConf["power"]
-            },
-            "configuration":{
-                "status":self.status,
+            "status":self.status,
+            "input-parameters":{
                 "temperature":conf["temperature"],
                 "vdd":conf["vdd"],
                 "power":conf["power"]
             },
+            "dut-allMeasure":self.dut.allMeasure(),
             "ate-result":{
                 "ClimCham":{
                     "reference":"xxxxxxxxx",
@@ -107,14 +116,17 @@ class genericTc(baseTestCase):
                     "humidity_consigne":"80",
                     "humidity_real":"80.2"
                 },
-                "Swtch":{
+                "DCPwr":{
                     "reference":"xxxxxxxxx",
                     "version":"xxxxxxxxx",
                     "error":["57", "64"],
-                    "input":"2",
-                    "output":"1"
+                    "status":"ON",
+                    "current_consigne":"5",
+                    "current_real":"2.6",
+                    "voltage_consigne":"12.5",
+                    "voltage_real":"12.5"
                 },
-                "DCPwr":{
+                "PwrMeter":{
                     "reference":"xxxxxxxxx",
                     "version":"xxxxxxxxx",
                     "error":["57", "64"],
@@ -131,6 +143,21 @@ class genericTc(baseTestCase):
                     "status":"ERROR",
                     "power":"-90",
                     "frequence":"869525000"
+                },
+                "SpecAn":{
+                    "reference":"xxxxxxxxx",
+                    "version":"xxxxxxxxx",
+                    "error":["57", "64"],
+                    "status":"ERROR",
+                    "power":"-90",
+                    "frequence":"869525000"
+                },
+                "Swtch":{
+                    "reference":"xxxxxxxxx",
+                    "version":"xxxxxxxxx",
+                    "error":["57", "64"],
+                    "input":"2",
+                    "output":"1"
                 }
             },
             "dut-result":{

@@ -88,13 +88,7 @@ class dut(object):
         pass
 
     def allMeasure(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        pass
+        return {}
 
     def allMeasureAvailable(self):
         """

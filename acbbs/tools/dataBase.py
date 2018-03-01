@@ -5,7 +5,6 @@ from acbbs.tools.configurationFile import *
 
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError, DuplicateKeyError
-from time import strftime
 
 class dataBase(object):
 

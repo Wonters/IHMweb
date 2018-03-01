@@ -3,11 +3,15 @@
 from acbbs.tools.dataBase import *
 from acbbs.tools.log import *
 from acbbs.tools.configurationFile import *
+from acbbs.drivers.dut import *
 
 from threading import Thread
 
+import time
+
 class st():
     NOT_RUNNING = "NOT_RUNNING"
+    INIT = "INIT"
     STARTING = "STARTING"
     RUNNING = "RUNNING"
     ABORTING = "ABORTING"
@@ -34,7 +38,7 @@ class baseTestCase(Thread):
         self.tcConf = self.conf.getConfiguration()
 
         #get date key value
-        self.date = strftime("%Y_%m_%d_%H_%M_%S")
+        self.date = time.time()
 
     def getProgress(self):
         return (self.progress/self.iterationsNumber)*100.0

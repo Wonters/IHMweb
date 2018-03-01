@@ -38,10 +38,10 @@ class dataBase(object):
         self.configuration = {}
         self.measures = {}
 
-    def writeDataBase(self, measures):
+    def writeDataBase(self, document):
         self.__openCollection(self.file)
         try:
-            post_id = self.db_collection.insert_one(measures).inserted_id
+            post_id = self.db_collection.insert_one(document).inserted_id
         except DuplicateKeyError as err:
             self.logger.error(err)
         else:
@@ -69,7 +69,7 @@ class dataBase(object):
         self.db = self.client[database]
 
     def __openCollection(self, collection):
-        self.logger.debug("Create collection {0}".format(collection))
+        self.logger.debug("Open collection {0}".format(collection))
 
         #create collection
         self.db_collection = self.db[collection]

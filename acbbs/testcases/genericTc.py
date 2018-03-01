@@ -7,12 +7,18 @@ from acbbs.drivers.ate.RFSigGen import *
 
 import time
 
+#simulation
+import random
+
 class genericTc(baseTestCase):
     def __init__(self):
         baseTestCase.__init__(self)
 
+        #Tc version
+        self.tcVersion = "1.0.0"
+
         #calcul iterations number
-        self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * 4
+        self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * 4 #nb dut
 
     def run(self):
         #update Status
@@ -29,7 +35,7 @@ class genericTc(baseTestCase):
 
         #start loop
         self.logger.debug("Start loop of \"{0}\"........".format(self.__class__.__name__))
-        for dutID in ['CAFE', 'BABE', 'R2D2', 'Z6PO']:
+        for dutID in ['CAFE', 'BABE', 'R2D2', 'Z6PO', 'DRZ', 'FZAS', 'XXFE', 'TKKO', 'COZUX', 'LEJUXB', 'AKSUF', 'EAHSE']:
             #if status = ABORTING, finish iteration and break :
             if self.status is st().ABORTING:
                 continue
@@ -58,28 +64,40 @@ class genericTc(baseTestCase):
 
                         #start measurement
 
+                        #simulation
+                        i9 = float(vdd) / (float(random.randrange(9000, 12000))/1000.0)
+                        i12 = float(vdd) / (float(random.randrange(5000, 19000))/1000.0)
+                        pout = temperature * random.randrange(7, 9)
+
                         #write measures
-                        self.__writeMeasure({"temperature":temperature, "vdd":vdd, "power":power, "dutID":dutID},
-                                            {"preamp0":"LNA", "preamp1":"ATTEN", "preamp2":"LNA", "irr":12})
+                        self.db.writeDataBase(self.__writeMeasure(conf = {"dutID":dutID, "temperature":temperature, "vdd":vdd, "power":power},
+                                                                result = {"i9":i9, "i12": i12, "pout":pout}))
+
                         #simulation
                         time.sleep(0.1)
-
-        #write measures in database
-        self.db.writeDataBase(self.__createDocument())
 
         #update Status
         self.status = st().FINISHED
 
-    def __writeMeasure(self, dataIn, dataOut):
-        self.allMeasures.append({
-            "data-input":{
-                "status":self.status,
-                "dutID":dataIn["dutID"],
-                "temperature":dataIn["temperature"],
-                "vdd":dataIn["vdd"],
-                "power":dataIn["power"]
+    def __writeMeasure(self, conf, result):
+        return {
+            "dut-id":conf["dutID"],
+            "date-measure":int(strftime("%Y%m%d%H%M%S")),
+            "date-tc":self.date,
+            "tc_version":self.tcVersion,
+            "acbbs_version":self.conf.getVersion(),
+            "tcConfiguration":{
+                "temperature":self.tcConf["temperature"],
+                "voltage":self.tcConf["voltage"],
+                "power":self.tcConf["power"]
             },
-            "ate-configuration":{
+            "configuration":{
+                "status":self.status,
+                "temperature":conf["temperature"],
+                "vdd":conf["vdd"],
+                "power":conf["power"]
+            },
+            "ate-result":{
                 "ClimCham":{
                     "reference":"xxxxxxxxx",
                     "version":"xxxxxxxxx",
@@ -115,25 +133,9 @@ class genericTc(baseTestCase):
                     "frequence":"869525000"
                 }
             },
-            "data-output":{
-                "preamp0":dataOut["preamp0"],
-                "preamp1":dataOut["preamp1"],
-                "preamp2":dataOut["preamp2"],
-                "irr":dataOut["irr"]
+            "dut-result":{
+                "i9":result["i9"],
+                "i12":result["i12"],
+                "pout":result["pout"]
             }
-        })
-
-    def __createDocument(self):
-        return {
-            "date":self.date,
-            "bench_informations":{
-                "tc_version":"1.0.0",
-                "acbbs_version":"1.0.0"
-            },
-            "tcConfiguration":{
-                "temperature":self.tcConf["temperature"],
-                "voltage":self.tcConf["voltage"],
-                "power":self.tcConf["power"]
-            },
-            "measures":self.allMeasures
         }

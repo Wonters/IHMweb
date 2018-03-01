@@ -1,4 +1,7 @@
 {
+  "global":{
+    "version":"0.0.1"
+  },
   "dataBase":{
     "mongodb-ip":"127.0.0.1",
     "mongodb-port":"27017",

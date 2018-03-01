@@ -16,6 +16,10 @@ class configurationFile(object):
         self.file = file
         self.__openConfigurationFile()
 
+    def getVersion(self):
+        self.logger.debug("Get Version")
+        return self.json_data["global"]["version"]
+
     def getConfiguration(self):
         self.logger.debug("Get configuration for \"{0}\"".format(self.file))
         return self.json_data[self.file]

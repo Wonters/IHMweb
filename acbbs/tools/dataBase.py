@@ -7,30 +7,27 @@ from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError, DuplicateKeyError
 
 class dataBase(object):
-
-    class _simulate(object):
-        def __init__(self):
-            return
-
     def __init__(self, file = None, simulate = False):
         #init logs
         self.logger = get_logger(self.__class__.__name__)
-
-        #case of simulate
-        if simulate :
-            self.logger.debug("Init dataBase in Simulate")
-        else :
-            self.logger.debug("Init dataBase")
 
         #get configuration dataBase
         self.conf = configurationFile(file = self.__class__.__name__)
         self.dbConf = self.conf.getConfiguration()
 
+        #case of simulate
+        if simulate :
+            self.logger.info("Init dataBase in Simulate")
+            self.simulate = True
+        else :
+            self.logger.info("Init dataBase")
+            self.simulate = False
+
+            #open dataBase
+            self.__openDataBase()
+
         #collection name
         self.file = file
-
-        #open dataBase
-        self.__openDataBase()
 
         #create dictionnary
         self.bench_informations = {}
@@ -38,13 +35,16 @@ class dataBase(object):
         self.measures = {}
 
     def writeDataBase(self, document):
-        self.__openCollection(self.file)
-        try:
-            post_id = self.db_collection.insert_one(document).inserted_id
-        except DuplicateKeyError as err:
-            self.logger.error(err)
+        if self.simulate == True:
+            self.logger.debug("writing simulation")
         else:
-            self.logger.debug("successful writing at id : {0}".format(post_id))
+            self.__openCollection(self.file)
+            try:
+                post_id = self.db_collection.insert_one(document).inserted_id
+            except DuplicateKeyError as err:
+                self.logger.error(err)
+            else:
+                self.logger.debug("successful writing at id : {0}".format(post_id))
 
     def __openDataBase(self):
         #get server, port and database from json configuration file

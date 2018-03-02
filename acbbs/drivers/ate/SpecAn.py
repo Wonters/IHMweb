@@ -12,6 +12,17 @@ class SpecAn(object):
         """
         pass
 
+    def getErrors(self):
+        return []
+
+    @property
+    def reference(self):
+        return ""
+
+    @property
+    def version(self):
+        return ""
+
     def limitLineCreation(self, name = None, value = None):
         """
 

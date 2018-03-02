@@ -12,6 +12,17 @@ class ClimCham(object):
         """
         pass
 
+    def getErrors(self):
+        return []
+
+    @property
+    def reference(self):
+        return ""
+
+    @property
+    def version(self):
+        return ""
+
     def enable(self):
         """
 
@@ -21,20 +32,18 @@ class ClimCham(object):
         """
         pass
 
+    @property
     def tempConsigne(self):
-        """
+        return None
 
+    @property
+    def tempReal(self):
+        return None
 
-        @return  :
-        @author
-        """
-        pass
+    @property
+    def humidityConsigne(self):
+        return None
 
-    def temp(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        pass
+    @property
+    def humidityReal(self):
+        return None

@@ -12,6 +12,17 @@ class RFSigGen(object):
         """
         pass
 
+    def getErrors(self):
+        return []
+
+    @property
+    def reference(self):
+        return ""
+
+    @property
+    def version(self):
+        return ""
+
     def status(self, status = None):
         """
 

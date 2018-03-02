@@ -12,6 +12,17 @@ class PwrMeter(object):
         """
         pass
 
+    def getErrors(self):
+        return []
+
+    @property
+    def reference(self):
+        return ""
+
+    @property
+    def version(self):
+        return ""
+
     def reset(self):
         """
 

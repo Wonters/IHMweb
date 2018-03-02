@@ -11,7 +11,7 @@ from acbbs.drivers.ate.Swtch import *
 #simulation
 import random
 
-class genericTc(baseTestCase):
+class skeletonTc(baseTestCase):
     def __init__(self):
         baseTestCase.__init__(self)
 
@@ -79,9 +79,10 @@ class genericTc(baseTestCase):
         self.status = st().INIT
 
         #init script
-        self.logger.info("Init \"{0}\"".format(self.__class__.__name__))
+        self.logger.info("Init ".format(self.__class__.__name__))
 
         #ate drivers init
+        self.logger.debug("Init ate")
         self.ClimCham = ClimCham()
         self.DCPwr = DCPwr()
         self.PwrMeter = PwrMeter()
@@ -90,11 +91,28 @@ class genericTc(baseTestCase):
         self.Swtch = Swtch()
 
         #dut drivers init
+        self.logger.debug("Init dut")
         self.dut = dut()
+
+        #get ate version and reference
+        self.logger.debug("Get ate references and versions")
+        self.ClimChamRef = self.ClimCham.reference
+        self.ClimChamVer = self.ClimCham.version
+        self.DCPwrRef = self.DCPwr.reference
+        self.DCPwrVer = self.DCPwr.version
+        self.PwrMeterRef = self.PwrMeter.reference
+        self.PwrMeterVer = self.PwrMeter.version
+        self.RFSigGenRef = self.RFSigGen.reference
+        self.RFSigGenVer = self.RFSigGen.version
+        self.SpecAnRef = self.SpecAn.reference
+        self.SpecAnVer = self.SpecAn.version
+        self.SwtchRef = self.Swtch.reference
+        self.SwtchVer = self.Swtch.version
+
 
     def __writeMeasure(self, conf, result):
         return {
-            "dut-id":conf["dutID"],
+            "dut-id":self.dut.tapId,
             "date-measure":time.time(),
             "date-tc":self.date,
             "tc_version":self.tcVersion,
@@ -108,56 +126,43 @@ class genericTc(baseTestCase):
             "dut-allMeasure":self.dut.allMeasure(),
             "ate-result":{
                 "ClimCham":{
-                    "reference":"xxxxxxxxx",
-                    "version":"xxxxxxxxx",
-                    "error":[],
-                    "temp_consigne":"20",
-                    "temp_real":"20.02",
-                    "humidity_consigne":"80",
-                    "humidity_real":"80.2"
+                    "reference":self.ClimChamRef,
+                    "version":self.ClimChamVer,
+                    "error":self.ClimCham.getErrors(),
+                    "temp_consigne":self.ClimCham.tempConsigne,
+                    "temp_real":self.ClimCham.tempReal,
+                    "humidity_consigne":self.ClimCham.humidityConsigne,
+                    "humidity_real":self.ClimCham.humidityReal
                 },
                 "DCPwr":{
-                    "reference":"xxxxxxxxx",
-                    "version":"xxxxxxxxx",
-                    "error":["57", "64"],
-                    "status":"ON",
-                    "current_consigne":"5",
-                    "current_real":"2.6",
-                    "voltage_consigne":"12.5",
-                    "voltage_real":"12.5"
+                    "reference":self.DCPwrRef,
+                    "version":self.DCPwrVer,
+                    "error":self.DCPwr.getErrors(),
+                    "status":self.DCPwr.status,
+                    "current_consigne":self.DCPwr.currentConsigne,
+                    "current_real":self.DCPwr.currentReal,
+                    "voltage_consigne":self.DCPwr.voltageConsigne,
+                    "voltage_real":self.DCPwr.voltageReal
                 },
                 "PwrMeter":{
-                    "reference":"xxxxxxxxx",
-                    "version":"xxxxxxxxx",
-                    "error":["57", "64"],
-                    "status":"ON",
-                    "current_consigne":"5",
-                    "current_real":"2.6",
-                    "voltage_consigne":"12.5",
-                    "voltage_real":"12.5"
+                    "reference":self.PwrMeterRef,
+                    "version":self.PwrMeterVer,
+                    "error":self.PwrMeter.getErrors()
                 },
                 "RFSigGen":{
-                    "reference":"xxxxxxxxx",
-                    "version":"xxxxxxxxx",
-                    "error":["57", "64"],
-                    "status":"ERROR",
-                    "power":"-90",
-                    "frequence":"869525000"
+                    "reference":self.RFSigGenRef,
+                    "version":self.RFSigGenVer,
+                    "error":self.RFSigGen.getErrors()
                 },
                 "SpecAn":{
-                    "reference":"xxxxxxxxx",
-                    "version":"xxxxxxxxx",
-                    "error":["57", "64"],
-                    "status":"ERROR",
-                    "power":"-90",
-                    "frequence":"869525000"
+                    "reference":self.SpecAnRef,
+                    "version":self.SpecAnVer,
+                    "error":self.SpecAn.getErrors()
                 },
                 "Swtch":{
-                    "reference":"xxxxxxxxx",
-                    "version":"xxxxxxxxx",
-                    "error":["57", "64"],
-                    "input":"2",
-                    "output":"1"
+                    "reference":self.SwtchRef,
+                    "version":self.SwtchVer,
+                    "error":self.SpecAn.getErrors()
                 }
             },
             "dut-result":{

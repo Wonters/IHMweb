@@ -12,38 +12,36 @@ class DCPwr(object):
         """
         pass
 
-    def status(self, channel = 1, status = None):
-        """
+    def getErrors(self):
+        return []
 
+    @property
+    def reference(self):
+        return ""
 
-        @param int channel :
-        @param  status :
-        @return  :
-        @author
-        """
-        pass
+    @property
+    def version(self):
+        return ""
 
-    def voltage(self, channel = 1, voltage = None):
-        """
+    @property
+    def status(self):
+        return ""
 
+    @property
+    def voltageConsigne(self):
+        return None
 
-        @param int channel :
-        @param  voltage :
-        @return  :
-        @author
-        """
-        pass
+    @property
+    def voltageReal(self):
+        return None
 
-    def current(self, channel = 1, current = None):
-        """
+    @property
+    def currentConsigne(self):
+        return None
 
-
-        @param int channel :
-        @param  current :
-        @return  :
-        @author
-        """
-        pass
+    @property
+    def currentReal(self):
+        return None
 
     def __wait(self, channel = 1):
         """

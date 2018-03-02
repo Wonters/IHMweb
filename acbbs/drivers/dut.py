@@ -5,15 +5,7 @@ from acbbs.tools.dataBase import *
 
 class dut(object):
     def __init__(self, simulate = False):
-        self.address = None
-        self.channel = None
-        self.radioFw = None
-        self.radioHw = None
-        self.tapFw = None
-        self.tapHW = None
-        self.tapId = None
-        self.tmpHw = None
-        self.tmpVendor = None
+        pass
 
     def address(self):
         """
@@ -60,14 +52,9 @@ class dut(object):
         """
         pass
 
+    @property
     def tapId(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        pass
+        return ""
 
     def tpmHw(self):
         """

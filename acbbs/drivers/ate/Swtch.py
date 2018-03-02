@@ -12,6 +12,17 @@ class Swtch(object):
         """
         pass
 
+    def getErrors(self):
+        return []
+
+    @property
+    def reference(self):
+        return ""
+
+    @property
+    def version(self):
+        return ""
+
     def sw1(self):
         """
 

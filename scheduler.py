@@ -2,22 +2,22 @@
 # coding=UTF-8
 
 import argparse
-from acbbs.testcases.genericTc import *
+from acbbs.testcases.skeletonTc import *
 
 import time
 
 def main(args):
-    threadGenericTc = genericTc()
-    threadGenericTc.tcInit()
-    threadGenericTc.start()
+    threadSkeletonTc = skeletonTc()
+    threadSkeletonTc.tcInit()
+    threadSkeletonTc.start()
 
-    while threadGenericTc.is_alive():
+    while threadSkeletonTc.is_alive():
         # if threadGenericTc.getProgress() > 40 :
         #     threadGenericTc.abort()
-        print("progress : {0:.2f} Status = {1}".format(threadGenericTc.getProgress(), threadGenericTc.getStatus()))
+        print("progress : {0:.2f} Status = {1}".format(threadSkeletonTc.getProgress(), threadSkeletonTc.getStatus()))
         time.sleep(0.5)
 
-    print("progress : {0:.2f} Status = {1}".format(threadGenericTc.getProgress(), threadGenericTc.getStatus()))
+    print("progress : {0:.2f} Status = {1}".format(threadSkeletonTc.getProgress(), threadSkeletonTc.getStatus()))
 
     exit(0)
 

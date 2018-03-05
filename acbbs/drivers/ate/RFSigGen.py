@@ -1,16 +1,41 @@
 # coding=UTF-8
 from acbbs.tools.log import *
+from acbbs.tools.configurationFile import *
+
+#from vxi11 import Instrument
 
 class RFSigGen(object):
+    class _simulate(object):
+        def __init__(self):
+            return
+        def write(self, val):
+            return '0'
+        def read(self, val, timeout=None):
+            return '0'
+
     def __init__(self, simulate = False):
-        """
 
+        #init logs
+        self.logger = get_logger(self.__class__.__name__)
 
-        @param bool simulate :
-        @return  :
-        @author
-        """
-        pass
+        #get configuration
+        self.conf = configurationFile(file = self.__class__.__name__)
+        self.sigGenConf = self.conf.getConfiguration()
+
+        if not simulate:
+            self.logger.info("Init RFSigGen")
+            try :
+                #Initialise and configure ATE
+                self.inst = Instrument(sig_gen)
+                inst.write("*CLS")
+                inst.write("*RST")
+            except :
+                raise AcbbsError("RFSigGen Connection error", log = self.logger)
+            Ps_hmp4040.powerDevice1.write("OUTP:GEN ON\n")
+            Ps_hmp4040.powerDevice2.write("OUTP:GEN ON\n")
+        else :
+            self.logger.info("Init RFSigGen in Simulate")
+            self.inst = self._simulate()
 
     def getErrors(self):
         return []
@@ -23,35 +48,29 @@ class RFSigGen(object):
     def version(self):
         return ""
 
-    def status(self, status = None):
-        """
+    @property
+    def status(self):
+        return ""
 
+    @status.setter
+    def status(self, value):
+        self.inst.write(":OUTP:STATE {0}".format(value))
 
-        @param  status :
-        @return  :
-        @author
-        """
-        pass
+    @property
+    def power(self):
+        return ""
 
-    def power(self, value = None):
-        """
+    @power.setter
+    def power(self, value):
+        self.inst.write(":SOUR:POW:LEV:IMM:AMPL {0}".format(value + self.sigGenConf["cableLoss"]))
 
+    @property
+    def freq(self):
+        return ""
 
-        @param  value :
-        @return  :
-        @author
-        """
-        pass
-
-    def freq(self, value = None):
-        """
-
-
-        @param  value :
-        @return  :
-        @author
-        """
-        pass
+    @freq.setter
+    def freq(self, value):
+        self.inst.write(":SOUR:FREQ:CW {0}".format(value))
 
     def __readWrite(self, cmd = None, value = None):
         """

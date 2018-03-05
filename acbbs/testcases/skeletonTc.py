@@ -86,7 +86,7 @@ class skeletonTc(baseTestCase):
         self.ClimCham = ClimCham()
         self.DCPwr = DCPwr(simulate = True)
         self.PwrMeter = PwrMeter()
-        self.RFSigGen = RFSigGen()
+        self.RFSigGen = RFSigGen(simulate = True)
         self.SpecAn = SpecAn()
         self.Swtch = Swtch()
 

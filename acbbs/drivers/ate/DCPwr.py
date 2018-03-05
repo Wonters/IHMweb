@@ -27,7 +27,7 @@ class DCPwr(object):
         #init logs
         self.logger = get_logger(self.__class__.__name__)
 
-        #get configuration dataBase
+        #get configuration
         self.conf = configurationFile(file = self.__class__.__name__)
         self.dcConf = self.conf.getConfiguration()
 

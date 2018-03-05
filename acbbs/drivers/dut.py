@@ -1,5 +1,6 @@
 # coding=UTF-8
 from acbbs.tools.log import *
+from acbbs.tools.configurationFile import *
 
 TIMEOUT = 2
 

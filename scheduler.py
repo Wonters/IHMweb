@@ -9,6 +9,7 @@ import time
 def main(args):
     threadSkeletonTc = skeletonTc()
     threadSkeletonTc.tcInit()
+    exit(0)
     threadSkeletonTc.start()
 
     while threadSkeletonTc.is_alive():

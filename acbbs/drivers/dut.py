@@ -1,239 +1,329 @@
 # coding=UTF-8
 from acbbs.tools.log import *
-from acbbs.testcases.baseTestCase import *
-from acbbs.tools.dataBase import *
+
+TIMEOUT = 2
 
 class dut(object):
-    def __init__(self, simulate = False):
-        pass
+    class _simulate(object):
+        class post(object):
+            def __init__(self, uri, json=None, timeout=None):
+                pass
 
-    def address(self):
-        """
+            @property
+            def status_code(self):
+                return 200
 
+        class get(object):
+            def __init__(self, uri, stream=None, timeout=None):
+                pass
 
-        @return  :
-        @author
-        """
-        pass
+            def iter_content(chunk_size=None):
+                pass
 
-    def radioFw(self):
-        """
+            def json(self):
+                return {
+                    "preamp":"preamp",
+                    "tapid":"tapid",
+                    "taphw":"taphw",
+                    "tapsw":"tapsw",
+                    "radiohw":"radiohw",
+                    "radiofw":"radiofw",
+                    "tpmhw":"tpmhw",
+                    "tpmVendor":"tpmVendor",
+                    "measures":"measures"
+                    }
 
+            @property
+            def status_code(self):
+                return 200
 
-        @return  :
-        @author
-        """
-        pass
+        def __init__(self):
+            pass
 
-    def radioHw(self):
-        """
+    def __init__(self , ip=None, simulate = False):
+        '''
+        Constructor
+        '''
 
+        #init logs
+        self.logger = get_logger(self.__class__.__name__)
 
-        @return  :
-        @author
-        """
-        pass
+        #case of simulate
+        if simulate :
+            self.logger.info("Init dut in Simulate")
+            self.simulate = True
+            self.address = "192.168.x.x"
+            self.channel = "xx"
+            self.session = self._simulate()
 
-    def tapFw(self):
-        """
+        else :
+            self.logger.info("Init dut")
+            self.simulate = False
 
+            #init connection to dut
+            if ip is None:
+                raise AcbbsError("Ip or Channel mandatory", log=self.logger)
+            self.session = requests.Session()
+            self.channel = ip
+            self.address = "http://%s/factory" % ip
+            self.logger.info("New RadioDevice %s" % (self.address), ip)
 
-        @return  :
-        @author
-        """
-        pass
+    def _launchCmd(self, uri, get = True, payloadJson = None, payloadData = None, stream = False, callback = None):
+        if get:
+            resp = self.session.get(uri, stream=stream, timeout=TIMEOUT)
+            #self.logger.debug("GET %s %s" % (uri , resp.status_code), ch=self.channel)
+            if stream :
+                if "signal/record" not in uri:
+                    raise AcbbsError("Stream is compatible only with signal/record request",
+                                      ch=self.channel, log=self.logger)
+                if callback is None:
+                    raise AcbbsError("Stream activate but there is no callback",
+                                     ch=self.channel, log=self.logger)
+                nbChunk = 0
+                ret = 0
+                stoped = 0
+                for chunk in resp.iter_content(chunk_size=2048):
+                    nbChunk = nbChunk + len(chunk)
+                    if stoped is 0:
+                        if ret is not 0:
+                            self.session.post("%s/signal/stop" % self.address)
+                            stoped = 1
+                        else:
+                            ret = callback(resp, chunk)
+            if resp.status_code not in [200, 204]:
+                if resp.status_code == 500:
+                    raise AcbbsError("Bad status code %u for GET on %s dump %s" %
+                                     (resp.status_code, uri, self._dumpErrors()), ch=self.channel, log=self.logger)
+                else:
+                    raise AcbbsError("Bad status code %u for GET on %s" % (resp.status_code, uri),
+                                     ch=self.channel, log=self.logger)
+            if resp.status_code == 200:
+                return resp.json()
+            if resp.status_code == 204:
+                return nbChunk
 
-    def tapHw(self):
-        """
+        else:
+            if payloadJson:
+                resp = self.session.post(uri, json=payloadJson, timeout=TIMEOUT)
+            elif payloadData:
+                resp = self.session.post(uri, data=payloadData, headers={'Content-Type': 'application/octet-stream'}, timeout=TIMEOUT)
+            else:
+                resp = self.session.post(uri, timeout=TIMEOUT)
+            #self.logger.debug("POST %s %s" % (uri , resp.status_code), ch=self.channel)
+            if resp.status_code not in [200, 204]:
+                if resp.status_code == 500:
+                    raise AcbbsError("Bad status code %u for POST on %s dump %s" %
+                                     (resp.status_code, uri, self._dumpErrors()), ch=self.channel, log=self.logger)
+                else:
+                    raise AcbbsError("Bad status code %u for POST on %s" % (resp.status_code, uri),
+                                      ch=self.channel, log=self.logger)
 
+    def _launchGetJson(self, uri):
+        return self._launchCmd(uri, True, None, None, False, None)
+    def _launchGetStream(self, uri, callback=None):
+        return self._launchCmd(uri, True, None, None, True, callback)
+    def _launchPost(self, uri):
+        return self._launchCmd(uri, False, None, None, False, None)
+    def _launchPostJson(self, uri, payloadJson=None):
+        return self._launchCmd(uri, False, payloadJson, None, False, None)
+    def _launchPostData(self, uri, payloadData=None):
+        return self._launchCmd(uri, False, None, payloadData, False, None)
 
-        @return  :
-        @author
-        """
-        pass
+    @property
+    def connected(self):
+        try:
+            self._launchGetJson("%s/info" % self.address)
+        except:
+            return False
+        else:
+            return True
 
     @property
     def tapId(self):
-        return ""
+        return self._launchGetJson("%s/info" % self.address)['tapid']
 
+    @property
+    def tapHw(self):
+        return self._launchGetJson("%s/info" % self.address)['taphw']
+
+    @property
+    def tapSw(self):
+        return self._launchGetJson("%s/info" % self.address)['tapsw']
+
+    @property
+    def radioHw(self):
+        return self._launchGetJson("%s/info" % self.address)['radiohw']
+
+    @property
+    def radioFw(self):
+        return self._launchGetJson("%s/info" % self.address)['radiofw']
+
+    @property
     def tpmHw(self):
-        """
+        return self._launchGetJson("%s/info" % self.address)['tpmhw']
 
-
-        @return  :
-        @author
-        """
-        pass
-
+    @property
     def tpmVendor(self):
-        """
+        return self._launchGetJson("%s/info" % self.address)['tpmVendor']
 
-
-        @return  :
-        @author
-        """
-        pass
-
-    def allMeasure(self):
-        return {}
-
+    @property
     def allMeasureAvailable(self):
-        """
+        return self._launchGetJson("%s/measures" % (self.address))['measures']
 
+    @property
+    def allMeasure(self):
+        allMeasuresList = self.allMeasuresAvailable()
+        allValueList = []
+        for measure in allMeasuresList:
+            allValueList.append(self._launchGetJson("%s/measures/%s" % (self.address, measure))[measure])
+        return dict(zip(allMeasuresList, allValueList))
 
-        @return  :
-        @author
-        """
-        pass
-
+    @property
     def freqTx(self):
-        """
+        return self._launchGetJson("%s/radio/freq/tx" % self.address)["tx"]
 
+    @freqTx.setter
+    def freqTx(self, value):
+        self.logger.info("Change tx to %s" % str(freq), ch = self.channel)
+        self._launchPostJson("%s/radio/freq/tx" % self.address, {"tx":value})
 
-        @return  :
-        @author
-        """
-        pass
-
+    @property
     def freqRx(self):
-        """
+        return self._launchGetJson("%s/radio/freq/rx" % self.address)["rx"]
 
+    @freqRx.setter
+    def freqRx(self, value):
+        self.logger.info("Change rx to %s" % str(freq), ch = self.channel)
+        self._launchPostJson("%s/radio/freq/rx" % self.address, {"rx":value})
 
-        @return  :
-        @author
-        """
-        pass
-
+    @property
     def mode(self):
-        """
+        return self._launchGetJson("%s/radio/mode" % self.address)['mode'].upper()
 
+    @mode.setter
+    def mode(self, value):
+        self.logger.info("Change mode to %s" % value, ch = self.channel )
+        self._launchPostJson("%s/radio/mode" % self.address, {'mode':value})
 
-        @return  :
-        @author
-        """
-        pass
-
+    @property
     def preamp0(self):
-        """
+        return self._launchGetJson("%s/radio/preamp?id=0" % (self.address))['preamp']
 
+    @preamp0.setter
+    def preamp0(self, value):
+        self.logger.info("Change preamp0 to %s" % value, ch = self.channel )
+        self._launchPostJson("%s/radio/preamp?id=0" % (self.address), {'preamp':value})
 
-        @return  :
-        @author
-        """
-        pass
-
+    @property
     def preamp1(self):
-        """
+        return self._launchGetJson("%s/radio/preamp?id=1" % (self.address))['preamp']
 
+    @preamp1.setter
+    def preamp1(self, value):
+        self.logger.info("Change preamp1 to %s" % value, ch = self.channel )
+        self._launchPostJson("%s/radio/preamp?id=1" % (self.address), {'preamp':value})
 
-        @return  :
-        @author
-        """
-        pass
-
+    @property
     def preamp2(self):
-        """
+        return self._launchGetJson("%s/radio/preamp?id=2" % (self.address))['preamp']
 
+    @preamp2.setter
+    def preamp2(self, value):
+        self.logger.info("Change preamp2 to %s" % value, ch = self.channel )
+        self._launchPostJson("%s/radio/preamp?id=2" % (self.address), {'preamp':value})
 
-        @return  :
-        @author
-        """
-        pass
-
-    def nxpRegister(self, group = 0, index = 0):
-        """
-
-
-        @param int group :
-        @param int index :
-        @return  :
-        @author
-        """
-        pass
+    def nxpRegister(self, group = 0, index = 0, value=None):
+        if value is None:
+            return self._launchGetJson("%s/radio/nxp?group=%s&command=%s" % (self.address, group, index))['value']
+        else:
+            self.logger.info("Set Register %s to %s" % (group, index), ch = self.channel)
+            self._launchPostJson("%s/radio/nxp?group=%s&command=%s&value=%s" % (self.address, group, index, value))
 
     def playBBSine(self, freqBBHz = 20000, timeSec = 1, atten = 10):
-        """
-
-
-        @param int freqBBHz :
-        @param int timeSec :
-        @param int atten :
-        @return  :
-        @author
-        """
-        pass
+        try:
+            freqList = float(freqBBHz)
+        except:
+            freqList = [float(x) for x in freqBBHz]
+        else:
+            freqList = [freqBBHz]
+        fs = 192000
+        t = np.arange(fs * float(timeSec))
+        samplesI = [0] * len(t)
+        samplesQ = [0] * len(t)
+        for freq in freqList:
+            samplesI += (np.cos(2 * np.pi * float(freq) / fs * t))
+            samplesQ += (np.sin(2 * np.pi * float(freq) / fs * t))
+        signalRow = np.empty((samplesI.size + samplesQ.size))
+        signalRow[0::2] = samplesI
+        signalRow[1::2] = samplesQ
+        signalRow /= np.max(signalRow)
+        signalRowF16_LE = (signalRow * 32766).astype(np.int16)
+        dither = np.random.random_integers(-1, 1, len(signalRowF16_LE))
+        signalRowF16_LE += dither
+        try:
+            self._launchPostData("%s/signal/playRaw?count=0&attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
+        except:
+            self._launchPost("%s/signal/stop" % self.address)
+            self._launchPostData("%s/signal/playRaw?attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
 
     def stopBBSine(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        pass
+        self._launchPost("%s/signal/stop" % (self.address))
+        time.sleep(0.01)
 
     def playBBNoise(self, bwBBHz = 20000, timeSec = 1, atten = 10):
-        """
-
-
-        @param int bwBBHz :
-        @param int timeSec :
-        @param int atten :
-        @return  :
-        @author
-        """
-        pass
+        try:
+            BWList = float(bwBBHz)
+        except:
+            BWList = [float(x) for x in bwBBHz]
+        else:
+            BWList = [bwBBHz]
+        fs = 192000
+        t = np.arange(fs * float(timeSec))
+        noise = np.random.randn(len(t))
+        for bw in BWList:
+            fa = float(bw)
+        fBW = float(fa / fs)
+        noiseWindow = np.kaiser(len(t), 5)
+        noise /= np.max(noise)
+        if fBW < 0.95 :
+            # FILTRE BUTTER #
+            # b, a = signal.butter(10, float(fa / fs))
+            # noiseBw = signal.filtfilt(b, a, noise)
+            # FILTRE FIR #
+            # b = signal.firwin(128, float(fa / fs), window='nuttall')
+            # noiseBw = signal.convolve(noise,b)
+            # FILTRE IIR #
+            b, a = sig.iirdesign(fBW, (0.05 + fBW), 1, 120, analog=False, ftype='cheby2', output='ba')
+            noiseBW = sig.filtfilt(b, a, noise) * noiseWindow
+        else :
+            noiseBW = noise * noiseWindow
+        signalRow = np.empty((2 * noiseBW.size))
+        signalRow[0::2] = noiseBW
+        signalRow[1::2] = noiseBW
+        signalRowF16_LE = (signalRow * 32766).astype(np.int16)
+        try:
+            self._launchPostData("%s/signal/playRaw?count=1&attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
+        except:
+            self._launchPost("%s/signal/stop" % self.address)
+            self._launchPostData("%s/signal/playRaw?count=1&attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
 
     def stopBBNoise(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        pass
+        self._launchPost("%s/signal/stop" % (self.address))
+        time.sleep(0.01)
 
     def rssiSin(self, freqBBHz = 20000):
-        """
-
-
-        @param int freqBBHz :
-        @return  :
-        @author
-        """
         pass
 
     def irrSin(self, freqBBHz = 20000):
-        """
-
-
-        @param int freqBBHz :
-        @return  :
-        @author
-        """
         pass
 
-    def __launchCmd(self, uri, get = True, payloadJson = None, payloadData = None, stream = False, callback = None):
-        """
-
-
-        @param string uri :
-        @param bool get :
-        @param  payloadJson :
-        @param  payloadData :
-        @param bool stream :
-        @param  callback :
-        @return  :
-        @author
-        """
-        pass
-
-    def __launchGetJson(self, uri):
-        """
-
-
-        @param string uri :
-        @return  :
-        @author
-        """
-        pass
+    def _dumpErrors(self):
+        errors = []
+        while True:
+            resp = self.session.get("%s/radio/nxp?group=0&command=2" % (self.address)).json()['value']
+            if resp is 0:
+                break
+            errors.append(hex(int(resp)))
+        if not errors:
+            return None
+        return errors

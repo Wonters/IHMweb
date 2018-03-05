@@ -93,6 +93,8 @@ class skeletonTc(baseTestCase):
         #dut drivers init
         self.logger.debug("Init dut")
         self.dut = dut()
+        self.dut.preamp0
+        self.dut.tapId
 
         #get ate version and reference
         self.logger.debug("Get ate references and versions")

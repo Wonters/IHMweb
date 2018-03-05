@@ -14,9 +14,6 @@ class DCPwr(object):
         def read_until(self, val, timeout=None):
             return '0'
 
-    powerDevice1 = None
-    powerDevice2 = None
-
     def __init__(self, simulate = False):
         """Constructor
         When called without arguments, create a connected instance with the device
@@ -34,20 +31,19 @@ class DCPwr(object):
         if not simulate:
             self.logger.info("New power instance")
             try :
-                if Ps_hmp4040.powerDevice1 is None:
-                    Ps_hmp4040.powerDevice1 = Telnet(self.dcConf["powerDevice1-ip"], 5025, 1)
+                self.powerDevice1 = Telnet(self.dcConf["self.powerDevice1-ip"], 5025, 1)
             except :
                 raise AcbbsError("hmp4040 1 Connection error", log = self.logger)
             try :
-                if Ps_hmp4040.powerDevice2 is None:
-                    Ps_hmp4040.powerDevice2 = Telnet(self.dcConf["powerDevice2-ip"], 5025, 1)
+                self.powerDevice2 = Telnet(self.dcConf["self.powerDevice2-ip"], 5025, 1)
             except :
                 raise AcbbsError("hmp4040 2 Connection error", log = self.logger)
-            Ps_hmp4040.powerDevice1.write("OUTP:GEN ON\n")
-            Ps_hmp4040.powerDevice2.write("OUTP:GEN ON\n")
+            self.powerDevice1.write("OUTP:GEN ON\n")
+            self.powerDevice2.write("OUTP:GEN ON\n")
         else :
             self.logger.info("New power instance in Simulate")
-            DCPwr.powerDevice1 = self._simulate()
+            self.powerDevice1 = self._simulate()
+            self.powerDevice2 = self._simulate()
 
         self.currentChan = None
 
@@ -68,7 +64,7 @@ class DCPwr(object):
 
     @property
     def voltage(self):
-        return self._readWrite(channel, "VOLT?")
+        return self._readWrite("VOLT?")
 
     @voltage.setter
     def voltage(self, value):
@@ -77,7 +73,7 @@ class DCPwr(object):
 
     @property
     def current(self):
-        return self._readWrite(channel, "CURR?")
+        return self._readWrite("CURR?")
 
     @current.setter
     def current(self, value):
@@ -91,19 +87,19 @@ class DCPwr(object):
         else:
             raise AcbbsError("Bad Channel", ch= self.currentChan, log=self.logger)
 
-    def __wait(self):
+    def _wait(self):
         if self.currentChan != None:
-            if int(channel) in [1, 2, 3, 4]:
-                Ps_hmp4040.powerDevice1.write("*WAI\n")
+            if self.currentChan in [1, 2, 3, 4]:
+                self.powerDevice1.write("*WAI\n")
                 return
-            elif int(channel) in [5, 6, 7, 8]:
-                Ps_hmp4040.powerDevice2.write("*WAI\n")
+            elif self.currentChan in [5, 6, 7, 8]:
+                self.powerDevice2.write("*WAI\n")
                 return
 
         else:
             raise AcbbsError("Channel not set", log=self.logger)
 
-    def __readWrite(self, cmd = None, value = None):
+    def _readWrite(self, cmd = None, value = None):
         if "?" in cmd:
             device = self._channelSel()
             device.write("%s\n" % cmd)
@@ -112,19 +108,19 @@ class DCPwr(object):
             self._channelSel().write("%s %s\n" % (cmd, value))
             self._wait(self.currentChan)
 
-    def __channelSel(self):
+    def _channelSel(self):
         if int(self.currentChan) in [1, 2, 3, 4]:
-            Ps_hmp4040.powerDevice1.write("INST:NSEL?\n")
-            if Ps_hmp4040.powerDevice1.read_until("\n")[:-1] != str(self.currentChan):
-                Ps_hmp4040.powerDevice1.write("INST:NSEL %s\n" % self.currentChan)
-                self._wait(self.currentChan)
-            return Ps_hmp4040.powerDevice1
+            self.powerDevice1.write("INST:NSEL?\n")
+            if self.powerDevice1.read_until("\n")[:-1] != str(self.currentChan):
+                self.powerDevice1.write("INST:NSEL %s\n" % self.currentChan)
+                self._wait()
+            return self.powerDevice1
         elif int(self.currentChan) in [5, 6, 7, 8]:
             channel = (int(self.currentChan) - 4)
-            Ps_hmp4040.powerDevice2.write("INST:NSEL?\n")
-            if Ps_hmp4040.powerDevice2.read_until("\n")[:-1] != str(self.currentChan):
-                Ps_hmp4040.powerDevice2.write("INST:NSEL %s\n" % int(self.currentChan))
+            self.powerDevice2.write("INST:NSEL?\n")
+            if self.powerDevice2.read_until("\n")[:-1] != str(self.currentChan):
+                self.powerDevice2.write("INST:NSEL %s\n" % int(self.currentChan))
                 self._wait(self.currentChan)
-            return Ps_hmp4040.powerDevice2
+            return self.powerDevice2
         else:
             raise AcbbsError("Bad Channel", ch= self.currentChan, log=self.logger)

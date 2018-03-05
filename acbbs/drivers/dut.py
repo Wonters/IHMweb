@@ -173,11 +173,14 @@ class dut(object):
 
     @property
     def allMeasure(self):
-        allMeasuresList = self.allMeasuresAvailable()
-        allValueList = []
-        for measure in allMeasuresList:
-            allValueList.append(self._launchGetJson("%s/measures/%s" % (self.address, measure))[measure])
-        return dict(zip(allMeasuresList, allValueList))
+        if self.simulate:
+            return {}
+        else:
+            allMeasuresList = self.allMeasureAvailable
+            allValueList = []
+            for measure in allMeasuresList:
+                allValueList.append(self._launchGetJson("%s/measures/%s" % (self.address, measure))[measure])
+            return dict(zip(allMeasuresList, allValueList))
 
     @property
     def freqTx(self):

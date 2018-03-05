@@ -3,22 +3,25 @@
 
 import argparse
 from acbbs.testcases.skeletonTc import *
+from acbbs.testcases.rxGainLNA import *
 
 import time
 
 def main(args):
     threadSkeletonTc = skeletonTc()
     threadSkeletonTc.tcInit()
-    exit(0)
-    threadSkeletonTc.start()
+    # threadSkeletonTc.start()
+    threadrxGainLNA = rxGainLNA()
+    threadrxGainLNA.tcInit()
+    threadrxGainLNA.start()
 
-    while threadSkeletonTc.is_alive():
+    while threadrxGainLNA.is_alive():
         # if threadGenericTc.getProgress() > 40 :
         #     threadGenericTc.abort()
-        print("progress : {0:.2f} Status = {1}".format(threadSkeletonTc.getProgress(), threadSkeletonTc.getStatus()))
+        print("progress : {0:.2f} Status = {1}".format(threadrxGainLNA.getProgress(), threadrxGainLNA.getStatus()))
         time.sleep(0.5)
 
-    print("progress : {0:.2f} Status = {1}".format(threadSkeletonTc.getProgress(), threadSkeletonTc.getStatus()))
+    print("progress : {0:.2f} Status = {1}".format(threadrxGainLNA.getProgress(), threadrxGainLNA.getStatus()))
 
     exit(0)
 

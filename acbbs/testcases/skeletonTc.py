@@ -84,7 +84,7 @@ class skeletonTc(baseTestCase):
         #ate drivers init
         self.logger.debug("Init ate")
         self.ClimCham = ClimCham()
-        self.DCPwr = DCPwr()
+        self.DCPwr = DCPwr(simulate = True)
         self.PwrMeter = PwrMeter()
         self.RFSigGen = RFSigGen()
         self.SpecAn = SpecAn()
@@ -92,7 +92,7 @@ class skeletonTc(baseTestCase):
 
         #dut drivers init
         self.logger.debug("Init dut")
-        self.dut = dut()
+        self.dut = dut(simulate = True)
         self.dut.preamp0
         self.dut.tapId
 
@@ -141,10 +141,8 @@ class skeletonTc(baseTestCase):
                     "version":self.DCPwrVer,
                     "error":self.DCPwr.getErrors(),
                     "status":self.DCPwr.status,
-                    "current_consigne":self.DCPwr.currentConsigne,
-                    "current_real":self.DCPwr.currentReal,
-                    "voltage_consigne":self.DCPwr.voltageConsigne,
-                    "voltage_real":self.DCPwr.voltageReal
+                    "current":self.DCPwr.current,
+                    "voltage":self.DCPwr.voltage
                 },
                 "PwrMeter":{
                     "reference":self.PwrMeterRef,

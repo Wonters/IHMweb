@@ -20,6 +20,7 @@ class skeletonTc(baseTestCase):
 
         #calcul iterations number
         self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * 4 #nb dut
+        self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
         #update Status
@@ -89,7 +90,7 @@ class skeletonTc(baseTestCase):
         self.PwrMeter = PwrMeter()
         self.RFSigGen = RFSigGen(simulate = True)
         self.SpecAn = SpecAn()
-        self.Swtch = Swtch()
+        self.Swtch = Swtch(simulate = True)
 
         #dut drivers init
         self.logger.debug("Init dut")
@@ -101,7 +102,6 @@ class skeletonTc(baseTestCase):
         self.logger.debug("Get ate references and versions")
         self.ClimChamRef = self.ClimCham.reference
         self.ClimChamVer = self.ClimCham.version
-        self.DCPwrRef = self.DCPwr.reference
         self.DCPwrVer = self.DCPwr.version
         self.PwrMeterRef = self.PwrMeter.reference
         self.PwrMeterVer = self.PwrMeter.version
@@ -138,12 +138,13 @@ class skeletonTc(baseTestCase):
                     "humidity_real":self.ClimCham.humidityReal
                 },
                 "DCPwr":{
-                    "reference":self.DCPwrRef,
                     "version":self.DCPwrVer,
                     "error":self.DCPwr.errors,
                     "status":self.DCPwr.status,
-                    "current":self.DCPwr.current,
-                    "voltage":self.DCPwr.voltage
+                    "current_consigne":self.DCPwr.currentConsigne,
+                    "current_real":self.DCPwr.currentReal,
+                    "voltage_consigne":self.DCPwr.voltageConsigne,
+                    "voltage_real":self.DCPwr.voltageReal
                 },
                 "PwrMeter":{
                     "reference":self.PwrMeterRef,

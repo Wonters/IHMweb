@@ -12,6 +12,9 @@
     "powerDevice1-ip":"192.168.0.30",
     "powerDevice2-ip":"192.168.0.31"
   },
+  "Swtch":{
+    "swtch-ip":"192.168.0.20"
+  },
   "RFSigGen":{
     "cableLoss":"0"
   },

@@ -33,15 +33,14 @@ class DCPwr(object):
         if not simulate:
             self.logger.info("New power instance")
             try :
-                pass
-                # self.powerDevice1 = Telnet(self.dcConf["powerDevice1-ip"], 5025, 1)
+                self.powerDevice1 = Telnet(self.dcConf["powerDevice1-ip"], 5025, 1)
             except :
                 raise AcbbsError("hmp4040 1 Connection error: {0}".format(self.dcConf["powerDevice2-ip"]), log = self.logger)
             try :
                 self.powerDevice2 = Telnet(self.dcConf["powerDevice2-ip"], 5025, 1)
             except :
                 raise AcbbsError("hmp4040 2 Connection error : {0}".format(self.dcConf["powerDevice2-ip"]), log = self.logger)
-            # self.powerDevice1.write("OUTP:GEN ON\n")
+            self.powerDevice1.write("OUTP:GEN ON\n")
             self.powerDevice2.write("OUTP:GEN ON\n")
         else :
             self.logger.info("New power instance in Simulate")

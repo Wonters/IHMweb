@@ -9,7 +9,7 @@
     "mongodb-maxSevSelDelay":"500"
   },
   "DCPwr":{
-    "powerDevice1-ip":"192.168.0.xx",
+    "powerDevice1-ip":"192.168.0.30",
     "powerDevice2-ip":"192.168.0.31"
   },
   "RFSigGen":{

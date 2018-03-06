@@ -10,18 +10,18 @@ import time
 def main(args):
     threadSkeletonTc = skeletonTc()
     threadSkeletonTc.tcInit()
-    # threadSkeletonTc.start()
-    threadrxGainLNA = rxGainLNA()
-    threadrxGainLNA.tcInit()
-    threadrxGainLNA.start()
+    threadSkeletonTc.start()
+    # threadrxGainLNA = rxGainLNA()
+    # threadrxGainLNA.tcInit()
+    # threadrxGainLNA.start()
 
-    while threadrxGainLNA.is_alive():
+    while threadSkeletonTc.is_alive():
         # if threadGenericTc.getProgress() > 40 :
         #     threadGenericTc.abort()
-        print("progress : {0:.2f} Status = {1}".format(threadrxGainLNA.getProgress(), threadrxGainLNA.getStatus()))
+        print("progress : {0:.2f} Status = {1}".format(threadSkeletonTc.getProgress(), threadSkeletonTc.getStatus()))
         time.sleep(0.5)
 
-    print("progress : {0:.2f} Status = {1}".format(threadrxGainLNA.getProgress(), threadrxGainLNA.getStatus()))
+    print("progress : {0:.2f} Status = {1}".format(threadSkeletonTc.getProgress(), threadSkeletonTc.getStatus()))
 
     exit(0)
 

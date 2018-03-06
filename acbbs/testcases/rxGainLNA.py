@@ -95,7 +95,7 @@ class rxGainLNA(baseTestCase):
                 "DCPwr":{
                     "reference":self.DCPwrRef,
                     "version":self.DCPwrVer,
-                    "error":self.DCPwr.getErrors(),
+                    "error":self.DCPwr.errors,
                     "status":self.DCPwr.status,
                     "current":self.DCPwr.current,
                     "voltage":self.DCPwr.voltage

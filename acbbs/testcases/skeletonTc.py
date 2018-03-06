@@ -85,6 +85,7 @@ class skeletonTc(baseTestCase):
         self.logger.debug("Init ate")
         self.ClimCham = ClimCham()
         self.DCPwr = DCPwr(simulate = True)
+        self.DCPwr.selChan(1)
         self.PwrMeter = PwrMeter()
         self.RFSigGen = RFSigGen(simulate = True)
         self.SpecAn = SpecAn()
@@ -125,7 +126,7 @@ class skeletonTc(baseTestCase):
                 "vdd":conf["vdd"],
                 "power":conf["power"]
             },
-            "dut-allMeasure":self.dut.allMeasure(),
+            "dut-allMeasure":self.dut.allMeasure,
             "ate-result":{
                 "ClimCham":{
                     "reference":self.ClimChamRef,
@@ -139,7 +140,7 @@ class skeletonTc(baseTestCase):
                 "DCPwr":{
                     "reference":self.DCPwrRef,
                     "version":self.DCPwrVer,
-                    "error":self.DCPwr.getErrors(),
+                    "error":self.DCPwr.errors,
                     "status":self.DCPwr.status,
                     "current":self.DCPwr.current,
                     "voltage":self.DCPwr.voltage

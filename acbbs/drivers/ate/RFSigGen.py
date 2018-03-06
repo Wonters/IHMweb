@@ -2,7 +2,7 @@
 from acbbs.tools.log import *
 from acbbs.tools.configurationFile import *
 
-#from vxi11 import Instrument
+from vxi11 import Instrument
 
 class RFSigGen(object):
     class _simulate(object):

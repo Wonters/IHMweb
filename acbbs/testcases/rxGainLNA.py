@@ -64,8 +64,9 @@ class rxGainLNA(baseTestCase):
         #ate drivers init
         self.logger.debug("Init ate")
         self.DCPwr = DCPwr(simulate = True)
-        self.DCPwr.selChan(1)
         self.RFSigGen = RFSigGen(simulate = True)
+
+        self.DCPwr.selChan(1)
 
         #dut drivers init
         self.logger.debug("Init dut")
@@ -73,7 +74,6 @@ class rxGainLNA(baseTestCase):
 
         #get ate version and reference
         self.logger.debug("Get ate references and versions")
-        self.DCPwrRef = self.DCPwr.reference
         self.DCPwrVer = self.DCPwr.version
         self.RFSigGenRef = self.RFSigGen.reference
         self.RFSigGenVer = self.RFSigGen.version
@@ -93,17 +93,18 @@ class rxGainLNA(baseTestCase):
             "dut-allMeasure":self.dut.allMeasure,
             "ate-result":{
                 "DCPwr":{
-                    "reference":self.DCPwrRef,
                     "version":self.DCPwrVer,
                     "error":self.DCPwr.errors,
                     "status":self.DCPwr.status,
-                    "current":self.DCPwr.current,
-                    "voltage":self.DCPwr.voltage
+                    "current_consigne":self.DCPwr.currentConsigne,
+                    "current_real":self.DCPwr.currentReal,
+                    "voltage_consigne":self.DCPwr.voltageConsigne,
+                    "voltage_real":self.DCPwr.voltageReal
                 },
                 "RFSigGen":{
                     "reference":self.RFSigGenRef,
                     "version":self.RFSigGenVer,
-                    "error":self.RFSigGen.getErrors()
+                    "error":self.RFSigGen.errors
                 }
             },
             "dut-result":{

@@ -56,11 +56,17 @@ class DCPwr(object):
 
     @property
     def version(self):
-        return self._readWrite("SYST:VERS?")
+        if not self.simulate:
+            return self._readWrite("SYST:VERS?")
+        else:
+            return "1.0.0"
 
     @property
     def status(self):
-        return self._readWrite("OUTP:STAT?")
+        if not self.simulate:
+            return self._readWrite("OUTP:STAT?")
+        else:
+            return "STBY"
 
     @status.setter
     def status(self, value):
@@ -69,11 +75,17 @@ class DCPwr(object):
 
     @property
     def voltageConsigne(self):
-        return self._readWrite("VOLT?")
+        if not self.simulate:
+            return self._readWrite("VOLT?")
+        else:
+            return "12.00"
 
     @property
     def voltageReal(self):
-        return self._readWrite("MEAS:VOLT?")
+        if not self.simulate:
+            return self._readWrite("MEAS:VOLT?")
+        else:
+            return "12.01"
 
     def voltage(self, value):
         self.logger.info("Change voltage to %s" % value, ch = self.currentChan)
@@ -81,11 +93,17 @@ class DCPwr(object):
 
     @property
     def currentConsigne(self):
-        return self._readWrite("CURR?")
+        if not self.simulate:
+            return self._readWrite("CURR?")
+        else:
+            return "6.000"
 
     @property
     def currentReal(self):
-        return self._readWrite("MEAS:CURR?")
+        if not self.simulate:
+            return self._readWrite("MEAS:CURR?")
+        else:
+            return "1.456"
 
     def current(self, value):
         self.logger.info("Change current to %s" % value, ch = self.currentChan)

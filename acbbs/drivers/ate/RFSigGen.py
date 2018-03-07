@@ -24,6 +24,7 @@ class RFSigGen(object):
 
         if not simulate:
             self.logger.info("Init RFSigGen")
+            self.simulate = False
             try :
                 #Initialise and configure ATE
                 self.inst = Instrument(sig_gen)
@@ -34,23 +35,37 @@ class RFSigGen(object):
             Ps_hmp4040.powerDevice1.write("OUTP:GEN ON\n")
             Ps_hmp4040.powerDevice2.write("OUTP:GEN ON\n")
         else :
+            self.simulate = True
             self.logger.info("Init RFSigGen in Simulate")
             self.inst = self._simulate()
 
-    def getErrors(self):
-        return []
+    @property
+    def errors(self):
+        if not self.simulate:
+            pass
+        else:
+            return []
 
     @property
     def reference(self):
-        return ""
+        if not self.simulate:
+            pass
+        else:
+            return "XXXXXX"
 
     @property
     def version(self):
-        return ""
+        if not self.simulate:
+            pass
+        else:
+            return "1.0.0"
 
     @property
     def status(self):
-        return ""
+        if not self.simulate:
+            pass
+        else:
+            return "STBY"
 
     @status.setter
     def status(self, value):
@@ -58,7 +73,10 @@ class RFSigGen(object):
 
     @property
     def power(self):
-        return ""
+        if not self.simulate:
+            pass
+        else:
+            return "-100"
 
     @power.setter
     def power(self, value):
@@ -66,28 +84,17 @@ class RFSigGen(object):
 
     @property
     def freq(self):
-        return ""
+        if not self.simulate:
+            pass
+        else:
+            return "868000000"
 
     @freq.setter
     def freq(self, value):
         self.inst.write(":SOUR:FREQ:CW {0}".format(value))
 
     def __readWrite(self, cmd = None, value = None):
-        """
-
-
-        @param  cmd :
-        @param  value :
-        @return  :
-        @author
-        """
         pass
 
     def __wait(self):
-        """
-
-
-        @return  :
-        @author
-        """
         pass

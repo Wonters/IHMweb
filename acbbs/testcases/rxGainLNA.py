@@ -70,7 +70,7 @@ class rxGainLNA(baseTestCase):
 
         #dut drivers init
         self.logger.debug("Init dut")
-        self.dut = dut(simulate = True)
+        self.dut = dut("10.30.24.254")
 
         #get ate version and reference
         self.logger.debug("Get ate references and versions")
@@ -90,7 +90,6 @@ class rxGainLNA(baseTestCase):
                 "vdd":conf["vdd"],
                 "power":conf["power"]
             },
-            "dut-allMeasure":self.dut.allMeasure,
             "ate-result":{
                 "DCPwr":{
                     "version":self.DCPwrVer,
@@ -108,5 +107,6 @@ class rxGainLNA(baseTestCase):
                 }
             },
             "dut-result":{
+                "dut-allMeasure":self.dut.allMeasure
             }
         }

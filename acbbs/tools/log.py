@@ -30,7 +30,7 @@ class log(logging.Logger):
         if kwargs.has_key('ch'):
             channel = kwargs['ch']
             del kwargs['ch']
-        kwargs['extra'] = {'channel': channel}
+        kwargs['extra'] = {'channel': str(channel)}
         logging.Logger.warning(self, msg, *args, **kwargs)
 
     def debug(self, msg, *args, **kwargs):
@@ -38,7 +38,7 @@ class log(logging.Logger):
         if kwargs.has_key('ch'):
             channel = kwargs['ch']
             del kwargs['ch']
-        kwargs['extra'] = {'channel': channel}
+        kwargs['extra'] = {'channel': str(channel)}
         logging.Logger.debug(self, msg, *args, **kwargs)
 
     def error(self, msg, *args, **kwargs):
@@ -46,7 +46,7 @@ class log(logging.Logger):
         if kwargs.has_key('ch'):
             channel = kwargs['ch']
             del kwargs['ch']
-        kwargs['extra'] = {'channel': channel}
+        kwargs['extra'] = {'channel': srt(channel)}
         logging.Logger.error(self, msg, *args, **kwargs)
 
 def get_logger(name, log_path = "/var/log/acbbs/"):

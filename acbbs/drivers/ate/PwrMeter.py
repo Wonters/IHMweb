@@ -3,17 +3,19 @@ from acbbs.tools.log import *
 
 class PwrMeter(object):
     def __init__(self, simulate = False):
-        """
+        if not simulate:
+            self.simulate = False
 
+        else:
+            self.simulate = True
 
-        @param bool simulate :
-        @return  :
-        @author
-        """
-        pass
+    @property
+    def errors(self):
+        if not self.simulate:
+            return []
 
-    def getErrors(self):
-        return []
+        else:
+            return []
 
     @property
     def reference(self):

@@ -2,6 +2,15 @@
 from acbbs.tools.log import *
 from acbbs.tools.configurationFile import *
 
+import requests
+import os
+
+folder = os.path.dirname(os.path.abspath(__file__))
+#Set log class in connectionpool Class with the CustomLog class
+requests.packages.urllib3.connectionpool.log.__class__ = log
+#Rename log name
+requests.packages.urllib3.connectionpool.log.name = "connectionPool"
+
 TIMEOUT = 2
 
 class dut(object):
@@ -67,12 +76,12 @@ class dut(object):
             self.session = requests.Session()
             self.channel = ip
             self.address = "http://%s/factory" % ip
-            self.logger.info("New RadioDevice %s" % (self.address), ip)
+            self.logger.info("New RadioDevice %s" % (self.address), ch=self.channel)
 
     def _launchCmd(self, uri, get = True, payloadJson = None, payloadData = None, stream = False, callback = None):
         if get:
             resp = self.session.get(uri, stream=stream, timeout=TIMEOUT)
-            #self.logger.debug("GET %s %s" % (uri , resp.status_code), ch=self.channel)
+            self.logger.debug("GET %s %s" % (uri , resp.status_code), ch=self.channel)
             if stream :
                 if "signal/record" not in uri:
                     raise AcbbsError("Stream is compatible only with signal/record request",
@@ -110,7 +119,7 @@ class dut(object):
                 resp = self.session.post(uri, data=payloadData, headers={'Content-Type': 'application/octet-stream'}, timeout=TIMEOUT)
             else:
                 resp = self.session.post(uri, timeout=TIMEOUT)
-            #self.logger.debug("POST %s %s" % (uri , resp.status_code), ch=self.channel)
+            self.logger.debug("POST %s %s" % (uri , resp.status_code), ch=self.channel)
             if resp.status_code not in [200, 204]:
                 if resp.status_code == 500:
                     raise AcbbsError("Bad status code %u for POST on %s dump %s" %
@@ -165,7 +174,7 @@ class dut(object):
 
     @property
     def tpmVendor(self):
-        return self._launchGetJson("%s/info" % self.address)['tpmVendor']
+        return self._launchGetJson("%s/info" % self.address)['tpmvendor']
 
     @property
     def allMeasureAvailable(self):

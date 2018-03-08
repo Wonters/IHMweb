@@ -88,8 +88,13 @@ class Swtch(object):
 		self.__disconnect()
 		return ret
 
-    def getErrors(self):
-        return []
+    @property
+    def errors(self):
+        if not self.simulate:
+            return []
+
+        else:
+            return []
 
     @property
     def reference(self):

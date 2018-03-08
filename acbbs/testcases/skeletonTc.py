@@ -19,7 +19,7 @@ class skeletonTc(baseTestCase):
         self.tcVersion = "1.0.0"
 
         #calcul iterations number
-        self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * 4 #nb dut
+        self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * 1 #nb dut
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -31,7 +31,7 @@ class skeletonTc(baseTestCase):
 
         #start loop
         self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
-        for dutID in ['CAFE', 'BABE', 'R2D2', 'Z6PO']:
+        for dutID in ['CAFE']:
             #if status = ABORTING, finish iteration and break :
             if self.status is st().ABORTING:
                 continue
@@ -94,9 +94,9 @@ class skeletonTc(baseTestCase):
 
         #dut drivers init
         self.logger.debug("Init dut")
-        self.dut = dut(simulate = True)
-        self.dut.preamp0
-        self.dut.tapId
+        self.dut = dut("10.30.24.254")
+        # self.dut.preamp0
+        # self.dut.tapId
 
         #get ate version and reference
         self.logger.debug("Get ate references and versions")
@@ -115,7 +115,6 @@ class skeletonTc(baseTestCase):
 
     def __writeMeasure(self, conf, result):
         return {
-            "dut-id":self.dut.tapId,
             "date-measure":time.time(),
             "date-tc":self.date,
             "tc_version":self.tcVersion,
@@ -126,12 +125,27 @@ class skeletonTc(baseTestCase):
                 "vdd":conf["vdd"],
                 "power":conf["power"]
             },
-            "dut-allMeasure":self.dut.allMeasure,
+            "dut-info":{
+                "id":self.dut.tapId,
+                "tap-hw":self.dut.tapHw,
+                "tap-sw":self.dut.tapSw,
+                "radio-hw":self.dut.radioHw,
+                "radio-fw":self.dut.radioFw,
+                "tpm-hw":self.dut.tpmHw,
+                "tpm-vendor":self.dut.tpmVendor,
+                "freq-tx":self.dut.freqTx,
+                "freq-rx":self.dut.freqRx,
+                "mode":self.dut.mode,
+                "preamp0":self.dut.preamp0,
+                "preamp1":self.dut.preamp1,
+                "preamp2":self.dut.preamp2,
+                "measure":self.dut.allMeasure
+            },
             "ate-result":{
                 "ClimCham":{
                     "reference":self.ClimChamRef,
                     "version":self.ClimChamVer,
-                    "error":self.ClimCham.getErrors(),
+                    "error":self.ClimCham.errors,
                     "temp_consigne":self.ClimCham.tempConsigne,
                     "temp_real":self.ClimCham.tempReal,
                     "humidity_consigne":self.ClimCham.humidityConsigne,
@@ -149,22 +163,22 @@ class skeletonTc(baseTestCase):
                 "PwrMeter":{
                     "reference":self.PwrMeterRef,
                     "version":self.PwrMeterVer,
-                    "error":self.PwrMeter.getErrors()
+                    "error":self.PwrMeter.errors
                 },
                 "RFSigGen":{
                     "reference":self.RFSigGenRef,
                     "version":self.RFSigGenVer,
-                    "error":self.RFSigGen.getErrors()
+                    "error":self.RFSigGen.errors
                 },
                 "SpecAn":{
                     "reference":self.SpecAnRef,
                     "version":self.SpecAnVer,
-                    "error":self.SpecAn.getErrors()
+                    "error":self.SpecAn.errors
                 },
                 "Swtch":{
                     "reference":self.SwtchRef,
                     "version":self.SwtchVer,
-                    "error":self.SpecAn.getErrors()
+                    "error":self.SpecAn.errors
                 }
             },
             "dut-result":{

@@ -11,7 +11,7 @@ def main(args):
     threadSkeletonTc = skeletonTc()
     threadSkeletonTc.tcInit()
     threadSkeletonTc.start()
-    # threadrxGainLNA = rxGainLNA()
+    threadrxGainLNA = rxGainLNA()
     # threadrxGainLNA.tcInit()
     # threadrxGainLNA.start()
 

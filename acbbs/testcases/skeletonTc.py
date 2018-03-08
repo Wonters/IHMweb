@@ -31,10 +31,14 @@ class skeletonTc(baseTestCase):
 
         #start loop
         self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
-        for dutID in ['CAFE']:
+        for dutIP in self.tcConf["dut-ip"]:
             #if status = ABORTING, finish iteration and break :
             if self.status is st().ABORTING:
                 continue
+
+            #dut drivers init
+            self.logger.debug("Init dut")
+            self.dut = dut(dutIP)
 
             for temperature in self.tcConf["temperature"]:
                 #if status = ABORTING, finish iteration and break :
@@ -66,7 +70,7 @@ class skeletonTc(baseTestCase):
                         pout = temperature * random.randrange(7, 9)
 
                         #write measures
-                        self.db.writeDataBase(self.__writeMeasure(conf = {"dutID":dutID, "temperature":temperature, "vdd":vdd, "power":power},
+                        self.db.writeDataBase(self.__writeMeasure(conf = {"temperature":temperature, "vdd":vdd, "power":power},
                                                                 result = {"i9":i9, "i12": i12, "pout":pout}))
 
                         #simulation
@@ -91,12 +95,6 @@ class skeletonTc(baseTestCase):
         self.RFSigGen = RFSigGen(simulate = True)
         self.SpecAn = SpecAn()
         self.Swtch = Swtch(simulate = True)
-
-        #dut drivers init
-        self.logger.debug("Init dut")
-        self.dut = dut("10.30.24.254")
-        # self.dut.preamp0
-        # self.dut.tapId
 
         #get ate version and reference
         self.logger.debug("Get ate references and versions")

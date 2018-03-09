@@ -6,7 +6,7 @@ from acbbs.testcases.skeletonTc import *
 from acbbs.testcases.rxGainLNA import *
 
 import time
-from progress.bar import Bar
+from progress.bar import PixelBar
 
 def main(args):
     threadSkeletonTc = skeletonTc()
@@ -14,7 +14,7 @@ def main(args):
     # threadrxGainLNA.tcInit()
     # threadrxGainLNA.start()
 
-    bar = Bar('Processing', max=threadSkeletonTc.iterationsNumber)
+    bar = PixelBar('Processing SkeletonTc', max=threadSkeletonTc.iterationsNumber)
     i = threadSkeletonTc.iteration
 
     threadSkeletonTc.tcInit()

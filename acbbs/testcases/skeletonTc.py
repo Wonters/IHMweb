@@ -39,7 +39,7 @@ class skeletonTc(baseTestCase):
             #dut drivers init
             self.logger.debug("Init dut")
             self.logger.debug("Check dut-ip : {0}".format(dutIP))
-            self.dut = dut(dutIP)
+            self.dut = dut(simulate = True)
             if self.dut.connected:
                 self.logger.debug("DUT at {0} well connected".format(dutIP))
             else:

@@ -32,15 +32,18 @@ class dut(object):
 
             def json(self):
                 return {
-                    "preamp":"preamp",
-                    "tapid":"tapid",
-                    "taphw":"taphw",
-                    "tapsw":"tapsw",
-                    "radiohw":"radiohw",
-                    "radiofw":"radiofw",
-                    "tpmhw":"tpmhw",
-                    "tpmVendor":"tpmVendor",
-                    "measures":"measures"
+                    "preamp":"xxxx",
+                    "tapid":"xxxx",
+                    "taphw":"xxxx",
+                    "tapsw":"xxxx",
+                    "radiohw":"xxxx",
+                    "radiofw":"xxxx",
+                    "tpmhw":"xxxx",
+                    "tpmVendor":"xxxx",
+                    "measures":"xxxx",
+                    "tx":"xxxx",
+                    "rx":"xxxx",
+                    "mode":"xxxx"
                     }
 
             @property
@@ -79,13 +82,13 @@ class dut(object):
             self.address = "http://%s/factory" % ip
             self.logger.info("New RadioDevice %s" % (self.address), ch=self.channel)
 
-            self.tapId_var = None
-            self.tapHw_var = None
-            self.tapSw_var = None
-            self.radioHw_var = None
-            self.radioFw_var = None
-            self.tpmHw_var = None
-            self.tpmVendor_var = None
+        self.tapId_var = None
+        self.tapHw_var = None
+        self.tapSw_var = None
+        self.radioHw_var = None
+        self.radioFw_var = None
+        self.tpmHw_var = None
+        self.tpmVendor_var = None
 
     def _launchCmd(self, uri, get = True, payloadJson = None, payloadData = None, stream = False, callback = None):
         if get:

@@ -41,7 +41,7 @@ class baseTestCase(Thread):
         self.date = time.time()
 
     @property
-    def purcent(self):
+    def percent(self):
         return (self.iteration/self.iterationsNumber)*100.0
 
     def run(self):

@@ -106,20 +106,6 @@ class skeletonTc(baseTestCase):
         self.SpecAn = SpecAn()
         self.Swtch = Swtch(simulate = True)
 
-        #get ate version and reference
-        self.logger.debug("Get ate references and versions")
-        self.ClimChamRef = self.ClimCham.reference
-        self.ClimChamVer = self.ClimCham.version
-        self.DCPwrVer = self.DCPwr.version
-        self.PwrMeterRef = self.PwrMeter.reference
-        self.PwrMeterVer = self.PwrMeter.version
-        self.RFSigGenRef = self.RFSigGen.reference
-        self.RFSigGenVer = self.RFSigGen.version
-        self.SpecAnRef = self.SpecAn.reference
-        self.SpecAnVer = self.SpecAn.version
-        self.SwtchRef = self.Swtch.reference
-        self.SwtchVer = self.Swtch.version
-
     def __writeMeasure(self, conf, result):
         return {
             "date-measure":time.time(),
@@ -132,61 +118,14 @@ class skeletonTc(baseTestCase):
                 "vdd":conf["vdd"],
                 "power":conf["power"]
             },
-            "dut-info":{
-                "id":self.dut.tapId,
-                "tap-hw":self.dut.tapHw,
-                "tap-sw":self.dut.tapSw,
-                "radio-hw":self.dut.radioHw,
-                "radio-fw":self.dut.radioFw,
-                "tpm-hw":self.dut.tpmHw,
-                "tpm-vendor":self.dut.tpmVendor,
-                "freq-tx":self.dut.freqTx,
-                "freq-rx":self.dut.freqRx,
-                "mode":self.dut.mode,
-                "preamp0":self.dut.preamp0,
-                "preamp1":self.dut.preamp1,
-                "preamp2":self.dut.preamp2,
-                "measure":self.dut.allMeasure
-            },
+            "dut-info":self.dut.info,
             "ate-result":{
-                "ClimCham":{
-                    "reference":self.ClimChamRef,
-                    "version":self.ClimChamVer,
-                    "error":self.ClimCham.errors,
-                    "temp_consigne":self.ClimCham.tempConsigne,
-                    "temp_real":self.ClimCham.tempReal,
-                    "humidity_consigne":self.ClimCham.humidityConsigne,
-                    "humidity_real":self.ClimCham.humidityReal
-                },
-                "DCPwr":{
-                    "version":self.DCPwrVer,
-                    "error":self.DCPwr.errors,
-                    "status":self.DCPwr.status,
-                    "current_consigne":self.DCPwr.currentConsigne,
-                    "current_real":self.DCPwr.currentReal,
-                    "voltage_consigne":self.DCPwr.voltageConsigne,
-                    "voltage_real":self.DCPwr.voltageReal
-                },
-                "PwrMeter":{
-                    "reference":self.PwrMeterRef,
-                    "version":self.PwrMeterVer,
-                    "error":self.PwrMeter.errors
-                },
-                "RFSigGen":{
-                    "reference":self.RFSigGenRef,
-                    "version":self.RFSigGenVer,
-                    "error":self.RFSigGen.errors
-                },
-                "SpecAn":{
-                    "reference":self.SpecAnRef,
-                    "version":self.SpecAnVer,
-                    "error":self.SpecAn.errors
-                },
-                "Swtch":{
-                    "reference":self.SwtchRef,
-                    "version":self.SwtchVer,
-                    "error":self.SpecAn.errors
-                }
+                "ClimCham":self.ClimCham.info,
+                "DCPwr":self.DCPwr.info,
+                "PwrMeter":self.PwrMeter.info,
+                "RFSigGen":self.RFSigGen.info,
+                "SpecAn":self.SpecAn.info,
+                "Swtch":self.Swtch.info
             },
             "dut-result":{
                 "i9":result["i9"],

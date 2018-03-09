@@ -22,9 +22,11 @@ class RFSigGen(object):
         self.conf = configurationFile(file = self.__class__.__name__)
         self.sigGenConf = self.conf.getConfiguration()
 
+        #simulation state
+        self.simulate = simulate
+
         if not simulate:
             self.logger.info("Init RFSigGen")
-            self.simulate = False
             try :
                 #Initialise and configure ATE
                 self.inst = Instrument(sig_gen)
@@ -35,9 +37,19 @@ class RFSigGen(object):
             Ps_hmp4040.powerDevice1.write("OUTP:GEN ON\n")
             Ps_hmp4040.powerDevice2.write("OUTP:GEN ON\n")
         else :
-            self.simulate = True
             self.logger.info("Init RFSigGen in Simulate")
             self.inst = self._simulate()
+
+        self.reference_var = None
+        self.version_var = None
+
+    @property
+    def info(self):
+        return {
+            "reference":self.reference,
+            "version":self.version,
+            "error":self.errors
+        }
 
     @property
     def errors(self):
@@ -48,17 +60,21 @@ class RFSigGen(object):
 
     @property
     def reference(self):
-        if not self.simulate:
-            pass
-        else:
-            return "XXXXXX"
+        if self.reference_var is None:
+            if not self.simulate:
+                self.reference_var = "xxxx"
+            else:
+                self.reference_var = "xxxx"
+        return self.reference_var
 
     @property
     def version(self):
-        if not self.simulate:
-            pass
-        else:
-            return "1.0.0"
+        if self.version_var is None:
+            if not self.simulate:
+                self.version_var = "xxxx"
+            else:
+                self.version_var = "xxxx"
+        return self.version_var
 
     @property
     def status(self):

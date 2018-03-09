@@ -30,9 +30,11 @@ class DCPwr(object):
         self.conf = configurationFile(file = self.__class__.__name__)
         self.dcConf = self.conf.getConfiguration()
 
+        #simulation state
+        self.simulate = simulate
+
         if not simulate:
             self.logger.info("New power instance")
-            self.simulate = False
             try :
                 self.powerDevice1 = Telnet(self.dcConf["powerDevice1-ip"], 5025, 1)
             except :
@@ -45,28 +47,43 @@ class DCPwr(object):
             self.powerDevice2.write("OUTP:GEN ON\n")
         else:
             self.logger.info("New power instance in Simulate")
-            self.simulate = True
             self.powerDevice1 = self._simulate()
             self.powerDevice2 = self._simulate()
 
         self.currentChan = None
+
+        self.version_var = None
+
+    @property
+    def info(self):
+        return {
+            "version":self.version,
+            "error":self.errors,
+            "status":self.status,
+            "current_consigne":self.currentConsigne,
+            "current_real":self.currentReal,
+            "voltage_consigne":self.voltageConsigne,
+            "voltage_real":self.voltageReal
+        }
 
     def reset(self):
         self._readWrite("*RST")
 
     @property
     def version(self):
-        if not self.simulate:
-            return self._readWrite("SYST:VERS?")
-        else:
-            return "1.0.0"
+        if self.version_var is None:
+            if not self.simulate:
+                self.version_var = self._readWrite("SYST:VERS?")
+            else:
+                self.version_var = "xxxx"
+        return self.version_var
 
     @property
     def status(self):
         if not self.simulate:
             return self._readWrite("OUTP:STAT?")
         else:
-            return "STBY"
+            return "xxxx"
 
     @status.setter
     def status(self, value):

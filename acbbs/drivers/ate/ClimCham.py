@@ -3,11 +3,29 @@ from acbbs.tools.log import *
 
 class ClimCham(object):
     def __init__(self, simulate = False):
-        if not simulate:
-            self.simulate = False
 
+        #simulation state
+        self.simulate = simulate
+
+        if not simulate:
+            pass
         else:
-            self.simulate = True
+            pass
+
+        self.reference_var = None
+        self.version_var = None
+
+    @property
+    def info(self):
+        return {
+            "reference":self.reference,
+            "version":self.version,
+            "error":self.errors,
+            "temp_consigne":self.tempConsigne,
+            "temp_real":self.tempReal,
+            "humidity_consigne":self.humidityConsigne,
+            "humidity_real":self.humidityReal
+        }
 
     @property
     def errors(self):
@@ -19,11 +37,17 @@ class ClimCham(object):
 
     @property
     def reference(self):
-        return ""
+        if self.reference_var is None:
+            #get reference
+            self.reference_var = "xxxx"
+        return self.reference_var
 
     @property
     def version(self):
-        return ""
+        if self.version_var is None:
+            #get reference
+            self.version_var = "xxxx"
+        return self.version_var
 
     def enable(self):
         """

@@ -3,11 +3,25 @@ from acbbs.tools.log import *
 
 class PwrMeter(object):
     def __init__(self, simulate = False):
-        if not simulate:
-            self.simulate = False
 
+        #simulation state
+        self.simulate = simulate
+
+        if not simulate:
+            pass
         else:
-            self.simulate = True
+            pass
+
+        self.reference_var = None
+        self.version_var = None
+
+    @property
+    def info(self):
+        return {
+            "version":self.reference,
+            "reference":self.version,
+            "error":self.errors
+        }
 
     @property
     def errors(self):
@@ -19,11 +33,21 @@ class PwrMeter(object):
 
     @property
     def reference(self):
-        return ""
+        if self.reference_var is None:
+            if self.simulate:
+                self.reference_var =  "xxxx"
+            else:
+                self.reference_var =  "xxxx"
+        return self.reference_var
 
     @property
     def version(self):
-        return ""
+        if self.version_var is None:
+            if self.simulate:
+                self.version_var =  "xxxx"
+            else:
+                self.version_var =  "xxxx"
+        return self.version_var
 
     def reset(self):
         """

@@ -48,6 +48,9 @@ class Swtch(object):
         self.conf = configurationFile(file = self.__class__.__name__)
         self.swtchConf = self.conf.getConfiguration()
 
+        #simulation state
+        self.simulate = simulate
+
         #if simulate
         if not simulate:
     		self.tn = Telnet(self.dcConf["swtch-ip"], 23, 2)
@@ -56,6 +59,35 @@ class Swtch(object):
 
         else:
             self.tn = self._simulate()
+
+        self.reference_var = None
+        self.version_var = None
+
+    @property
+    def info(self):
+        return {
+            "reference":self.reference,
+            "version":self.version,
+            "error":self.errors
+        }
+
+    @property
+    def reference(self):
+        if self.reference_var is None:
+            if not self.simulate:
+                self.reference_var = "xxxx"
+            else:
+                self.reference_var = "xxxx"
+        return self.reference_var
+
+    @property
+    def version(self):
+        if self.version_var is None:
+            if not self.simulate:
+                self.version_var = "xxxx"
+            else:
+                self.version_var = "xxxx"
+        return self.version_var
 
     def __connect(self):
 		self.tn.write('connect line 2 \r\n')
@@ -95,11 +127,3 @@ class Swtch(object):
 
         else:
             return []
-
-    @property
-    def reference(self):
-        return ""
-
-    @property
-    def version(self):
-        return ""

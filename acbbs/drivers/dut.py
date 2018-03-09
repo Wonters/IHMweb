@@ -58,17 +58,18 @@ class dut(object):
         #init logs
         self.logger = get_logger(self.__class__.__name__)
 
+        #simulation state
+        self.simulate = simulate
+
         #case of simulate
         if simulate :
             self.logger.info("Init dut in Simulate")
-            self.simulate = True
             self.address = "192.168.x.x"
             self.channel = "xx"
             self.session = self._simulate()
 
         else :
             self.logger.info("Init dut")
-            self.simulate = False
 
             #init connection to dut
             if ip is None:
@@ -77,6 +78,14 @@ class dut(object):
             self.channel = ip
             self.address = "http://%s/factory" % ip
             self.logger.info("New RadioDevice %s" % (self.address), ch=self.channel)
+
+            self.tapId_var = None
+            self.tapHw_var = None
+            self.tapSw_var = None
+            self.radioHw_var = None
+            self.radioFw_var = None
+            self.tpmHw_var = None
+            self.tpmVendor_var = None
 
     def _launchCmd(self, uri, get = True, payloadJson = None, payloadData = None, stream = False, callback = None):
         if get:
@@ -140,6 +149,25 @@ class dut(object):
         return self._launchCmd(uri, False, None, payloadData, False, None)
 
     @property
+    def info(self):
+        return {
+            "id":self.tapId,
+            "tap-hw":self.tapHw,
+            "tap-sw":self.tapSw,
+            "radio-hw":self.radioHw,
+            "radio-fw":self.radioFw,
+            "tpm-hw":self.tpmHw,
+            "tpm-vendor":self.tpmVendor,
+            "freq-tx":self.freqTx,
+            "freq-rx":self.freqRx,
+            "mode":self.mode,
+            "preamp0":self.preamp0,
+            "preamp1":self.preamp1,
+            "preamp2":self.preamp2,
+            "measure":self.allMeasure
+        }
+
+    @property
     def connected(self):
         try:
             self._launchGetJson("%s/info" % self.address)
@@ -150,31 +178,66 @@ class dut(object):
 
     @property
     def tapId(self):
-        return self._launchGetJson("%s/info" % self.address)['tapid']
+        if self.tapId_var is None:
+            if self.simulate:
+                self.tapId_var = "xxxx"
+            else:
+                self.tapId_var = self._launchGetJson("%s/info" % self.address)['tapid']
+        return self.tapId_var
 
     @property
     def tapHw(self):
-        return self._launchGetJson("%s/info" % self.address)['taphw']
+        if self.tapHw_var is None:
+            if self.simulate:
+                self.tapHw_var = "xxxx"
+            else:
+                self.tapHw_var = self._launchGetJson("%s/info" % self.address)['taphw']
+        return self.tapHw_var
 
     @property
     def tapSw(self):
-        return self._launchGetJson("%s/info" % self.address)['tapsw']
+        if self.tapSw_var is None:
+            if self.simulate:
+                self.tapSw_var = "xxxx"
+            else:
+                self.tapSw_var = self._launchGetJson("%s/info" % self.address)['tapsw']
+        return self.tapSw_var
 
     @property
     def radioHw(self):
-        return self._launchGetJson("%s/info" % self.address)['radiohw']
+        if self.radioHw_var is None:
+            if self.simulate:
+                self.radioHw_var = "xxxx"
+            else:
+                self.radioHw_var = self._launchGetJson("%s/info" % self.address)['radiohw']
+        return self.radioHw_var
 
     @property
     def radioFw(self):
-        return self._launchGetJson("%s/info" % self.address)['radiofw']
+        if self.radioFw_var is None:
+            if self.simulate:
+                self.radioFw_var = "xxxx"
+            else:
+                self.radioFw_var = self._launchGetJson("%s/info" % self.address)['radiofw']
+        return self.radioFw_var
 
     @property
     def tpmHw(self):
-        return self._launchGetJson("%s/info" % self.address)['tpmhw']
+        if self.tpmHw_var is None:
+            if self.simulate:
+                self.tpmHw_var = "xxxx"
+            else:
+                self.tpmHw_var = self._launchGetJson("%s/info" % self.address)['tpmhw']
+        return self.tpmHw_var
 
     @property
     def tpmVendor(self):
-        return self._launchGetJson("%s/info" % self.address)['tpmvendor']
+        if self.tpmVendor_var is None:
+            if self.simulate:
+                self.tpmVendor_var = "xxxx"
+            else:
+                self.tpmVendor_var = self._launchGetJson("%s/info" % self.address)['tpmvendor']
+        return self.tpmVendor_var
 
     @property
     def allMeasureAvailable(self):

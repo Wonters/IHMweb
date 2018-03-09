@@ -33,6 +33,9 @@ class DCPwr(object):
         #simulation state
         self.simulate = simulate
 
+        #channel
+        self.channel = 'N'
+
         if not simulate:
             self.logger.info("New power instance")
             try :
@@ -50,7 +53,7 @@ class DCPwr(object):
             self.powerDevice1 = self._simulate()
             self.powerDevice2 = self._simulate()
 
-        self.currentChan = None
+        self.channel = None
 
         self.version_var = None
 
@@ -87,7 +90,7 @@ class DCPwr(object):
 
     @status.setter
     def status(self, value):
-        self.logger.info("Change status to %s" % value, ch = self.currentChan)
+        self.logger.info("Change status to %s" % value, ch = self.channel)
         self._readWrite("OUTP:STAT", value)
 
     @property
@@ -105,7 +108,7 @@ class DCPwr(object):
             return "12.01"
 
     def voltage(self, value):
-        self.logger.info("Change voltage to %s" % value, ch = self.currentChan)
+        self.logger.info("Change voltage to %s" % value, ch = self.channel)
         self._readWrite("VOLT", value)
 
     @property
@@ -123,7 +126,7 @@ class DCPwr(object):
             return "1.456"
 
     def current(self, value):
-        self.logger.info("Change current to %s" % value, ch = self.currentChan)
+        self.logger.info("Change current to %s" % value, ch = self.channel)
         self._readWrite("CURR", value)
 
     @property
@@ -135,25 +138,25 @@ class DCPwr(object):
                 err = self._readWrite("SYST:ERR?")
                 if "No error" not in err:
                     errList.append(err)
-                    self.logger.debug("read error %s" % err, ch = self.currentChan)
+                    self.logger.debug("read error %s" % err, ch = self.channel)
             return errList
 
         else:
             return []
 
-    def selChan(self, channel):
-        if int(channel) in [1, 2, 3, 4, 5, 6, 7, 8]:
-            self.logger.info("Change channel to %s" % channel, ch = self.currentChan)
-            self.currentChan = channel
+    def setChan(self, dutChan):
+        if int(dutChan) in [1, 2, 3, 4, 5, 6, 7, 8]:
+            self.logger.info("Change channel to %s" % dutChan, ch = self.channel)
+            self.channel = dutChan
         else:
-            raise AcbbsError("Bad Channel", ch = self.currentChan, log = self.logger)
+            raise AcbbsError("Bad Channel", ch = self.channel, log = self.logger)
 
     def _wait(self):
-        if self.currentChan != None:
-            if self.currentChan in [1, 2, 3, 4]:
+        if self.channel != None:
+            if self.channel in [1, 2, 3, 4]:
                 self.powerDevice1.write("*WAI\n")
                 return
-            elif self.currentChan in [5, 6, 7, 8]:
+            elif self.channel in [5, 6, 7, 8]:
                 self.powerDevice2.write("*WAI\n")
                 return
 
@@ -178,24 +181,24 @@ class DCPwr(object):
                 c = "%s" % (cmd.split("\n")[0])
             else:
                 c = "%s %s" % (cmd.split("\n")[0], value)
-            self.logger.warning("Get following errors after \"{0}\" command : {1}".format(c, strerr), ch = self.currentChan)
+            self.logger.warning("Get following errors after \"{0}\" command : {1}".format(c, strerr), ch = self.channel)
 
 
     def _channelSel(self):
-        if int(self.currentChan) in [1, 2, 3, 4]:
+        if int(self.channel) in [1, 2, 3, 4]:
             self.powerDevice1.write("INST:NSEL?\n")
-            if self.powerDevice1.read_until("\n")[:-1] != str(self.currentChan):
-                self.logger.debug("Write on channel %s on powerDevice1" % self.currentChan, ch = self.currentChan)
-                self.powerDevice1.write("INST:NSEL %s\n" % self.currentChan)
+            if self.powerDevice1.read_until("\n")[:-1] != str(self.channel):
+                self.logger.debug("Write on channel %s on powerDevice1" % self.channel, ch = self.channel)
+                self.powerDevice1.write("INST:NSEL %s\n" % self.channel)
                 self._wait()
             return self.powerDevice1
-        elif int(self.currentChan) in [5, 6, 7, 8]:
-            channel = (int(self.currentChan) - 4)
+        elif int(self.channel) in [5, 6, 7, 8]:
+            channel = (int(self.channel) - 4)
             self.powerDevice2.write("INST:NSEL?\n")
             if self.powerDevice2.read_until("\n")[:-1] != str(channel):
-                self.logger.debug("Write on channel %s on powerDevice2" % channel, ch = self.currentChan)
+                self.logger.debug("Write on channel %s on powerDevice2" % channel, ch = self.channel)
                 self.powerDevice2.write("INST:NSEL %s\n" % int(channel))
                 self._wait()
             return self.powerDevice2
         else:
-            raise AcbbsError("Bad Channel", ch = self.currentChan, log = self.logger)
+            raise AcbbsError("Bad Channel", ch = self.channel, log = self.logger)

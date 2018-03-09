@@ -19,7 +19,7 @@ class skeletonTc(baseTestCase):
         self.tcVersion = "1.0.0"
 
         #calcul iterations number
-        self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["switch"])
+        self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["channel"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -31,22 +31,24 @@ class skeletonTc(baseTestCase):
 
         #start loop
         self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
-        for chan in self.tcConf["switch"]:
+        for chan in self.tcConf["channel"]:
             #if status = ABORTING, finish iteration and break :
             if self.status is st().ABORTING:
                 break
 
-            #configure switch
+            #configure ate channel
+            self.logger.info("Configure ATE channel : {0}".format(chan), ch = chan)
             self.Swtch.setSwitch(dutChan = chan)
+            self.DCPwr.setChan(dutChan = chan)
 
             #dut drivers init
-            self.logger.debug("Init dut")
-            self.logger.debug("Check dut-ip : {0}".format(self.Swtch.dutIP))
-            self.dut = dut(self.Swtch.dutIP)
+            self.logger.info("Init dut", ch = chan)
+            self.logger.info("Check dut-ip : {0}".format(chan), ch = chan)
+            self.dut = dut(chan)
             if self.dut.connected:
-                self.logger.debug("DUT at {0} well connected".format(self.Swtch.dutIP))
+                self.logger.info("DUT at {0} well connected".format(chan), ch = chan)
             else:
-                self.logger.error("dut error, aborting...")
+                self.logger.error("dut error, aborting...", ch = chan)
                 self.status = st().ABORTING
 
 
@@ -103,7 +105,6 @@ class skeletonTc(baseTestCase):
         self.logger.debug("Init ate")
         self.ClimCham = ClimCham()
         self.DCPwr = DCPwr(simulate = True)
-        self.DCPwr.selChan(1)
         self.PwrMeter = PwrMeter()
         self.RFSigGen = RFSigGen(simulate = True)
         self.SpecAn = SpecAn()

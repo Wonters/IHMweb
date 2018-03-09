@@ -53,7 +53,7 @@ class dut(object):
         def __init__(self):
             pass
 
-    def __init__(self , ip=None, simulate = False):
+    def __init__(self , chan=None, simulate = False):
         '''
         Constructor
         '''
@@ -64,23 +64,27 @@ class dut(object):
         #simulation state
         self.simulate = simulate
 
+        #get configuration
+        self.conf = configurationFile(file = self.__class__.__name__)
+        self.dutConf = self.conf.getConfiguration()
+
+        if chan is None:
+            raise AcbbsError("Channel mandatory", log=self.logger)
+
+        self.channel = chan
+        self.ip = self.dutConf["dut-ip"] % self.channel
+
         #case of simulate
         if simulate :
-            self.logger.info("Init dut in Simulate")
-            self.address = "192.168.x.x"
-            self.channel = "xx"
+            self.logger.info("Init dut in Simulate", ch=self.channel)
             self.session = self._simulate()
 
         else :
             self.logger.info("Init dut")
-
-            #init connection to dut
-            if ip is None:
-                raise AcbbsError("Ip or Channel mandatory", log=self.logger)
             self.session = requests.Session()
-            self.channel = ip
-            self.address = "http://%s/factory" % ip
-            self.logger.info("New RadioDevice %s" % (self.address), ch=self.channel)
+
+        self.address = "http://%s/factory" % self.ip
+        self.logger.info("New RadioDevice %s" % (self.address), ch=self.channel)
 
         self.tapId_var = None
         self.tapHw_var = None

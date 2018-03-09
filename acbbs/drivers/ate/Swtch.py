@@ -48,6 +48,9 @@ class Swtch(object):
         self.conf = configurationFile(file = self.__class__.__name__)
         self.swtchConf = self.conf.getConfiguration()
 
+        #channel
+        self.channel = 'N'
+
         #simulation state
         self.simulate = simulate
 
@@ -59,8 +62,6 @@ class Swtch(object):
 
         else:
             self.tn = self._simulate()
-
-        self.ipChannel = None
 
         self.reference_var = None
         self.version_var = None
@@ -105,6 +106,8 @@ class Swtch(object):
 
     def setSwitch(self, dutChan = None, dcLoadChan = None, ateChan = None, sigGenAttenChan = None):
         if not self.simulate:
+            if dutChan is not None:
+                self.channel = dutChan
             self.__connect()
             self.tn.write("S\r\n")
             ret = self.tn.read_until("\r\n")
@@ -128,15 +131,8 @@ class Swtch(object):
                 return ret
         else:
             if dutChan is not None:
-                self.ipChannel = dutChan
+                self.channel = dutChan
             return None
-
-    @property
-    def dutIP(self):
-        if self.ipChannel is None:
-            self.logger.warning("Channel is not yet defined ! Use setSwitch method to define it.")
-        else:
-            return self.swtchConf["dut-ip"] % self.ipChannel
 
     @property
     def errors(self):

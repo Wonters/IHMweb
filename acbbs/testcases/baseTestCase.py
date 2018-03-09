@@ -23,7 +23,7 @@ class baseTestCase(Thread):
         Thread.__init__(self)
 
         #init var
-        self.progress = 0.0
+        self.iteration = 0.0
         self.status = st().NOT_RUNNING
         self.iterationsNumber = 0.0
 
@@ -40,11 +40,9 @@ class baseTestCase(Thread):
         #get date key value
         self.date = time.time()
 
-    def getProgress(self):
-        return (self.progress/self.iterationsNumber)*100.0
-
-    def getStatus(self):
-        return self.status
+    @property
+    def purcent(self):
+        return (self.iteration/self.iterationsNumber)*100.0
 
     def run(self):
         """

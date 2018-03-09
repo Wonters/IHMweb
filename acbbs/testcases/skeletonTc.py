@@ -19,7 +19,7 @@ class skeletonTc(baseTestCase):
         self.tcVersion = "1.0.0"
 
         #calcul iterations number
-        self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * 1 #nb dut
+        self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["dut-ip"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -34,29 +34,39 @@ class skeletonTc(baseTestCase):
         for dutIP in self.tcConf["dut-ip"]:
             #if status = ABORTING, finish iteration and break :
             if self.status is st().ABORTING:
-                continue
+                break
 
             #dut drivers init
             self.logger.debug("Init dut")
+            self.logger.debug("Check dut-ip : {0}".format(dutIP))
             self.dut = dut(dutIP)
+            if self.dut.connected:
+                self.logger.debug("DUT at {0} well connected".format(dutIP))
+            else:
+                self.logger.error("dut error, aborting...")
+                self.status = st().ABORTING
+
 
             for temperature in self.tcConf["temperature"]:
                 #if status = ABORTING, finish iteration and break :
                 if self.status is st().ABORTING:
-                    continue
+                    break
+
 
                 for vdd in self.tcConf["voltage"]:
                     #if status = ABORTING, finish iteration and break :
                     if self.status is st().ABORTING:
-                        continue
+                        break
+
 
                     for power in self.tcConf["power"]:
                         #if status = ABORTING, finish iteration and break :
                         if self.status is st().ABORTING:
-                            continue
+                            break
+
 
                         #update progress
-                        self.progress += 1
+                        self.iteration += 1
 
                         #configure DUT
 
@@ -109,7 +119,6 @@ class skeletonTc(baseTestCase):
         self.SpecAnVer = self.SpecAn.version
         self.SwtchRef = self.Swtch.reference
         self.SwtchVer = self.Swtch.version
-
 
     def __writeMeasure(self, conf, result):
         return {

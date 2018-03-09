@@ -6,22 +6,25 @@ from acbbs.testcases.skeletonTc import *
 from acbbs.testcases.rxGainLNA import *
 
 import time
+from progress.bar import Bar
 
 def main(args):
     threadSkeletonTc = skeletonTc()
-    threadSkeletonTc.tcInit()
-    threadSkeletonTc.start()
     threadrxGainLNA = rxGainLNA()
     # threadrxGainLNA.tcInit()
     # threadrxGainLNA.start()
 
-    while threadSkeletonTc.is_alive():
-        # if threadGenericTc.getProgress() > 40 :
-        #     threadGenericTc.abort()
-        print("progress : {0:.2f} Status = {1}".format(threadSkeletonTc.getProgress(), threadSkeletonTc.getStatus()))
-        time.sleep(0.5)
+    bar = Bar('Processing', max=threadSkeletonTc.iterationsNumber)
+    i = threadSkeletonTc.iteration
 
-    print("progress : {0:.2f} Status = {1}".format(threadSkeletonTc.getProgress(), threadSkeletonTc.getStatus()))
+    threadSkeletonTc.tcInit()
+    threadSkeletonTc.start()
+    while threadSkeletonTc.is_alive():
+        if threadSkeletonTc.iteration != i:
+            i = threadSkeletonTc.iteration
+            bar.next()
+    bar.finish()
+
 
     exit(0)
 

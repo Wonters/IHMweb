@@ -19,7 +19,7 @@ class skeletonTc(baseTestCase):
         self.tcVersion = "1.0.0"
 
         #calcul iterations number
-        self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["dut-ip"])
+        self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["switch"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -31,17 +31,20 @@ class skeletonTc(baseTestCase):
 
         #start loop
         self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
-        for dutIP in self.tcConf["dut-ip"]:
+        for chan in self.tcConf["switch"]:
             #if status = ABORTING, finish iteration and break :
             if self.status is st().ABORTING:
                 break
 
+            #configure switch
+            self.Swtch.setSwitch(dutChan = chan)
+
             #dut drivers init
             self.logger.debug("Init dut")
-            self.logger.debug("Check dut-ip : {0}".format(dutIP))
-            self.dut = dut(simulate = True)
+            self.logger.debug("Check dut-ip : {0}".format(self.Swtch.dutIP))
+            self.dut = dut(self.Swtch.dutIP)
             if self.dut.connected:
-                self.logger.debug("DUT at {0} well connected".format(dutIP))
+                self.logger.debug("DUT at {0} well connected".format(self.Swtch.dutIP))
             else:
                 self.logger.error("dut error, aborting...")
                 self.status = st().ABORTING
@@ -105,6 +108,7 @@ class skeletonTc(baseTestCase):
         self.RFSigGen = RFSigGen(simulate = True)
         self.SpecAn = SpecAn()
         self.Swtch = Swtch(simulate = True)
+        self.Swtch.setSwitch(dcLoadChan = 1, ateChan = 2, sigGenAttenChan = 2)
 
     def __writeMeasure(self, conf, result):
         return {

@@ -53,12 +53,14 @@ class Swtch(object):
 
         #if simulate
         if not simulate:
-    		self.tn = Telnet(self.dcConf["swtch-ip"], 23, 2)
-    		self.tn.write('enable \r\n')
-    		self.tn.read_until("(enable)#")
+            self.tn = Telnet(self.dcConf["swtch-ip"], 23, 2)
+            self.tn.write('enable \r\n')
+            self.tn.read_until("(enable)#")
 
         else:
             self.tn = self._simulate()
+
+        self.ipChannel = None
 
         self.reference_var = None
         self.version_var = None
@@ -90,35 +92,51 @@ class Swtch(object):
         return self.version_var
 
     def __connect(self):
-		self.tn.write('connect line 2 \r\n')
-		result = self.tn.read_until("Connected to line 2.\r\n", 1)
-		if "Connected" not in result:
-			raise commutRackException(result)
-		self.tn.read_until("\r\n")
+        if not self.simulate:
+            self.tn.write('connect line 2 \r\n')
+            result = self.tn.read_until("Connected to line 2.\r\n", 1)
+            if "Connected" not in result:
+                raise commutRackException(result)
+                self.tn.read_until("\r\n")
 
     def __disconnect(self):
 		self.tn.write(chr(12))
 		self.tn.read_until("#", 1)
 
-    def setSwitch(self, sw1, sw2, sw3, sw4):
-		self.__connect()
-		self.tn.write("S\r\n")
-		ret = self.tn.read_until("\r\n")
+    def setSwitch(self, dutChan = None, dcLoadChan = None, ateChan = None, sigGenAttenChan = None):
+        if not self.simulate:
+            self.__connect()
+            self.tn.write("S\r\n")
+            ret = self.tn.read_until("\r\n")
+            if dutChan is not None:
+                self.tn.write('c' + str(dutChan) + ret[2] + ret[3] + ret[4] + '\r\n')
+                ret = self.tn.read_until("\r\n")
 
-		self.tn.write('c' + str(sw1) + ret[2] + ret[3] + ret[4] + '\r\n')
-		ret = self.tn.read_until("\r\n")
+            if dcLoadChan is not None:
+                self.tn.write('c' + ret[1] + str(dcLoadChan) + ret[3] + ret[4] + '\r\n')
+                ret = self.tn.read_until("\r\n")
 
-		self.tn.write('c' + ret[1] + str(sw2) + ret[3] + ret[4] + '\r\n')
-		ret = self.tn.read_until("\r\n")
+            if ateChan is not None:
+                self.tn.write('c' + ret[1] + ret[2] + str(ateChan) + ret[4] + '\r\n')
+                ret = self.tn.read_until("\r\n")
 
-		self.tn.write('c' + ret[1] + ret[2] + str(sw3) + ret[4] + '\r\n')
-		ret = self.tn.read_until("\r\n")
+            if sigGenAttenChan is not None:
+                self.tn.write('c' + ret[1] + ret[2] + ret[3] + str(sigGenAttenChan) + '\r\n')
+                ret = self.tn.read_until("\r\n")
 
-		self.tn.write('c' + ret[1] + ret[2] + ret[3] + str(sw4) + '\r\n')
-		ret = self.tn.read_until("\r\n")
+                self.__disconnect()
+                return ret
+        else:
+            if dutChan is not None:
+                self.ipChannel = dutChan
+            return None
 
-		self.__disconnect()
-		return ret
+    @property
+    def dutIP(self):
+        if self.ipChannel is None:
+            self.logger.warning("Channel is not yet defined ! Use setSwitch method to define it.")
+        else:
+            return self.swtchConf["dut-ip"] % self.ipChannel
 
     @property
     def errors(self):

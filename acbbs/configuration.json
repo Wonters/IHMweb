@@ -13,13 +13,14 @@
     "powerDevice2-ip":"192.168.0.31"
   },
   "Swtch":{
-    "swtch-ip":"192.168.0.20"
+    "swtch-ip":"192.168.0.20",
+    "dut-ip":"192.168.%s.20"
   },
   "RFSigGen":{
     "cableLoss":"0"
   },
   "skeletonTc":{
-    "dut-ip":["10.30.24.254"],
+    "switch":["1", "2", "3"],
     "temperature":["-20", "0", "20"],
     "voltage":["10", "11", "12", "14"],
     "power":["-100", "-90"]

@@ -10,7 +10,7 @@ from progress.bar import PixelBar
 
 def main(args):
     threadSkeletonTc = skeletonTc()
-    threadrxGainLNA = rxGainLNA()
+    # threadrxGainLNA = rxGainLNA()
     # threadrxGainLNA.tcInit()
     # threadrxGainLNA.start()
 

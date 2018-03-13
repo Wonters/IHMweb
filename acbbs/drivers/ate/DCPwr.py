@@ -105,6 +105,11 @@ class DCPwr(object):
         else:
             return "12.01"
 
+    @property
+    def voltage(self):
+        raise AcbbsError("Command not implemented", log = self.logger)
+
+    @voltage.setter
     def voltage(self, value):
         self.logger.info("Change voltage to %s" % value, ch = self.channel)
         self._readWrite("VOLT", value)
@@ -123,6 +128,11 @@ class DCPwr(object):
         else:
             return "1.456"
 
+    @property
+    def current(self):
+        raise AcbbsError("Command not implemented", log = self.logger)
+
+    @current.setter
     def current(self, value):
         self.logger.info("Change current to %s" % value, ch = self.channel)
         self._readWrite("CURR", value)

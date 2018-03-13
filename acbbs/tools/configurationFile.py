@@ -24,6 +24,12 @@ class configurationFile(object):
         self.logger.debug("Get configuration for \"{0}\"".format(self.file))
         return self.json_data[self.file]
 
+    def getTcIterationsNumber(self):
+        nbValue = 1
+        for key in self.json_data[self.file].values():
+            nbValue *= len(key)
+        return nbValue
+
     def __openConfigurationFile(self):
         with open("acbbs/configuration.json") as json_file:
             self.json_data = json.load(json_file)

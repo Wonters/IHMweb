@@ -19,13 +19,10 @@ class skeletonTc(baseTestCase):
         self.tcVersion = "1.0.0"
 
         #calcul iterations number
-        self.iterationsNumber = len(self.tcConf["temperature"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["channel"])
+        self.iterationsNumber = self.conf.getTcIterationsNumber()
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
-        #update Status
-        self.status = st().STARTING
-
         #update Status
         self.status = st().RUNNING
 
@@ -34,21 +31,21 @@ class skeletonTc(baseTestCase):
         for chan in self.tcConf["channel"]:
             if self.status is st().ABORTING:
                 break
-            self.Swtch.setSwitch(dutChan = chan)    #configure Swtch channel
-            self.DCPwr.setChan(dutChan = chan)      #configure DCPwr channel
-            self.dut = dut(chan)                    #dut drivers init
+            self.Swtch.setSwitch(dutChan = chan)       #configure Swtch channel
+            self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
+            self.dut = dut(chan=chan, simulate=True)   #dut drivers init
 
 
             for vdd in self.tcConf["voltage"]:
                 if self.status is st().ABORTING:
                     break
-                self.DCPwr.voltage = vdd            #configure voltage
+                self.DCPwr.voltage = vdd               #configure voltage
 
 
                 for power in self.tcConf["power"]:
                     if self.status is st().ABORTING:
                         break
-                    self.RFSigGen.power = power     #configure power
+                    self.RFSigGen.power = power        #configure power
 
 
                     #update progress
@@ -63,11 +60,10 @@ class skeletonTc(baseTestCase):
                     #simulation
                     i9 = float(vdd) / (float(random.randrange(9000, 12000))/1000.0)
                     i12 = float(vdd) / (float(random.randrange(5000, 19000))/1000.0)
-                    pout = temperature * random.randrange(7, 9)
 
                     #write measures
-                    self.db.writeDataBase(self.__writeMeasure(conf = {"temperature":temperature, "vdd":vdd, "power":power},
-                                                            result = {"i9":i9, "i12": i12, "pout":pout}))
+                    self.db.writeDataBase(self.__writeMeasure(conf = {"vdd":vdd, "power":power},
+                                                            result = {"i9":i9, "i12": i12}))
 
                     #simulation
                     time.sleep(0.1)
@@ -79,16 +75,13 @@ class skeletonTc(baseTestCase):
         #update Status
         self.status = st().INIT
 
-        #init script
-        self.logger.info("Init ".format(self.__class__.__name__))
-
         #ate drivers init
         self.logger.debug("Init ate")
-        self.ClimCham = ClimCham()
+        self.ClimCham = ClimCham(simulate = True)
         self.DCPwr = DCPwr(simulate = True)
-        self.PwrMeter = PwrMeter()
+        self.PwrMeter = PwrMeter(simulate = True)
         self.RFSigGen = RFSigGen(simulate = True)
-        self.SpecAn = SpecAn()
+        self.SpecAn = SpecAn(simulate = True)
         self.Swtch = Swtch(simulate = True)
         self.Swtch.setSwitch(dcLoadChan = 1, ateChan = 2, sigGenAttenChan = 2)
 
@@ -100,7 +93,6 @@ class skeletonTc(baseTestCase):
             "acbbs_version":self.conf.getVersion(),
             "status":self.status,
             "input-parameters":{
-                "temperature":conf["temperature"],
                 "vdd":conf["vdd"],
                 "power":conf["power"]
             },
@@ -115,7 +107,6 @@ class skeletonTc(baseTestCase):
             },
             "dut-result":{
                 "i9":result["i9"],
-                "i12":result["i12"],
-                "pout":result["pout"]
+                "i12":result["i12"]
             }
         }

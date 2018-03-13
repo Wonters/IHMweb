@@ -56,7 +56,7 @@ class Swtch(object):
 
         #if simulate
         if not simulate:
-            self.tn = Telnet(self.dcConf["swtch-ip"], 23, 2)
+            self.tn = Telnet(self.dcConf["ip"], 23, 2)
             self.tn.write('enable \r\n')
             self.tn.read_until("(enable)#")
 

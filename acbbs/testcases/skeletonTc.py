@@ -32,64 +32,45 @@ class skeletonTc(baseTestCase):
         #start loop
         self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
         for chan in self.tcConf["channel"]:
-            #if status = ABORTING, finish iteration and break :
             if self.status is st().ABORTING:
                 break
-
-            #configure ate channel
-            self.logger.info("Configure ATE channel : {0}".format(chan), ch = chan)
-            self.Swtch.setSwitch(dutChan = chan)
-            self.DCPwr.setChan(dutChan = chan)
-
-            #dut drivers init
-            self.logger.info("Init dut", ch = chan)
-            self.logger.info("Check dut-ip : {0}".format(chan), ch = chan)
-            self.dut = dut(chan)
-            if self.dut.connected:
-                self.logger.info("DUT at {0} well connected".format(chan), ch = chan)
-            else:
-                self.logger.error("dut error, aborting...", ch = chan)
-                self.status = st().ABORTING
+            self.Swtch.setSwitch(dutChan = chan)    #configure Swtch channel
+            self.DCPwr.setChan(dutChan = chan)      #configure DCPwr channel
+            self.dut = dut(chan)                    #dut drivers init
 
 
-            for temperature in self.tcConf["temperature"]:
-                #if status = ABORTING, finish iteration and break :
+            for vdd in self.tcConf["voltage"]:
                 if self.status is st().ABORTING:
                     break
+                self.DCPwr.voltage = vdd            #configure voltage
 
 
-                for vdd in self.tcConf["voltage"]:
-                    #if status = ABORTING, finish iteration and break :
+                for power in self.tcConf["power"]:
                     if self.status is st().ABORTING:
                         break
+                    self.RFSigGen.power = power     #configure power
 
 
-                    for power in self.tcConf["power"]:
-                        #if status = ABORTING, finish iteration and break :
-                        if self.status is st().ABORTING:
-                            break
+                    #update progress
+                    self.iteration += 1
 
+                    #configure DUT
 
-                        #update progress
-                        self.iteration += 1
+                    #configure ATE
 
-                        #configure DUT
+                    #start measurement
 
-                        #configure ATE
+                    #simulation
+                    i9 = float(vdd) / (float(random.randrange(9000, 12000))/1000.0)
+                    i12 = float(vdd) / (float(random.randrange(5000, 19000))/1000.0)
+                    pout = temperature * random.randrange(7, 9)
 
-                        #start measurement
+                    #write measures
+                    self.db.writeDataBase(self.__writeMeasure(conf = {"temperature":temperature, "vdd":vdd, "power":power},
+                                                            result = {"i9":i9, "i12": i12, "pout":pout}))
 
-                        #simulation
-                        i9 = float(vdd) / (float(random.randrange(9000, 12000))/1000.0)
-                        i12 = float(vdd) / (float(random.randrange(5000, 19000))/1000.0)
-                        pout = temperature * random.randrange(7, 9)
-
-                        #write measures
-                        self.db.writeDataBase(self.__writeMeasure(conf = {"temperature":temperature, "vdd":vdd, "power":power},
-                                                                result = {"i9":i9, "i12": i12, "pout":pout}))
-
-                        #simulation
-                        time.sleep(0.1)
+                    #simulation
+                    time.sleep(0.1)
 
         #update Status
         self.status = st().FINISHED

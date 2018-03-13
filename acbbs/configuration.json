@@ -6,23 +6,24 @@
     "dut-ip":"192.168.%s.20"
   },
   "dataBase":{
-    "mongodb-ip":"127.0.0.1",
-    "mongodb-port":"27017",
-    "mongodb-database":"acbbs",
-    "mongodb-maxSevSelDelay":"500"
+    "ip":"127.0.0.1",
+    "port":"27017",
+    "database":"acbbs",
+    "maxSevSelDelay":"500"
   },
   "DCPwr":{
     "powerDevice1-ip":"192.168.0.30",
     "powerDevice2-ip":"192.168.0.31"
   },
   "Swtch":{
-    "swtch-ip":"192.168.0.20"
+    "ip":"192.168.0.20"
   },
   "RFSigGen":{
+    "ip":"192.168.0.10",
     "cableLoss":"0"
   },
   "skeletonTc":{
-    "channel":["24", "2", "3"],
+    "channel":["1", "2", "3"],
     "temperature":["-20", "0", "20"],
     "voltage":["10", "11", "12", "14"],
     "power":["-100", "-90"]

@@ -2,7 +2,7 @@
 from acbbs.tools.log import *
 from acbbs.tools.configurationFile import *
 
-from vxi11 import Instrument
+from telnetlib import Telnet
 
 class RFSigGen(object):
     class _simulate(object):
@@ -28,14 +28,9 @@ class RFSigGen(object):
         if not simulate:
             self.logger.info("Init RFSigGen")
             try :
-                #Initialise and configure ATE
-                self.inst = Instrument(sig_gen)
-                inst.write("*CLS")
-                inst.write("*RST")
+                self.inst = Telnet(self.sigGenConf["ip"], 5025, 1)
             except :
-                raise AcbbsError("RFSigGen Connection error", log = self.logger)
-            Ps_hmp4040.powerDevice1.write("OUTP:GEN ON\n")
-            Ps_hmp4040.powerDevice2.write("OUTP:GEN ON\n")
+                raise AcbbsError("RFSigGen Connection error: {0}".format(self.sigGenConf["ip"]), log = self.logger)
         else :
             self.logger.info("Init RFSigGen in Simulate")
             self.inst = self._simulate()
@@ -51,12 +46,17 @@ class RFSigGen(object):
             "error":self.errors
         }
 
+    def reset(self):
+        self._readWrite("SYST:PRES")
+
     @property
-    def errors(self):
-        if not self.simulate:
-            pass
-        else:
-            return []
+    def version(self):
+        if self.version_var is None:
+            if not self.simulate:
+                self.version_var = self._readWrite("SYST:VERS?")
+            else:
+                self.version_var = "xxxx"
+        return self.version_var
 
     @property
     def reference(self):
@@ -68,49 +68,75 @@ class RFSigGen(object):
         return self.reference_var
 
     @property
-    def version(self):
-        if self.version_var is None:
-            if not self.simulate:
-                self.version_var = "xxxx"
-            else:
-                self.version_var = "xxxx"
-        return self.version_var
+    def errors(self):
+        if not self.simulate:
+            err = ""
+            errList = []
+            while "No error" not in err:
+                err = self._readWrite("SYST:ERR?")
+                if "No error" not in err:
+                    errList.append(err)
+                    self.logger.debug("read error %s" % err)
+            return errList
+
+        else:
+            return []
 
     @property
     def status(self):
         if not self.simulate:
-            pass
+            return self._readWrite("OUTP:STAT?")
         else:
-            return "STBY"
+            return "xxxx"
 
     @status.setter
     def status(self, value):
-        self.inst.write(":OUTP:STATE {0}".format(value))
+        self.logger.info("Change status to %s" % value)
+        self._readWrite("OUTP:STAT", value)
 
     @property
     def power(self):
         if not self.simulate:
-            pass
+            return self._readWrite("SOUR:POW:LEV:IMM:AMPL?")
         else:
-            return "-100"
+            return "xxxx"
 
     @power.setter
     def power(self, value):
-        self.inst.write(":SOUR:POW:LEV:IMM:AMPL {0}".format(value + self.sigGenConf["cableLoss"]))
+        self.logger.info("Change power to %s" % value)
+        self._readWrite("SOUR:POW:LEV:IMM:AMPL", value + int(self.sigGenConf["cableLoss"]))
 
     @property
     def freq(self):
         if not self.simulate:
-            pass
+            return self._readWrite("SOUR:FREQ:CW?")
         else:
-            return "868000000"
+            return "xxxx"
 
     @freq.setter
     def freq(self, value):
-        self.inst.write(":SOUR:FREQ:CW {0}".format(value))
+        self.logger.info("Change freq to %s" % value)
+        self._readWrite("SOUR:FREQ:CW", value)
 
-    def __readWrite(self, cmd = None, value = None):
-        pass
+    def _wait(self):
+        self.inst.write("*WAI\n")
+        return
 
-    def __wait(self):
-        pass
+    def _readWrite(self, cmd = None, value = None):
+        if "?" in cmd:
+            self.inst.write("%s\n" % cmd)
+            return(self.inst.read_until("\n")[:-1])
+        else:
+            self.inst.write("%s %s\n" % (cmd, value))
+            self._wait()
+
+        err = self.errors
+        if len(err) != 0:
+            strerr = ""
+            for e in err:
+                strerr += "|%s| " % e
+            if value is None:
+                c = "%s" % (cmd.split("\n")[0])
+            else:
+                c = "%s %s" % (cmd.split("\n")[0], value)
+            self.logger.warning("Get following errors after \"{0}\" command : {1}".format(c, strerr))

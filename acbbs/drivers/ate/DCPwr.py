@@ -53,8 +53,6 @@ class DCPwr(object):
             self.powerDevice1 = self._simulate()
             self.powerDevice2 = self._simulate()
 
-        self.channel = None
-
         self.version_var = None
 
     @property

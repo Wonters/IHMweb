@@ -72,7 +72,7 @@ class dut(object):
             raise AcbbsError("Channel mandatory", log=self.logger)
 
         self.channel = chan
-        self.ip = self.dutConf["dut-ip"] % self.channel
+        self.ip = self.dutConf["ip"] % self.channel
 
         #case of simulate
         if simulate :
@@ -93,6 +93,12 @@ class dut(object):
         self.radioFw_var = None
         self.tpmHw_var = None
         self.tpmVendor_var = None
+
+        self.logger.info("Check dut-ip : {0}".format(chan), ch = chan)
+        if self.connected:
+            self.logger.info("DUT at {0} well connected".format(chan), ch = chan)
+        else:
+            self.logger.error("dut error, aborting...", ch = chan)
 
     def _launchCmd(self, uri, get = True, payloadJson = None, payloadData = None, stream = False, callback = None):
         if get:

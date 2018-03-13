@@ -48,10 +48,10 @@ class dataBase(object):
 
     def __openDataBase(self):
         #get server, port and database from json configuration file
-        server = self.dbConf["mongodb-ip"]
-        port = self.dbConf["mongodb-port"]
-        database = self.dbConf["mongodb-database"]
-        maxSevSelDelay = self.dbConf["mongodb-maxSevSelDelay"]
+        server = self.dbConf["ip"]
+        port = self.dbConf["port"]
+        database = self.dbConf["database"]
+        maxSevSelDelay = self.dbConf["maxSevSelDelay"]
         self.logger.debug("Open MongoDB database \"{0}\" at : {1}:{2}".format(database, server, port))
 
         try:

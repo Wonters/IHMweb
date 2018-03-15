@@ -197,7 +197,7 @@ class DCPwr(object):
             self.powerDevice1.write("INST:NSEL?\n")
             if self.powerDevice1.read_until("\n")[:-1] != str(self.channel):
                 self.logger.debug("Write on channel %s on powerDevice1" % self.channel, ch = self.channel)
-                self.powerDevice1.write("INST:NSEL %s\n" % self.channel)
+                self.powerDevice1.write("%s %s\n" % ("INST:NSEL", int(self.channel)))
                 self._wait()
             return self.powerDevice1
         elif int(self.channel) in [5, 6, 7, 8]:
@@ -205,7 +205,7 @@ class DCPwr(object):
             self.powerDevice2.write("INST:NSEL?\n")
             if self.powerDevice2.read_until("\n")[:-1] != str(channel):
                 self.logger.debug("Write on channel %s on powerDevice2" % channel, ch = self.channel)
-                self.powerDevice2.write("INST:NSEL %s\n" % int(channel))
+                self.powerDevice1.write("%s %s\n" % ("INST:NSEL", int(self.channel)))
                 self._wait()
             return self.powerDevice2
         else:

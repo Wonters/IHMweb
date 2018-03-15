@@ -72,11 +72,11 @@ def test_rssiSin():
     ################
 
 def main(args):
-    test_DCPwr()
+    # test_DCPwr()
     # test_RFSigGen()
     # test_Swtch()
     # test_dut()
-    # test_rssiSin()
+    test_rssiSin()
     exit(0)
 
 if __name__ == '__main__':

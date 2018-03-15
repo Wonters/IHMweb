@@ -3,7 +3,7 @@
     "version":"0.0.1"
   },
   "dut":{
-    "ip":"192.168.%s.20"
+    "ip":"192.168.%s.128"
   },
   "dataBase":{
     "ip":"127.0.0.1",
@@ -27,8 +27,24 @@
     "voltage":["10", "11", "12", "14"],
     "power":["-100", "-90"]
   },
-  "rxGainLNA":{
-    "voltage":["10", "11", "12", "14"],
-    "power":["-100", "-90"]
+  "rxGainLNAs":{
+    "channel":["1"],
+    "voltage":["11", "12"],
+    "power":["-70"],
+    "freq":["902200000", "920800000"],
+    "backoff":[
+      ["BO Step 0", "LNA", "LNA", "LNA"],
+      ["BO Step 2", "LNA", "LNA", "ATTEN"],
+      ["BO Step 3", "LNA", "BYPASS", "LNA"],
+      ["BO Step 5", "LNA", "BYPASS", "ATTEN"],
+      ["BO Step 9", "BYPASS", "LNA", "LNA"],
+      ["BO Step 11", "BYPASS", "LNA", "ATTEN"],
+      ["BO Step 12", "BYPASS", "BYPASS", "LNA"],
+      ["BO Step 14", "BYPASS", "BYPASS", "ATTEN"]
+    ],
+    "bbFreq":"20000",
+    "preamp0-ref": "LNA",
+    "preamp1-ref": "LNA",
+    "preamp2-ref": "LNA"
   }
 }

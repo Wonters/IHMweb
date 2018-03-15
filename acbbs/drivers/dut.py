@@ -273,7 +273,7 @@ class dut(object):
 
     @freqTx.setter
     def freqTx(self, value):
-        self.logger.info("Change tx to %s" % str(freq), ch = self.channel)
+        self.logger.info("Change tx to %s" % str(value), ch = self.channel)
         self._launchPostJson("%s/radio/freq/tx" % self.address, {"tx":value})
 
     @property
@@ -282,7 +282,7 @@ class dut(object):
 
     @freqRx.setter
     def freqRx(self, value):
-        self.logger.info("Change rx to %s" % str(freq), ch = self.channel)
+        self.logger.info("Change rx to %s" % str(value), ch = self.channel)
         self._launchPostJson("%s/radio/freq/rx" % self.address, {"rx":value})
 
     @property
@@ -401,10 +401,12 @@ class dut(object):
         time.sleep(0.01)
 
     def rssiSin(self, freqBBHz = 20000):
-        pass
+        if self.simulate:
+            return "xxxx"
 
     def irrSin(self, freqBBHz = 20000):
-        pass
+        if self.simulate:
+            return "xxxx"
 
     def _dumpErrors(self):
         errors = []

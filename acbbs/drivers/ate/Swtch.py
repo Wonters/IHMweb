@@ -56,41 +56,12 @@ class Swtch(object):
 
         #if simulate
         if not simulate:
-            self.tn = Telnet(self.dcConf["ip"], 23, 2)
+            self.tn = Telnet(self.swtchConf["ip"], 23, 2)
             self.tn.write('enable \r\n')
             self.tn.read_until("(enable)#")
 
         else:
             self.tn = self._simulate()
-
-        self.reference_var = None
-        self.version_var = None
-
-    @property
-    def info(self):
-        return {
-            "reference":self.reference,
-            "version":self.version,
-            "error":self.errors
-        }
-
-    @property
-    def reference(self):
-        if self.reference_var is None:
-            if not self.simulate:
-                self.reference_var = "xxxx"
-            else:
-                self.reference_var = "xxxx"
-        return self.reference_var
-
-    @property
-    def version(self):
-        if self.version_var is None:
-            if not self.simulate:
-                self.version_var = "xxxx"
-            else:
-                self.version_var = "xxxx"
-        return self.version_var
 
     def __connect(self):
         if not self.simulate:
@@ -104,7 +75,7 @@ class Swtch(object):
 		self.tn.write(chr(12))
 		self.tn.read_until("#", 1)
 
-    def setSwitch(self, dutChan = None, dcLoadChan = None, ateChan = None, sigGenAttenChan = None):
+    def setSwitch(self, sw1 = None, sw2 = None, sw3 = None, sw4 = None):
         if not self.simulate:
             if dutChan is not None:
                 self.channel = dutChan
@@ -129,15 +100,7 @@ class Swtch(object):
 
                 self.__disconnect()
                 return ret
-        else:
-            if dutChan is not None:
-                self.channel = dutChan
-            return None
-
-    @property
-    def errors(self):
-        if not self.simulate:
-            return []
-
-        else:
-            return []
+            else:
+                if dutChan is not None:
+                    self.channel = dutChan
+        return None

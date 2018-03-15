@@ -31,7 +31,7 @@ class skeletonTc(baseTestCase):
         for chan in self.tcConf["channel"]:
             if self.status is st().ABORTING:
                 break
-            self.Swtch.setSwitch(dutChan = chan)       #configure Swtch channel
+            self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
             self.dut = dut(chan=chan, simulate=True)   #dut drivers init
 
@@ -83,7 +83,7 @@ class skeletonTc(baseTestCase):
         self.RFSigGen = RFSigGen(simulate = True)
         self.SpecAn = SpecAn(simulate = True)
         self.Swtch = Swtch(simulate = True)
-        self.Swtch.setSwitch(dcLoadChan = 1, ateChan = 2, sigGenAttenChan = 2)
+        self.Swtch.setSwitch(sw2 = 4, sw3 = 3, sw4 = 1)
 
     def __writeMeasure(self, conf, result):
         return {
@@ -92,21 +92,14 @@ class skeletonTc(baseTestCase):
             "tc_version":self.tcVersion,
             "acbbs_version":self.conf.getVersion(),
             "status":self.status,
-            "input-parameters":{
-                "vdd":conf["vdd"],
-                "power":conf["power"]
-            },
+            "input-parameters":conf,
             "dut-info":self.dut.info,
             "ate-result":{
                 "ClimCham":self.ClimCham.info,
                 "DCPwr":self.DCPwr.info,
                 "PwrMeter":self.PwrMeter.info,
                 "RFSigGen":self.RFSigGen.info,
-                "SpecAn":self.SpecAn.info,
-                "Swtch":self.Swtch.info
+                "SpecAn":self.SpecAn.info
             },
-            "dut-result":{
-                "i9":result["i9"],
-                "i12":result["i12"]
-            }
+            "dut-result":result
         }

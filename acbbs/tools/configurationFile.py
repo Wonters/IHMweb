@@ -27,7 +27,8 @@ class configurationFile(object):
     def getTcIterationsNumber(self):
         nbValue = 1
         for key in self.json_data[self.file].values():
-            nbValue *= len(key)
+            if type(key) is list:
+                nbValue *= len(key)
         return nbValue
 
     def __openConfigurationFile(self):

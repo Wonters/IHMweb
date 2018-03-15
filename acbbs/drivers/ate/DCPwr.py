@@ -96,14 +96,14 @@ class DCPwr(object):
         if not self.simulate:
             return self._readWrite("VOLT?")
         else:
-            return "12.00"
+            return "xxxx"
 
     @property
     def voltageReal(self):
         if not self.simulate:
             return self._readWrite("MEAS:VOLT?")
         else:
-            return "12.01"
+            return "xxxx"
 
     @property
     def voltage(self):
@@ -119,14 +119,14 @@ class DCPwr(object):
         if not self.simulate:
             return self._readWrite("CURR?")
         else:
-            return "6.000"
+            return "xxxx"
 
     @property
     def currentReal(self):
         if not self.simulate:
             return self._readWrite("MEAS:CURR?")
         else:
-            return "1.456"
+            return "xxxx"
 
     @property
     def current(self):

@@ -29,7 +29,7 @@
   },
   "rxGainLNAs":{
     "channel":["1"],
-    "voltage":["11", "12"],
+    "voltage":["12"],
     "power":["-70"],
     "freq":["902200000", "920800000"],
     "backoff":[
@@ -42,9 +42,6 @@
       ["BO Step 12", "BYPASS", "BYPASS", "LNA"],
       ["BO Step 14", "BYPASS", "BYPASS", "ATTEN"]
     ],
-    "bbFreq":"20000",
-    "preamp0-ref": "LNA",
-    "preamp1-ref": "LNA",
-    "preamp2-ref": "LNA"
+    "bbFreq":"20000"
   }
 }

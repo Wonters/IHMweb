@@ -51,11 +51,32 @@ def test_dut():
         print("Channel {0} -> id : {1}".format(i, dutClass.tapId))
     ################
 
+def test_rssiSin():
+    ### dut test ###
+    dutClass = dut(chan=1)
+    dutClass.mode = "RX"
+    dutClass.preamp0 = "LNA"
+    dutClass.preamp1 = "LNA"
+    dutClass.preamp2 = "LNA"
+    dutClass.freqRx = 902200000
+
+    swtch = Swtch()
+    swtch.setSwitch(sw1 = 1, sw2 = 4, sw3 = 3, sw4 = 1)
+
+    sigGen = RFSigGen()
+    sigGen.power = -70
+    sigGen.freq = 902220000
+    sigGen.status = 1
+    ref = dutClass.rssiSin()
+    print("dutClass.rssiSin() return {0}".format(ref))
+    ################
+
 def main(args):
-    # test_DCPwr()
-    test_RFSigGen()
+    test_DCPwr()
+    # test_RFSigGen()
     # test_Swtch()
     # test_dut()
+    # test_rssiSin()
     exit(0)
 
 if __name__ == '__main__':

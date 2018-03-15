@@ -5,6 +5,9 @@ from acbbs.tools.configurationFile import *
 import requests
 import os
 
+import subprocess
+import time
+
 folder = os.path.dirname(os.path.abspath(__file__))
 #Set log class in connectionpool Class with the CustomLog class
 requests.packages.urllib3.connectionpool.log.__class__ = log
@@ -403,6 +406,34 @@ class dut(object):
     def rssiSin(self, freqBBHz = 20000):
         if self.simulate:
             return "xxxx"
+        else:
+            self.logger.debug("Get rssiSin at freqBBHz = {0}".format(freqBBHz))
+            resp = self.session.get("%s/signal/record" % (self.address), stream=True, timeout=3)
+            if resp.status_code not in [200, 204]:
+                if resp.status_code == 500:
+                    raise AcbbsError("Errors To record signal Dump %s" % self.dumpErrors(),
+                                      ch=self.channel, log=self.logger)
+                else:
+                    raise AcbbsError("Errors To record signal", ch=self.channel, log=self.logger)
+            p = subprocess.Popen("%s/toolIQ -f %s --int-gain 0 --ext-gain 0" % (os.path.dirname(os.path.abspath(__file__)), freqBBHz), stdout=subprocess.PIPE, stdin=subprocess.PIPE, shell=True)
+            pout = p.stdout
+            acquire = True
+            for chunk in resp.iter_content(chunk_size=1024):
+                if acquire :
+                    try:
+                        p.stdin.write(chunk)
+                    except:
+                        self.stopBBSine()
+                        acquire = False
+            result = pout.readlines()[2].split(" ")
+            rssi = result[17]
+            freq = float(result[14])
+            if ((freq > (int(freqBBHz) + 1000)) or (freq < (int(freqBBHz) - 1000))):
+                raise AcbbsError("ToolIQ bad freqBBHz freq read: %s expected: %s" % (freq, int(freqBBHz)),
+                                 ch=self.channel, log=self.logger)
+            else:
+                self.logger.debug("return = {0}".format(rssi))
+                return rssi
 
     def irrSin(self, freqBBHz = 20000):
         if self.simulate:

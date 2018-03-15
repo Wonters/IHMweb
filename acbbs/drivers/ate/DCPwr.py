@@ -177,7 +177,7 @@ class DCPwr(object):
             device.write("%s\n" % cmd)
             return(device.read_until("\n")[:-1])
         else:
-            self._channelSel().write("%s %s\n" % (cmd, value))
+            self._channelSel().write("%s %s\n" % (cmd, int(value)))
             self._wait()
 
         err = self.errors

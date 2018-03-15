@@ -27,14 +27,10 @@ class rxGainLNAs(baseTestCase):
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
-            self.dut = dut(chan=chan, simulate = True)                  #dut drivers init
+            self.dut = dut(chan=chan)                  #dut drivers init
 
             #configuration dut
             self.dut.mode = "RX"
-            self.dut.preamp0 = self.tcConf["preamp0-ref"]
-            self.dut.preamp1 = self.tcConf["preamp1-ref"]
-            self.dut.preamp2 = self.tcConf["preamp2-ref"]
-
 
             for vdd in self.tcConf["voltage"]:
                 if self.status is st().ABORTING:
@@ -52,7 +48,7 @@ class rxGainLNAs(baseTestCase):
                         if self.status is st().ABORTING:
                             break
                         self.dut.freqRx = freq
-                        self.RFSigGen.freq = freq
+                        self.RFSigGen.freq = int(int(freq) + int(self.tcConf["bbFreq"]))
 
                         for backoff in self.tcConf["backoff"]:
                             if self.status is st().ABORTING:
@@ -60,8 +56,6 @@ class rxGainLNAs(baseTestCase):
 
                             #update progress
                             self.iteration += 1
-
-                            #configure DUT
 
                             #configure ATE
                             self.dut.preamp0 = backoff[1]
@@ -95,12 +89,13 @@ class rxGainLNAs(baseTestCase):
 
         #ate drivers init
         self.logger.debug("Init ate")
-        self.DCPwr = DCPwr(simulate = True)
-        self.RFSigGen = RFSigGen(simulate = True)
-        self.Swtch = Swtch(simulate = True)
+        self.DCPwr = DCPwr()
+        self.RFSigGen = RFSigGen()
+        self.Swtch = Swtch()
 
         #ate configuration
         self.Swtch.setSwitch(sw2 = 4, sw3 = 3, sw4 = 1)
+        self.RFSigGen.power = -130
         self.RFSigGen.status = 1
 
     def __writeMeasure(self, conf, result):

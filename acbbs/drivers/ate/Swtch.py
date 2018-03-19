@@ -114,6 +114,6 @@ class Swtch(object):
                 self.__disconnect()
                 return ret
         else:
-            if dutChan is not None:
-                self.channel = dutChan
+            if sw1 is not None:
+                self.channel = sw1
         return None

@@ -29,8 +29,8 @@ def test_RFSigGen():
     ### RFSigGen test ###
     sigGen = RFSigGen()
     # sigGen.freq = 868525117
-    # sigGen.power = -100
-    sigGen.status = 1
+    sigGen.power = -100
+    # sigGen.status = 1
     print("status : {0}".format(sigGen.status))
     print("power : {0}".format(sigGen.power))
     print("freq : {0}".format(sigGen.freq))
@@ -73,10 +73,10 @@ def test_rssiSin():
 
 def main(args):
     # test_DCPwr()
-    # test_RFSigGen()
+    test_RFSigGen()
     # test_Swtch()
     # test_dut()
-    test_rssiSin()
+    # test_rssiSin()
     exit(0)
 
 if __name__ == '__main__':

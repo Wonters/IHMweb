@@ -10,17 +10,17 @@ from progress.bar import PixelBar
 
 def main(args):
     # threadSkeletonTc = skeletonTc()
-    threadrxGainLNA = rxGainLNAs()
+    threadrxGainLNAs = rxGainLNAs()
 
-    bar = PixelBar('Processing rxGainLNAs', max=threadrxGainLNA.iterationsNumber)
+    bar = PixelBar('Processing rxGainLNAs', max=threadrxGainLNAs.iterationsNumber)
 
-    threadrxGainLNA.tcInit()
-    threadrxGainLNA.start()
+    threadrxGainLNAs.tcInit()
+    threadrxGainLNAs.start()
 
-    i = threadrxGainLNA.iteration
-    while threadrxGainLNA.is_alive():
-        if threadrxGainLNA.iteration != i:
-            i = threadrxGainLNA.iteration
+    i = threadrxGainLNAs.iteration
+    while threadrxGainLNAs.is_alive():
+        if threadrxGainLNAs.iteration != i:
+            i = threadrxGainLNAs.iteration
             bar.next()
     bar.finish()
 

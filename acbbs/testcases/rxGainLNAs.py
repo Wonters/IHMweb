@@ -50,7 +50,7 @@ class rxGainLNAs(baseTestCase):
                         if self.status is st().ABORTING:
                             break
                         self.dut.freqRx = freq
-                        self.RFSigGen.freq = int(int(freq) + int(self.tcConf["bbFreq"]))
+                        self.RFSigGen.freq = freq + self.tcConf["bbFreq"]
 
                         for backoff in self.tcConf["backoff"]:
                             if self.status is st().ABORTING:
@@ -90,7 +90,7 @@ class rxGainLNAs(baseTestCase):
         self.status = st().INIT
 
         #ate drivers init
-        self.logger.debug("Init ate")
+        self.logger.info("Init ate")
         self.DCPwr = DCPwr()
         self.RFSigGen = RFSigGen()
         self.Swtch = Swtch()

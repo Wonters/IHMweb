@@ -441,19 +441,12 @@ class dut(object):
                         return rssi
                 except:
                     if nbOfRetry >= maxRetry:
-                        log.error("Bad BB frequency rssiSin: 4 tries to receive the correct frequency", ch ="%s" % BSchannel)
-                        #Set RF level OFF
-                        inst.write(":OUTP:STATE OFF")
-                        print "saving data in progress..."
-                        ioFiles.saveOutputFile()
-                        print "data saved"
-                        exit(-1)
+                        self.logger.error("Bad BB frequency rssiSin: 4 tries to receive the correct frequency", ch ="%s" % self.channel)
+                        return "NA"
                     else:
                         if nbOfRetry == maxRetry -1 :
-                            #dev.nxpRegister(0, 3, 0)
-                            #log.error("Bad BB frequency rssiSin:3tries => nxpRegister activated", ch ="%s" % BSchannel)
                             time.sleep(10)
-                            log.debug("nbOfRetry rssiSin: %s" %nbOfRetry , ch ="%s" % BSchannel)
+                            self.logger.debug("nbOfRetry rssiSin: %s" %nbOfRetry , ch ="%s" % self.channel)
                         nbOfRetry = nbOfRetry + 1
                 else:
                     status = True

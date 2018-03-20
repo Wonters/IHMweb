@@ -10,6 +10,8 @@ from acbbs.drivers.ate.SpecAn import *
 from acbbs.drivers.ate.Swtch import *
 from acbbs.drivers.dut import *
 
+import time
+
 def test_DCPwr():
     ### DCPwr test ###
     alim = DCPwr()
@@ -67,16 +69,17 @@ def test_rssiSin():
     sigGen.power = -70
     sigGen.freq = 902220000
     sigGen.status = 1
-    ref = dutClass.rssiSin()
-    print("dutClass.rssiSin() return {0}".format(ref))
+    # ref = dutClass.rssiSin()
+    ref = dutClass.rssiSinNumpy()
+    # print("dutClass.rssiSin() return {0}".format(ref))
     ################
 
 def main(args):
     # test_DCPwr()
-    test_RFSigGen()
+    # test_RFSigGen()
     # test_Swtch()
     # test_dut()
-    # test_rssiSin()
+    test_rssiSin()
     exit(0)
 
 if __name__ == '__main__':

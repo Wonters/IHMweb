@@ -4,9 +4,13 @@ from acbbs.tools.configurationFile import *
 
 import requests
 import os
+import sys
 
 import subprocess
 import time
+
+import numpy as np
+import matplotlib.pyplot as plt
 
 folder = os.path.dirname(os.path.abspath(__file__))
 #Set log class in connectionpool Class with the CustomLog class
@@ -451,8 +455,24 @@ class dut(object):
                 else:
                     status = True
 
+    def rssiSinNumpy(self, freqBBHz = 20000):
+        if self.simulate:
+            return "xxxx"
+        else:
+            self.logger.debug("Get rssiSin at freqBBHz = {0}".format(freqBBHz))
+            resp = self.session.get("%s/signal/record" % (self.address), stream=True, timeout=3)
+            if resp.status_code not in [200, 204]:
+                if resp.status_code == 500:
+                    raise AcbbsError("Errors To record signal Dump %s" % self.dumpErrors(),
+                                      ch=self.channel, log=self.logger)
+                else:
+                    raise AcbbsError("Errors To record signal", ch=self.channel, log=self.logger)
 
-
+            for chunk in resp.iter_content(chunk_size=768000):
+                c = chunk
+                self.stopBBSine()
+                break
+            sys.stdout.write(c)
 
     def irrSin(self, freqBBHz = 20000):
         if self.simulate:

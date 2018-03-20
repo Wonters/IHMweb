@@ -4,23 +4,25 @@
 import argparse
 from acbbs.testcases.skeletonTc import *
 from acbbs.testcases.rxGainLNAs import *
+from acbbs.testcases.rxIQImbalance import *
 
 import time
 from progress.bar import PixelBar
 
 def main(args):
     # threadSkeletonTc = skeletonTc()
-    threadrxGainLNAs = rxGainLNAs()
+    # threadTc = rxGainLNAs()
+    threadTc = rxIQImbalance()
 
-    bar = PixelBar('Processing rxGainLNAs', max=threadrxGainLNAs.iterationsNumber)
+    bar = PixelBar('Processing rxGainLNAs', max=threadTc.iterationsNumber)
 
-    threadrxGainLNAs.tcInit()
-    threadrxGainLNAs.start()
+    threadTc.tcInit()
+    threadTc.start()
 
-    i = threadrxGainLNAs.iteration
-    while threadrxGainLNAs.is_alive():
-        if threadrxGainLNAs.iteration != i:
-            i = threadrxGainLNAs.iteration
+    i = threadTc.iteration
+    while threadTc.is_alive():
+        if threadTc.iteration != i:
+            i = threadTc.iteration
             bar.next()
     bar.finish()
 

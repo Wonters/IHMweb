@@ -5,8 +5,6 @@ from acbbs.drivers.ate.DCPwr import *
 from acbbs.drivers.ate.RFSigGen import *
 from acbbs.drivers.ate.Swtch import *
 
-import time
-
 class rxGainLNAs(baseTestCase):
     def __init__(self):
         baseTestCase.__init__(self)

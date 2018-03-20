@@ -66,12 +66,33 @@ def test_rssiSin():
     swtch.setSwitch(sw1 = 1, sw2 = 4, sw3 = 3, sw4 = 1)
 
     sigGen = RFSigGen()
-    sigGen.power = -70
+    sigGen.power = -80
     sigGen.freq = 902220000
     sigGen.status = 1
-    # ref = dutClass.rssiSin()
-    ref = dutClass.rssiSinNumpy()
-    # print("dutClass.rssiSin() return {0}".format(ref))
+    ref = dutClass.rssiSin()
+    # ref = dutClass.rssiSinNumpy()
+    print("dutClass.rssiSin() return {0}".format(ref))
+    ################
+
+def test_irrSin():
+    ### dut test ###
+    dutClass = dut(chan=1)
+    dutClass.mode = "RX"
+    dutClass.preamp0 = "LNA"
+    dutClass.preamp1 = "LNA"
+    dutClass.preamp2 = "LNA"
+    dutClass.freqRx = 902200000
+
+    swtch = Swtch()
+    swtch.setSwitch(sw1 = 1, sw2 = 4, sw3 = 3, sw4 = 1)
+
+    sigGen = RFSigGen()
+    sigGen.power = -60
+    sigGen.freq = 902220000
+    sigGen.status = 1
+    ref = dutClass.irrSin()
+    # ref = dutClass.rssiSinNumpy()
+    print("dutClass.rssiSin() return {0}".format(ref))
     ################
 
 def main(args):
@@ -79,7 +100,8 @@ def main(args):
     # test_RFSigGen()
     # test_Swtch()
     # test_dut()
-    test_rssiSin()
+    # test_rssiSin()
+    test_irrSin()
     exit(0)
 
 if __name__ == '__main__':

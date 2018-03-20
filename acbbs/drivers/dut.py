@@ -476,7 +476,51 @@ class dut(object):
 
     def irrSin(self, freqBBHz = 20000):
         if self.simulate:
-            return "xxxx"
+            return {'dGain': "xxxx", 'dPhase': "xxxx", 'IRR': "xxxx"}
+        else:
+            maxRetry = 3
+            nbOfRetry = 0
+            status = False
+            while status is False:
+                try:
+                    self.logger.debug("Get irrSin at freqBBHz = {0}".format(freqBBHz))
+                    resp = self.session.get("%s/signal/record" % (self.address), stream=True, timeout=3)
+                    if resp.status_code not in [200, 204]:
+                        if resp.status_code == 500:
+                            raise AcbbsError("Errors To record signal Dump %s" % self.dumpErrors(),
+                                              ch=self.channel, log=self.logger)
+                        else:
+                            raise AcbbsError("Errors To record signal", ch=self.channel, log=self.logger)
+                    p = subprocess.Popen("%s/toolIQ -f %s --int-gain 0 --ext-gain 0" % (os.path.dirname(os.path.abspath(__file__)), freqBBHz), stdout=subprocess.PIPE, stdin=subprocess.PIPE, shell=True)
+                    pout = p.stdout
+                    acquire = True
+                    for chunk in resp.iter_content(chunk_size=1024):
+                        if acquire :
+                            try:
+                                p.stdin.write(chunk)
+                            except:
+                                self.stopBBSine()
+                                acquire = False
+                    result = pout.readlines()[2].split(" ")
+                    irr = {'dGain': result[7], 'dPhase': result[9], 'IRR': result[11]}
+                    freq = float(result[14])
+                    if ((freq > (int(freqBBHz) + 1000)) or (freq < (int(freqBBHz) - 1000))):
+                        raise AcbbsError("ToolIQ bad freqBBHz freq read: %s expected: %s" % (freq, int(freqBBHz)),
+                                         ch=self.channel, log=self.logger)
+                    else:
+                        self.logger.debug("return = {0}".format(irr))
+                        return irr
+                except:
+                    if nbOfRetry >= maxRetry:
+                        self.logger.error("Bad BB frequency irrSin: 4 tries to receive the correct frequency", ch ="%s" % self.channel)
+                        return "NA"
+                    else:
+                        if nbOfRetry == maxRetry -1 :
+                            time.sleep(10)
+                            self.logger.debug("nbOfRetry rssiSin: %s" %nbOfRetry , ch ="%s" % self.channel)
+                        nbOfRetry = nbOfRetry + 1
+                else:
+                    status = True
 
     def _dumpErrors(self):
         errors = []

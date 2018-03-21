@@ -19,17 +19,17 @@ class skeletonTc(baseTestCase):
         self.tcVersion = "1.0.0"
 
         #calcul iterations number
-        self.iterationsNumber = self.conf.getTcIterationsNumber()
-        self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
+        self.__iterationsNumber = self.conf.getTcIterationsNumber()
+        self.logger.info("Number of iteration : {0}".format(self.__iterationsNumber))
 
     def run(self):
-        #update Status
-        self.status = st().RUNNING
+        #update __status
+        self.__status = st().RUNNING
 
         #start loop
         self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
         for chan in self.tcConf["channel"]:
-            if self.status is st().ABORTING:
+            if self.__status is st().ABORTING:
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
@@ -37,19 +37,19 @@ class skeletonTc(baseTestCase):
 
 
             for vdd in self.tcConf["voltage"]:
-                if self.status is st().ABORTING:
+                if self.__status is st().ABORTING:
                     break
                 self.DCPwr.voltage = vdd               #configure voltage
 
 
                 for power in self.tcConf["power"]:
-                    if self.status is st().ABORTING:
+                    if self.__status is st().ABORTING:
                         break
                     self.RFSigGen.power = power        #configure power
 
 
                     #update progress
-                    self.iteration += 1
+                    self.__iteration += 1
 
                     #configure DUT
 
@@ -68,12 +68,12 @@ class skeletonTc(baseTestCase):
                     #simulation
                     time.sleep(0.1)
 
-        #update Status
-        self.status = st().FINISHED
+        #update __status
+        self.__status = st().FINISHED
 
     def tcInit(self):
-        #update Status
-        self.status = st().INIT
+        #update __status
+        self.__status = st().INIT
 
         #ate drivers init
         self.logger.debug("Init ate")
@@ -87,11 +87,11 @@ class skeletonTc(baseTestCase):
 
     def __writeMeasure(self, conf, result):
         return {
-            "date-measure":time.time(),
-            "date-tc":self.date,
+            "__date-measure":time.time(),
+            "__date-tc":self.__date,
             "tc_version":self.tcVersion,
             "acbbs_version":self.conf.getVersion(),
-            "status":self.status,
+            "__status":self.__status,
             "input-parameters":conf,
             "dut-info":self.dut.info,
             "ate-result":{

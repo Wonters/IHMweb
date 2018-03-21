@@ -16,17 +16,17 @@ class rxIQImbalance(baseTestCase):
         bbIter = 0
         for i in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
             bbIter += 1
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["freq"]) * bbIter
-        self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
+        self.__iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["freq"]) * bbIter
+        self.logger.info("Number of iteration : {0}".format(self.__iterationsNumber))
 
     def run(self):
-        #update Status
-        self.status = st().RUNNING
+        #update __status
+        self.__status = st().RUNNING
 
         #start loop
         self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
         for chan in self.tcConf["channel"]:
-            if self.status is st().ABORTING:
+            if self.__status is st().ABORTING:
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
@@ -39,25 +39,25 @@ class rxIQImbalance(baseTestCase):
             self.dut.preamp2 = self.tcConf["backoff"][3]
 
             for vdd in self.tcConf["voltage"]:
-                if self.status is st().ABORTING:
+                if self.__status is st().ABORTING:
                     break
                 self.DCPwr.voltage = vdd               #configure voltage
 
 
                 for power in self.tcConf["power"]:
-                    if self.status is st().ABORTING:
+                    if self.__status is st().ABORTING:
                         break
                     self.RFSigGen.power = power        #configure power
 
 
                     for freq in self.tcConf["freq"]:
-                        if self.status is st().ABORTING:
+                        if self.__status is st().ABORTING:
                             break
                         self.dut.freqRx = freq         #configure dut freq
 
                         for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
                             #update progress
-                            self.iteration += 1
+                            self.__iteration += 1
 
                             #set SigGen freq
                             self.RFSigGen.freq = freq + dfreq
@@ -79,12 +79,12 @@ class rxIQImbalance(baseTestCase):
                             result = irr
                             self.db.writeDataBase(self.__writeMeasure(conf, result))
 
-        #update Status
-        self.status = st().FINISHED
+        #update __status
+        self.__status = st().FINISHED
 
     def tcInit(self):
-        #update Status
-        self.status = st().INIT
+        #update __status
+        self.__status = st().INIT
 
         #ate drivers init
         self.logger.info("Init ate")
@@ -95,15 +95,15 @@ class rxIQImbalance(baseTestCase):
         #ate configuration
         self.Swtch.setSwitch(sw2 = 4, sw3 = 3, sw4 = 1)
         self.RFSigGen.power = -130
-        self.RFSigGen.status = 1
+        self.RFSigGen.__status = 1
 
     def __writeMeasure(self, conf, result):
         return {
-            "date-measure":time.time(),
-            "date-tc":self.date,
+            "__date-measure":time.time(),
+            "__date-tc":self.__date,
             "tc_version":self.tcVersion,
             "acbbs_version":self.conf.getVersion(),
-            "status":self.status,
+            "__status":self.__status,
             "input-parameters":conf,
             "dut-info":self.dut.info,
             "ate-result":{

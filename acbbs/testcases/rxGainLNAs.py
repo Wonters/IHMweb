@@ -13,17 +13,17 @@ class rxGainLNAs(baseTestCase):
         self.tcVersion = "1.0.0"
 
         #calcul iterations number
-        self.iterationsNumber = self.conf.getTcIterationsNumber()
-        self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
+        self.__iterationsNumber = self.conf.getTcIterationsNumber()
+        self.logger.info("Number of iteration : {0}".format(self.__iterationsNumber))
 
     def run(self):
-        #update Status
-        self.status = st().RUNNING
+        #update __status
+        self.__status = st().RUNNING
 
         #start loop
         self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
         for chan in self.tcConf["channel"]:
-            if self.status is st().ABORTING:
+            if self.__status is st().ABORTING:
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
@@ -33,19 +33,19 @@ class rxGainLNAs(baseTestCase):
             self.dut.mode = "RX"
 
             for vdd in self.tcConf["voltage"]:
-                if self.status is st().ABORTING:
+                if self.__status is st().ABORTING:
                     break
                 self.DCPwr.voltage = vdd               #configure voltage
 
 
                 for power in self.tcConf["power"]:
-                    if self.status is st().ABORTING:
+                    if self.__status is st().ABORTING:
                         break
                     self.RFSigGen.power = power        #configure power
 
 
                     for freq in self.tcConf["freq"]:
-                        if self.status is st().ABORTING:
+                        if self.__status is st().ABORTING:
                             break
                         self.dut.freqRx = freq
                         self.RFSigGen.freq = freq + self.tcConf["bbFreq"]
@@ -62,11 +62,11 @@ class rxGainLNAs(baseTestCase):
 
 
                         for backoff in self.tcConf["backoff"]:
-                            if self.status is st().ABORTING:
+                            if self.__status is st().ABORTING:
                                 break
 
                             #update progress
-                            self.iteration += 1
+                            self.__iteration += 1
 
                             #configure ATE
                             self.dut.preamp0 = backoff[1]
@@ -93,12 +93,12 @@ class rxGainLNAs(baseTestCase):
                             }
                             self.db.writeDataBase(self.__writeMeasure(conf, result))
 
-        #update Status
-        self.status = st().FINISHED
+        #update __status
+        self.__status = st().FINISHED
 
     def tcInit(self):
-        #update Status
-        self.status = st().INIT
+        #update __status
+        self.__status = st().INIT
 
         #ate drivers init
         self.logger.info("Init ate")
@@ -109,15 +109,15 @@ class rxGainLNAs(baseTestCase):
         #ate configuration
         self.Swtch.setSwitch(sw2 = 4, sw3 = 3, sw4 = 1)
         self.RFSigGen.power = -130
-        self.RFSigGen.status = 1
+        self.RFSigGen.__status = 1
 
     def __writeMeasure(self, conf, result):
         return {
-            "date-measure":time.time(),
-            "date-tc":self.date,
+            "__date-measure":time.time(),
+            "__date-tc":self.__date,
             "tc_version":self.tcVersion,
             "acbbs_version":self.conf.getVersion(),
-            "status":self.status,
+            "__status":self.__status,
             "input-parameters":conf,
             "dut-info":self.dut.info,
             "ate-result":{

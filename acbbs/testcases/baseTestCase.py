@@ -23,9 +23,9 @@ class baseTestCase(Thread):
         Thread.__init__(self)
 
         #init var
-        self.iteration = 1
-        self.status = st().NOT_RUNNING
-        self.iterationsNumber = 0.0
+        self.__iteration = 1
+        self.__status = st().NOT_RUNNING
+        self.__iterationsNumber = 0.0
 
         #init logs
         self.logger = get_logger(self.__class__.__name__)
@@ -38,11 +38,11 @@ class baseTestCase(Thread):
         self.tcConf = self.conf.getConfiguration()
 
         #get date key value
-        self.date = time.time()
+        self.__date = time.time()
 
     @property
     def percent(self):
-        return (self.iteration/self.iterationsNumber)*100.0
+        return (self.__iteration/self.__iterationsNumber)*100.0
 
     def run(self):
         """
@@ -55,7 +55,7 @@ class baseTestCase(Thread):
 
     def abort(self):
         self.logger.debug("Aborting \"{0}\"........".format(self.__class__.__name__))
-        self.status = st().ABORTING
+        self.__status = st().ABORTING
 
     def tcInit(self):
         """

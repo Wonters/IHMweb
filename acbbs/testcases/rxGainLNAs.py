@@ -50,6 +50,17 @@ class rxGainLNAs(baseTestCase):
                         self.dut.freqRx = freq
                         self.RFSigGen.freq = freq + self.tcConf["bbFreq"]
 
+                        #measure refLevel
+
+                        #configure ATE
+                        self.dut.preamp0 = self.tcConf["backoff"][0][1]
+                        self.dut.preamp1 = self.tcConf["backoff"][0][2]
+                        self.dut.preamp2 = self.tcConf["backoff"][0][3]
+
+                        #start measurement
+                        refLevel = self.dut.rssiSin(freqBBHz = self.tcConf["bbFreq"])
+
+
                         for backoff in self.tcConf["backoff"]:
                             if self.status is st().ABORTING:
                                 break
@@ -63,7 +74,7 @@ class rxGainLNAs(baseTestCase):
                             self.dut.preamp2 = backoff[3]
 
                             #start measurement
-                            refLevel = self.dut.rssiSin(freqBBHz = self.tcConf["bbFreq"])
+                            resultLevel = self.dut.rssiSin(freqBBHz = self.tcConf["bbFreq"])
 
                             #write measures
                             conf = {
@@ -76,7 +87,9 @@ class rxGainLNAs(baseTestCase):
                                 "preamp2":backoff[3]
                             }
                             result = {
-                                "refLevel":refLevel
+                                "refLevel":refLevel,
+                                "resultLevel":resultLevel,
+                                "gain":float(refLevel) - float(resultLevel)
                             }
                             self.db.writeDataBase(self.__writeMeasure(conf, result))
 

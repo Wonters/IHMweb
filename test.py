@@ -66,11 +66,31 @@ def test_rssiSin():
     swtch.setSwitch(sw1 = 1, sw2 = 4, sw3 = 3, sw4 = 1)
 
     sigGen = RFSigGen()
-    sigGen.power = -80
+    sigGen.power = -60
     sigGen.freq = 902220000
     sigGen.status = 1
     ref = dutClass.rssiSin()
     # ref = dutClass.rssiSinNumpy()
+    print("dutClass.rssiSin() return {0}".format(ref))
+    ################
+
+def test_rssiSinNumpy():
+    ### dut test ###
+    dutClass = dut(chan=1)
+    dutClass.mode = "RX"
+    dutClass.preamp0 = "LNA"
+    dutClass.preamp1 = "LNA"
+    dutClass.preamp2 = "LNA"
+    dutClass.freqRx = 902200000
+
+    swtch = Swtch()
+    swtch.setSwitch(sw1 = 1, sw2 = 4, sw3 = 3, sw4 = 1)
+
+    sigGen = RFSigGen()
+    sigGen.power = -60
+    sigGen.freq = 902220000
+    sigGen.status = 1
+    ref = dutClass.rssiSinNumpy()
     print("dutClass.rssiSin() return {0}".format(ref))
     ################
 
@@ -90,18 +110,40 @@ def test_irrSin():
     sigGen.power = -60
     sigGen.freq = 902220000
     sigGen.status = 1
-    ref = dutClass.irrSin()
-    # ref = dutClass.rssiSinNumpy()
-    print("dutClass.rssiSin() return {0}".format(ref))
+    # ref = dutClass.irrSin()
+    ref = dutClass.rssiSinNumpy()
+    # print("dutClass.rssiSin() return {0}".format(ref))
     ################
+
+import matplotlib.pyplot as plt
+from scipy.fftpack import fft
+from scipy.io import wavfile # get the api
+def test_fft():
+    fs, data = wavfile.read('test.wav') # load the data
+    a = data.T[0] # this is a two channel soundtrack, I get the first track
+    b=[(ele/2**16.)*2-1 for ele in a] # this is 8-bit track, b is now normalized on [-1,1)
+    c = fft(b) # calculate fourier transform (complex numbers list)
+    d = len(c)/2  # you only need half of the fft list (real signal symmetry)
+    e = abs(c[:(d-1)])
+    # plt.plot(e)
+
+    peak = 0
+    for i in e:
+        if i > peak and i < 100000:
+            peak = i
+    print('Peaks are: %s' % (peak))
+
+    # plt.show()
 
 def main(args):
     # test_DCPwr()
     # test_RFSigGen()
     # test_Swtch()
     # test_dut()
-    # test_rssiSin()
-    test_irrSin()
+    test_rssiSin()
+    # test_irrSin()
+    # test_fft()
+    test_rssiSinNumpy()
     exit(0)
 
 if __name__ == '__main__':

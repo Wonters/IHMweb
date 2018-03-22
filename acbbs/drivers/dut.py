@@ -9,8 +9,10 @@ import sys
 import subprocess
 import time
 
-import numpy as np
-import matplotlib.pyplot as plt
+import math
+
+from scipy.fftpack import fft
+from scipy.io import wavfile # get the api
 
 folder = os.path.dirname(os.path.abspath(__file__))
 #Set log class in connectionpool Class with the CustomLog class
@@ -472,7 +474,25 @@ class dut(object):
                 c = chunk
                 self.stopBBSine()
                 break
-            sys.stdout.write(c)
+            # sys.stdout.write(c)
+            with open('data.raw', 'w') as f:
+                f.write(c)
+            os.system("sox -b 16 -c 2 -L -r 192000 -e signed-integer data.raw data.wav")
+            fs, data = wavfile.read('data.wav')
+            os.system("rm data.raw data.wav")
+            a = data.T[0] # this is a two channel soundtrack, I get the first track
+            b=[(ele/2**8.)*2-1 for ele in a] # this is 8-bit track, b is now normalized on [-1,1)
+            c = fft(b) # calculate fourier transform (complex numbers list)
+            d = len(c)/2  # you only need half of the fft list (real signal symmetry)
+            e = abs(c[:(d-1)])
+            # plt.plot(e)
+            # plt.show()
+
+            peak = 0
+            for i in e:
+                if i > peak and i < 100000:
+                    peak = i
+            return 10*math.log10(peak)
 
     def irrSin(self, freqBBHz = 20000):
         if self.simulate:

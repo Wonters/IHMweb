@@ -27,6 +27,33 @@ def test_DCPwr():
         print("")
     ##################
 
+def test_SpecAna():
+    ### RFSigGen test ###
+    SpecAna = SpecAn()
+    # SpecAna.reset()
+    SpecAna.freqCenter = 902000000
+    SpecAna.freqSpan = 100000000
+    SpecAna.rbw = 10000
+    SpecAna.vbw = 10000
+    SpecAna.sweep = 1
+    # SpecAna.freqStart = 902000000
+    # SpecAna.freqStop = 904000000
+    # print("power : {0}".format(sigGen.power))
+    # print("freq : {0}".format(sigGen.freq))
+    print("version : {0}".format(SpecAna.version))
+    print("errors : {0}".format(SpecAna.errors))
+    print("freqCenter : {0}".format(SpecAna.freqCenter))
+    print("freqStart : {0}".format(SpecAna.freqStart))
+    print("freqStop : {0}".format(SpecAna.freqStop))
+    print("freqSpan : {0}".format(SpecAna.freqSpan))
+    print("rbw : {0}".format(SpecAna.rbw))
+    print("vbw : {0}".format(SpecAna.vbw))
+    print("inputAtten : {0}".format(SpecAna.inputAtten))
+    print("refLvl : {0}".format(SpecAna.refLvl))
+    print("refLvlOffset : {0}".format(SpecAna.refLvlOffset))
+    print("sweep : {0}".format(SpecAna.sweep))
+    #####################
+
 def test_RFSigGen():
     ### RFSigGen test ###
     sigGen = RFSigGen()
@@ -140,10 +167,11 @@ def main(args):
     # test_RFSigGen()
     # test_Swtch()
     # test_dut()
-    test_rssiSin()
+    # test_rssiSin()
     # test_irrSin()
     # test_fft()
-    test_rssiSinNumpy()
+    # test_rssiSinNumpy()
+    test_SpecAna()
     exit(0)
 
 if __name__ == '__main__':

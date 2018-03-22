@@ -1,19 +1,48 @@
 # coding=UTF-8
 from acbbs.tools.log import *
+from acbbs.tools.configurationFile import *
+
+from telnetlib import Telnet
 
 class SpecAn(object):
+    class _simulate(object):
+        def __init__(self):
+            return
+        def write(self, val):
+            return '0'
+        def read(self, val, timeout=None):
+            return '0'
+
     def __init__(self, simulate = False):
+
+        #init logs
+        self.logger = get_logger(self.__class__.__name__)
+
+        #get configuration
+        self.conf = configurationFile(file = self.__class__.__name__)
+        self.SpecAnConf = self.conf.getConfiguration()
 
         #simulation state
         self.simulate = simulate
-        
+
         if not simulate:
-            pass
-        else:
-            pass
+            self.logger.info("Init SpecAn")
+            try :
+                self.inst = Telnet(self.SpecAnConf["ip"], 5025, 1)
+                self._readWrite("SYST:PRES")
+                self._readWrite("SYST:DISP:UPD ON")
+            except :
+                raise AcbbsError("RFSigGen Connection error: {0}".format(self.SpecAnConf["ip"]), log = self.logger)
+        else :
+            self.logger.info("Init RFSigGen in Simulate")
+            self.inst = self._simulate()
 
         self.reference_var = None
         self.version_var = None
+
+    def __del__(self):
+        self.logger.info("Radio off")
+        self.status = 0
 
     @property
     def info(self):
@@ -23,13 +52,19 @@ class SpecAn(object):
             "error":self.errors
         }
 
-    @property
-    def errors(self):
-        if not self.simulate:
-            return []
+    def reset(self):
+        self._readWrite("SYST:PRES")
+        # self._readWrite("*CLS")
+        # self._readWrite("*RST")
 
-        else:
-            return []
+    @property
+    def version(self):
+        if self.version_var is None:
+            if not self.simulate:
+                self.version_var = self._readWrite("SYST:VERS?")
+            else:
+                self.version_var = "xxxx"
+        return self.version_var
 
     @property
     def reference(self):
@@ -41,13 +76,19 @@ class SpecAn(object):
         return self.reference_var
 
     @property
-    def version(self):
-        if self.version_var is None:
-            if not self.simulate:
-                self.version_var = "xxxx"
-            else:
-                self.version_var = "xxxx"
-        return self.version_var
+    def errors(self):
+        if not self.simulate:
+            err = ""
+            errList = []
+            while "No error" not in err:
+                err = self._readWrite("SYST:ERR?")
+                if "No error" not in err:
+                    errList.append(err)
+                    self.logger.debug("read error %s" % err)
+            return errList
+
+        else:
+            return []
 
     def limitLineCreation(self, name = None, value = None):
         """
@@ -103,105 +144,142 @@ class SpecAn(object):
         """
         pass
 
-    def freqStart(self, value = None):
-        """
+    @property
+    def freqStart(self):
+        if not self.simulate:
+            return self._readWrite("FREQ:START?")
+        else:
+            return "xxxx"
 
+    @freqStart.setter
+    def freqStart(self, value):
+        if not self.simulate:
+            return self._readWrite("FREQ:START", value)
+        else:
+            return "xxxx"
 
-        @param int value :
-        @return  :
-        @author
-        """
-        pass
-
+    @property
     def freqCenter(self, value = None):
-        """
+        if not self.simulate:
+            return self._readWrite("FREQ:CENT?")
+        else:
+            return "xxxx"
 
+    @freqCenter.setter
+    def freqCenter(self, value):
+        self._readWrite("FREQ:CENT", value)
 
-        @param int value :
-        @return  :
-        @author
-        """
-        pass
+    @property
+    def freqStop(self):
+        if not self.simulate:
+            return self._readWrite("FREQ:STOP?")
+        else:
+            return "xxxx"
 
-    def freqStop(self, value = None):
-        """
+    @freqStop.setter
+    def freqStop(self, value):
+        if not self.simulate:
+            return self._readWrite("FREQ:STOP", value)
+        else:
+            return "xxxx"
 
+    @property
+    def freqSpan(self):
+        if not self.simulate:
+            return self._readWrite("FREQ:SPAN?")
+        else:
+            return "xxxx"
 
-        @param int value :
-        @return  :
-        @author
-        """
-        pass
+    @freqSpan.setter
+    def freqSpan(self, value):
+        if not self.simulate:
+            return self._readWrite("FREQ:SPAN", value)
+        else:
+            return "xxxx"
 
-    def freqSpan(self, value = None):
-        """
+    @property
+    def refLvl(self):
+        if not self.simulate:
+            return self._readWrite("DISP:TRAC1:Y:RLEVel?")
+        else:
+            return "xxxx"
 
+    @refLvl.setter
+    def refLvl(self, value):
+        if not self.simulate:
+            return self._readWrite("DISP:TRAC1:Y:RLEVel", value)
+        else:
+            return "xxxx"
 
-        @param int value :
-        @return  :
-        @author
-        """
-        pass
+    @property
+    def refLvlOffset(self):
+        if not self.simulate:
+            return self._readWrite("DISP:TRAC1:Y:RLEV:OFFS?")
+        else:
+            return "xxxx"
 
-    def refLvl(self, value = None):
-        """
+    @refLvlOffset.setter
+    def refLvlOffset(self, value):
+        if not self.simulate:
+            return self._readWrite("DISP:TRAC1:Y:RLEV:OFFS", value)
+        else:
+            return "xxxx"
 
+    @property
+    def inputAtten(self):
+        if not self.simulate:
+            return self._readWrite("INP:ATT?")
+        else:
+            return "xxxx"
 
-        @param int value :
-        @return  :
-        @author
-        """
-        pass
+    @inputAtten.setter
+    def inputAtten(self, value):
+        if not self.simulate:
+            return self._readWrite("INP:ATT", value)
+        else:
+            return "xxxx"
 
-    def refLvlOffset(self, value = None):
-        """
+    @property
+    def rbw(self):
+        if not self.simulate:
+            return self._readWrite("SENS:BWID:RES?")
+        else:
+            return "xxxx"
 
+    @rbw.setter
+    def rbw(self, value):
+        if not self.simulate:
+            return self._readWrite("SENS:BWID:RES", value)
+        else:
+            return "xxxx"
 
-        @param int value :
-        @return  :
-        @author
-        """
-        pass
+    @property
+    def vbw(self):
+        if not self.simulate:
+            return self._readWrite("SENS:BWID:VID?")
+        else:
+            return "xxxx"
 
-    def inputAtt(self, value = None):
-        """
+    @vbw.setter
+    def vbw(self, value):
+        if not self.simulate:
+            return self._readWrite("SENS:BWID:VID", value)
+        else:
+            return "xxxx"
 
+    @property
+    def sweep(self):
+        if not self.simulate:
+            return self._readWrite("SENS:SWE:TIME?")
+        else:
+            return "xxxx"
 
-        @param int value :
-        @return  :
-        @author
-        """
-        pass
-
-    def rbw(self, value = None):
-        """
-
-
-        @param int value :
-        @return  :
-        @author
-        """
-        pass
-
-    def vbw(self, value = None):
-        """
-
-
-        @param int value :
-        @return  :
-        @author
-        """
-        pass
-
-    def sweep(self, value = None):
-        """
-
-
-        @param int value :
-        @return  :
-        @author
-        """
-        pass
+    @sweep.setter
+    def sweep(self, value):
+        if not self.simulate:
+            return self._readWrite("SENS:SWE:TIME", value)
+        else:
+            return "xxxx"
 
     def averageCount(self, value = None):
         """
@@ -317,22 +395,30 @@ class SpecAn(object):
         """
         pass
 
-    def __readWrite(self, cmd = None, value = None):
-        """
 
+    def _wait(self):
+        self.inst.write("*WAI\n")
+        return
 
-        @param  cmd :
-        @param  value :
-        @return  :
-        @author
-        """
-        pass
+    def _readWrite(self, cmd = None, value = None):
+        self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
+        if "?" in cmd:
+            self.inst.write("%s\n" % cmd)
+            return(self.inst.read_until("\n")[:-1])
+        elif value is None:
+            self.inst.write("%s\n" % (cmd))
+            self._wait()
+        else:
+            self.inst.write("%s %s\n" % (cmd, value))
+            self._wait()
 
-    def __wait(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        pass
+        err = self.errors
+        if len(err) != 0:
+            strerr = ""
+            for e in err:
+                strerr += "|%s| " % e
+            if value is None:
+                c = "%s" % (cmd.split("\n")[0])
+            else:
+                c = "%s %s" % (cmd.split("\n")[0], value)
+            self.logger.warning("Get following errors after \"{0}\" command : {1}".format(c, strerr))

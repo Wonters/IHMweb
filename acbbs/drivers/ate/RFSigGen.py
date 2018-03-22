@@ -127,9 +127,13 @@ class RFSigGen(object):
         return
 
     def _readWrite(self, cmd = None, value = None):
+        self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
         if "?" in cmd:
             self.inst.write("%s\n" % cmd)
             return(self.inst.read_until("\n")[:-1])
+        elif value is None:
+            self.inst.write("%s\n" % (cmd))
+            self._wait()
         else:
             self.inst.write("%s %s\n" % (cmd, value))
             self._wait()

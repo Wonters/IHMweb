@@ -56,8 +56,10 @@ class rxMaximumGain(baseTestCase):
                         self.dut.freqRx = freq         #configure dut freq
 
                         for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
+
                             #update progress
                             self.iteration += 1
+                            self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
 
                             #set SigGen freq
                             self.RFSigGen.freq = freq + dfreq
@@ -102,8 +104,8 @@ class rxMaximumGain(baseTestCase):
 
     def __writeMeasure(self, conf, result):
         return {
-            "__date-measure":time.time(),
-            "__date-tc":self.__date,
+            "date-measure":time.time(),
+            "date-tc":self.date,
             "tc_version":self.tcVersion,
             "acbbs_version":self.conf.getVersion(),
             "status":self.status,

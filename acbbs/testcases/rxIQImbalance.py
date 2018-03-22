@@ -56,8 +56,10 @@ class rxIQImbalance(baseTestCase):
                         self.dut.freqRx = freq         #configure dut freq
 
                         for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
+                            
                             #update progress
                             self.iteration += 1
+                            self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
 
                             #set SigGen freq
                             self.RFSigGen.freq = freq + dfreq

@@ -68,6 +68,7 @@ class rxGainLNAs(baseTestCase):
 
                             #update progress
                             self.iteration += 1
+                            self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
 
                             #configure ATE
                             self.dut.preamp0 = backoff[1]

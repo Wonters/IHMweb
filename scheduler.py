@@ -15,15 +15,17 @@ def main(args):
     # threadSkeletonTc = skeletonTc()
     # threadTc = rxMaximumGain()
     # threadTc = rxIQImbalance()
-    threadTc = rxGainLNAs()
+    threadTc = rxMaximumGain()
 
     bar = PixelBar('Processing rxGainLNAs', max=threadTc.iterationsNumber)
 
     threadTc.tcInit()
     threadTc.start()
+    #threadTc.join()
 
     i = threadTc.iteration
     while threadTc.is_alive():
+        time.sleep(2)
         if threadTc.iteration != i:
             i = threadTc.iteration
             bar.next()

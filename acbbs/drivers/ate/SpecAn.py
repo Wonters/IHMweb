@@ -301,24 +301,14 @@ class SpecAn(object):
         """
         pass
 
-    def statSweep(self, value = None):
-        """
-
-
-        @param bool value :
-        @return  :
-        @author
-        """
-        pass
+    def sweepCount(self, value):
+        self._readWrite("INIT:CONT OFF")
+        self._readWrite("AVER:COUN", value)
+        self._readWrite("INIT;*WAI")
 
     def markPeakSearch(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        pass
+        self._readWrite("CALC:MARK:MAX")
+        return float(self._readWrite("CALC:MARK1:Y?"))
 
     def markSet(self, number = 1, freq = None, status = True):
         """

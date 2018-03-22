@@ -36,10 +36,12 @@ def test_SpecAna():
     SpecAna.rbw = 10000
     SpecAna.vbw = 10000
     SpecAna.sweep = 1
+    SpecAna.sweepCount(10)
     # SpecAna.freqStart = 902000000
     # SpecAna.freqStop = 904000000
     # print("power : {0}".format(sigGen.power))
     # print("freq : {0}".format(sigGen.freq))
+    print("Max peak : {0}".format(SpecAna.markPeakSearch()))
     print("version : {0}".format(SpecAna.version))
     print("errors : {0}".format(SpecAna.errors))
     print("freqCenter : {0}".format(SpecAna.freqCenter))

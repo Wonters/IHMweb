@@ -3,6 +3,13 @@
 
 from setuptools import setup, find_packages
 
+INSTALL_REQUIRES = [
+    'pymongo',
+    'requests',
+    'scipy',
+    'colorlog',
+]
+
 setup(
     version='0.1',
     description='ACBBS Python libraries',
@@ -10,6 +17,7 @@ setup(
     author="Hardware Team",
     author_email = "hardware@sigfox.com",
     license='Other/Proprietary License',
+    install_requires=INSTALL_REQUIRES,
     include_package_data=True,
     packages = find_packages()
 )

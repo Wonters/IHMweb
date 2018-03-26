@@ -45,7 +45,6 @@ class RFSigGen(object):
     @property
     def info(self):
         return {
-            "reference":self.reference,
             "version":self.version,
             "error":self.errors
         }
@@ -61,15 +60,6 @@ class RFSigGen(object):
             else:
                 self.version_var = "xxxx"
         return self.version_var
-
-    @property
-    def reference(self):
-        if self.reference_var is None:
-            if not self.simulate:
-                self.reference_var = "xxxx"
-            else:
-                self.reference_var = "xxxx"
-        return self.reference_var
 
     @property
     def errors(self):

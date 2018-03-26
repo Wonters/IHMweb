@@ -32,5 +32,5 @@ class configurationFile(object):
         return nbValue
 
     def __openConfigurationFile(self):
-        with open("acbbs/configuration.json") as json_file:
+        with open("configuration.json") as json_file:
             self.json_data = json.load(json_file)

@@ -47,15 +47,12 @@ class SpecAn(object):
     @property
     def info(self):
         return {
-            "reference":self.reference,
             "version":self.version,
             "error":self.errors
         }
 
     def reset(self):
         self._readWrite("SYST:PRES")
-        # self._readWrite("*CLS")
-        # self._readWrite("*RST")
 
     @property
     def version(self):
@@ -65,15 +62,6 @@ class SpecAn(object):
             else:
                 self.version_var = "xxxx"
         return self.version_var
-
-    @property
-    def reference(self):
-        if self.reference_var is None:
-            if not self.simulate:
-                self.reference_var = "xxxx"
-            else:
-                self.reference_var = "xxxx"
-        return self.reference_var
 
     @property
     def errors(self):
@@ -90,60 +78,6 @@ class SpecAn(object):
         else:
             return []
 
-    def limitLineCreation(self, name = None, value = None):
-        """
-
-
-        @param string name :
-        @param  value :
-        @return  :
-        @author
-        """
-        pass
-
-    def limitGabaritCreation(self, name = None, freqTab = None, limitTab = None):
-        """
-
-
-        @param string name :
-        @param  freqTab :
-        @param  limitTab :
-        @return  :
-        @author
-        """
-        pass
-
-    def limitStatus(self, name = None, value = None):
-        """
-
-
-        @param string name :
-        @param  value :
-        @return  :
-        @author
-        """
-        pass
-
-    def limitCheck(self, name = None):
-        """
-
-
-        @param string name :
-        @return  :
-        @author
-        """
-        pass
-
-    def screenShot(self, name = None):
-        """
-
-
-        @param string name :
-        @return  :
-        @author
-        """
-        pass
-
     @property
     def freqStart(self):
         if not self.simulate:
@@ -153,10 +87,7 @@ class SpecAn(object):
 
     @freqStart.setter
     def freqStart(self, value):
-        if not self.simulate:
-            return self._readWrite("FREQ:START", value)
-        else:
-            return "xxxx"
+        return self._readWrite("FREQ:START", value)
 
     @property
     def freqCenter(self, value = None):
@@ -178,10 +109,7 @@ class SpecAn(object):
 
     @freqStop.setter
     def freqStop(self, value):
-        if not self.simulate:
-            return self._readWrite("FREQ:STOP", value)
-        else:
-            return "xxxx"
+        return self._readWrite("FREQ:STOP", value)
 
     @property
     def freqSpan(self):
@@ -192,10 +120,7 @@ class SpecAn(object):
 
     @freqSpan.setter
     def freqSpan(self, value):
-        if not self.simulate:
-            return self._readWrite("FREQ:SPAN", value)
-        else:
-            return "xxxx"
+        return self._readWrite("FREQ:SPAN", value)
 
     @property
     def refLvl(self):
@@ -206,10 +131,7 @@ class SpecAn(object):
 
     @refLvl.setter
     def refLvl(self, value):
-        if not self.simulate:
-            return self._readWrite("DISP:TRAC1:Y:RLEVel", value)
-        else:
-            return "xxxx"
+        return self._readWrite("DISP:TRAC1:Y:RLEVel", value)
 
     @property
     def refLvlOffset(self):
@@ -220,10 +142,7 @@ class SpecAn(object):
 
     @refLvlOffset.setter
     def refLvlOffset(self, value):
-        if not self.simulate:
-            return self._readWrite("DISP:TRAC1:Y:RLEV:OFFS", value)
-        else:
-            return "xxxx"
+        return self._readWrite("DISP:TRAC1:Y:RLEV:OFFS", value)
 
     @property
     def inputAtten(self):
@@ -234,10 +153,7 @@ class SpecAn(object):
 
     @inputAtten.setter
     def inputAtten(self, value):
-        if not self.simulate:
-            return self._readWrite("INP:ATT", value)
-        else:
-            return "xxxx"
+        return self._readWrite("INP:ATT", value)
 
     @property
     def rbw(self):
@@ -248,10 +164,7 @@ class SpecAn(object):
 
     @rbw.setter
     def rbw(self, value):
-        if not self.simulate:
-            return self._readWrite("SENS:BWID:RES", value)
-        else:
-            return "xxxx"
+        return self._readWrite("SENS:BWID:RES", value)
 
     @property
     def vbw(self):
@@ -262,10 +175,7 @@ class SpecAn(object):
 
     @vbw.setter
     def vbw(self, value):
-        if not self.simulate:
-            return self._readWrite("SENS:BWID:VID", value)
-        else:
-            return "xxxx"
+        return self._readWrite("SENS:BWID:VID", value)
 
     @property
     def sweep(self):
@@ -276,53 +186,26 @@ class SpecAn(object):
 
     @sweep.setter
     def sweep(self, value):
-        if not self.simulate:
-            return self._readWrite("SENS:SWE:TIME", value)
-        else:
-            return "xxxx"
+        return self._readWrite("SENS:SWE:TIME", value)
 
-    def averageCount(self, value = None):
-        """
-
-
-        @param int value :
-        @return  :
-        @author
-        """
-        pass
-
-    def statAverage(self, value = None):
-        """
-
-
-        @param bool value :
-        @return  :
-        @author
-        """
-        pass
-
-    def sweepCount(self, value):
+    def averageCount(self, value):
         self._readWrite("INIT:CONT OFF")
         self._readWrite("AVER:COUN", value)
         self._readWrite("INIT;*WAI")
 
-    def markPeakSearch(self):
-        self._readWrite("CALC:MARK:MAX")
-        return float(self._readWrite("CALC:MARK1:Y?"))
+    def markPeakSearch(self, marker = 1):
+        self._readWrite("CALC:MARK{0}:MAX".format(marker))
+        return [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
 
-    def markSet(self, number = 1, freq = None, status = True):
-        """
+    def markerSet(self, marker = 1, freq = None, status = 1):
+        if freq is not None:
+            self._readWrite("CALC:MARK{0}:X".format(marker), freq)
+        self._readWrite("CALC:MARK{0}".format(marker), status)
 
+    def markerGet(self, marker = 1):
+        return [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
 
-        @param int number :
-        @param int freq :
-        @param bool status :
-        @return  :
-        @author
-        """
-        pass
-
-    def markSearchLimit(self, number = 1, dir = None, freq = None, status = True):
+    def markerSearchLimit(self, marker = 1, dir = None, freq = None, status = 1):
         """
 
 
@@ -335,32 +218,13 @@ class SpecAn(object):
         """
         pass
 
-    def markGet(self, number = 1):
-        """
-
-
-        @param int number :
-        @return  :
-        @author
-        """
-        pass
-
-    def markDelta(self, number = 1, mode = None, status = True):
+    def markerDelta(self, marker = 1, mode = None, status = True):
         """
 
 
         @param int number :
         @param string mode :
         @param bool status :
-        @return  :
-        @author
-        """
-        pass
-
-    def startSweep(self):
-        """
-
-
         @return  :
         @author
         """
@@ -385,6 +249,32 @@ class SpecAn(object):
         """
         pass
 
+    def limitSet(self, limit = 1, freq = None, power = None, margin = 0):
+        if len(freq) != len(power):
+            raise AcbbsError("freq and power not same size", log = self.logger)
+
+        freqString = ""
+        for i in range (0, len(freq)-1):
+            freqString += freq[i] + ","
+        freqString += freq[len(freq)-1]
+
+        powerString = ""
+        for i in range (0, len(power)-1):
+            powerString += power[i] + ","
+        powerString += power[len(power)-1]
+
+        self._readWrite("CALC:LIM{0}:CONT:MODE ABS".format(limit))
+        self._readWrite("CALC:LIM{0}:UPP:MODE ABS".format(limit))
+        self._readWrite("CALC:LIM{0}:UNIT DBM".format(limit))
+        self._readWrite("CALC:LIM{0}:CONT".format(limit), freqString)
+        self._readWrite("CALC:LIM{0}:UPP".format(limit), powerString)
+        self._readWrite("CALC:LIM{0}:UPP:MARG".format(limit), margin)
+
+    def limitState(self, limit = 1, status = None):
+        self._readWrite("CALC:LIM{0}:STAT".format(limit), status)
+
+    def limitCheck(self, limit = 1):
+        return self._readWrite("CALC:LIM{0}:FAIL?".format(limit))
 
     def _wait(self):
         self.inst.write("*WAI\n")

@@ -188,13 +188,33 @@ class SpecAn(object):
     def sweep(self, value):
         return self._readWrite("SENS:SWE:TIME", value)
 
+    def refreshDisplay(self):
+        self._readWrite("INIT:CONT OFF")
+        self._readWrite("DISP:TRAC:MODE WRIT")
+        self._readWrite("INIT:CONT ON")
+
     def averageCount(self, value):
         self._readWrite("INIT:CONT OFF")
         self._readWrite("AVER:COUN", value)
         self._readWrite("INIT;*WAI")
 
-    def markPeakSearch(self, marker = 1):
+    def maxHoldCount(self, value):
+        self._readWrite("INIT:CONT OFF")
+        self._readWrite("SWE:COUN", value)
+        self._readWrite("DISP:TRAC:MODE MAXH")
+        self._readWrite("INIT;*WAI")
+
+    def markerPeakSearch(self, marker = 1):
         self._readWrite("CALC:MARK{0}:MAX".format(marker))
+        return [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
+
+    def markerSearch(self, marker = 1, dir = None):
+        if dir == 'r':
+            self._readWrite("CALC:MARK{0}:MAX:RIGH".format(marker))
+        if dir == 'l':
+            self._readWrite("CALC:MARK{0}:MAX:LEFT".format(marker))
+        if dir == 'n':
+            self._readWrite("CALC:MARK{0}:MAX:NEXT".format(marker))
         return [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
 
     def markerSet(self, marker = 1, freq = None, status = 1):
@@ -255,13 +275,13 @@ class SpecAn(object):
 
         freqString = ""
         for i in range (0, len(freq)-1):
-            freqString += freq[i] + ","
-        freqString += freq[len(freq)-1]
+            freqString += str(freq[i]) + ","
+        freqString += str(freq[len(freq)-1])
 
         powerString = ""
         for i in range (0, len(power)-1):
-            powerString += power[i] + ","
-        powerString += power[len(power)-1]
+            powerString += str(power[i]) + ","
+        powerString += str(power[len(power)-1])
 
         self._readWrite("CALC:LIM{0}:CONT:MODE ABS".format(limit))
         self._readWrite("CALC:LIM{0}:UPP:MODE ABS".format(limit))
@@ -269,6 +289,7 @@ class SpecAn(object):
         self._readWrite("CALC:LIM{0}:CONT".format(limit), freqString)
         self._readWrite("CALC:LIM{0}:UPP".format(limit), powerString)
         self._readWrite("CALC:LIM{0}:UPP:MARG".format(limit), margin)
+        self._readWrite("CALC:LIM{0}:STAT ON".format(limit))
 
     def limitState(self, limit = 1, status = None):
         self._readWrite("CALC:LIM{0}:STAT".format(limit), status)

@@ -1,151 +1,126 @@
 # coding=UTF-8
 from acbbs.tools.log import *
+from acbbs.tools.configurationFile import *
+
+from telnetlib import Telnet
 
 class PwrMeter(object):
+    class _simulate(object):
+        def __init__(self):
+            return
+        def write(self, val):
+            return '0'
+        def read(self, val, timeout=None):
+            return '0'
+
     def __init__(self, simulate = False):
+
+        #init logs
+        self.logger = get_logger(self.__class__.__name__)
+
+        #get configuration
+        self.conf = configurationFile(file = self.__class__.__name__)
+        self.SpecAnConf = self.conf.getConfiguration()
 
         #simulation state
         self.simulate = simulate
 
         if not simulate:
-            pass
-        else:
-            pass
+            self.logger.info("Init PwrMeter")
+            try :
+                self.inst = Telnet(self.SpecAnConf["ip"], 5025, 1)
+                self._readWrite("SYST:DISP:UPD ON")
+                self._readWrite("SENS:PMET:STAT 1")
+                self._readWrite("PMET:UPD 1")
+            except :
+                raise AcbbsError("PwrMeter Connection error: {0}".format(self.SpecAnConf["ip"]), log = self.logger)
+        else :
+            self.logger.info("Init PwrMeter in Simulate")
+            self.inst = self._simulate()
 
         self.reference_var = None
         self.version_var = None
 
+    def __del__(self):
+        self.logger.info("PwrMeter off")
+        self._readWrite("SENS:PMET:STAT 0")
+
     @property
     def info(self):
         return {
-            "version":self.reference,
-            "reference":self.version,
+            "version":self.version,
             "error":self.errors
         }
+
+    def reset(self):
+        self._readWrite("SYST:PRES")
+
+    @property
+    def version(self):
+        if self.version_var is None:
+            if not self.simulate:
+                self.version_var = self._readWrite("SYST:VERS?")
+            else:
+                self.version_var = "xxxx"
+        return self.version_var
 
     @property
     def errors(self):
         if not self.simulate:
-            return []
+            err = ""
+            errList = []
+            while "No error" not in err:
+                err = self._readWrite("SYST:ERR?")
+                if "No error" not in err:
+                    errList.append(err)
+                    self.logger.debug("read error %s" % err)
+            return errList
 
         else:
             return []
 
     @property
-    def reference(self):
-        if self.reference_var is None:
-            if self.simulate:
-                self.reference_var =  "xxxx"
-            else:
-                self.reference_var =  "xxxx"
-        return self.reference_var
+    def status(self):
+        return self._readWrite("SENS:PMET:STAT?")
 
     @property
-    def version(self):
-        if self.version_var is None:
-            if self.simulate:
-                self.version_var =  "xxxx"
+    def freq(self, value = None):
+        if not self.simulate:
+            return self._readWrite("SENS:PMET:FREQ?")
+        else:
+            return "xxxx"
+
+    @freq.setter
+    def freq(self, value):
+        self._readWrite("SENS:PMET:FREQ", value)
+
+    @property
+    def power(self):
+        return(float(self._readWrite("READ:PMET?")))
+
+    def _wait(self):
+        self.inst.write("*WAI\n")
+        return
+
+    def _readWrite(self, cmd = None, value = None):
+        self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
+        if "?" in cmd:
+            self.inst.write("%s\n" % cmd)
+            return(self.inst.read_until("\n")[:-1])
+        elif value is None:
+            self.inst.write("%s\n" % (cmd))
+            self._wait()
+        else:
+            self.inst.write("%s %s\n" % (cmd, value))
+            self._wait()
+
+        err = self.errors
+        if len(err) != 0:
+            strerr = ""
+            for e in err:
+                strerr += "|%s| " % e
+            if value is None:
+                c = "%s" % (cmd.split("\n")[0])
             else:
-                self.version_var =  "xxxx"
-        return self.version_var
-
-    def reset(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        pass
-
-    def measure(self, freq = 1000000000, trigMode = "SLOP POS", trigState = "OFF", avgVal = 1, avgState = "ON", pmCh = 1):
-        """
-
-
-        @param int freq :
-        @param string trigMode :
-        @param string trigState :
-        @param int avgVal :
-        @param string avgState :
-        @param  pmCh :
-        @return  :
-        @author
-        """
-        pass
-
-    def identification(self, cmd = "*IDN?"):
-        """
-
-
-        @param string cmd :
-        @return  :
-        @author
-        """
-        pass
-
-    def calibrationZeroAuto(self, mode = None, pmCh = 1):
-        """
-
-
-        @param  mode :
-        @param  pmCh :
-        @return  :
-        @author
-        """
-        pass
-
-    def __wait(self):
-        """
-
-
-        @return  :
-        @author
-        """
-        pass
-
-    def __readWrite(self, cmd = None, value = None):
-        """
-
-
-        @param  cmd :
-        @param  value :
-        @return  :
-        @author
-        """
-        pass
-
-    def __frequency(self, freq = None, pmCh = 1):
-        """
-
-
-        @param int freq :
-        @param  pmCh :
-        @return  :
-        @author
-        """
-        pass
-
-    def __averageCount(self, average = None, state = "OFF", pmCh = 1):
-        """
-
-
-        @param  average :
-        @param string state :
-        @param  pmCh :
-        @return  :
-        @author
-        """
-        pass
-
-    def __senseFunction(self, mode = "OFF", unit = "DBM", state = "OFF", pmCh = 1):
-        """
-
-
-        @param string mode :
-        @param string unit :
-        @param string state :
-        @param  pmCh :
-        @return  :
-        @author
-        """
-        pass
+                c = "%s %s" % (cmd.split("\n")[0], value)
+            self.logger.warning("Get following errors after \"{0}\" command : {1}".format(c, strerr))

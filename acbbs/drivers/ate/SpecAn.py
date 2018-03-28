@@ -32,17 +32,13 @@ class SpecAn(object):
                 self._readWrite("SYST:PRES")
                 self._readWrite("SYST:DISP:UPD ON")
             except :
-                raise AcbbsError("RFSigGen Connection error: {0}".format(self.SpecAnConf["ip"]), log = self.logger)
+                raise AcbbsError("SpecAn Connection error: {0}".format(self.SpecAnConf["ip"]), log = self.logger)
         else :
-            self.logger.info("Init RFSigGen in Simulate")
+            self.logger.info("Init SpecAn in Simulate")
             self.inst = self._simulate()
 
         self.reference_var = None
         self.version_var = None
-
-    def __del__(self):
-        self.logger.info("Radio off")
-        self.status = 0
 
     @property
     def info(self):
@@ -268,6 +264,20 @@ class SpecAn(object):
         @author
         """
         pass
+
+    def limitLineHSet(self, line = 1, power = None, status = None):
+        if status is not None:
+            self._readWrite("CALC:DLIN{0}:STAT".format(line), status)
+        else:
+            self._readWrite("CALC:DLIN{0}:STAT ON".format(line))
+            self._readWrite("CALC:DLIN{0}".format(line), power)
+
+    def limitLineVSet(self, line = 1, freq = None, status = None):
+        if status is not None:
+            self._readWrite("CALC:FLIN{0}:STAT".format(line), status)
+        else:
+            self._readWrite("CALC:FLIN{0}:STAT ON".format(line))
+            self._readWrite("CALC:FLIN{0}".format(line), freq)
 
     def limitSet(self, limit = 1, freq = None, power = None, margin = 0):
         if len(freq) != len(power):

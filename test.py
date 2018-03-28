@@ -12,6 +12,23 @@ from acbbs.drivers.dut import *
 
 import time
 
+def test_PwrMeter():
+    SpecAna = SpecAn()
+    # SpecAna.reset()
+    SpecAna.freqCenter = 902000000
+    SpecAna.freqSpan = 100000000
+    SpecAna.rbw = 10000
+    SpecAna.vbw = 10000
+    SpecAna.sweep = 0.1
+    SpecAna.limitLineHSet(power = -50)
+    SpecAna.averageCount(6)
+    # SpecAna.limitSet(freq = [80000000, 940000000], power = [-20, -20])
+    pwr = PwrMeter()
+    pwr.freq = 1000000000
+    print("status : {0}".format(pwr.status))
+    print("freq : {0}".format(pwr.freq))
+    print("power : {0}".format(pwr.power))
+
 def test_DCPwr():
     ### DCPwr test ###
     alim = DCPwr()
@@ -166,7 +183,7 @@ def test_fft():
     # plt.show()
 
 def main(args):
-    test_DCPwr()
+    # test_DCPwr()
     # test_RFSigGen()
     # test_Swtch()
     # test_dut()
@@ -175,6 +192,7 @@ def main(args):
     # test_fft()
     # test_rssiSinNumpy()
     # test_SpsecAna()
+    test_PwrMeter()
     exit(0)
 
 if __name__ == '__main__':

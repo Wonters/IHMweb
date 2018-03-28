@@ -36,8 +36,8 @@ def test_SpecAna():
     SpecAna.rbw = 10000
     SpecAna.vbw = 10000
     SpecAna.sweep = 1
-    SpecAna.averageCount(10)
-    SpecAna.limitSet(freq = [902000000, 903000000], power = [-20, -20])
+    SpecAna.averageCount(2)
+    SpecAna.limitSet(freq = [80000000, 940000000], power = [-20, -20])
     # SpecAna.freqStart = 902000000
     # SpecAna.freqStop = 904000000
     # print("power : {0}".format(sigGen.power))
@@ -166,7 +166,7 @@ def test_fft():
     # plt.show()
 
 def main(args):
-    # test_DCPwr()
+    test_DCPwr()
     # test_RFSigGen()
     # test_Swtch()
     # test_dut()
@@ -174,7 +174,7 @@ def main(args):
     # test_irrSin()
     # test_fft()
     # test_rssiSinNumpy()
-    test_SpecAna()
+    # test_SpsecAna()
     exit(0)
 
 if __name__ == '__main__':

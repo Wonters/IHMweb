@@ -4,7 +4,7 @@ from acbbs.tools.log import *
 
 import json
 from os import getcwd
-from os.path import basename, splitext
+from os.path import basename, splitext, realpath
 
 class configurationFile(object):
     def __init__(self, file = None, simulate = False):
@@ -32,5 +32,6 @@ class configurationFile(object):
         return nbValue
 
     def __openConfigurationFile(self):
-        with open("configuration.json") as json_file:
+        path = realpath(__file__).split(self.__class__.__name__)[0]
+        with open("{0}/../../configuration.json".format(path)) as json_file:
             self.json_data = json.load(json_file)

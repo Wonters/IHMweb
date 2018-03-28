@@ -11,11 +11,6 @@ class app(object):
             if file.endswith(".py"):
                 self.tcFolder.append(os.path.join("acbbs/testcases", file))
 
-        # import all testcases
-        for tc in self.getTestcases():
-            cmd = "from acbbs.testcases.{0} import *".format(tc)
-            exec cmd
-
     def getTestcases(self):
         tclist = []
         for tc in self.tcFolder:
@@ -26,6 +21,14 @@ class app(object):
         tclist.sort()
         return tclist
 
+    def openTestcase(self, tc):
+        # import testcases
+        cmd = "from acbbs.testcases.{0} import *".format(tc)
+        exec cmd
+
+        cmd = "threadTc = {0}()".format(tc)
+        exec cmd
+        return threadTc
 
 if __name__ == '__main__':
     a = app()

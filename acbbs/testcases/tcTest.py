@@ -5,7 +5,7 @@ from acbbs.drivers.ate.DCPwr import *
 from acbbs.drivers.ate.RFSigGen import *
 from acbbs.drivers.ate.Swtch import *
 
-class rxGainLNAs(baseTestCase):
+class tcTest(baseTestCase):
     def __init__(self):
         baseTestCase.__init__(self)
 
@@ -27,7 +27,7 @@ class rxGainLNAs(baseTestCase):
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
-            self.dut = dut(chan=chan)                  #dut drivers init
+            self.dut = dut(chan=chan, simulate = True) #dut drivers init
 
             #configuration dut
             self.dut.mode = "RX"
@@ -51,13 +51,15 @@ class rxGainLNAs(baseTestCase):
                         self.RFSigGen.freq = freq + self.tcConf["bbFreq"]
 
                         #measure refLevel
-                        #configure ATE
-                        self.dut.preamp0 = self.tcConf["backoff"][0][1]
-                        self.dut.preamp1 = self.tcConf["backoff"][0][2]
-                        self.dut.preamp2 = self.tcConf["backoff"][0][3]
 
-                        #start measurement
-                        refLevel = self.dut.rssiSin(freqBBHz = self.tcConf["bbFreq"])
+                        # #configure ATE
+                        # self.dut.preamp0 = self.tcConf["backoff"][0][1]
+                        # self.dut.preamp1 = self.tcConf["backoff"][0][2]
+                        # self.dut.preamp2 = self.tcConf["backoff"][0][3]
+                        #
+                        # #start measurement
+                        # refLevel = self.dut.rssiSin(freqBBHz = self.tcConf["bbFreq"])
+                        refLevel = 0
 
 
                         for backoff in self.tcConf["backoff"]:
@@ -93,6 +95,9 @@ class rxGainLNAs(baseTestCase):
                             }
                             self.db.writeDataBase(self.__writeMeasure(conf, result))
 
+                            #simulation
+                            time.sleep(0.3)
+
         #update status
         self.status = st().FINISHED
 
@@ -102,9 +107,9 @@ class rxGainLNAs(baseTestCase):
 
         #ate drivers init
         self.logger.info("Init ate")
-        self.DCPwr = DCPwr()
-        self.RFSigGen = RFSigGen()
-        self.Swtch = Swtch()
+        self.DCPwr = DCPwr(simulate = True)
+        self.RFSigGen = RFSigGen(simulate = True)
+        self.Swtch = Swtch(simulate = True)
 
         #ate configuration
         self.Swtch.setSwitch(sw2 = 4, sw3 = 3, sw4 = 1)

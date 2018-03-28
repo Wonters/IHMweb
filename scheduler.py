@@ -7,6 +7,7 @@ from acbbs.testcases.rxGainLNAs import *
 from acbbs.testcases.rxIQImbalance import *
 from acbbs.testcases.rxP1dBSaturation import *
 from acbbs.testcases.rxMaximumGain import *
+from acbbs.testcases.tcTest import *
 
 import time
 from progress.bar import PixelBar
@@ -15,7 +16,7 @@ def main(args):
     # threadSkeletonTc = skeletonTc()
     # threadTc = rxMaximumGain()
     # threadTc = rxIQImbalance()
-    threadTc = rxIQImbalance()
+    threadTc = tcTest()
 
     bar = PixelBar('Processing rxGainLNAs', max=threadTc.iterationsNumber)
 
@@ -24,7 +25,7 @@ def main(args):
 
     i = threadTc.iteration
     while threadTc.is_alive():
-        time.sleep(2)
+        time.sleep(0.1)
         if threadTc.iteration != i:
             i = threadTc.iteration
             bar.next()

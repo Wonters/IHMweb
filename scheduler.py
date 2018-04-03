@@ -15,10 +15,10 @@ from progress.bar import PixelBar
 def main(args):
     # threadSkeletonTc = skeletonTc()
     # threadTc = rxMaximumGain()
-    # threadTc = rxIQImbalance()
-    threadTc = tcTest()
+    threadTc = rxIQImbalance()
+    # threadTc = tcTest()
 
-    bar = PixelBar('Processing rxGainLNAs', max=threadTc.iterationsNumber)
+    bar = PixelBar('Processing rxIQImbalance', max=threadTc.iterationsNumber)
 
     threadTc.tcInit()
     threadTc.start()

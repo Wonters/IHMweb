@@ -162,9 +162,9 @@ def test_irrSin():
     # print("dutClass.rssiSin() return {0}".format(ref))
     ################
 
-import matplotlib.pyplot as plt
-from scipy.fftpack import fft
-from scipy.io import wavfile # get the api
+# import matplotlib.pyplot as plt
+# from scipy.fftpack import fft
+# from scipy.io import wavfile # get the api
 def test_fft():
     fs, data = wavfile.read('test.wav') # load the data
     a = data.T[0] # this is a two channel soundtrack, I get the first track
@@ -183,7 +183,7 @@ def test_fft():
     # plt.show()
 
 def main(args):
-    # test_DCPwr()
+    test_DCPwr()
     # test_RFSigGen()
     # test_Swtch()
     # test_dut()
@@ -192,7 +192,7 @@ def main(args):
     # test_fft()
     # test_rssiSinNumpy()
     # test_SpsecAna()
-    test_PwrMeter()
+    # test_PwrMeter()
     exit(0)
 
 if __name__ == '__main__':

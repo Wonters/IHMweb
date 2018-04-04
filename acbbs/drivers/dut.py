@@ -496,7 +496,7 @@ class dut(object):
 
     def irrSin(self, freqBBHz = 20000):
         if self.simulate:
-            return {'dGain': "xxxx", 'dPhase': "xxxx", 'IRR': "xxxx"}
+            return {'dGain': "xxxx", 'dPhase': "xxxx", 'irr': "xxxx"}
         else:
             maxRetry = 3
             nbOfRetry = 0
@@ -522,7 +522,7 @@ class dut(object):
                                 self.stopBBSine()
                                 acquire = False
                     result = pout.readlines()[2].split(" ")
-                    irr = {'dGain': result[7], 'dPhase': result[9], 'IRR': result[11]}
+                    irr = {'dGain': float(result[7]), 'dPhase': float(result[9]), 'IRR': float(result[11])}
                     freq = float(result[14])
                     if ((freq > (int(freqBBHz) + 1000)) or (freq < (int(freqBBHz) - 1000))):
                         raise AcbbsError("ToolIQ bad freqBBHz freq read: %s expected: %s" % (freq, int(freqBBHz)),

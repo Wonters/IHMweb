@@ -2,35 +2,42 @@
 # coding=UTF-8
 
 import argparse
-from acbbs.testcases.skeletonTc import *
 from acbbs.testcases.rxGainLNAs import *
 from acbbs.testcases.rxIQImbalance import *
 from acbbs.testcases.rxP1dBSaturation import *
 from acbbs.testcases.rxMaximumGain import *
-from acbbs.testcases.tcTest import *
+
+from acbbs.drivers.ate.ClimCham import *
 
 import time
 from progress.bar import PixelBar
 
 def main(args):
-    # threadSkeletonTc = skeletonTc()
-    # threadTc = rxMaximumGain()
-    threadTc = rxIQImbalance()
-    # threadTc = tcTest()
 
-    bar = PixelBar('Processing rxIQImbalance', max=threadTc.iterationsNumber)
+    #get configuration
+    conf = configurationFile(file = self.__class__.__name__)
+    schConf = conf.getConfiguration()
 
-    threadTc.tcInit()
-    threadTc.start()
+    #start loops
+    for temp in schConf["temperature"]:
+        #set temperature and wait
 
-    i = threadTc.iteration
-    while threadTc.is_alive():
-        time.sleep(0.1)
-        if threadTc.iteration != i:
+        for tc in schConf["tc2play"]:
+            cmd = "threadTc = {0}()".format(tc)
+            exec cmd
+
+            bar = PixelBar("Processing {0}".format(tc), max=threadTc.iterationsNumber)
+
+            threadTc.tcInit()
+            threadTc.start()
+
             i = threadTc.iteration
-            bar.next()
-    bar.finish()
-
+            while threadTc.is_alive():
+                time.sleep(0.1)
+                if threadTc.iteration != i:
+                    i = threadTc.iteration
+                    bar.next()
+            bar.finish()
 
     exit(0)
 

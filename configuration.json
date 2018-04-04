@@ -33,6 +33,10 @@
     "voltage":[10, 11, 12, 14],
     "power":[-100, -90]
   },
+  "scheduler":{
+    "tc2play":["rxGainLNAs", "rxIQImbalance"],
+    "temperature":[-20, 0, 10]
+  },
   "rxGainLNAs":{
     "channel":[1, 2],
     "voltage":[12],

@@ -79,7 +79,7 @@ class SpecAn(object):
         if not self.simulate:
             return self._readWrite("FREQ:START?")
         else:
-            return "xxxx"
+            return 0.0
 
     @freqStart.setter
     def freqStart(self, value):
@@ -90,7 +90,7 @@ class SpecAn(object):
         if not self.simulate:
             return self._readWrite("FREQ:CENT?")
         else:
-            return "xxxx"
+            return 0.0
 
     @freqCenter.setter
     def freqCenter(self, value):
@@ -101,7 +101,7 @@ class SpecAn(object):
         if not self.simulate:
             return self._readWrite("FREQ:STOP?")
         else:
-            return "xxxx"
+            return 0.0
 
     @freqStop.setter
     def freqStop(self, value):
@@ -112,7 +112,7 @@ class SpecAn(object):
         if not self.simulate:
             return self._readWrite("FREQ:SPAN?")
         else:
-            return "xxxx"
+            return 0.0
 
     @freqSpan.setter
     def freqSpan(self, value):
@@ -123,7 +123,7 @@ class SpecAn(object):
         if not self.simulate:
             return self._readWrite("DISP:TRAC1:Y:RLEVel?")
         else:
-            return "xxxx"
+            return 0.0
 
     @refLvl.setter
     def refLvl(self, value):
@@ -134,7 +134,7 @@ class SpecAn(object):
         if not self.simulate:
             return self._readWrite("DISP:TRAC1:Y:RLEV:OFFS?")
         else:
-            return "xxxx"
+            return 0.0
 
     @refLvlOffset.setter
     def refLvlOffset(self, value):
@@ -145,7 +145,7 @@ class SpecAn(object):
         if not self.simulate:
             return self._readWrite("INP:ATT?")
         else:
-            return "xxxx"
+            return 0.0
 
     @inputAtten.setter
     def inputAtten(self, value):
@@ -156,7 +156,7 @@ class SpecAn(object):
         if not self.simulate:
             return self._readWrite("SENS:BWID:RES?")
         else:
-            return "xxxx"
+            return 0.0
 
     @rbw.setter
     def rbw(self, value):
@@ -167,7 +167,7 @@ class SpecAn(object):
         if not self.simulate:
             return self._readWrite("SENS:BWID:VID?")
         else:
-            return "xxxx"
+            return 0.0
 
     @vbw.setter
     def vbw(self, value):
@@ -178,7 +178,7 @@ class SpecAn(object):
         if not self.simulate:
             return self._readWrite("SENS:SWE:TIME?")
         else:
-            return "xxxx"
+            return 0.0
 
     @sweep.setter
     def sweep(self, value):
@@ -315,7 +315,10 @@ class SpecAn(object):
         self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
         if "?" in cmd:
             self.inst.write("%s\n" % cmd)
-            return(self.inst.read_until("\n")[:-1])
+            try:
+                return float(self.inst.read_until("\n")[:-1])
+            except:
+                return self.inst.read_until("\n")[:-1]
         elif value is None:
             self.inst.write("%s\n" % (cmd))
             self._wait()

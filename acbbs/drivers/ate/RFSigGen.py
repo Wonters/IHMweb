@@ -58,7 +58,7 @@ class RFSigGen(object):
             if not self.simulate:
                 self.version_var = self._readWrite("SYST:VERS?")
             else:
-                self.version_var = "xxxx"
+                self.version_var = 0.0
         return self.version_var
 
     @property
@@ -81,7 +81,7 @@ class RFSigGen(object):
         if not self.simulate:
             return self._readWrite("OUTP:STAT?")
         else:
-            return "xxxx"
+            return 0.0
 
     @status.setter
     def status(self, value):
@@ -93,7 +93,7 @@ class RFSigGen(object):
         if not self.simulate:
             return self._readWrite("SOUR:POW:LEV:IMM:AMPL?")
         else:
-            return "xxxx"
+            return 0.0
 
     @power.setter
     def power(self, value):
@@ -105,7 +105,7 @@ class RFSigGen(object):
         if not self.simulate:
             return self._readWrite("SOUR:FREQ:CW?")
         else:
-            return "xxxx"
+            return 0.0
 
     @freq.setter
     def freq(self, value):
@@ -120,7 +120,10 @@ class RFSigGen(object):
         self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
         if "?" in cmd:
             self.inst.write("%s\n" % cmd)
-            return(self.inst.read_until("\n")[:-1])
+            try:
+                return float(self.inst.read_until("\n")[:-1])
+            except:
+                return self.inst.read_until("\n")[:-1]
         elif value is None:
             self.inst.write("%s\n" % (cmd))
             self._wait()

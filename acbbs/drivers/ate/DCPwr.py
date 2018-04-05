@@ -76,7 +76,7 @@ class DCPwr(object):
             if not self.simulate:
                 self.version_var = self._readWrite("SYST:VERS?")
             else:
-                self.version_var = "xxxx"
+                self.version_var = 0.0
         return self.version_var
 
     @property
@@ -84,7 +84,7 @@ class DCPwr(object):
         if not self.simulate:
             return self._readWrite("OUTP:STAT?")
         else:
-            return "xxxx"
+            return 0.0
 
     @status.setter
     def status(self, value):
@@ -96,14 +96,14 @@ class DCPwr(object):
         if not self.simulate:
             return self._readWrite("VOLT?")
         else:
-            return "xxxx"
+            return 0.0
 
     @property
     def voltageReal(self):
         if not self.simulate:
             return self._readWrite("MEAS:VOLT?")
         else:
-            return "xxxx"
+            return 0.0
 
     @property
     def voltage(self):
@@ -119,14 +119,14 @@ class DCPwr(object):
         if not self.simulate:
             return self._readWrite("CURR?")
         else:
-            return "xxxx"
+            return 0.0
 
     @property
     def currentReal(self):
         if not self.simulate:
             return self._readWrite("MEAS:CURR?")
         else:
-            return "xxxx"
+            return 0.0
 
     @property
     def current(self):
@@ -175,7 +175,10 @@ class DCPwr(object):
         if "?" in cmd:
             device = self._channelSel()
             device.write("%s\n" % cmd)
-            return(device.read_until("\n")[:-1])
+            try:
+                return float(self.inst.read_until("\n")[:-1])
+            except:
+                return self.inst.read_until("\n")[:-1]
         else:
             self._channelSel().write("%s %s\n" % (cmd, int(value)))
             self._wait()

@@ -13,9 +13,8 @@ import time
 from progress.bar import PixelBar
 
 def main(args):
-
     #get configuration
-    conf = configurationFile(file = self.__class__.__name__)
+    conf = configurationFile(file = "scheduler")
     schConf = conf.getConfiguration()
 
     #start loops
@@ -23,7 +22,7 @@ def main(args):
         #set temperature and wait
 
         for tc in schConf["tc2play"]:
-            cmd = "threadTc = {0}()".format(tc)
+            cmd = "threadTc = {0}({1})".format(tc, temp)
             exec cmd
 
             bar = PixelBar("Processing {0}".format(tc), max=threadTc.iterationsNumber)

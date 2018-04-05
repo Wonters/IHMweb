@@ -6,11 +6,14 @@ from acbbs.drivers.ate.RFSigGen import *
 from acbbs.drivers.ate.Swtch import *
 
 class rxIQImbalance(baseTestCase):
-    def __init__(self):
+    def __init__(self, temp):
         baseTestCase.__init__(self)
 
         #Tc version
         self.tcVersion = "1.0.0"
+
+        #store temp
+        self.temp = temp
 
         #calcul iterations number
         bbIter = 0
@@ -56,7 +59,7 @@ class rxIQImbalance(baseTestCase):
                         self.dut.freqRx = freq         #configure dut freq
 
                         for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
-                            
+
                             #update progress
                             self.iteration += 1
                             self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
@@ -72,6 +75,7 @@ class rxIQImbalance(baseTestCase):
                                 "vdd":vdd,
                                 "power":power,
                                 "freq":freq,
+                                "temp":self.temp,
                                 "baseband":dfreq,
                                 "backoff":self.tcConf["backoff"][0],
                                 "preamp0":self.tcConf["backoff"][1],

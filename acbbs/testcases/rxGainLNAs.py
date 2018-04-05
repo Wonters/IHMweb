@@ -6,11 +6,14 @@ from acbbs.drivers.ate.RFSigGen import *
 from acbbs.drivers.ate.Swtch import *
 
 class rxGainLNAs(baseTestCase):
-    def __init__(self):
+    def __init__(self, temp):
         baseTestCase.__init__(self)
 
         #Tc version
         self.tcVersion = "1.0.0"
+
+        #store temp
+        self.temp = temp
 
         #calcul iterations number
         self.iterationsNumber = self.conf.getTcIterationsNumber()
@@ -81,6 +84,7 @@ class rxGainLNAs(baseTestCase):
                                 "vdd":vdd,
                                 "power":power,
                                 "freq":freq,
+                                "temp":self.temp,
                                 "backoff":backoff[0],
                                 "preamp0":backoff[1],
                                 "preamp1":backoff[2],

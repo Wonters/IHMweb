@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
         for document in pm.get_collection(tc):
             row = []
-            
+
             #get title name
             if title is False:
                 title = True
@@ -58,6 +58,7 @@ if __name__ == "__main__":
                     row.append(keys)
                 for keys in document["dut-result"].keys():
                     row.append(keys)
+                row.append("id")
                 for keys in document["dut-info"]["measure"].keys():
                     row.append(keys)
                 xl.write_row(row)
@@ -68,6 +69,7 @@ if __name__ == "__main__":
                 row.append(values)
             for values in document["dut-result"].values():
                 row.append(values)
+            row.append(document["dut-info"]["id"])
             for values in document["dut-info"]["measure"].values():
                 row.append(values)
 

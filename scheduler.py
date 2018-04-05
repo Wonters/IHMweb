@@ -1,6 +1,8 @@
 #!/usr/bin/python2.7
 # coding=UTF-8
 
+from __future__ import print_function
+
 import argparse
 from acbbs.testcases.rxGainLNAs import *
 from acbbs.testcases.rxIQImbalance import *
@@ -11,7 +13,8 @@ from acbbs.drivers.ate.ClimCham import *
 
 import time
 import sys
-from progress.bar import PixelBar
+
+from etaprogress.progress import ProgressBar
 
 def main(args):
     #get configuration
@@ -29,7 +32,8 @@ def main(args):
         for tc in schConf["tc2play"]:
             exec "threadTc = {0}(temp={1}, simulate={2})".format(tc, temp, simulate)
 
-            bar = PixelBar("Processing {0}".format(tc), max=threadTc.iterationsNumber)
+            print("Processing {0}".format(tc))
+            bar = ProgressBar(threadTc.iterationsNumber, max_width=70)
 
             threadTc.tcInit()
             threadTc.start()
@@ -40,11 +44,13 @@ def main(args):
                     time.sleep(0.1)
                     if threadTc.iteration != i:
                         i = threadTc.iteration
-                        bar.next()
-                bar.finish()
+                        bar.numerator = i
+                        print (bar, end='\r')
+                        sys.stdout.flush()
+                print("\n\n")
 
             except KeyboardInterrupt:
-                print("\nKeyboard Interrupt Aborting....")
+                print("\n\nKeyboard Interrupt Aborting....")
                 threadTc.abort()
                 threadTc.join()
                 sys.exit(0)

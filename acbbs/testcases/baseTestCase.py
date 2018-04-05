@@ -23,7 +23,7 @@ class baseTestCase(Thread):
         Thread.__init__(self)
 
         #init var
-        self.iteration = 1
+        self.iteration = 0
         self.status = st().NOT_RUNNING
         self.iterationsNumber = 0.0
 

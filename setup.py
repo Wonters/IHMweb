@@ -8,6 +8,7 @@ INSTALL_REQUIRES = [
     'requests',
     'scipy',
     'colorlog',
+    'etaprogress',
 ]
 
 setup(

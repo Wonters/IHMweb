@@ -98,6 +98,9 @@ class rxGainLNAs(baseTestCase):
                             }
                             self.db.writeDataBase(self.__writeMeasure(conf, result))
 
+                            if self.simulate:
+                                time.sleep(0.2)
+
         #update status
         self.status = st().FINISHED
 

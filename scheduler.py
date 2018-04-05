@@ -10,6 +10,7 @@ from acbbs.testcases.rxMaximumGain import *
 from acbbs.drivers.ate.ClimCham import *
 
 import time
+import sys
 from progress.bar import PixelBar
 
 def main(args):
@@ -34,12 +35,19 @@ def main(args):
             threadTc.start()
 
             i = threadTc.iteration
-            while threadTc.is_alive():
-                time.sleep(0.1)
-                if threadTc.iteration != i:
-                    i = threadTc.iteration
-                    bar.next()
-            bar.finish()
+            try:
+                while threadTc.is_alive():
+                    time.sleep(0.1)
+                    if threadTc.iteration != i:
+                        i = threadTc.iteration
+                        bar.next()
+                bar.finish()
+
+            except KeyboardInterrupt:
+                print("\nKeyboard Interrupt Aborting....")
+                threadTc.abort()
+                threadTc.join()
+                sys.exit(0)
 
     exit(0)
 

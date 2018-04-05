@@ -60,6 +60,8 @@ class rxMaximumGain(baseTestCase):
                         self.dut.freqRx = freq         #configure dut freq
 
                         for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
+                            if self.status is st().ABORTING:
+                                break
 
                             #update progress
                             self.iteration += 1
@@ -88,6 +90,9 @@ class rxMaximumGain(baseTestCase):
                                 "gain":float(rssi) - float(power)
                             }
                             self.db.writeDataBase(self.__writeMeasure(conf, result))
+
+                            if self.simulate:
+                                time.sleep(0.2)
 
         #update status
         self.status = st().FINISHED

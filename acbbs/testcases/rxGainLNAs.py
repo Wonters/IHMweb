@@ -16,6 +16,9 @@ class rxGainLNAs(baseTestCase):
         self.temp = temp
         self.simulate = simulate
 
+        #get backoff
+        self.backoff = self.conf.getBackoff()
+
         #calcul iterations number
         self.iterationsNumber = self.conf.getTcIterationsNumber()
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
@@ -56,15 +59,15 @@ class rxGainLNAs(baseTestCase):
 
                         #measure refLevel
                         #configure ATE
-                        self.dut.preamp0 = self.tcConf["backoff"][0][1]
-                        self.dut.preamp1 = self.tcConf["backoff"][0][2]
-                        self.dut.preamp2 = self.tcConf["backoff"][0][3]
+                        self.dut.preamp0 = self.backoff[0][1]
+                        self.dut.preamp1 = self.backoff[0][2]
+                        self.dut.preamp2 = self.backoff[0][3]
 
                         #start measurement
                         refLevel = self.dut.rssiSin(freqBBHz = self.tcConf["bbFreq"])
 
 
-                        for backoff in self.tcConf["backoff"]:
+                        for backoff in self.backoff:
                             if self.status is st().ABORTING:
                                 break
 
@@ -86,10 +89,7 @@ class rxGainLNAs(baseTestCase):
                                 "power":power,
                                 "freq":freq,
                                 "temp":self.temp,
-                                "backoff":backoff[0],
-                                "preamp0":backoff[1],
-                                "preamp1":backoff[2],
-                                "preamp2":backoff[3]
+                                "backoff":backoff[0]
                             }
                             result = {
                                 "refLevel":refLevel,
@@ -99,7 +99,7 @@ class rxGainLNAs(baseTestCase):
                             self.db.writeDataBase(self.__writeMeasure(conf, result))
 
                             if self.simulate:
-                                time.sleep(0.2)
+                                time.sleep(0.02)
 
         #update status
         self.status = st().FINISHED

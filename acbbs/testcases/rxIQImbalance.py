@@ -16,6 +16,9 @@ class rxIQImbalance(baseTestCase):
         self.temp = temp
         self.simulate = simulate
 
+        #get backoff
+        self.backoff = self.conf.getBackoff()[0]
+
         #calcul iterations number
         bbIter = 0
         for i in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
@@ -38,9 +41,9 @@ class rxIQImbalance(baseTestCase):
 
             #configuration dut
             self.dut.mode = "RX"
-            self.dut.preamp0 = self.tcConf["backoff"][1]
-            self.dut.preamp1 = self.tcConf["backoff"][2]
-            self.dut.preamp2 = self.tcConf["backoff"][3]
+            self.dut.preamp0 = self.backoff[1]
+            self.dut.preamp1 = self.backoff[2]
+            self.dut.preamp2 = self.backoff[3]
 
             for vdd in self.tcConf["voltage"]:
                 if self.status is st().ABORTING:
@@ -80,16 +83,13 @@ class rxIQImbalance(baseTestCase):
                                 "freq":freq,
                                 "temp":self.temp,
                                 "baseband":dfreq,
-                                "backoff":self.tcConf["backoff"][0],
-                                "preamp0":self.tcConf["backoff"][1],
-                                "preamp1":self.tcConf["backoff"][2],
-                                "preamp2":self.tcConf["backoff"][3]
+                                "backoff":self.backoff[0]
                             }
                             result = irr
                             self.db.writeDataBase(self.__writeMeasure(conf, result))
 
                             if self.simulate:
-                                time.sleep(0.2)
+                                time.sleep(0.02)
 
         #update Status
         self.status = st().FINISHED

@@ -31,6 +31,14 @@ class configurationFile(object):
                 nbValue *= len(key)
         return nbValue
 
+    def getBackoff(self):
+        backoff = []
+        for backoffTc in self.json_data[self.file]["backoff"]:
+            for backoffGlobal in self.json_data["global"]["backoff"]:
+                if "BO Step {0}".format(backoffTc) == backoffGlobal[0]:
+                    backoff.append(backoffGlobal)
+        return backoff
+
     def __openConfigurationFile(self):
         path = realpath(__file__).split(self.__class__.__name__)[0]
         with open("{0}/../../configuration.json".format(path)) as json_file:

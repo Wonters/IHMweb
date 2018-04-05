@@ -6,14 +6,15 @@ from acbbs.drivers.ate.RFSigGen import *
 from acbbs.drivers.ate.Swtch import *
 
 class rxGainLNAs(baseTestCase):
-    def __init__(self, temp):
-        baseTestCase.__init__(self)
+    def __init__(self, temp, simulate):
+        baseTestCase.__init__(self, simulate)
 
         #Tc version
         self.tcVersion = "1.0.0"
 
-        #store temp
+        #store var
         self.temp = temp
+        self.simulate = simulate
 
         #calcul iterations number
         self.iterationsNumber = self.conf.getTcIterationsNumber()
@@ -30,7 +31,7 @@ class rxGainLNAs(baseTestCase):
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
-            self.dut = dut(chan=chan)                  #dut drivers init
+            self.dut = dut(chan=chan, simulate=self.simulate) #dut drivers init
 
             #configuration dut
             self.dut.mode = "RX"
@@ -92,8 +93,8 @@ class rxGainLNAs(baseTestCase):
                             }
                             result = {
                                 "refLevel":refLevel,
-                                "resultLevel":resultLevel
-                                # "gain":float(refLevel) - float(resultLevel)
+                                "resultLevel":resultLevel,
+                                "gain":refLevel - resultLevel
                             }
                             self.db.writeDataBase(self.__writeMeasure(conf, result))
 
@@ -106,9 +107,9 @@ class rxGainLNAs(baseTestCase):
 
         #ate drivers init
         self.logger.info("Init ate")
-        self.DCPwr = DCPwr()
-        self.RFSigGen = RFSigGen()
-        self.Swtch = Swtch()
+        self.DCPwr = DCPwr(simulate=self.simulate)
+        self.RFSigGen = RFSigGen(simulate=self.simulate)
+        self.Swtch = Swtch(simulate=self.simulate)
 
         #ate configuration
         self.Swtch.setSwitch(sw2 = 4, sw3 = 3, sw4 = 1)

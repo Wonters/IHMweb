@@ -16,14 +16,17 @@ def main(args):
     #get configuration
     conf = configurationFile(file = "scheduler")
     schConf = conf.getConfiguration()
+    if schConf["simulate"] == "True":
+        simulate = True
+    else:
+        simulate = False
 
     #start loops
     for temp in schConf["temperature"]:
         #set temperature and wait
 
         for tc in schConf["tc2play"]:
-            cmd = "threadTc = {0}({1})".format(tc, temp)
-            exec cmd
+            exec "threadTc = {0}(temp={1}, simulate={2})".format(tc, temp, simulate)
 
             bar = PixelBar("Processing {0}".format(tc), max=threadTc.iterationsNumber)
 

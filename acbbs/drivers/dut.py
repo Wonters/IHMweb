@@ -411,7 +411,7 @@ class dut(object):
 
     def rssiSin(self, freqBBHz = 20000):
         if self.simulate:
-            return "xxxx"
+            return 0.0
         else:
             maxRetry = 3
             nbOfRetry = 0
@@ -444,11 +444,11 @@ class dut(object):
                                          ch=self.channel, log=self.logger)
                     else:
                         self.logger.debug("return = {0}".format(rssi))
-                        return rssi
+                        return float(rssi)
                 except:
                     if nbOfRetry >= maxRetry:
                         self.logger.error("Bad BB frequency rssiSin: 4 tries to receive the correct frequency", ch ="%s" % self.channel)
-                        return "NA"
+                        return 0.0
                     else:
                         if nbOfRetry == maxRetry -1 :
                             time.sleep(10)
@@ -459,7 +459,7 @@ class dut(object):
 
     def rssiSinNumpy(self, freqBBHz = 20000):
         if self.simulate:
-            return "xxxx"
+            return 0.0
         else:
             self.logger.debug("Get rssiSin at freqBBHz = {0}".format(freqBBHz))
             resp = self.session.get("%s/signal/record" % (self.address), stream=True, timeout=3)
@@ -496,7 +496,7 @@ class dut(object):
 
     def irrSin(self, freqBBHz = 20000):
         if self.simulate:
-            return {'dGain': "xxxx", 'dPhase': "xxxx", 'irr': "xxxx"}
+            return {'dGain': 0.0, 'dPhase': 0.0, 'irr': 0.0}
         else:
             maxRetry = 3
             nbOfRetry = 0
@@ -529,11 +529,11 @@ class dut(object):
                                          ch=self.channel, log=self.logger)
                     else:
                         self.logger.debug("return = {0}".format(irr))
-                        return irr
+                        return float(irr)
                 except:
                     if nbOfRetry >= maxRetry:
                         self.logger.error("Bad BB frequency irrSin: 4 tries to receive the correct frequency", ch ="%s" % self.channel)
-                        return "NA"
+                        return 0.0
                     else:
                         if nbOfRetry == maxRetry -1 :
                             time.sleep(10)

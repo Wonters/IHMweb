@@ -34,6 +34,7 @@
     "power":[-100, -90]
   },
   "scheduler":{
+    "simulate":"True",
     "tc2play":["rxGainLNAs", "rxIQImbalance"],
     "temperature":[25]
   },

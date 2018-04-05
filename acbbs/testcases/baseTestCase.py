@@ -18,7 +18,7 @@ class st():
     FINISHED = "FINISHED"
 
 class baseTestCase(Thread):
-    def __init__(self):
+    def __init__(self, simulate):
         #init thread
         Thread.__init__(self)
 
@@ -31,7 +31,7 @@ class baseTestCase(Thread):
         self.logger = get_logger(self.__class__.__name__)
 
         #init dataBase
-        self.db = dataBase(file = self.__class__.__name__)
+        self.db = dataBase(file = self.__class__.__name__, simulate = simulate)
 
         #get configuration testcases
         self.conf = configurationFile(file = self.__class__.__name__)

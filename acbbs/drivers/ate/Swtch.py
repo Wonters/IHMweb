@@ -76,44 +76,47 @@ class Swtch(object):
 		self.tn.read_until("#", 1)
 
     def setSwitch(self, sw1 = None, sw2 = None, sw3 = None, sw4 = None):
+        if sw1 is not None:
+            self.channel = sw1
         if not self.simulate:
-            if sw1 is not None:
-                self.channel = sw1
-            if sw1 is not None:
-                self.__connect()
-                self.tn.write("S\r\n")
-                ret = self.tn.read_until("\r\n")
-                self.tn.write('c' + str(sw1) + ret[2] + ret[3] + ret[4] + '\r\n')
-                ret = self.tn.read_until("\r\n")
-                self.__disconnect()
+            #configure switch
+            self.__connect()
+            self.tn.write("S\r\n")
+            ret = self.tn.read_until("\r\n")
+            if sw1 is None:
+                sw1 = ret[1]
+            if sw2 is None:
+                sw2 = ret[2]
+            if sw3 is None:
+                sw3 = ret[3]
+            if sw4 is None:
+                sw4 = ret[4]
+            self.tn.write('c' + str(sw1) + str(sw2) + str(sw3) + str(sw4) + '\r\n')
+            ret = self.tn.read_until("\r\n")
+            self.__disconnect()
 
-            if sw2 is not None:
-                self.__connect()
-                self.tn.write("S\r\n")
-                ret = self.tn.read_until("\r\n")
-                self.tn.write('c' + ret[1] + str(sw2) + ret[3] + ret[4] + '\r\n')
-                ret = self.tn.read_until("\r\n")
-                self.__disconnect()
-
-            if sw3 is not None:
-                self.__connect()
-                self.tn.write("S\r\n")
-                ret = self.tn.read_until("\r\n")
-                self.tn.write('c' + ret[1] + ret[2] + str(sw3) + ret[4] + '\r\n')
-                ret = self.tn.read_until("\r\n")
-                self.__disconnect()
-
-            if sw4 is not None:
-                self.__connect()
-                self.tn.write("S\r\n")
-                ret = self.tn.read_until("\r\n")
-                self.tn.write('c' + ret[1] + ret[2] + ret[3] + str(sw4) + '\r\n')
-                ret = self.tn.read_until("\r\n")
-                self.__disconnect()
-
-                self.__disconnect()
-                return ret
         else:
-            if sw1 is not None:
-                self.channel = sw1
-        return None
+            if sw1 is None:
+                sw1 = 1
+            if sw2 is None:
+                sw2 = 4
+            if sw3 is None:
+                sw3 = 3
+            if sw4 is None:
+                sw4 = 1
+
+        #return correct offset depending of switch configurationFile
+        if sw3 == 2:
+            return {"noise-soure":self.swtchConf["loss"]["J{0}-J18".format(sw1+8)]}
+        elif sw3 == 3 and sw4 == 1:
+            return {"pwr-meter":self.swtchConf["loss"]["J{0}-J2".format(sw1+8)],
+                    "fsv-fswr":self.swtchConf["loss"]["J{0}-J5".format(sw1+8)],
+                    "smb100a":self.swtchConf["loss"]["J{0}-J4_20dB".format(sw1+8)]}
+        elif sw3 == 3 and sw4 == 2:
+            return {"pwr-meter":self.swtchConf["loss"]["J{0}-J2".format(sw1+8)],
+                    "fsv-fswr":self.swtchConf["loss"]["J{0}-J5".format(sw1+8)]}
+        elif sw3 == 4 and sw4 == 1:
+            return {"smbv100a":self.swtchConf["loss"]["J{0}-J3".format(sw1+8)]}
+        elif sw3 == 4 and sw4 == 2:
+            return {"smbv100a":self.swtchConf["loss"]["J{0}-J3".format(sw1+8)],
+                    "smb100a":self.swtchConf["loss"]["J{0}-J4".format(sw1+8)]}

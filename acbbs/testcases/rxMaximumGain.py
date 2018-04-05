@@ -32,7 +32,7 @@ class rxMaximumGain(baseTestCase):
         for chan in self.tcConf["channel"]:
             if self.status is st().ABORTING:
                 break
-            self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
+            RFSigGenOffset = self.Swtch.setSwitch(sw1 = chan) #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
             self.dut = dut(chan=chan, simulate=self.simulate) #dut drivers init
 
@@ -51,7 +51,7 @@ class rxMaximumGain(baseTestCase):
                 for power in self.tcConf["power"]:
                     if self.status is st().ABORTING:
                         break
-                    self.RFSigGen.power = power        #configure power
+                    self.RFSigGen.power = power + RFSigGenOffset["smb100a"] #configure power
 
 
                     for freq in self.tcConf["freq"]:

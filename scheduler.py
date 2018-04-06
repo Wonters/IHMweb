@@ -28,6 +28,9 @@ def main(args):
     #start loops
     for temp in schConf["temperature"]:
         #set temperature and wait
+        print("\n#########################")
+        print("Launch TestCases at {0}C".format(temp))
+        print("#########################\n")
 
         for tc in schConf["tc2play"]:
             exec "threadTc = {0}(temp={1}, simulate={2})".format(tc, temp, simulate)

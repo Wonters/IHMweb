@@ -91,45 +91,32 @@
   "PwrMeter":{
     "ip":"192.168.0.11"
   },
-  "skeletonTc":{
-    "channel":[1, 2, 3],
-    "voltage":[10, 11, 12, 14],
-    "power":[-100, -90]
-  },
   "scheduler":{
     "simulate":"True",
     "tc2play":["rxGainLNAs", "rxIQImbalance", "rxP1dBSaturation", "rxMaximumGain"],
-    "temperature":[25]
+    "temperature":[0, 25]
   },
   "rxGainLNAs":{
-    "channel":[1, 2, 3, 4],
-    "voltage":[12],
-    "power":[-70],
-    "freq":[902200000, 920800000],
-    "backoff":[0],
-    "bbFreq":20000
-  },
-  "tcTest":{
     "channel":[1, 2, 3, 4, 5, 6, 7, 8],
-    "voltage":[12],
+    "voltage":[11, 12],
     "power":[-70],
     "freq":[902200000, 920800000],
     "backoff":[0],
     "bbFreq":20000
   },
   "rxIQImbalance":{
-    "channel":[1, 2, 3, 4],
-    "voltage":[12],
+    "channel":[1, 2, 3, 4, 5, 6, 7, 8],
+    "voltage":[11, 12],
     "power":[-90],
-    "freq":[902200000],
+    "freq":[902200000, 920800000],
     "backoff":[0],
     "bbFreqLow":-94000,
     "bbFreqHigh":94000,
     "bbFreqStep":2000
   },
   "rxP1dBSaturation":{
-    "channel":[1, 2],
-    "voltage":[12],
+    "channel":[1, 2, 3, 4, 5, 6, 7, 8],
+    "voltage":[11, 12],
     "power":[-90],
     "freq":[902200000, 920800000],
     "backoff":[0],
@@ -138,8 +125,8 @@
     "bbFreqStep":2000
   },
   "rxMaximumGain":{
-    "channel":[1, 2],
-    "voltage":[12],
+    "channel":[1, 2, 3, 4, 5, 6, 7, 8],
+    "voltage":[11, 12],
     "power":[-90],
     "freq":[902200000, 920800000],
     "backoff":[0],

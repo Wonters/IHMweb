@@ -175,10 +175,11 @@ class DCPwr(object):
         if "?" in cmd:
             device = self._channelSel()
             device.write("%s\n" % cmd)
+            out = device.read_until("\n")[:-1]
             try:
-                return float(self.inst.read_until("\n")[:-1])
+                return float(out)
             except:
-                return self.inst.read_until("\n")[:-1]
+                return out
         else:
             self._channelSel().write("%s %s\n" % (cmd, int(value)))
             self._wait()

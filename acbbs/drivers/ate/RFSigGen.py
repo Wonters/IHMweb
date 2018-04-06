@@ -120,10 +120,11 @@ class RFSigGen(object):
         self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
         if "?" in cmd:
             self.inst.write("%s\n" % cmd)
+            out = self.inst.read_until("\n")[:-1]
             try:
-                return float(self.inst.read_until("\n")[:-1])
+                return float(out)
             except:
-                return self.inst.read_until("\n")[:-1]
+                return out
         elif value is None:
             self.inst.write("%s\n" % (cmd))
             self._wait()

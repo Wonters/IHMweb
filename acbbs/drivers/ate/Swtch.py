@@ -69,7 +69,7 @@ class Swtch(object):
             result = self.tn.read_until("Connected to line 2.\r\n", 1)
             if "Connected" not in result:
                 raise commutRackException(result)
-                self.tn.read_until("\r\n")
+            self.tn.read_until("\r\n")
 
     def __disconnect(self):
 		self.tn.write(chr(12))
@@ -84,13 +84,13 @@ class Swtch(object):
             self.tn.write("S\r\n")
             ret = self.tn.read_until("\r\n")
             if sw1 is None:
-                sw1 = ret[1]
+                sw1 = int(ret[1])
             if sw2 is None:
-                sw2 = ret[2]
+                sw2 = int(ret[2])
             if sw3 is None:
-                sw3 = ret[3]
+                sw3 = int(ret[3])
             if sw4 is None:
-                sw4 = ret[4]
+                sw4 = int(ret[4])
             self.tn.write('c' + str(sw1) + str(sw2) + str(sw3) + str(sw4) + '\r\n')
             ret = self.tn.read_until("\r\n")
             self.__disconnect()
@@ -106,6 +106,7 @@ class Swtch(object):
                 sw4 = 1
 
         #return correct offset depending of switch configurationFile
+
         if sw3 == 2:
             return {"noise-soure":self.swtchConf["loss"]["J{0}-J18".format(sw1+8)]}
         elif sw3 == 3 and sw4 == 1:
@@ -120,3 +121,5 @@ class Swtch(object):
         elif sw3 == 4 and sw4 == 2:
             return {"smbv100a":self.swtchConf["loss"]["J{0}-J3".format(sw1+8)],
                     "smb100a":self.swtchConf["loss"]["J{0}-J4".format(sw1+8)]}
+        else:
+            raise commutRackException()

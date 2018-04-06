@@ -529,7 +529,7 @@ class dut(object):
                                          ch=self.channel, log=self.logger)
                     else:
                         self.logger.debug("return = {0}".format(irr))
-                        return float(irr)
+                        return irr
                 except:
                     if nbOfRetry >= maxRetry:
                         self.logger.error("Bad BB frequency irrSin: 4 tries to receive the correct frequency", ch ="%s" % self.channel)

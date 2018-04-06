@@ -7,17 +7,10 @@ from acbbs.drivers.ate.Swtch import *
 
 class rxIQImbalance(baseTestCase):
     def __init__(self, temp, simulate):
-        baseTestCase.__init__(self, simulate)
+        baseTestCase.__init__(self, temp, simulate)
 
         #Tc version
         self.tcVersion = "1.0.0"
-
-        #store var
-        self.temp = temp
-        self.simulate = simulate
-
-        #get backoff
-        self.backoff = self.conf.getBackoff()[0]
 
         #calcul iterations number
         bbIter = 0

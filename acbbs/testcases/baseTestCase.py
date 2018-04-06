@@ -18,7 +18,7 @@ class st():
     FINISHED = "FINISHED"
 
 class baseTestCase(Thread):
-    def __init__(self, simulate):
+    def __init__(self, temp, simulate):
         #init thread
         Thread.__init__(self)
 
@@ -26,6 +26,10 @@ class baseTestCase(Thread):
         self.iteration = 0
         self.status = st().NOT_RUNNING
         self.iterationsNumber = 0.0
+
+        #store var
+        self.temp = temp
+        self.simulate = simulate
 
         #init logs
         self.logger = get_logger(self.__class__.__name__)
@@ -36,6 +40,9 @@ class baseTestCase(Thread):
         #get configuration testcases
         self.conf = configurationFile(file = self.__class__.__name__)
         self.tcConf = self.conf.getConfiguration()
+
+        #get backoff
+        self.backoff = self.conf.getBackoff()
 
         #get date key value
         self.date = time.time()

@@ -24,13 +24,6 @@ class configurationFile(object):
         self.logger.debug("Get configuration for \"{0}\"".format(self.file))
         return self.json_data[self.file]
 
-    def getTcIterationsNumber(self):
-        nbValue = 1
-        for key in self.json_data[self.file].values():
-            if type(key) is list:
-                nbValue *= len(key)
-        return nbValue
-
     def getBackoff(self):
         backoff = []
         bo = self.json_data[self.file]["backoff"]

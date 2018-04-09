@@ -20,7 +20,7 @@ class skeletonTc(baseTestCase):
         self.simulate = simulate
 
         #calcul iterations number
-        self.__iterationsNumber = self.conf.getTcIterationsNumber()
+        self.__iterationsNumber = 0
         self.logger.info("Number of iteration : {0}".format(self.__iterationsNumber))
 
     def run(self):

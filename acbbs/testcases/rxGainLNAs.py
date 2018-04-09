@@ -13,7 +13,7 @@ class rxGainLNAs(baseTestCase):
         self.tcVersion = "1.0.0"
 
         #calcul iterations number
-        self.iterationsNumber = self.conf.getTcIterationsNumber()
+        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["freq"]) * len(self.tcConf["backoff"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):

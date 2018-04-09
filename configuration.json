@@ -92,7 +92,7 @@
     "ip":"192.168.0.11"
   },
   "scheduler":{
-    "simulate":"False",
+    "simulate":"True",
     "tc2play":["rxGainLNAs", "rxIQImbalance", "rxP1dBSaturation", "rxMaximumGain"],
     "temperature":[25]
   },

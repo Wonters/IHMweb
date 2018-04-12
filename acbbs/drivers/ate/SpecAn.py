@@ -239,17 +239,17 @@ class SpecAn(object):
         """
         pass
 
-    def markerDelta(self, marker = 1, mode = None, status = True):
-        """
+    def markerDelta(self, marker = 1, mode = None, delta = None, status = True):
+        if self.simulate:
+            return 0.0
+        else:
+            if mode is not None and delta is not None:
+                self._readWrite("CALC:DELT{0}:MODE".format(marker), mode)
+                self._readWrite("CALC:DELT{0}:X".format(marker), delta)
 
+            self._readWrite("CALC:DELT{0}".format(marker), status)
 
-        @param int number :
-        @param string mode :
-        @param bool status :
-        @return  :
-        @author
-        """
-        pass
+            return float(self._readWrite("CALC:DELT{0}:Y?".format(marker)))
 
     def display(self, mode = None):
         """

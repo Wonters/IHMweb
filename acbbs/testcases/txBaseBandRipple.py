@@ -36,6 +36,9 @@ class txBaseBandRipple(baseTestCase):
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
             self.dut = dut(chan=chan, simulate=self.simulate) #dut drivers init
 
+            #configuration dut
+            self.dut.mode = "TX"
+
 
             for vdd in self.tcConf["voltage"]:
                 if self.status is st().ABORTING:
@@ -46,7 +49,7 @@ class txBaseBandRipple(baseTestCase):
                 for freq in self.tcConf["freq"]:
                     if self.status is st().ABORTING:
                         break
-                    self.dut.freqRx = freq
+                    self.dut.freqTx = freq
                     self.PwrMeter.freq = freq
 
 

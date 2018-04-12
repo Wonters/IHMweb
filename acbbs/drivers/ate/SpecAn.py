@@ -226,20 +226,16 @@ class SpecAn(object):
     def markerGet(self, marker = 1):
         return [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
 
-    def markerSearchLimit(self, marker = 1, dir = None, freq = None, status = 1):
-        """
+    def markerSearchLimit(self, marker = 1, freqleft = None, freqright = None, status = 1):
+        if not self.simulate:
+            if freqleft is not None and freqright is not None:
+                self._readWrite("CALC:MARK{0}:X:SLIM:LEFT".format(marker), freqleft)
+                self._readWrite("CALC:MARK{0}:X:SLIM:RIGHT".format(marker), freqright)
+
+            self._readWrite("CALC:MARK{0}:X:SLIM".format(marker), status)
 
 
-        @param int number :
-        @param string dir :
-        @param int freq :
-        @param bool status :
-        @return  :
-        @author
-        """
-        pass
-
-    def markerDelta(self, marker = 1, mode = None, delta = None, status = True):
+    def markerDelta(self, marker = 1, mode = None, delta = None, status = 1):
         if self.simulate:
             return 0.0
         else:

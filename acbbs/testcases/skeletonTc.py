@@ -10,47 +10,42 @@ from acbbs.drivers.ate.Swtch import *
 
 class skeletonTc(baseTestCase):
     def __init__(self, temp, simulate):
-        baseTestCase.__init__(self, simulate)
+        baseTestCase.__init__(self, temp, simulate)
 
         #Tc version
         self.tcVersion = "1.0.0"
 
-        #store var
-        self.temp = temp
-        self.simulate = simulate
-
         #calcul iterations number
-        self.__iterationsNumber = 0
-        self.logger.info("Number of iteration : {0}".format(self.__iterationsNumber))
+        self.iterationsNumber = 0
+        self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
-        #update __status
-        self.__status = st().RUNNING
+        #update status
+        self.status = st().RUNNING
 
         #start loop
         self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
         for chan in self.tcConf["channel"]:
-            if self.__status is st().ABORTING:
+            if self.status is st().ABORTING:
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
             self.dut = dut(chan=chan, simulate=self.simulate) #dut drivers init
 
-
             for vdd in self.tcConf["voltage"]:
-                if self.__status is st().ABORTING:
+                if self.status is st().ABORTING:
                     break
                 self.DCPwr.voltage = vdd               #configure voltage
 
 
                 for power in self.tcConf["power"]:
-                    if self.__status is st().ABORTING:
+                    if self.status is st().ABORTING:
                         break
                     self.RFSigGen.power = power        #configure power
 
 
                     #update progress
-                    self.__iteration += 1
+                    self.iteration += 1
 
                     #configure DUT
 
@@ -69,16 +64,18 @@ class skeletonTc(baseTestCase):
                     }
                     self.db.writeDataBase(self.__writeMeasure(conf, result))
 
-        #update __status
-        self.__status = st().FINISHED
+                    if self.simulate:
+                        time.sleep(0.02)
+
+        #update status
+        self.status = st().FINISHED
 
     def tcInit(self):
-        #update __status
-        self.__status = st().INIT
+        #update status
+        self.status = st().INIT
 
         #ate drivers init
         self.logger.debug("Init ate")
-        self.ClimCham = ClimCham(simulate=self.simulate)
         self.DCPwr = DCPwr(simulate=self.simulate)
         self.PwrMeter = PwrMeter(simulate=self.simulate)
         self.RFSigGen = RFSigGen(simulate=self.simulate)

@@ -41,9 +41,6 @@ class baseTestCase(Thread):
         self.conf = configurationFile(file = self.__class__.__name__)
         self.tcConf = self.conf.getConfiguration()
 
-        #get backoff
-        self.backoff = self.conf.getBackoff()
-
         #get date key value
         self.date = time.time()
 

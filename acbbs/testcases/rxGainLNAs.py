@@ -12,6 +12,9 @@ class rxGainLNAs(baseTestCase):
         #Tc version
         self.tcVersion = "1.0.0"
 
+        #get backoff
+        self.backoff = self.conf.getBackoff()
+
         #calcul iterations number
         self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["freq"]) * len(self.tcConf["backoff"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))

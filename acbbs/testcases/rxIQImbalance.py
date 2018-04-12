@@ -12,6 +12,9 @@ class rxIQImbalance(baseTestCase):
         #Tc version
         self.tcVersion = "1.0.0"
 
+        #get backoff
+        self.backoff = self.conf.getBackoff()
+
         #calcul iterations number
         bbIter = 0
         for i in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):

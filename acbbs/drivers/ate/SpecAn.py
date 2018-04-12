@@ -12,6 +12,8 @@ class SpecAn(object):
             return '0'
         def read(self, val, timeout=None):
             return '0'
+        def read_until(self, val):
+            return '0'
 
     def __init__(self, simulate = False):
 
@@ -201,8 +203,11 @@ class SpecAn(object):
         self._readWrite("INIT;*WAI")
 
     def markerPeakSearch(self, marker = 1):
-        self._readWrite("CALC:MARK{0}:MAX".format(marker))
-        return [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
+        if self.simulate:
+            return [0.0, 0.0]
+        else:
+            self._readWrite("CALC:MARK{0}:MAX".format(marker))
+            return [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
 
     def markerSearch(self, marker = 1, dir = None):
         if dir == 'r':

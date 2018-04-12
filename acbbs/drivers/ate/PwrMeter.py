@@ -12,6 +12,8 @@ class PwrMeter(object):
             return '0'
         def read(self, val, timeout=None):
             return '0'
+        def read_until(self, val):
+            return '0'
 
     def __init__(self, simulate = False):
 
@@ -96,7 +98,10 @@ class PwrMeter(object):
 
     @property
     def power(self):
-        return(float(self._readWrite("READ:PMET?")))
+        if self.simulate:
+            return 0.0
+        else:
+            return(float(self._readWrite("READ:PMET?")))
 
     def _wait(self):
         self.inst.write("*WAI\n")

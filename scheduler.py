@@ -2,19 +2,20 @@
 # coding=UTF-8
 
 from __future__ import print_function
+from etaprogress.progress import ProgressBar
 
-import argparse
+from acbbs.drivers.ate.ClimCham import *
+
 from acbbs.testcases.rxGainLNAs import *
 from acbbs.testcases.rxIQImbalance import *
 from acbbs.testcases.rxP1dBSaturation import *
 from acbbs.testcases.rxMaximumGain import *
 
-from acbbs.drivers.ate.ClimCham import *
+from acbbs.testcases.txBaseBandRipple import *
 
+import argparse
 import time
 import sys
-
-from etaprogress.progress import ProgressBar
 
 def main(args):
     #get configuration

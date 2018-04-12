@@ -11,6 +11,8 @@ import time
 
 import math
 
+import numpy as np
+
 from scipy.fftpack import fft
 from scipy.io import wavfile # get the api
 
@@ -338,76 +340,82 @@ class dut(object):
             self._launchPostJson("%s/radio/nxp?group=%s&command=%s&value=%s" % (self.address, group, index, value))
 
     def playBBSine(self, freqBBHz = 20000, timeSec = 1, atten = 10):
-        try:
-            freqList = float(freqBBHz)
-        except:
-            freqList = [float(x) for x in freqBBHz]
-        else:
-            freqList = [freqBBHz]
-        fs = 192000
-        t = np.arange(fs * float(timeSec))
-        samplesI = [0] * len(t)
-        samplesQ = [0] * len(t)
-        for freq in freqList:
-            samplesI += (np.cos(2 * np.pi * float(freq) / fs * t))
-            samplesQ += (np.sin(2 * np.pi * float(freq) / fs * t))
-        signalRow = np.empty((samplesI.size + samplesQ.size))
-        signalRow[0::2] = samplesI
-        signalRow[1::2] = samplesQ
-        signalRow /= np.max(signalRow)
-        signalRowF16_LE = (signalRow * 32766).astype(np.int16)
-        dither = np.random.random_integers(-1, 1, len(signalRowF16_LE))
-        signalRowF16_LE += dither
-        try:
-            self._launchPostData("%s/signal/playRaw?count=0&attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
-        except:
-            self._launchPost("%s/signal/stop" % self.address)
-            self._launchPostData("%s/signal/playRaw?attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
+        if not self.simulate:
+            try:
+                freqList = float(freqBBHz)
+            except:
+                freqList = [float(x) for x in freqBBHz]
+            else:
+                freqList = [freqBBHz]
+            fs = 192000
+            t = np.arange(fs * float(timeSec))
+            samplesI = [0] * len(t)
+            samplesQ = [0] * len(t)
+            for freq in freqList:
+                samplesI += (np.cos(2 * np.pi * float(freq) / fs * t))
+                samplesQ += (np.sin(2 * np.pi * float(freq) / fs * t))
+            signalRow = np.empty((samplesI.size + samplesQ.size))
+            signalRow[0::2] = samplesI
+            signalRow[1::2] = samplesQ
+            signalRow /= np.max(signalRow)
+            signalRowF16_LE = (signalRow * 32766).astype(np.int16)
+            dither = np.random.random_integers(-1, 1, len(signalRowF16_LE))
+            signalRowF16_LE += dither
+            try:
+                self._launchPostData("%s/signal/playRaw?count=0&attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
+            except:
+                self._launchPost("%s/signal/stop" % self.address)
+                self._launchPostData("%s/signal/playRaw?attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
+            time.sleep(0.2)
 
     def stopBBSine(self):
-        self._launchPost("%s/signal/stop" % (self.address))
-        time.sleep(0.01)
+        if not self.simulate:
+            self._launchPost("%s/signal/stop" % (self.address))
+            time.sleep(0.01)
 
     def playBBNoise(self, bwBBHz = 20000, timeSec = 1, atten = 10):
-        try:
-            BWList = float(bwBBHz)
-        except:
-            BWList = [float(x) for x in bwBBHz]
-        else:
-            BWList = [bwBBHz]
-        fs = 192000
-        t = np.arange(fs * float(timeSec))
-        noise = np.random.randn(len(t))
-        for bw in BWList:
-            fa = float(bw)
-        fBW = float(fa / fs)
-        noiseWindow = np.kaiser(len(t), 5)
-        noise /= np.max(noise)
-        if fBW < 0.95 :
-            # FILTRE BUTTER #
-            # b, a = signal.butter(10, float(fa / fs))
-            # noiseBw = signal.filtfilt(b, a, noise)
-            # FILTRE FIR #
-            # b = signal.firwin(128, float(fa / fs), window='nuttall')
-            # noiseBw = signal.convolve(noise,b)
-            # FILTRE IIR #
-            b, a = sig.iirdesign(fBW, (0.05 + fBW), 1, 120, analog=False, ftype='cheby2', output='ba')
-            noiseBW = sig.filtfilt(b, a, noise) * noiseWindow
-        else :
-            noiseBW = noise * noiseWindow
-        signalRow = np.empty((2 * noiseBW.size))
-        signalRow[0::2] = noiseBW
-        signalRow[1::2] = noiseBW
-        signalRowF16_LE = (signalRow * 32766).astype(np.int16)
-        try:
-            self._launchPostData("%s/signal/playRaw?count=1&attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
-        except:
-            self._launchPost("%s/signal/stop" % self.address)
-            self._launchPostData("%s/signal/playRaw?count=1&attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
+        if not self.simulate:
+            try:
+                BWList = float(bwBBHz)
+            except:
+                BWList = [float(x) for x in bwBBHz]
+            else:
+                BWList = [bwBBHz]
+            fs = 192000
+            t = np.arange(fs * float(timeSec))
+            noise = np.random.randn(len(t))
+            for bw in BWList:
+                fa = float(bw)
+            fBW = float(fa / fs)
+            noiseWindow = np.kaiser(len(t), 5)
+            noise /= np.max(noise)
+            if fBW < 0.95 :
+                # FILTRE BUTTER #
+                # b, a = signal.butter(10, float(fa / fs))
+                # noiseBw = signal.filtfilt(b, a, noise)
+                # FILTRE FIR #
+                # b = signal.firwin(128, float(fa / fs), window='nuttall')
+                # noiseBw = signal.convolve(noise,b)
+                # FILTRE IIR #
+                b, a = sig.iirdesign(fBW, (0.05 + fBW), 1, 120, analog=False, ftype='cheby2', output='ba')
+                noiseBW = sig.filtfilt(b, a, noise) * noiseWindow
+            else :
+                noiseBW = noise * noiseWindow
+            signalRow = np.empty((2 * noiseBW.size))
+            signalRow[0::2] = noiseBW
+            signalRow[1::2] = noiseBW
+            signalRowF16_LE = (signalRow * 32766).astype(np.int16)
+            try:
+                self._launchPostData("%s/signal/playRaw?count=1&attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
+            except:
+                self._launchPost("%s/signal/stop" % self.address)
+                self._launchPostData("%s/signal/playRaw?count=1&attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
+            time.sleep(0.2)
 
     def stopBBNoise(self):
-        self._launchPost("%s/signal/stop" % (self.address))
-        time.sleep(0.01)
+        if not self.simulate:
+            self._launchPost("%s/signal/stop" % (self.address))
+            time.sleep(0.01)
 
     def rssiSin(self, freqBBHz = 20000):
         if self.simulate:

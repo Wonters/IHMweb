@@ -89,7 +89,8 @@
     "ip":"192.168.0.11"
   },
   "PwrMeter":{
-    "ip":"192.168.0.11"
+    "ip":"192.168.0.11",
+    "avrCount":8
   },
   "scheduler":{
     "simulate":"False",
@@ -139,18 +140,18 @@
     "channel":[1],
     "voltage":[12],
     "freq":[902200000],
-    "bbFreqLow":20000,
-    "bbFreqHigh":20000,
+    "bbFreqLow":-96000,
+    "bbFreqHigh":96000,
     "bbFreqStep":2000,
-    "attLow":40,
-    "attHigh":40,
+    "attLow":30,
+    "attHigh":30,
     "attStep":1,
     "refLvlOffset":24,
     "inputAtt":45,
     "refLvl":42,
     "rbw":1000,
     "vbw":1000,
-    "span":100000,
+    "span":200000,
     "sweep":0.010,
     "countAverage":10
   },

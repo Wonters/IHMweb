@@ -111,6 +111,10 @@ class dut(object):
         else:
             self.logger.error("dut error, aborting...", ch = chan)
 
+    def __del__(self):
+        self.logger.info("dut off")
+        self.mode = "RX"
+
     def _launchCmd(self, uri, get = True, payloadJson = None, payloadData = None, stream = False, callback = None):
         if get:
             resp = self.session.get(uri, stream=stream, timeout=TIMEOUT)

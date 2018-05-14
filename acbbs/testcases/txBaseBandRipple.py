@@ -49,6 +49,7 @@ class txBaseBandRipple(baseTestCase):
                 for freq in self.tcConf["freq"]:
                     if self.status is st().ABORTING:
                         break
+                    self.SpecAn.freqCenter = freq
                     self.dut.freqTx = freq
                     self.PwrMeter.freq = freq
 
@@ -56,7 +57,7 @@ class txBaseBandRipple(baseTestCase):
                     for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
                         if self.status is st().ABORTING:
                             break
-                        self.SpecAn.freqCenter = freq + dfreq
+                        # self.SpecAn.freqCenter = freq + dfreq
 
 
                         for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
@@ -73,8 +74,9 @@ class txBaseBandRipple(baseTestCase):
                             self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
 
                             #start measurement
-                            resultMarker = self.SpecAn.markerPeakSearch()           #place marker
                             resultPower = self.PwrMeter.power
+                            self.SpecAn.markerSearchLimit(freqleft = freq + (dfreq - 3000) , freqright = freq + (dfreq + 3000))
+                            resultMarker = self.SpecAn.markerPeakSearch()           #place marker
 
                             #stop measurement
                             self.dut.stopBBSine()
@@ -118,7 +120,7 @@ class txBaseBandRipple(baseTestCase):
         self.SpecAn.refLvl = self.tcConf["refLvl"]
         self.SpecAn.rbw = self.tcConf["rbw"]
         self.SpecAn.vbw = self.tcConf["vbw"]
-        self.SpecAn.span = self.tcConf["span"]
+        self.SpecAn.freqSpan = self.tcConf["span"]
         self.SpecAn.sweep = self.tcConf["sweep"]
 
     def __writeMeasure(self, conf, result):

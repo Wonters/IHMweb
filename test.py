@@ -21,7 +21,7 @@ def test_PwrMeter():
     SpecAna.vbw = 10000
     SpecAna.sweep = 0.1
     SpecAna.limitLineHSet(power = -50)
-    SpecAna.averageCount(6)
+    SpecAna.averageCount(10)
     # SpecAna.limitSet(freq = [80000000, 940000000], power = [-20, -20])
     pwr = PwrMeter()
     pwr.freq = 1000000000

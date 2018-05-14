@@ -70,7 +70,7 @@ class SpecAn(object):
                 err = self._readWrite("SYST:ERR?")
                 if "No error" not in err:
                     errList.append(err)
-                    self.logger.debug("read error %s" % err)
+                    raise AcbbsError("read error %s" % err, log = self.logger)
             return errList
 
         else:
@@ -194,12 +194,13 @@ class SpecAn(object):
     def averageCount(self, value):
         self._readWrite("INIT:CONT OFF")
         self._readWrite("AVER:COUN", value)
-        self._readWrite("INIT;*WAI")
 
     def maxHoldCount(self, value):
         self._readWrite("INIT:CONT OFF")
         self._readWrite("SWE:COUN", value)
         self._readWrite("DISP:TRAC:MODE MAXH")
+
+    def runSingle(self):
         self._readWrite("INIT;*WAI")
 
     def markerPeakSearch(self, marker = 1):
@@ -228,12 +229,10 @@ class SpecAn(object):
 
     def markerSearchLimit(self, marker = 1, freqleft = None, freqright = None, status = 1):
         if not self.simulate:
+            self._readWrite("CALC:MARK{0}:X:SLIM".format(marker), status)
             if freqleft is not None and freqright is not None:
                 self._readWrite("CALC:MARK{0}:X:SLIM:LEFT".format(marker), freqleft)
                 self._readWrite("CALC:MARK{0}:X:SLIM:RIGHT".format(marker), freqright)
-
-            self._readWrite("CALC:MARK{0}:X:SLIM".format(marker), status)
-
 
     def markerDelta(self, marker = 1, mode = None, delta = None, status = 1):
         if self.simulate:

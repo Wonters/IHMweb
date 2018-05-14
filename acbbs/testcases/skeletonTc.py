@@ -77,9 +77,9 @@ class skeletonTc(baseTestCase):
         #ate drivers init
         self.logger.debug("Init ate")
         self.DCPwr = DCPwr(simulate=self.simulate)
-        self.PwrMeter = PwrMeter(simulate=self.simulate)
         self.RFSigGen = RFSigGen(simulate=self.simulate)
         self.SpecAn = SpecAn(simulate=self.simulate)
+        self.PwrMeter = PwrMeter(simulate=self.simulate)
         self.Swtch = Swtch(simulate=self.simulate)
         self.Swtch.setSwitch(sw2 = 4, sw3 = 3, sw4 = 1)
 

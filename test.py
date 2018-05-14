@@ -183,7 +183,7 @@ def test_fft():
     # plt.show()
 
 def main(args):
-    test_DCPwr()
+    # test_DCPwr()
     # test_RFSigGen()
     # test_Swtch()
     # test_dut()
@@ -192,7 +192,7 @@ def main(args):
     # test_fft()
     # test_rssiSinNumpy()
     # test_SpsecAna()
-    # test_PwrMeter()
+    test_PwrMeter()
     exit(0)
 
 if __name__ == '__main__':

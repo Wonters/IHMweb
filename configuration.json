@@ -94,7 +94,7 @@
   },
   "scheduler":{
     "simulate":"False",
-    "tc2play":["txBaseBandRipple"],
+    "tc2play":["txIQImbalance"],
     "tc2playBack":["rxGainLNAs", "rxIQImbalance", "rxP1dBSaturation", "rxMaximumGain", "txPowVsAtt", "txMaximumPower", "txLoLeakageBaseBand", "txIQImbalance", "txBaseBandRipple"],
     "temperature":[25]
   },
@@ -156,14 +156,14 @@
     "countAverage":10
   },
   "txIQImbalance":{
-    "channel":[1, 2, 3, 4],
+    "channel":[1],
     "voltage":[12],
     "freq":[902200000],
     "bbFreqLow":-96000,
     "bbFreqHigh":96000,
     "bbFreqStep":2000,
-    "attLow":8,
-    "attHigh":8,
+    "attLow":30,
+    "attHigh":30,
     "attStep":1,
     "refLvlOffset":24,
     "inputAtt":45,

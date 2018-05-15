@@ -110,7 +110,7 @@ class txMaximumPower(baseTestCase):
         self.SpecAn.refLvl = self.tcConf["refLvl"]
         self.SpecAn.rbw = self.tcConf["rbw"]
         self.SpecAn.vbw = self.tcConf["vbw"]
-        self.SpecAn.span = self.tcConf["span"]
+        self.SpecAn.freqSpan = self.tcConf["span"]
 
     def __writeMeasure(self, conf, result):
         return {

@@ -238,11 +238,10 @@ class SpecAn(object):
         if self.simulate:
             return 0.0
         else:
+            self._readWrite("CALC:DELT{0}".format(marker), status)
             if mode is not None and delta is not None:
                 self._readWrite("CALC:DELT{0}:MODE".format(marker), mode)
                 self._readWrite("CALC:DELT{0}:X".format(marker), delta)
-
-            self._readWrite("CALC:DELT{0}".format(marker), status)
 
             return float(self._readWrite("CALC:DELT{0}:Y?".format(marker)))
 

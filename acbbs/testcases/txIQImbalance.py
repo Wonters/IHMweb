@@ -34,7 +34,7 @@ class txIQImbalance(baseTestCase):
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
-            self.dut = dut(chan=chan, simulate=self.simulate) #dut drivers init
+            self.dut = dut(chan=chan, simulate=False)  #dut drivers init
 
             #configuration dut
             self.dut.mode = "TX"
@@ -56,7 +56,7 @@ class txIQImbalance(baseTestCase):
                     for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
                         if self.status is st().ABORTING:
                             break
-                        self.SpecAn.freqCenter = freq + dfreq
+                        self.SpecAn.freqCenter = freq
 
 
                         for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
@@ -73,9 +73,10 @@ class txIQImbalance(baseTestCase):
                             self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
 
                             #start measurement
+                            resultPower = self.PwrMeter.power
+                            self.SpecAn.markerSearchLimit(freqleft = freq + (dfreq - 3000) , freqright = freq + (dfreq + 3000))
                             resultMarkerPeak = self.SpecAn.markerPeakSearch()       #place marker
                             resultMarkerDelta = self.SpecAn.markerDelta(mode = "REL", delta = -2*dfreq)
-                            resultPower = self.PwrMeter.power
 
                             #stop measurement
                             self.dut.stopBBSine()
@@ -120,7 +121,7 @@ class txIQImbalance(baseTestCase):
         self.SpecAn.refLvl = self.tcConf["refLvl"]
         self.SpecAn.rbw = self.tcConf["rbw"]
         self.SpecAn.vbw = self.tcConf["vbw"]
-        self.SpecAn.span = self.tcConf["span"]
+        self.SpecAn.freqSpan = self.tcConf["span"]
         self.SpecAn.sweep = self.tcConf["sweep"]
 
     def __writeMeasure(self, conf, result):

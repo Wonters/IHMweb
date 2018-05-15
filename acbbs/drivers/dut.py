@@ -15,6 +15,7 @@ import numpy as np
 
 from scipy.fftpack import fft
 from scipy.io import wavfile # get the api
+from scipy import signal
 
 folder = os.path.dirname(os.path.abspath(__file__))
 #Set log class in connectionpool Class with the CustomLog class
@@ -113,6 +114,8 @@ class dut(object):
 
     def __del__(self):
         self.logger.info("dut off")
+        self.stopBBSine()
+        self.stopBBNoise()
         self.mode = "RX"
 
     def _launchCmd(self, uri, get = True, payloadJson = None, payloadData = None, stream = False, callback = None):
@@ -401,8 +404,8 @@ class dut(object):
                 # b = signal.firwin(128, float(fa / fs), window='nuttall')
                 # noiseBw = signal.convolve(noise,b)
                 # FILTRE IIR #
-                b, a = sig.iirdesign(fBW, (0.05 + fBW), 1, 120, analog=False, ftype='cheby2', output='ba')
-                noiseBW = sig.filtfilt(b, a, noise) * noiseWindow
+                b, a = signal.iirdesign(fBW, (0.05 + fBW), 1, 120, analog=False, ftype='cheby2', output='ba')
+                noiseBW = signal.filtfilt(b, a, noise) * noiseWindow
             else :
                 noiseBW = noise * noiseWindow
             signalRow = np.empty((2 * noiseBW.size))

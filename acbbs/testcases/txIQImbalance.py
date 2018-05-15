@@ -51,54 +51,61 @@ class txIQImbalance(baseTestCase):
                         break
                     self.dut.freqTx = freq
                     self.PwrMeter.freq = freq
+                    self.SpecAn.freqCenter = freq
+
+                    #measure of OL frequency
+                    OLfreq = self.SpecAn.markerPeakSearch()[0]
+
+                    #Center SA
+                    self.SpecAn.freqCenter = OLfreq
 
 
                     for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
                         if self.status is st().ABORTING:
                             break
-                        self.SpecAn.freqCenter = freq
 
 
-                        for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
-                            if self.status is st().ABORTING:
-                                break
+                        if dfreq is not 0:
+                            for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
+                                if self.status is st().ABORTING:
+                                    break
 
-                            #update progress
-                            self.iteration += 1
+                                #update progress
+                                self.iteration += 1
 
-                            #configure DUT
-                            self.dut.playBBSine(freqBBHz = dfreq, atten = att, timeSec = "10")
+                                #configure DUT
+                                self.dut.playBBSine(freqBBHz = dfreq, atten = att, timeSec = "10")
 
-                            #configure ATE
-                            self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
+                                #configure ATE
+                                self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
 
-                            #start measurement
-                            resultPower = self.PwrMeter.power
-                            self.SpecAn.markerSearchLimit(freqleft = freq + (dfreq - 3000) , freqright = freq + (dfreq + 3000))
-                            resultMarkerPeak = self.SpecAn.markerPeakSearch()       #place marker
-                            resultMarkerDelta = self.SpecAn.markerDelta(mode = "REL", delta = -2*dfreq)
+                                #start measurement
+                                resultPower = self.PwrMeter.power
+                                self.SpecAn.markerSearchLimit(freqleft = OLfreq + (dfreq - 3000) , freqright = OLfreq + (dfreq + 3000))
+                                resultMarkerPeak = self.SpecAn.markerPeakSearch()       #place marker
+                                resultMarkerDelta = self.SpecAn.markerDelta(mode = "REL", delta = -2*dfreq)
 
-                            #stop measurement
-                            self.dut.stopBBSine()
+                                #stop measurement
+                                self.dut.stopBBSine()
 
-                            #write measures
-                            conf = {
-                                "vdd":vdd,
-                                "freq":freq,
-                                "baseband":dfreq,
-                                "atten":att,
-                                "temp":self.temp
-                            }
-                            result = {
-                                "marker_x":resultMarkerPeak[0],
-                                "marker_y":resultMarkerPeak[1],
-                                "delta":resultMarkerDelta,
-                                "power":resultPower
-                            }
-                            self.db.writeDataBase(self.__writeMeasure(conf, result))
+                                #write measures
+                                conf = {
+                                    "vdd":vdd,
+                                    "freq":freq,
+                                    "baseband":dfreq,
+                                    "atten":att,
+                                    "temp":self.temp
+                                }
+                                result = {
+                                    "marker_x":resultMarkerPeak[0],
+                                    "marker_y":resultMarkerPeak[1],
+                                    "delta":resultMarkerDelta,
+                                    "power":resultPower
+                                }
+                                self.db.writeDataBase(self.__writeMeasure(conf, result))
 
-                            if self.simulate:
-                                time.sleep(0.02)
+                                if self.simulate:
+                                    time.sleep(0.02)
 
         #update status
         self.status = st().FINISHED

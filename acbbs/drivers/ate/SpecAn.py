@@ -228,6 +228,7 @@ class SpecAn(object):
         return [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
 
     def markerSearchLimit(self, marker = 1, freqleft = None, freqright = None, status = 1):
+        self.logger.debug("marker = {0}, freqleft = {1}, freqright = {2}, status = {3}".format(marker, freqleft, freqright, status))
         if not self.simulate:
             self._readWrite("CALC:MARK{0}:X:SLIM".format(marker), status)
             if freqleft is not None and freqright is not None:
@@ -315,6 +316,7 @@ class SpecAn(object):
         if "?" in cmd:
             self.inst.write("%s\n" % cmd)
             out = self.inst.read_until("\n")[:-1]
+            self.logger.debug("out : {0}".format(out))
             try:
                 return float(out)
             except:

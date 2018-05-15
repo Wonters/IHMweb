@@ -54,6 +54,8 @@ class txIQImbalance(baseTestCase):
                     self.SpecAn.freqCenter = freq
 
                     #measure of OL frequency
+                    self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
+                    self.SpecAn.runSingle()
                     OLfreq = self.SpecAn.markerPeakSearch()[0]
 
                     #Center SA

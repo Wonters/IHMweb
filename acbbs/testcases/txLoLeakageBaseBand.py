@@ -51,57 +51,64 @@ class txLoLeakageBaseBand(baseTestCase):
                         break
                     self.dut.freqTx = freq
                     self.PwrMeter.freq = freq
+                    self.SpecAn.freqCenter = freq
+
+                    #measure of OL frequency
+                    self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
+                    self.SpecAn.runSingle()
+                    OLfreq = self.SpecAn.markerPeakSearch()[0]
+
+                    #Center SA
+                    self.SpecAn.freqCenter = OLfreq
 
 
                     for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
                         if self.status is st().ABORTING:
                             break
-                        self.SpecAn.freqCenter = freq + dfreq
 
+                        if dfreq is not 0:
+                            for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
+                                if self.status is st().ABORTING:
+                                    break
 
-                        for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
-                            if self.status is st().ABORTING:
-                                break
+                                #update progress
+                                self.iteration += 1
 
-                            #update progress
-                            self.iteration += 1
+                                #configure DUT
+                                self.dut.playBBSine(freqBBHz = dfreq, atten = att, timeSec = "10")
 
-                            #configure DUT
-                            self.dut.playBBSine(freqBBHz = dfreq, atten = att, timeSec = "10")
+                                #configure ATE
+                                self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
+                                self.SpecAn.markerSearchLimit(marker = 1, freqleft = OLfreq - 1000, freqright = OLfreq + 1000) #place limit search
 
-                            #configure ATE
-                            self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
-                            self.SpecAn.markerSearchLimit(marker = 2, freqleft = freq-1000, freqright = freq+1000) #place limit search
+                                #start measurement
+                                # resultPower = self.PwrMeter.power
+                                resultPower = 0
+                                self.SpecAn.runSingle()
+                                resultMarkerPeak1 = self.SpecAn.markerPeakSearch(marker = 1)       #place marker
+                                resultCarrier = self.SpecAn.markerDelta(mode = "REL", delta = dfreq)
 
-                            #start measurement
-                            resultMarkerPeak1 = self.SpecAn.markerPeakSearch(marker = 1)       #place marker
-                            resultMarkerPeak2 = self.SpecAn.markerPeakSearch(marker = 2)       #place marker
-                            resultMarkerDelta = self.SpecAn.markerDelta(mode = "REL", delta = dfreq)
-                            resultPower = self.PwrMeter.power
+                                #stop measurement
+                                self.dut.stopBBSine()
 
-                            #stop measurement
-                            self.dut.stopBBSine()
+                                #write measures
+                                conf = {
+                                    "vdd":vdd,
+                                    "freq":freq,
+                                    "baseband":dfreq,
+                                    "atten":att,
+                                    "temp":self.temp
+                                }
+                                result = {
+                                    "OL_x":resultMarkerPeak1[0],
+                                    "OL_y":resultMarkerPeak1[1],
+                                    "Carrier_y":resultCarrier,
+                                    "power":resultPower
+                                }
+                                self.db.writeDataBase(self.__writeMeasure(conf, result))
 
-                            #write measures
-                            conf = {
-                                "vdd":vdd,
-                                "freq":freq,
-                                "baseband":dfreq,
-                                "atten":att,
-                                "temp":self.temp
-                            }
-                            result = {
-                                "marker_x1":resultMarkerPeak1[0],
-                                "marker_y1":resultMarkerPeak1[1],
-                                "marker_x2":resultMarkerPeak2[0],
-                                "marker_y2":resultMarkerPeak2[1],
-                                "delta":resultMarkerDelta,
-                                "power":resultPower
-                            }
-                            self.db.writeDataBase(self.__writeMeasure(conf, result))
-
-                            if self.simulate:
-                                time.sleep(0.02)
+                                if self.simulate:
+                                    time.sleep(0.02)
 
         #update status
         self.status = st().FINISHED

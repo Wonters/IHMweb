@@ -48,6 +48,15 @@ class txPowVsAtt(baseTestCase):
                         break
                     self.dut.freqTx = freq
                     self.PwrMeter.freq = freq + self.tcConf["bbFreq"]
+                    self.SpecAn.freqCenter = freq
+
+                    #measure of OL frequency
+                    self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
+                    self.SpecAn.runSingle()
+                    OLfreq = self.SpecAn.markerPeakSearch()[0]
+
+                    #Center SA
+                    self.SpecAn.freqCenter = OLfreq
 
 
                     for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
@@ -60,25 +69,17 @@ class txPowVsAtt(baseTestCase):
                         #configure DUT
                         self.dut.playBBSine(freqBBHz = self.tcConf["bbFreq"], atten = att, timeSec = "10")
 
-                        #mesure Tx power
                         #configure ATE
-                        self.SpecAn.freqCenter = freq + self.tcConf["bbFreq"]
-                        self.SpecAn.markerSearchLimit(marker = 1, freqleft = freq + self.tcConf["bbFreq"] - 1500, freqright = freq + self.tcConf["bbFreq"] + 1500) #place limit search
-                        self.SpecAn.averageCount(self.tcConf["countAverage"])              #get an average
-
-                        #start measurement
-                        resultMarkerPeak1 = self.SpecAn.markerPeakSearch(marker = 1)       #place marker
-                        resultPower1 = self.PwrMeter.power
-
-                        #mesure OlLeakage
-                        #configure ATE
-                        self.SpecAn.freqCenter = self.tcConf["OlLeakage"]
                         self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
-                        self.SpecAn.markerSearchLimit(marker = 2, freqleft = self.tcConf["OlLeakage"] - 1000, freqright = self.tcConf["OlLeakage"] + 1000) #place limit search
 
                         #start measurement
-                        resultMarkerPeak2 = self.SpecAn.markerPeakSearch(marker = 2)       #place marker
-                        resultPower2 = self.PwrMeter.power
+                        resultPower = self.PwrMeter.power
+                        #measure carrier
+                        self.SpecAn.markerSearchLimit(freqleft = OLfreq + (self.tcConf["bbFreq"] - self.tcConf["searchLimit"]) , freqright = OLfreq + (self.tcConf["bbFreq"] +  self.tcConf["searchLimit"]))
+                        resultCarrier = self.SpecAn.markerPeakSearch()       #place marker
+                        #measure OL
+                        self.SpecAn.markerSearchLimit(freqleft = OLfreq -  self.tcConf["searchLimit"] , freqright = OLfreq +  self.tcConf["searchLimit"])
+                        resultOL = self.SpecAn.markerPeakSearch()       #place marker
 
                         #stop measurement
                         self.dut.stopBBSine()
@@ -88,17 +89,15 @@ class txPowVsAtt(baseTestCase):
                             "vdd":vdd,
                             "freq":freq,
                             "baseband":self.tcConf["bbFreq"],
-                            "Olleakage":self.tcConf["OlLeakage"],
                             "atten":att,
                             "temp":self.temp
                         }
                         result = {
-                            "marker_x1":resultMarkerPeak1[0],
-                            "marker_y1":resultMarkerPeak1[1],
-                            "power1":resultPower1,
-                            "marker_xol":resultMarkerPeak2[0],
-                            "marker_yol":resultMarkerPeak2[1],
-                            "power2":resultPower2
+                            "carrier_x":resultCarrier[0],
+                            "carrier_y":resultCarrier[1],
+                            "ol_x":resultOL[0],
+                            "ol_y":resultOL[1],
+                            "power":resultPower
                         }
                         self.db.writeDataBase(self.__writeMeasure(conf, result))
 

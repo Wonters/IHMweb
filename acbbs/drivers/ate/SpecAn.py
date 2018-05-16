@@ -192,6 +192,7 @@ class SpecAn(object):
         self._readWrite("INIT:CONT ON")
 
     def averageCount(self, value):
+        self._readWrite("DISP:TRAC:MODE AVER")
         self._readWrite("INIT:CONT OFF")
         self._readWrite("AVER:COUN", value)
 

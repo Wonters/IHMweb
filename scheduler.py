@@ -11,11 +11,9 @@ from acbbs.testcases.rxIQImbalance import *
 from acbbs.testcases.rxP1dBSaturation import *
 from acbbs.testcases.rxMaximumGain import *
 
-from acbbs.testcases.txIQImbalance import *
-from acbbs.testcases.txBaseBandRipple import *
-from acbbs.testcases.txLoLeakageBaseBand import *
 from acbbs.testcases.txMaximumPower import *
 from acbbs.testcases.txPowVsAtt import *
+from acbbs.testcases.txExcursion import *
 
 import argparse
 import time

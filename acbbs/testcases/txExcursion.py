@@ -6,7 +6,7 @@ from acbbs.drivers.ate.SpecAn import *
 from acbbs.drivers.ate.PwrMeter import *
 from acbbs.drivers.ate.Swtch import *
 
-class txBaseBandRipple(baseTestCase):
+class txExcursion(baseTestCase):
     def __init__(self, temp, simulate):
         baseTestCase.__init__(self, temp, simulate)
 
@@ -14,13 +14,14 @@ class txBaseBandRipple(baseTestCase):
         self.tcVersion = "1.0.0"
 
         #calcul iterations number
-        bbIter = 0
+        self.bbFreq = []
         attIter = 0
         for i in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
-            bbIter += 1
+            if abs(i) >  self.tcConf["searchLimit"] * 2:
+                self.bbFreq.append(i)
         for i in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
             attIter += 1
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq"]) * bbIter * attIter
+        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq"]) * len(self.bbFreq) * attIter
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -34,7 +35,7 @@ class txBaseBandRipple(baseTestCase):
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
-            self.dut = dut(chan=chan, simulate=self.simulate) #dut drivers init
+            self.dut = dut(chan=chan, simulate=False)  #dut drivers init
 
             #configuration dut
             self.dut.mode = "TX"
@@ -49,15 +50,22 @@ class txBaseBandRipple(baseTestCase):
                 for freq in self.tcConf["freq"]:
                     if self.status is st().ABORTING:
                         break
-                    self.SpecAn.freqCenter = freq
                     self.dut.freqTx = freq
                     self.PwrMeter.freq = freq
+                    self.SpecAn.freqCenter = freq
+
+                    #measure of OL frequency
+                    self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
+                    self.SpecAn.runSingle()
+                    OLfreq = self.SpecAn.markerPeakSearch()[0]
+
+                    #Center SA
+                    self.SpecAn.freqCenter = OLfreq
 
 
-                    for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
+                    for dfreq in self.bbFreq:
                         if self.status is st().ABORTING:
                             break
-                        # self.SpecAn.freqCenter = freq + dfreq
 
 
                         for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
@@ -68,15 +76,20 @@ class txBaseBandRipple(baseTestCase):
                             self.iteration += 1
 
                             #configure DUT
-                            self.dut.playBBSine(freqBBHz = dfreq, atten = att, timeSec = "5")
+                            self.dut.playBBSine(freqBBHz = dfreq, atten = att, timeSec = "10")
 
                             #configure ATE
                             self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
 
                             #start measurement
                             resultPower = self.PwrMeter.power
-                            self.SpecAn.markerSearchLimit(freqleft = freq + (dfreq - 3000) , freqright = freq + (dfreq + 3000))
-                            resultMarker = self.SpecAn.markerPeakSearch()           #place marker
+                            #measure carrier and image
+                            self.SpecAn.markerSearchLimit(freqleft = OLfreq + (dfreq - self.tcConf["searchLimit"]) , freqright = OLfreq + (dfreq +  self.tcConf["searchLimit"]))
+                            resultCarrier = self.SpecAn.markerPeakSearch()       #place marker
+                            resultImage = self.SpecAn.markerDelta(mode = "REL", delta = -2*dfreq)
+                            #measure OL
+                            self.SpecAn.markerSearchLimit(freqleft = OLfreq -  self.tcConf["searchLimit"] , freqright = OLfreq +  self.tcConf["searchLimit"])
+                            resultOL = self.SpecAn.markerPeakSearch()       #place marker
 
                             #stop measurement
                             self.dut.stopBBSine()
@@ -90,8 +103,12 @@ class txBaseBandRipple(baseTestCase):
                                 "temp":self.temp
                             }
                             result = {
-                                "marker_x":resultMarker[0],
-                                "marker_y":resultMarker[1],
+                                "carrier_x":resultCarrier[0],
+                                "carrier_y":resultCarrier[1],
+                                "image_x":-2*dfreq,
+                                "image_y":resultImage,
+                                "ol_x":resultOL[0],
+                                "ol_y":resultOL[1],
                                 "power":resultPower
                             }
                             self.db.writeDataBase(self.__writeMeasure(conf, result))

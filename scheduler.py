@@ -15,6 +15,7 @@ from acbbs.testcases.txMaximumPower import *
 from acbbs.testcases.txPowVsAtt import *
 from acbbs.testcases.txExcursion import *
 from acbbs.testcases.txIM3Measurement import *
+from acbbs.testcases.txSpurious import *
 
 import argparse
 import time

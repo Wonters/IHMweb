@@ -138,7 +138,6 @@ class txExcursion(baseTestCase):
         self.SpecAn.rbw = self.tcConf["rbw"]
         self.SpecAn.vbw = self.tcConf["vbw"]
         self.SpecAn.freqSpan = self.tcConf["span"]
-        self.SpecAn.sweep = self.tcConf["sweep"]
 
     def __writeMeasure(self, conf, result):
         return {

@@ -14,6 +14,7 @@ from acbbs.testcases.rxMaximumGain import *
 from acbbs.testcases.txMaximumPower import *
 from acbbs.testcases.txPowVsAtt import *
 from acbbs.testcases.txExcursion import *
+from acbbs.testcases.txIM3Measurement import *
 
 import argparse
 import time

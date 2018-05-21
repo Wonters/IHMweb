@@ -82,6 +82,7 @@ class rxGainLNAs(baseTestCase):
                             #write measures
                             conf = {
                                 "vdd":vdd,
+                                "baseband":self.tcConf["bbFreq"],
                                 "power":power,
                                 "freq":freq,
                                 "temp":self.temp,

@@ -123,7 +123,8 @@ class txIM3Measurement(baseTestCase):
                             "F1F2_p":F1F2[1],
                             "F2F1_f":F2F1[0],
                             "F2F1_p":F2F1[1],
-                            "power":resultPower
+                            "power":resultPower,
+                            "ip3":F1[1]+(F1[1]-F2F1[1])/2
                         }
                         self.db.writeDataBase(self.__writeMeasure(conf, result))
 

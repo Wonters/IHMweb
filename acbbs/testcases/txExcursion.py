@@ -13,15 +13,22 @@ class txExcursion(baseTestCase):
         #Tc version
         self.tcVersion = "1.0.0"
 
+        #get att list
+        self.attlist = []
+        if len(self.tcConf["attlist"]) == 0:
+            for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
+                self.attlist.append(att)
+        else:
+            self.attlist = self.tcConf["attlist"]
+
+
         #calcul iterations number
         self.bbFreq = []
         attIter = 0
         for i in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
             if abs(i) >  self.tcConf["searchLimit"] * 2:
                 self.bbFreq.append(i)
-        for i in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
-            attIter += 1
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq"]) * len(self.bbFreq) * attIter
+        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq"]) * len(self.bbFreq) * len(self.attlist)
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -68,7 +75,7 @@ class txExcursion(baseTestCase):
                             break
 
 
-                        for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
+                        for att in self.attlist:
                             if self.status is st().ABORTING:
                                 break
 

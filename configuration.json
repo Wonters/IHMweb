@@ -157,6 +157,7 @@
     "vbw":1000,
     "span":200000,
     "countAverage":10,
+    "pwmeter":0,
     "searchLimit":1000
   },
   "txIM3Measurement":{
@@ -175,6 +176,7 @@
     "vbw":1000,
     "span":200000,
     "countAverage":10,
+    "pwmeter":0,
     "searchLimit":1000
   },
   "txSpurious":{
@@ -193,6 +195,7 @@
     "span":200000,
     "countAverage":10,
     "gabarit":"FCC-902",
+    "pwmeter":0,
     "searchLimit":1000
   },
   "txMaximumPower":{
@@ -209,6 +212,7 @@
     "rbw":1000000,
     "vbw":3000000,
     "span":5000000,
+    "pwmeter":0,
     "countAverage":50
   },
   "txPowVsAtt":{
@@ -227,6 +231,7 @@
     "span":50000,
     "sweep":0.02,
     "countAverage":10,
+    "pwmeter":0,
     "searchLimit":1000
   }
 }

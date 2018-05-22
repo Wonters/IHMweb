@@ -22,6 +22,9 @@ import time
 import sys
 
 def main(args):
+    #print date
+    print(time.strftime("%Y-%m-%d %H:%M:%S"))
+
     #get configuration
     conf = configurationFile(file = "scheduler")
     schConf = conf.getConfiguration()
@@ -41,6 +44,7 @@ def main(args):
             exec "threadTc = {0}(temp={1}, simulate={2})".format(tc, temp, simulate)
 
             print("Processing {0}".format(tc))
+            print(time.strftime("%Y-%m-%d %H:%M:%S"))
             bar = ProgressBar(threadTc.iterationsNumber, max_width=70)
 
             threadTc.tcInit()
@@ -63,6 +67,8 @@ def main(args):
                 threadTc.join()
                 sys.exit(0)
 
+    print("TestCases finished")
+    print(time.strftime("%Y-%m-%d %H:%M:%S"))
     exit(0)
 
 if __name__ == '__main__':

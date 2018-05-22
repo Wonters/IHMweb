@@ -121,14 +121,3 @@ class PwrMeter(object):
         else:
             self.inst.write("%s %s\n" % (cmd, value))
             self._wait()
-
-        err = self.errors
-        if len(err) != 0:
-            strerr = ""
-            for e in err:
-                strerr += "|%s| " % e
-            if value is None:
-                c = "%s" % (cmd.split("\n")[0])
-            else:
-                c = "%s %s" % (cmd.split("\n")[0], value)
-            self.logger.warning("Get following errors after \"{0}\" command : {1}".format(c, strerr))

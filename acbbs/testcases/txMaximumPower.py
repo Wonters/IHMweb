@@ -100,7 +100,10 @@ class txMaximumPower(baseTestCase):
         self.logger.debug("Init ate")
         self.DCPwr = DCPwr(simulate=self.simulate)
         self.SpecAn = SpecAn(simulate=self.simulate)
-        self.PwrMeter = PwrMeter(simulate=self.simulate)
+        if self.tcConf["pwmeter"] is 1:
+            self.PwrMeter = PwrMeter(simulate=self.simulate)
+        else:
+            self.PwrMeter = PwrMeter(simulate=True)
         self.Swtch = Swtch(simulate=self.simulate)
         self.Swtch.setSwitch(sw2 = 4, sw3 = 4, sw4 = 2)
 

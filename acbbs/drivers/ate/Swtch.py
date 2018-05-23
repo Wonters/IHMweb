@@ -54,26 +54,23 @@ class Swtch(object):
         #simulation state
         self.simulate = simulate
 
-        #if simulate
-        if not simulate:
+    def __connect(self):
+        if not self.simulate:
             self.tn = Telnet(self.swtchConf["ip"], 23, 2)
             self.tn.write('enable \r\n')
             self.tn.read_until("(enable)#")
-
-        else:
-            self.tn = self._simulate()
-
-    def __connect(self):
-        if not self.simulate:
             self.tn.write('connect line 2 \r\n')
             result = self.tn.read_until("Connected to line 2.\r\n", 1)
             if "Connected" not in result:
                 raise commutRackException(result)
             self.tn.read_until("\r\n")
+        else:
+            self.tn = self._simulate()
 
     def __disconnect(self):
-		self.tn.write(chr(12))
-		self.tn.read_until("#", 1)
+        self.tn.write(chr(12))
+        self.tn.read_until("#", 1)
+        self.tn.close()
 
     def setSwitch(self, sw1 = None, sw2 = None, sw3 = None, sw4 = None):
         if sw1 is not None:

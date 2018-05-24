@@ -95,7 +95,7 @@
   },
   "scheduler":{
     "simulate":"False",
-    "tc2play":["txIM3Measurement"],
+    "tc2play":["txPowVsAtt", "txMaximumPower", "txExcursion", "txIM3Measurement", "rxGainLNAs", "rxIQImbalance", "rxP1dBSaturation", "rxMaximumGain"],
     "tc2playBack":["txPowVsAtt", "txMaximumPower", "txExcursion", "txIM3Measurement", "rxGainLNAs", "rxIQImbalance", "rxP1dBSaturation", "rxMaximumGain"],
     "temperature":[25]
   },

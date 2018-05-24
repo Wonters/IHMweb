@@ -64,6 +64,7 @@ class txExcursion(baseTestCase):
                     #measure of OL frequency
                     self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
                     self.SpecAn.runSingle()
+                    self.SpecAn.markerSearchLimit(status = 0)
                     OLfreq = self.SpecAn.markerPeakSearch()[0]
 
                     #Center SA

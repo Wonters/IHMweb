@@ -15,7 +15,7 @@
   "dataBase":{
     "ip":"127.0.0.1",
     "port":"27017",
-    "database":"acbbs",
+    "database":"acbbs-t8",
     "maxSevSelDelay":"500"
   },
   "DCPwr":{
@@ -100,7 +100,7 @@
     "temperature":[25]
   },
   "rxGainLNAs":{
-    "channel":[1],
+    "channel":[1, 2],
     "voltage":[12],
     "power":[-70],
     "freq":[902200000],
@@ -108,7 +108,7 @@
     "bbFreq":20000
   },
   "rxIQImbalance":{
-    "channel":[1],
+    "channel":[1, 2],
     "voltage":[12],
     "power":[-90],
     "freq":[902200000],
@@ -118,19 +118,19 @@
     "bbFreqStep":2000
   },
   "rxP1dBSaturation":{
-    "channel":[1],
+    "channel":[1, 2],
     "voltage":[12],
     "levelstart":-50,
     "levelstop":-20,
     "levelstep":4,
     "freq":[902200000],
     "backoff":0,
-    "bbFreqLow":-94000,
-    "bbFreqHigh":94000,
+    "bbFreqLow":20000,
+    "bbFreqHigh":20000,
     "bbFreqStep":1000
   },
   "rxMaximumGain":{
-    "channel":[1],
+    "channel":[1, 2],
     "voltage":[12],
     "power":[-90, -60],
     "freq":[902200000],
@@ -140,7 +140,7 @@
     "bbFreqStep":2000
   },
   "txExcursion":{
-    "channel":[1],
+    "channel":[1, 2],
     "voltage":[12],
     "freq":[905200000],
     "bbFreqLow":-96000,
@@ -161,7 +161,7 @@
     "searchLimit":1000
   },
   "txIM3Measurement":{
-    "channel":[1],
+    "channel":[1, 2],
     "voltage":[12],
     "freq":[905200000],
     "bbFreq1":21300,
@@ -180,7 +180,7 @@
     "searchLimit":1000
   },
   "txSpurious":{
-    "channel":[1],
+    "channel":[1, 2],
     "voltage":[12],
     "freq":[905200000],
     "bbFreq":20000,
@@ -199,7 +199,7 @@
     "searchLimit":1000
   },
   "txMaximumPower":{
-    "channel":[1],
+    "channel":[1, 2],
     "voltage":[12],
     "freq":[905200000],
     "bbFreq":20000,
@@ -216,7 +216,7 @@
     "countAverage":50
   },
   "txPowVsAtt":{
-    "channel":[1],
+    "channel":[1, 2],
     "voltage":[12],
     "freq":[905200000],
     "bbFreq":20000,

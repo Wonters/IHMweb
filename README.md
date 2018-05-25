@@ -13,6 +13,7 @@ This package is a library that provides functions to drive automated test **equi
 	```sh
 	$ python setup.py install
 	```
+  
 - Add your user in specific group :
 	```sh
 	$ sudo usermod -a -G syslog user

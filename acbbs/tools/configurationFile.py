@@ -7,12 +7,21 @@ from os import getcwd
 from os.path import basename, splitext, realpath
 
 class configurationFile(object):
-    def __init__(self, file = None, simulate = False):
+    dut = None
+    def __init__(self, file = None, simulate = False, taphw = None):
         self.logger = get_logger(splitext(basename(__file__))[0])
         if simulate :
             self.logger.debug("Init configurationFile in Simulate")
         else :
             self.logger.debug("Init configurationFile")
+
+        if configurationFile.dut is None and taphw is None:
+            raise AcbbsError("Errors: no DUT Hw defined")
+        elif configurationFile.dut is not None and taphw is not None:
+            raise AcbbsError("Errors: DUT Hw already defined")
+        elif configurationFile.dut is None and taphw is not None:
+            configurationFile.dut = taphw
+
         self.file = file
         self.__openConfigurationFile()
 
@@ -40,5 +49,5 @@ class configurationFile(object):
 
     def __openConfigurationFile(self):
         path = realpath(__file__).split(self.__class__.__name__)[0]
-        with open("{0}/../../configuration.json".format(path)) as json_file:
+        with open("{0}/../../configuration_{1}.json".format(path, configurationFile.dut)) as json_file:
             self.json_data = json.load(json_file)

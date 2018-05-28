@@ -1,6 +1,6 @@
 {
   "global":{
-    "version":"1.0.0",
+    "version":"0.0.4",
     "backoff":[
       ["BO Step 0", "LNA", "LNA", "LNA"],
       ["BO Step 2", "LNA", "LNA", "ATTEN"],

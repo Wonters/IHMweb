@@ -94,7 +94,7 @@
     "avrCount":8
   },
   "scheduler":{
-    "simulate":"False",
+    "simulate":"True",
     "tc2play":["txPowVsAtt", "txMaximumPower", "txExcursion", "txIM3Measurement", "rxGainLNAs", "rxIQImbalance", "rxP1dBSaturation", "rxMaximumGain"],
     "tc2playBack":["txPowVsAtt", "txMaximumPower", "txExcursion", "txIM3Measurement", "rxGainLNAs", "rxIQImbalance", "rxP1dBSaturation", "rxMaximumGain"],
     "temperature":[25]

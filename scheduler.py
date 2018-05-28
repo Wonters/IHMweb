@@ -26,7 +26,7 @@ def main(args):
     print(time.strftime("%Y-%m-%d %H:%M:%S"))
 
     #get configuration
-    conf = configurationFile(file = "scheduler")
+    conf = configurationFile(file = "scheduler", taphw = args.dut)
     schConf = conf.getConfiguration()
     if schConf["simulate"] == "True":
         simulate = True
@@ -72,9 +72,21 @@ def main(args):
     exit(0)
 
 if __name__ == '__main__':
+    taplist = ["TAPMV3.0", "TAPMV4.0"]
     parser = argparse.ArgumentParser(
         description = "Scheduler for acbbs",
         fromfile_prefix_chars = '@' )
+    parser.add_argument(
+        "-d",
+        "--dut",
+        help="set type of DUT {0}".format(taplist),
+        required = True)
     args = parser.parse_args()
+    if args.dut not in taplist:
+        print("selected tap not available.")
+        print("available tap are :")
+        for tap in taplist:
+            print(tap)
+        exit(0)
 
     main(args)

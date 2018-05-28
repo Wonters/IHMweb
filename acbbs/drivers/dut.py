@@ -28,7 +28,7 @@ TIMEOUT = 2
 class Dut(object):
     class _simulate(object):
         class post(object):
-            def __init__(self, uri, json=None, timeout=None):
+            def __init__(self, uri, json=None, timeout=None, auth=None):
                 pass
 
             @property
@@ -36,7 +36,7 @@ class Dut(object):
                 return 200
 
         class get(object):
-            def __init__(self, uri, stream=None, timeout=None):
+            def __init__(self, uri, auth=None, stream=None, timeout=None):
                 pass
 
             def iter_content(chunk_size=None):
@@ -120,7 +120,7 @@ class Dut(object):
 
     def _launchCmd(self, uri, get = True, payloadJson = None, payloadData = None, stream = False, callback = None):
         if get:
-            resp = self.session.get(uri, stream=stream, timeout=TIMEOUT)
+            resp = self.session.get(uri, auth=('factory', 'factory'), stream=stream, timeout=TIMEOUT)
             self.logger.debug("GET %s %s" % (uri , resp.status_code), ch=self.channel)
             if stream :
                 if "signal/record" not in uri:
@@ -154,11 +154,11 @@ class Dut(object):
 
         else:
             if payloadJson:
-                resp = self.session.post(uri, json=payloadJson, timeout=TIMEOUT)
+                resp = self.session.post(uri, json=payloadJson, timeout=TIMEOUT, auth=('factory', 'factory'))
             elif payloadData:
-                resp = self.session.post(uri, data=payloadData, headers={'Content-Type': 'application/octet-stream'}, timeout=TIMEOUT)
+                resp = self.session.post(uri, data=payloadData, headers={'Content-Type': 'application/octet-stream'}, timeout=TIMEOUT, auth=('factory', 'factory'))
             else:
-                resp = self.session.post(uri, timeout=TIMEOUT)
+                resp = self.session.post(uri, timeout=TIMEOUT, auth=('factory', 'factory'))
             self.logger.debug("POST %s %s" % (uri , resp.status_code), ch=self.channel)
             if resp.status_code not in [200, 204]:
                 if resp.status_code == 500:
@@ -272,17 +272,23 @@ class Dut(object):
 
     @property
     def allMeasureAvailable(self):
-        return self._launchGetJson("%s/measures" % (self.address))['measures']
+        listAvailable = self._launchGetJson("%s/measures" % (self.address))['measures']
+        if self.tapHw == "TAPMV4.0":
+            listAvailable.append('txok')
+        return listAvailable
 
     @property
     def allMeasure(self):
         if self.simulate:
             return {}
         else:
-            allMeasuresList = self.allMeasureAvailable
+            allMeasuresList = self._launchGetJson("%s/measures" % (self.address))['measures']
             allValueList = []
             for measure in allMeasuresList:
                 allValueList.append(self._launchGetJson("%s/measures/%s" % (self.address, measure))[measure])
+            if self.tapHw == "TAPMV4.0":
+                allMeasuresList.append('txok')
+                allValueList.append(self._launchGetJson("%s/radio/txok" % (self.address))['txok'])
             return dict(zip(allMeasuresList, allValueList))
 
     @property
@@ -292,6 +298,15 @@ class Dut(object):
     @freqTx.setter
     def freqTx(self, value):
         self.logger.info("Change tx to %s" % str(value), ch = self.channel)
+        if self.tapHw == "TAPMV4.0":
+            if value in [868130000, 869525000]:
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=1" % (self.address, mode.lower()))
+            if value in [902200000, 905800000]:
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=2" % (self.address, mode.lower()))
+            if value in [923200000, 922200000]:
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=3" % (self.address, mode.lower()))
+            if value in [920800000, 922300000]:
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=4" % (self.address, mode.lower()))
         self._launchPostJson("%s/radio/freq/tx" % self.address, {"tx":value})
 
     @property
@@ -301,6 +316,15 @@ class Dut(object):
     @freqRx.setter
     def freqRx(self, value):
         self.logger.info("Change rx to %s" % str(value), ch = self.channel)
+        if self.tapHw == "TAPMV4.0":
+            if value in [868130000, 869525000]:
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=1" % (self.address, mode.lower()))
+            if value in [902200000, 905800000]:
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=2" % (self.address, mode.lower()))
+            if value in [923200000, 922200000]:
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=3" % (self.address, mode.lower()))
+            if value in [920800000, 922300000]:
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=4" % (self.address, mode.lower()))
         self._launchPostJson("%s/radio/freq/rx" % self.address, {"rx":value})
 
     @property
@@ -314,32 +338,46 @@ class Dut(object):
 
     @property
     def preamp0(self):
-        return self._launchGetJson("%s/radio/preamp?id=0" % (self.address))['preamp']
+        if self.tapHw != "TAPMV4.0":
+            return self._launchGetJson("%s/radio/preamp?id=0" % (self.address))['preamp']
+        else:
+            return "NA"
 
     @preamp0.setter
     def preamp0(self, value):
-        self.logger.info("Change preamp0 to %s" % value, ch = self.channel )
-        self._launchPostJson("%s/radio/preamp?id=0" % (self.address), {'preamp':value})
+        if self.tapHw != "TAPMV4.0":
+            self.logger.info("Change preamp0 to %s" % value, ch = self.channel )
+            self._launchPostJson("%s/radio/preamp?id=0" % (self.address), {'preamp':value})
 
     @property
     def preamp1(self):
-        return self._launchGetJson("%s/radio/preamp?id=1" % (self.address))['preamp']
+        if self.tapHw != "TAPMV4.0":
+            return self._launchGetJson("%s/radio/preamp?id=1" % (self.address))['preamp']
+        else:
+            return "NA"
 
     @preamp1.setter
     def preamp1(self, value):
-        self.logger.info("Change preamp1 to %s" % value, ch = self.channel )
-        self._launchPostJson("%s/radio/preamp?id=1" % (self.address), {'preamp':value})
+        if self.tapHw != "TAPMV4.0":
+            self.logger.info("Change preamp1 to %s" % value, ch = self.channel )
+            self._launchPostJson("%s/radio/preamp?id=1" % (self.address), {'preamp':value})
 
     @property
     def preamp2(self):
-        return self._launchGetJson("%s/radio/preamp?id=2" % (self.address))['preamp']
+        if self.tapHw != "TAPMV4.0":
+            return self._launchGetJson("%s/radio/preamp?id=2" % (self.address))['preamp']
+        else:
+            return "NA"
 
     @preamp2.setter
     def preamp2(self, value):
-        self.logger.info("Change preamp2 to %s" % value, ch = self.channel )
-        self._launchPostJson("%s/radio/preamp?id=2" % (self.address), {'preamp':value})
+        if self.tapHw != "TAPMV4.0":
+            self.logger.info("Change preamp2 to %s" % value, ch = self.channel )
+            self._launchPostJson("%s/radio/preamp?id=2" % (self.address), {'preamp':value})
 
     def nxpRegister(self, group = 0, index = 0, value=None):
+        if self.tapHw != "TAPMV4.0":
+            return None
         if value is None:
             return self._launchGetJson("%s/radio/nxp?group=%s&command=%s" % (self.address, group, index))['value']
         else:
@@ -354,7 +392,14 @@ class Dut(object):
                 freqList = [float(x) for x in freqBBHz]
             else:
                 freqList = [freqBBHz]
-            fs = 192000
+            if self.tapHw == "TAPMV4.0":
+                timeSec = "7"
+                if atten < 8:
+                    atten = 8
+                atten = -atten
+                fs = 280000
+            else:
+                fs = 192000
             t = np.arange(fs * float(timeSec))
             samplesI = [0] * len(t)
             samplesQ = [0] * len(t)
@@ -369,7 +414,7 @@ class Dut(object):
             dither = np.random.random_integers(-1, 1, len(signalRowF16_LE))
             signalRowF16_LE += dither
             try:
-                self._launchPostData("%s/signal/playRaw?count=0&attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
+                self._launchPostData("%s/signal/playRaw?attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
             except:
                 self._launchPost("%s/signal/stop" % self.address)
                 self._launchPostData("%s/signal/playRaw?attenLevel=%s" % (self.address, atten), signalRowF16_LE.tostring())
@@ -388,7 +433,14 @@ class Dut(object):
                 BWList = [float(x) for x in bwBBHz]
             else:
                 BWList = [bwBBHz]
-            fs = 192000
+            if self.tapHw == "TAPMV4.0":
+                if atten < 8:
+                    atten = 8
+                timeSec = "7"
+                atten = -atten
+                fs = 280000
+            else:
+                fs = 192000
             t = np.arange(fs * float(timeSec))
             noise = np.random.randn(len(t))
             for bw in BWList:
@@ -433,7 +485,7 @@ class Dut(object):
             status = False
             while status is False:
                 try:
-                    self.logger.debug("Get rssiSin at freqBBHz = {0}".format(freqBBHz))
+                    resp = self.session.get("%s/signal/record" % (self.address), auth=('factory', 'factory'), stream=True, timeout=3)
                     resp = self.session.get("%s/signal/record" % (self.address), stream=True, timeout=3)
                     if resp.status_code not in [200, 204]:
                         if resp.status_code == 500:
@@ -444,17 +496,20 @@ class Dut(object):
                     p = subprocess.Popen("%s/toolIQ -f %s --int-gain 0 --ext-gain 0" % (os.path.dirname(os.path.abspath(__file__)), freqBBHz), stdout=subprocess.PIPE, stdin=subprocess.PIPE, shell=True)
                     pout = p.stdout
                     acquire = True
-                    for chunk in resp.iter_content(chunk_size=1024):
-                        if acquire :
-                            try:
-                                p.stdin.write(chunk)
-                            except:
-                                self.stopBBSine()
-                                acquire = False
+                    try:
+                        for chunk in resp.iter_content(chunk_size=1024):
+                            if acquire :
+                                try:
+                                    p.stdin.write(chunk)
+                                except:
+                                    self.stopBBSine()
+                                    acquire = False
+                    except:
+                        self.stopBBSine()
                     result = pout.readlines()[2].split(" ")
                     rssi = result[17]
                     freq = float(result[14])
-                    if ((freq > (int(freqBBHz) + 1000)) or (freq < (int(freqBBHz) - 1000))):
+                    if ((freq > (int(freqBBHz) + 2000)) or (freq < (int(freqBBHz) - 2000))):
                         raise AcbbsError("ToolIQ bad freqBBHz freq read: %s expected: %s" % (freq, int(freqBBHz)),
                                          ch=self.channel, log=self.logger)
                     else:
@@ -519,7 +574,7 @@ class Dut(object):
             while status is False:
                 try:
                     self.logger.debug("Get irrSin at freqBBHz = {0}".format(freqBBHz))
-                    resp = self.session.get("%s/signal/record" % (self.address), stream=True, timeout=3)
+                    resp = self.session.get("%s/signal/record" % (self.address), auth=('factory', 'factory'), stream=True, timeout=3)
                     if resp.status_code not in [200, 204]:
                         if resp.status_code == 500:
                             raise AcbbsError("Errors To record signal Dump %s" % self.dumpErrors(),
@@ -529,17 +584,20 @@ class Dut(object):
                     p = subprocess.Popen("%s/toolIQ -f %s --int-gain 0 --ext-gain 0" % (os.path.dirname(os.path.abspath(__file__)), freqBBHz), stdout=subprocess.PIPE, stdin=subprocess.PIPE, shell=True)
                     pout = p.stdout
                     acquire = True
-                    for chunk in resp.iter_content(chunk_size=1024):
-                        if acquire :
-                            try:
-                                p.stdin.write(chunk)
-                            except:
-                                self.stopBBSine()
-                                acquire = False
+                    try:
+                        for chunk in resp.iter_content(chunk_size=1024):
+                            if acquire :
+                                try:
+                                    p.stdin.write(chunk)
+                                except:
+                                    self.stopBBSine()
+                                    acquire = False
+                    except:
+                        self.stopBBSine()
                     result = pout.readlines()[2].split(" ")
                     irr = {'dGain': float(result[7]), 'dPhase': float(result[9]), 'IRR': float(result[11])}
                     freq = float(result[14])
-                    if ((freq > (int(freqBBHz) + 1000)) or (freq < (int(freqBBHz) - 1000))):
+                    if ((freq > (int(freqBBHz) + 2000)) or (freq < (int(freqBBHz) - 2000))):
                         raise AcbbsError("ToolIQ bad freqBBHz freq read: %s expected: %s" % (freq, int(freqBBHz)),
                                          ch=self.channel, log=self.logger)
                     else:
@@ -558,12 +616,8 @@ class Dut(object):
                     status = True
 
     def _dumpErrors(self):
-        errors = []
-        while True:
-            resp = self.session.get("%s/radio/nxp?group=0&command=2" % (self.address)).json()['value']
-            if resp is 0:
-                break
-            errors.append(hex(int(resp)))
+        errors  = self.session.get("%s/radio/fwErrors" % (self.address), auth=('factory', 'factory')).json()['errors']
         if not errors:
             return None
+        self._launchPost("%s/radio/clearFwErrors" % self.address)
         return errors

@@ -30,7 +30,7 @@ class skeletonTc(baseTestCase):
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
-            self.dut = dut(chan=chan, simulate=self.simulate) #dut drivers init
+            self.dut = Dut(chan=chan, simulate=self.simulate) #dut drivers init
 
             for vdd in self.tcConf["voltage"]:
                 if self.status is st().ABORTING:

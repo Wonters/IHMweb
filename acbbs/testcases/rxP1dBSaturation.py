@@ -36,7 +36,7 @@ class rxP1dBSaturation(baseTestCase):
                 break
             RFSigGenOffset = self.Swtch.setSwitch(sw1 = chan) #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
-            self.dut = dut(chan=chan, simulate=self.simulate) #dut drivers init
+            self.dut = Dut(chan=chan, simulate=self.simulate) #dut drivers init
 
             #configuration dut
             self.dut.mode = "RX"

@@ -31,7 +31,7 @@ class txSpurious(baseTestCase):
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
-            self.dut = dut(chan=chan, simulate=True)  #dut drivers init
+            self.dut = Dut(chan=chan, simulate=True)  #dut drivers init
 
             #configuration dut
             self.dut.mode = "TX"

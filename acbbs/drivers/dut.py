@@ -25,7 +25,7 @@ requests.packages.urllib3.connectionpool.log.name = "connectionPool"
 
 TIMEOUT = 2
 
-class dut(object):
+class Dut(object):
     class _simulate(object):
         class post(object):
             def __init__(self, uri, json=None, timeout=None):

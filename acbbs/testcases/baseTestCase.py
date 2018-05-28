@@ -3,7 +3,7 @@
 from acbbs.tools.dataBase import *
 from acbbs.tools.log import *
 from acbbs.tools.configurationFile import *
-from acbbs.drivers.dut import *
+from acbbs.drivers.dut import Dut
 
 from threading import Thread
 

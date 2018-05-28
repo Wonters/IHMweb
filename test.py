@@ -8,7 +8,7 @@ from acbbs.drivers.ate.PwrMeter import *
 from acbbs.drivers.ate.RFSigGen import *
 from acbbs.drivers.ate.SpecAn import *
 from acbbs.drivers.ate.Swtch import *
-from acbbs.drivers.dut import *
+from acbbs.drivers.dut import Dut
 
 import time
 
@@ -96,13 +96,13 @@ def test_Swtch():
 def test_dut():
     ### dut test ###
     for i in range(1, 9):
-        dutClass = dut(chan=i)
+        dutClass = Dut(chan=i)
         print("Channel {0} -> id : {1}".format(i, dutClass.tapId))
     ################
 
 def test_rssiSin():
     ### dut test ###
-    dutClass = dut(chan=1)
+    dutClass = Dut(chan=1)
     dutClass.mode = "RX"
     dutClass.preamp0 = "LNA"
     dutClass.preamp1 = "LNA"
@@ -123,7 +123,7 @@ def test_rssiSin():
 
 def test_rssiSinNumpy():
     ### dut test ###
-    dutClass = dut(chan=1)
+    dutClass = Dut(chan=1)
     dutClass.mode = "RX"
     dutClass.preamp0 = "LNA"
     dutClass.preamp1 = "LNA"
@@ -143,7 +143,7 @@ def test_rssiSinNumpy():
 
 def test_irrSin():
     ### dut test ###
-    dutClass = dut(chan=1)
+    dutClass = Dut(chan=1)
     dutClass.mode = "RX"
     dutClass.preamp0 = "LNA"
     dutClass.preamp1 = "LNA"

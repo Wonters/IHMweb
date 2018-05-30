@@ -65,37 +65,35 @@ class Dut(object):
         def __init__(self):
             pass
 
-    def __init__(self , chan=None, simulate = False):
+    def __init__(self , chan=None, ip=None, simulate = False):
         '''
         Constructor
         '''
 
+        if ip is None and chan is None:
+            raise AcbbsError("Ip or Channel mandatory", log=self.logger)
         #init logs
         self.logger = get_logger(self.__class__.__name__)
 
         #simulation state
         self.simulate = simulate
 
-        #get configuration
-        self.conf = configurationFile(file = self.__class__.__name__)
-        self.dutConf = self.conf.getConfiguration()
-
-        if chan is None:
-            raise AcbbsError("Channel mandatory", log=self.logger)
-
-        self.channel = chan
-        self.ip = self.dutConf["ip"] % self.channel
-
         #case of simulate
         if simulate :
-            self.logger.info("Init dut in Simulate", ch=self.channel)
+            self.logger.info("Init dut in Simulate")
             self.session = self._simulate()
 
         else :
             self.logger.info("Init dut")
             self.session = requests.Session()
-
-        self.address = "http://%s/factory" % self.ip
+        
+        if chan is not None:
+            self.channel = chan
+            self.address = "http://192.168.%s.128/factory" % str(chan)
+        if ip is not None:
+            self.channel = ip
+            self.address = "http://%s/factory" % ip
+        
         self.logger.info("New RadioDevice %s" % (self.address), ch=self.channel)
 
         self.tapId_var = None
@@ -110,7 +108,7 @@ class Dut(object):
         if self.connected:
             self.logger.info("DUT at {0} well connected".format(chan), ch = chan)
         else:
-            self.logger.error("dut error, aborting...", ch = chan)
+            raise AcbbsError("Connection Errors", ch=self.channel, log=self.logger)
 
     def __del__(self):
         self.logger.info("dut off")
@@ -300,13 +298,13 @@ class Dut(object):
         self.logger.info("Change tx to %s" % str(value), ch = self.channel)
         if self.tapHw == "TAPMV4.0":
             if value in [868130000, 869525000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=1" % (self.address, mode.lower()))
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=1" % (self.address, self.mode.lower()))
             if value in [902200000, 905800000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=2" % (self.address, mode.lower()))
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=2" % (self.address, self.mode.lower()))
             if value in [923200000, 922200000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=3" % (self.address, mode.lower()))
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=3" % (self.address, self.mode.lower()))
             if value in [920800000, 922300000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=4" % (self.address, mode.lower()))
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=4" % (self.address, self.mode.lower()))
         self._launchPostJson("%s/radio/freq/tx" % self.address, {"tx":value})
 
     @property
@@ -318,13 +316,13 @@ class Dut(object):
         self.logger.info("Change rx to %s" % str(value), ch = self.channel)
         if self.tapHw == "TAPMV4.0":
             if value in [868130000, 869525000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=1" % (self.address, mode.lower()))
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=1" % (self.address, self.mode.lower()))
             if value in [902200000, 905800000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=2" % (self.address, mode.lower()))
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=2" % (self.address, self.mode.lower()))
             if value in [923200000, 922200000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=3" % (self.address, mode.lower()))
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=3" % (self.address, self.mode.lower()))
             if value in [920800000, 922300000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=4" % (self.address, mode.lower()))
+                self._launchPostJson("%s/radio/filter?mode=%s&filter=4" % (self.address, self.mode.lower()))
         self._launchPostJson("%s/radio/freq/rx" % self.address, {"rx":value})
 
     @property

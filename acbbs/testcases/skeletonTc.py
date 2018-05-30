@@ -1,12 +1,13 @@
 # coding=UTF-8
 
-from acbbs.testcases.baseTestCase import *
-from acbbs.drivers.ate.ClimCham import *
-from acbbs.drivers.ate.DCPwr import *
-from acbbs.drivers.ate.PwrMeter import *
-from acbbs.drivers.ate.RFSigGen import *
-from acbbs.drivers.ate.SpecAn import *
-from acbbs.drivers.ate.Swtch import *
+from ..testcases.baseTestCase import baseTestCase, st
+from ..drivers.ate.RFSigGen import RFSigGen
+from ..drivers.ate.DCPwr import DCPwr
+from ..drivers.ate.SpecAn import SpecAn
+from ..drivers.ate.PwrMeter import PwrMeter
+from ..drivers.ate.Swtch import Swtch
+from ..drivers.dut import Dut
+import time
 
 class skeletonTc(baseTestCase):
     def __init__(self, temp, simulate):

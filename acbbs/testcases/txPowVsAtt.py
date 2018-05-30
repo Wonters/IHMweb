@@ -1,10 +1,13 @@
 # coding=UTF-8
-
-from acbbs.testcases.baseTestCase import *
-from acbbs.drivers.ate.DCPwr import *
-from acbbs.drivers.ate.SpecAn import *
-from acbbs.drivers.ate.PwrMeter import *
-from acbbs.drivers.ate.Swtch import *
+from ..testcases.baseTestCase import baseTestCase
+from ..testcases.baseTestCase import st
+from ..drivers.ate.DCPwr import DCPwr
+from ..drivers.ate.SpecAn import SpecAn
+from ..drivers.ate.PwrMeter import PwrMeter
+from ..drivers.ate.Swtch import Swtch
+from ..drivers.dut import Dut
+from .. import __version__
+import time
 
 class txPowVsAtt(baseTestCase):
     def __init__(self, temp, simulate):
@@ -137,7 +140,7 @@ class txPowVsAtt(baseTestCase):
             "date-measure":time.time(),
             "date-tc":self.date,
             "tc_version":self.tcVersion,
-            "acbbs_version":self.conf.getVersion(),
+            "acbbs_version":__version__,
             "status":self.status,
             "input-parameters":conf,
             "dut-info":self.dut.info,

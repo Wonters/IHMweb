@@ -1,6 +1,5 @@
 # coding=UTF-8
-from acbbs.tools.log import *
-from acbbs.tools.configurationFile import *
+from ..tools.log import get_logger, AcbbsError, log
 
 import requests
 import os

@@ -1,12 +1,10 @@
 # coding=UTF-8
 
-from acbbs.tools.dataBase import *
-from acbbs.tools.log import *
-from acbbs.tools.configurationFile import *
-from acbbs.drivers.dut import Dut
 
+from ..tools.dataBase import dataBase
+from ..tools.configurationFile import configurationFile
+from ..tools.log import get_logger
 from threading import Thread
-
 import time
 
 class st():

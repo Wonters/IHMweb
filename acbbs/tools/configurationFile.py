@@ -1,6 +1,6 @@
 # coding=UTF-8
 
-from acbbs.tools.log import *
+from ..tools.log import get_logger, AcbbsError
 
 import json
 from os import getcwd
@@ -42,11 +42,9 @@ class configurationFile(object):
                 return backoffGlobal
 
     def __openConfigurationFile(self):
-        path = realpath(__file__).split(self.__class__.__name__)[0]
-        if configurationFile.dutGlobal is not None:
-            with open("{0}/../../configuration_{1}.json".format(path, configurationFile.dut)) as json_file:
-                json_data_tc = json.load(json_file)
         with open("/etc/acbbs/configuration.json") as json_file:
-            json_data_global = json.load(json_file)
-        self.json_allConf = dict(json_data_global + json_data_tc)
+            self.json_allConf = json.load(json_file)
+        if configurationFile.dutGlobal is not None:
+            with open(configurationFile.dutGlobal) as json_file:
+                self.json_allConf.update(json.load(json_file))
         

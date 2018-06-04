@@ -38,7 +38,7 @@ class Dut(object):
             def __init__(self, uri, auth=None, stream=None, timeout=None):
                 pass
 
-            def iter_content(chunk_size=None):
+            def iter_content(self, chunk_size=None):
                 pass
 
             def json(self):

@@ -32,14 +32,19 @@ class configurationFile(object):
             raise AcbbsError("Errors: Configuration {0} not present".format(self.file))
             
 
-
     def getBackoff(self):
         backoff = []
         bo = self.json_allConf[self.file]["backoff"]
-
-        for backoffGlobal in self.json_data_global["global"]["backoff"]:
-            if "BO Step {0}".format(bo) == backoffGlobal[0]:
-                return backoffGlobal
+        if isinstance(bo,(list,)):
+            for backoffTc in bo:
+                for backoffGlobal in self.json_allConf["global"]["backoff"]:
+                    if "BO Step {0}".format(backoffTc) == backoffGlobal[0]:
+                        backoff.append(backoffGlobal)
+            return backoff
+        else:
+            for backoffGlobal in self.json_allConf["global"]["backoff"]:
+                if "BO Step {0}".format(bo) == backoffGlobal[0]:
+                    return backoffGlobal
 
     def __openConfigurationFile(self):
         with open("/etc/acbbs/configuration.json") as json_file:

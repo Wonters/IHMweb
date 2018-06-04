@@ -4,18 +4,20 @@
 from __future__ import print_function
 from etaprogress.progress import ProgressBar
 
-from acbbs.drivers.ate.ClimCham import *
+from acbbs.drivers.ate.ClimCham import ClimCham
 
-from acbbs.testcases.rxGainLNAs import *
-from acbbs.testcases.rxIQImbalance import *
-from acbbs.testcases.rxP1dBSaturation import *
-from acbbs.testcases.rxMaximumGain import *
+from acbbs.testcases.rxGainLNAs import rxGainLNAs
+from acbbs.testcases.rxIQImbalance import rxIQImbalance
+from acbbs.testcases.rxP1dBSaturation import rxP1dBSaturation
+from acbbs.testcases.rxMaximumGain import rxMaximumGain
 
-from acbbs.testcases.txMaximumPower import *
-from acbbs.testcases.txPowVsAtt import *
-from acbbs.testcases.txExcursion import *
-from acbbs.testcases.txIM3Measurement import *
-from acbbs.testcases.txSpurious import *
+from acbbs.testcases.txMaximumPower import txMaximumPower
+from acbbs.testcases.txPowVsAtt import txPowVsAtt
+from acbbs.testcases.txExcursion import txExcursion
+from acbbs.testcases.txIM3Measurement import txIM3Measurement
+from acbbs.testcases.txSpurious import txSpurious
+
+from acbbs.tools.configurationFile import configurationFile
 
 import argparse
 import time
@@ -79,14 +81,7 @@ if __name__ == '__main__':
     parser.add_argument(
         "-d",
         "--dut",
-        help="set type of DUT {0}".format(taplist),
+        help="set type of DUT",
         required = True)
     args = parser.parse_args()
-    if args.dut not in taplist:
-        print("selected tap not available.")
-        print("available tap are :")
-        for tap in taplist:
-            print(tap)
-        exit(0)
-
     main(args)

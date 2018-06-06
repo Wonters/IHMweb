@@ -1,6 +1,6 @@
 # coding=UTF-8
-from acbbs.tools.log import *
-from acbbs.tools.configurationFile import *
+from ...tools.log import get_logger
+from ...tools.configurationFile import configurationFile
 
 from telnetlib import Telnet
 

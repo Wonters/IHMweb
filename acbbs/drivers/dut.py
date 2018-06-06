@@ -393,7 +393,6 @@ class Dut(object):
                 timeSec = "7"
                 if atten < 8:
                     atten = 8
-                atten = -atten
                 fs = 280000
             else:
                 fs = 192000
@@ -434,7 +433,6 @@ class Dut(object):
                 if atten < 8:
                     atten = 8
                 timeSec = "7"
-                atten = -atten
                 fs = 280000
             else:
                 fs = 192000

@@ -1,15 +1,15 @@
 {
   "rxGainLNAs":{
-    "channel":[1],
-    "voltage":[12],
+    "channel":[4],
+    "voltage":[5],
     "power":[-70],
     "freq":[902200000],
     "backoff":[0, 2, 3],
     "bbFreq":20000
   },
   "rxIQImbalance":{
-    "channel":[1],
-    "voltage":[12],
+    "channel":[4],
+    "voltage":[5],
     "power":[-90],
     "freq":[902200000],
     "backoff":0,
@@ -18,20 +18,20 @@
     "bbFreqStep":2000
   },
   "rxP1dBSaturation":{
-    "channel":[1],
-    "voltage":[12],
-    "levelstart":-50,
+    "channel":[4],
+    "voltage":[5],
+    "levelstart":-70,
     "levelstop":-20,
-    "levelstep":4,
+    "levelstep":5,
     "freq":[902200000],
     "backoff":0,
-    "bbFreqLow":-94000,
-    "bbFreqHigh":94000,
+    "bbFreqLow":20000,
+    "bbFreqHigh":20000,
     "bbFreqStep":1000
   },
   "rxMaximumGain":{
-    "channel":[1],
-    "voltage":[12],
+    "channel":[4],
+    "voltage":[5],
     "power":[-90, -60],
     "freq":[902200000],
     "backoff":0,
@@ -40,8 +40,8 @@
     "bbFreqStep":2000
   },
   "txExcursion":{
-    "channel":[1],
-    "voltage":[12],
+    "channel":[4],
+    "voltage":[5],
     "freq":[905200000],
     "bbFreqLow":-96000,
     "bbFreqHigh":96000,
@@ -61,8 +61,8 @@
     "searchLimit":1000
   },
   "txIM3Measurement":{
-    "channel":[1],
-    "voltage":[12],
+    "channel":[4],
+    "voltage":[5],
     "freq":[905200000],
     "bbFreq1":21300,
     "bbFreq2":33700,
@@ -80,8 +80,8 @@
     "searchLimit":1000
   },
   "txSpurious":{
-    "channel":[1],
-    "voltage":[12],
+    "channel":[4],
+    "voltage":[5],
     "freq":[905200000],
     "bbFreq":20000,
     "attLow":20,
@@ -99,8 +99,8 @@
     "searchLimit":1000
   },
   "txMaximumPower":{
-    "channel":[1],
-    "voltage":[12],
+    "channel":[4],
+    "voltage":[5],
     "freq":[905200000],
     "bbFreq":20000,
     "attLow":4,
@@ -116,13 +116,13 @@
     "countAverage":50
   },
   "txPowVsAtt":{
-    "channel":[1],
-    "voltage":[12],
+    "channel":[4],
+    "voltage":[5],
     "freq":[905200000],
     "bbFreq":20000,
-    "attLow":0,
-    "attHigh":40,
-    "attStep":1,
+    "attLow":8,
+    "attHigh":38,
+    "attStep":2,
     "refLvlOffset":24,
     "inputAtt":18,
     "refLvl":42,
@@ -136,7 +136,7 @@
   },
   "scheduler":{
     "simulate":"True",
-    "tc2play":["txPowVsAtt", "txMaximumPower", "txExcursion", "txIM3Measurement", "rxGainLNAs", "rxIQImbalance", "rxP1dBSaturation", "rxMaximumGain"],
+    "tc2play":["txPowVsAtt", "txMaximumPower", "txExcursion", "txIM3Measurement", "rxIQImbalance", "rxP1dBSaturation", "rxMaximumGain"],
     "tc2playBack":["txPowVsAtt", "txMaximumPower", "txExcursion", "txIM3Measurement", "rxGainLNAs", "rxIQImbalance", "rxP1dBSaturation", "rxMaximumGain"],
     "temperature":[25]
   }

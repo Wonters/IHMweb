@@ -501,6 +501,7 @@ class Dut(object):
                                     acquire = False
                     except:
                         self.stopBBSine()
+                        raise AcbbsError("No Chunk receive", ch=self.channel, log=self.logger)
                     result = pout.readlines()[2].split(" ")
                     rssi = result[17]
                     freq = float(result[14])
@@ -589,6 +590,7 @@ class Dut(object):
                                     acquire = False
                     except:
                         self.stopBBSine()
+                        raise AcbbsError("No Chunk receive", ch=self.channel, log=self.logger)
                     result = pout.readlines()[2].split(" ")
                     irr = {'dGain': float(result[7]), 'dPhase': float(result[9]), 'IRR': float(result[11])}
                     freq = float(result[14])

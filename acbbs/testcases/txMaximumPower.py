@@ -21,7 +21,7 @@ class txMaximumPower(baseTestCase):
         attIter = 0
         for i in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
             attIter += 1
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq"]) * attIter
+        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_tx"]) * attIter
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -47,7 +47,7 @@ class txMaximumPower(baseTestCase):
                 self.DCPwr.voltage = vdd               #configure voltage
 
 
-                for freq in self.tcConf["freq"]:
+                for freq in self.tcConf["freq_tx"]:
                     if self.status is st().ABORTING:
                         break
                     self.dut.freqTx = freq

@@ -22,7 +22,7 @@ class rxMaximumGain(baseTestCase):
         bbIter = 0
         for i in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
             bbIter += 1
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["freq"]) * bbIter
+        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["freq_rx"]) * bbIter
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -56,7 +56,7 @@ class rxMaximumGain(baseTestCase):
                     self.RFSigGen.power = power + RFSigGenOffset["smb100a"] #configure power
 
 
-                    for freq in self.tcConf["freq"]:
+                    for freq in self.tcConf["freq_rx"]:
                         if self.status is st().ABORTING:
                             break
                         self.dut.freqRx = freq         #configure dut freq

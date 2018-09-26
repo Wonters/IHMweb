@@ -39,6 +39,9 @@ class baseTestCase(Thread):
         self.conf = configurationFile(file = self.__class__.__name__)
         self.tcConf = self.conf.getConfiguration()
 
+        #parse frequencies
+        self.tcConf["freq_tx"], self.tcConf["freq_rx"] = self.conf.getFrequencies()
+
         #get date key value
         self.date = time.time()
 

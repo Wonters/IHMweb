@@ -7,7 +7,37 @@
       ["BO Step 3", "LNA", "BYPASS", "LNA"],
       ["BO Step 9", "BYPASS", "LNA", "LNA"],
       ["BO Step 12", "BYPASS", "BYPASS", "LNA"]
-    ]
+    ],
+    "radio_configuration":{
+      "rc1":{
+          "frequency_tx":[869525000],
+          "frequency_rx":[868130000]
+      },
+      "rc2":{
+          "frequency_tx":[905200000],
+          "frequency_rx":[902200000]
+      },
+      "rc3":{
+          "frequency_tx":[922200000],
+          "frequency_rx":[923200000]
+      },
+      "rc4":{
+          "frequency_tx":[922300000],
+          "frequency_rx":[902200000]
+      },
+      "rc5":{
+          "frequency_tx":[922250000],
+          "frequency_rx":[923250000, 923300000]
+      },
+      "rc6":{
+          "frequency_tx":[866300000],
+          "frequency_rx":[865200000]
+      },
+      "rc101":{
+          "frequency_tx":[72912500],
+          "frequency_rx":[68862500]
+      }
+    }
   },
   "dut":{
   },

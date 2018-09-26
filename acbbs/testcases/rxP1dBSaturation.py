@@ -26,7 +26,7 @@ class rxP1dBSaturation(baseTestCase):
             bbIter += 1
         for i in range(self.tcConf["levelstart"], self.tcConf["levelstop"] + 1, self.tcConf["levelstep"]):
             leveliter += 1
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq"]) * bbIter * leveliter
+        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_rx"]) * bbIter * leveliter
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -60,7 +60,7 @@ class rxP1dBSaturation(baseTestCase):
                     self.RFSigGen.power = power + RFSigGenOffset["smb100a"] #configure power
 
 
-                    for freq in self.tcConf["freq"]:
+                    for freq in self.tcConf["freq_rx"]:
                         if self.status is st().ABORTING:
                             break
                         self.dut.freqRx = freq         #configure dut freq

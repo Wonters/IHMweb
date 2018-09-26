@@ -32,7 +32,7 @@ class txExcursion(baseTestCase):
         for i in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
             if abs(i) >  self.tcConf["searchLimit"] * 2:
                 self.bbFreq.append(i)
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq"]) * len(self.bbFreq) * len(self.attlist)
+        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_tx"]) * len(self.bbFreq) * len(self.attlist)
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -58,7 +58,7 @@ class txExcursion(baseTestCase):
                 self.DCPwr.voltage = vdd               #configure voltage
 
 
-                for freq in self.tcConf["freq"]:
+                for freq in self.tcConf["freq_tx"]:
                     if self.status is st().ABORTING:
                         break
                     self.dut.freqTx = freq

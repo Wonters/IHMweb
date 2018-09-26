@@ -22,15 +22,40 @@ class configurationFile(object):
 
     def getVersion(self):
         self.logger.debug("Get Version")
-        return self.json_data_global["global"]["version"]
+        return self.json_allConf["global"]["version"]
 
     def getConfiguration(self):
         self.logger.debug("Get configuration for \"{0}\"".format(self.file))
-        try :      
+        try :            
             return self.json_allConf[self.file]
         except:
-            raise AcbbsError("Errors: Configuration {0} not present".format(self.file))
-            
+            raise AcbbsError("Errors: Configuration {0} not present".format(self.file))   
+
+    def getFrequencies(self):
+        self.logger.debug("Get frequencies for \"{0}\"".format(self.file))
+        try:
+            radioConfiguration = self.json_allConf[self.file]["radio_configuration"]
+            freq_list_tx = []
+            freq_list_rx = []
+            for rc in radioConfiguration:
+                freq_list_tx.append(self.json_allConf["global"]["radio_configuration"][rc]["frequency_tx"])
+                freq_list_rx.append(self.json_allConf["global"]["radio_configuration"][rc]["frequency_rx"])
+
+            #remove lists tab
+            freq_tx = []
+            freq_rx = []
+            for freq in freq_list_tx:
+                for f in freq:
+                    freq_tx.append(f)
+            for freq in freq_list_rx:
+                for f in freq:
+                    freq_rx.append(f)
+
+            return freq_tx, freq_rx
+
+        except:
+            raise AcbbsError("Errors: Frequencies {0} not present".format(self.file))  
+
 
     def getBackoff(self):
         backoff = []
@@ -48,7 +73,7 @@ class configurationFile(object):
 
     def __openConfigurationFile(self):
         with open("/etc/acbbs/configuration.json") as json_file:
-            self.json_allConf = json.load(json_file)
+            self.json_allConf = json.load(json_file)                
         if configurationFile.dutGlobal is not None:
             with open(configurationFile.dutGlobal) as json_file:
                 self.json_allConf.update(json.load(json_file))

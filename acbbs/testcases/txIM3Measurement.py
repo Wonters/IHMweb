@@ -47,12 +47,13 @@ class txIM3Measurement(baseTestCase):
                 self.DCPwr.voltage = vdd               #configure voltage
 
 
-                for freq in self.tcConf["freq_tx"]:
+                for freq_tx, filter_tx in zip(self.tcConf["freq_tx"],self.tcConf["filter_tx"]):
                     if self.status is st().ABORTING:
                         break
-                    self.dut.freqTx = freq
-                    self.PwrMeter.freq = freq
-                    self.SpecAn.freqCenter = freq
+                    self.dut.freqTx = freq_tx
+                    self.PwrMeter.freq = freq_tx
+                    self.SpecAn.freqCenter = freq_tx
+                    self.dut.filterTx = filter_tx
 
                     #measure of OL frequency
                     self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
@@ -113,7 +114,8 @@ class txIM3Measurement(baseTestCase):
                         #write measures
                         conf = {
                             "vdd":vdd,
-                            "freq":freq,
+                            "freq_tx":freq_tx,
+                            "filter_tx":filter_tx,
                             "baseband1":self.tcConf["bbFreq1"],
                             "baseband2":self.tcConf["bbFreq2"],
                             "atten":att,

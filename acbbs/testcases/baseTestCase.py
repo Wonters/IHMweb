@@ -3,7 +3,7 @@
 
 from ..tools.dataBase import dataBase
 from ..tools.configurationFile import configurationFile
-from ..tools.log import get_logger
+from ..tools.log import get_logger, AcbbsError
 from threading import Thread
 import time
 
@@ -40,7 +40,24 @@ class baseTestCase(Thread):
         self.tcConf = self.conf.getConfiguration()
 
         #parse frequencies
-        self.tcConf["freq_tx"], self.tcConf["freq_rx"] = self.conf.getFrequencies()
+        freq_tx, freq_rx = self.conf.getFrequencies()        
+        if len(self.tcConf["freq_tx"]) == 0:
+            self.tcConf["freq_tx"] = freq_tx
+        if len(self.tcConf["freq_rx"]) == 0:
+            self.tcConf["freq_rx"] = freq_rx
+
+        #parse filters
+        filter_tx, filter_rx = self.conf.getFilters()
+        if len(self.tcConf["filter_tx"]) == 0:
+            self.tcConf["filter_tx"] = filter_tx
+        if len(self.tcConf["filter_rx"]) == 0:
+            self.tcConf["filter_rx"] = filter_rx
+
+        #check for filters and frequencies number
+        if len(self.tcConf["filter_tx"]) != len(self.tcConf["freq_tx"]):
+            raise AcbbsError("Errors: filter_tx and freq_tx lists has not the same size.")  
+        if len(self.tcConf["filter_rx"]) != len(self.tcConf["freq_rx"]):
+            raise AcbbsError("Errors: filter_rx and freq_rx lists has not the same size.")  
 
         #get date key value
         self.date = time.time()

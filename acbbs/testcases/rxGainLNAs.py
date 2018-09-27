@@ -50,11 +50,12 @@ class rxGainLNAs(baseTestCase):
                     self.RFSigGen.power = power + RFSigGenOffset["smb100a"] #configure power
 
 
-                    for freq in self.tcConf["freq_rx"]:
+                    for freq_rx, filter_rx in zip(self.tcConf["freq_rx"],self.tcConf["filter_rx"]):
                         if self.status is st().ABORTING:
                             break
-                        self.dut.freqRx = freq
-                        self.RFSigGen.freq = freq + self.tcConf["bbFreq"]
+                        self.dut.freqRx = freq_rx
+                        self.dut.filterRx = filter_rx
+                        self.RFSigGen.freq = freq_rx + self.tcConf["bbFreq"]
 
                         #measure refLevel
                         #configure ATE
@@ -87,7 +88,8 @@ class rxGainLNAs(baseTestCase):
                                 "vdd":vdd,
                                 "baseband":self.tcConf["bbFreq"],
                                 "power":power,
-                                "freq":freq,
+                                "freq_rx":freq_rx,
+                                "filter_rx":filter_rx,
                                 "temp":self.temp,
                                 "backoff":backoff[0]
                             }

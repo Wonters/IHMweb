@@ -38,8 +38,8 @@ class configurationFile(object):
             freq_list_tx = []
             freq_list_rx = []
             for rc in radioConfiguration:
-                freq_list_tx.append(self.json_allConf["global"]["radio_configuration"][rc]["frequency_tx"])
-                freq_list_rx.append(self.json_allConf["global"]["radio_configuration"][rc]["frequency_rx"])
+                freq_list_tx.append(self.json_allConf["global"]["radio_configuration"][rc]["freq_tx"])
+                freq_list_rx.append(self.json_allConf["global"]["radio_configuration"][rc]["freq_rx"])
 
             #remove lists tab
             freq_tx = []
@@ -55,6 +55,31 @@ class configurationFile(object):
 
         except:
             raise AcbbsError("Errors: Frequencies {0} not present".format(self.file))  
+
+    def getFilters(self):
+        self.logger.debug("Get filters for \"{0}\"".format(self.file))
+        try:
+            radioConfiguration = self.json_allConf[self.file]["radio_configuration"]
+            filter_list_tx = []
+            filter_list_rx = []
+            for rc in radioConfiguration:
+                filter_list_tx.append(self.json_allConf["global"]["radio_configuration"][rc]["filter_tx"])
+                filter_list_rx.append(self.json_allConf["global"]["radio_configuration"][rc]["filter_rx"])
+
+            #remove lists tab
+            filter_tx = []
+            filter_rx = []
+            for filter in filter_list_tx:
+                for f in filter:
+                    filter_tx.append(f)
+            for filter in filter_list_rx:
+                for f in filter:
+                    filter_rx.append(f)
+
+            return filter_tx, filter_rx
+
+        except:
+            raise AcbbsError("Errors: Filters {0} not present".format(self.file))  
 
 
     def getBackoff(self):

@@ -3,10 +3,32 @@
     "version":"0.0.9",
     "backoff":[
       ["BO Step 0", "LNA", "LNA", "LNA"],
+      ["BO Step 1", "LNA", "LNA", "BYPASS"],
       ["BO Step 2", "LNA", "LNA", "ATTEN"],
       ["BO Step 3", "LNA", "BYPASS", "LNA"],
+      ["BO Step 4", "LNA", "BYPASS", "BYPASS"],
+      ["BO Step 5", "LNA", "BYPASS", "ATTEN"],
+      ["BO Step 6", "LNA", "ATTEN", "LNA"],
+      ["BO Step 7", "LNA", "ATTEN", "BYPASS"],
+      ["BO Step 8", "LNA", "ATTEN", "ATTEN"],
       ["BO Step 9", "BYPASS", "LNA", "LNA"],
-      ["BO Step 12", "BYPASS", "BYPASS", "LNA"]
+      ["BO Step 10", "BYPASS", "LNA", "BYPASS"],
+      ["BO Step 11", "BYPASS", "LNA", "ATTEN"],
+      ["BO Step 12", "BYPASS", "BYPASS", "LNA"],
+      ["BO Step 13", "BYPASS", "BYPASS", "BYPASS"],
+      ["BO Step 14", "BYPASS", "BYPASS", "ATTEN"],
+      ["BO Step 15", "BYPASS", "ATTEN", "LNA"],
+      ["BO Step 16", "BYPASS", "ATTEN", "BYPASS"],
+      ["BO Step 17", "BYPASS", "ATTEN", "ATTEN"],
+      ["BO Step 18", "ATTEN", "LNA", "LNA"],
+      ["BO Step 19", "ATTEN", "LNA", "BYPASS"],
+      ["BO Step 20", "ATTEN", "LNA", "ATTEN"],
+      ["BO Step 21", "ATTEN", "BYPASS", "LNA"],
+      ["BO Step 22", "ATTEN", "BYPASS", "BYPASS"],
+      ["BO Step 23", "ATTEN", "BYPASS", "ATTEN"],
+      ["BO Step 24", "ATTEN", "ATTEN", "LNA"],
+      ["BO Step 25", "ATTEN", "ATTEN", "BYPASS"],
+      ["BO Step 26", "ATTEN", "ATTEN", "ATTEN"]
     ],
     "radio_configuration":{
       "rc1":{

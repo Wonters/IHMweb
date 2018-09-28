@@ -8,8 +8,7 @@ from ..drivers.dut import Dut
 from .. import __version__
 import time
 
-
-class rxP1dBSaturation(baseTestCase):
+class rxExcursion(baseTestCase):
     def __init__(self, temp, simulate):
         baseTestCase.__init__(self, temp, simulate)
 
@@ -20,17 +19,11 @@ class rxP1dBSaturation(baseTestCase):
         self.backoff = self.conf.getBackoff()
 
         #calcul iterations number
-        bbIter = 0
-        leveliter = 0
-        for i in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
-            bbIter += 1
-        for i in range(self.tcConf["levelstart"], self.tcConf["levelstop"] + 1, self.tcConf["levelstep"]):
-            leveliter += 1
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_rx"]) * bbIter * leveliter
+        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["freq_rx"]) * len(self.tcConf["bbFreq"]) * len(self.tcConf["backoff"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
-        #update Status
+        #update status
         self.status = st().RUNNING
 
         #start loop
@@ -44,9 +37,6 @@ class rxP1dBSaturation(baseTestCase):
 
             #configuration dut
             self.dut.mode = "RX"
-            self.dut.preamp0 = self.backoff[1]
-            self.dut.preamp1 = self.backoff[2]
-            self.dut.preamp2 = self.backoff[3]
 
             for vdd in self.tcConf["voltage"]:
                 if self.status is st().ABORTING:
@@ -54,7 +44,7 @@ class rxP1dBSaturation(baseTestCase):
                 self.DCPwr.voltage = vdd               #configure voltage
 
 
-                for power in range(self.tcConf["levelstart"], self.tcConf["levelstop"] + 1, self.tcConf["levelstep"]):
+                for power in self.tcConf["power"]:
                     if self.status is st().ABORTING:
                         break
                     self.RFSigGen.power = power + RFSigGenOffset["smb100a"] #configure power
@@ -66,43 +56,64 @@ class rxP1dBSaturation(baseTestCase):
                         self.dut.freqRx = freq_rx         #configure dut freq
                         self.dut.filterRx = filter_rx
 
-                        for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
+                        for dfreq in self.tcConf["bbFreq"]:
                             if self.status is st().ABORTING:
                                 break
-
-                            #update progress
-                            self.iteration += 1
-                            self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
-
-                            #set SigGen freq
                             self.RFSigGen.freq = freq_rx + dfreq
 
+                            #measure refLevel
+                            #configure ATE
+                            self.dut.preamp0 = self.backoff[0][1]
+                            self.dut.preamp1 = self.backoff[0][2]
+                            self.dut.preamp2 = self.backoff[0][3]
+
                             #start measurement
-                            rssi = self.dut.rssiSin(freqBBHz = dfreq)
+                            refLevel = self.dut.rssiSin(freqBBHz = dfreq)
 
-                            #write measures
-                            conf = {
-                                "vdd":vdd,
-                                "power":power,
-                                "freq_rx":freq_rx,
-                                "filter_rx":filter_rx,
-                                "temp":self.temp,
-                                "baseband":dfreq,
-                                "backoff":self.backoff[0]
-                            }
-                            result = {
-                                "rssi":rssi
-                            }
-                            self.db.writeDataBase(self.__writeMeasure(conf, result))
+                            for backoff in self.backoff:
+                                if self.status is st().ABORTING:
+                                    break                           
 
-                            if self.simulate:
-                                time.sleep(0.02)
+                                #update progress
+                                self.iteration += 1
+                                self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
 
-        #update Status
+                                #configure ATE
+                                self.dut.preamp0 = backoff[1]
+                                self.dut.preamp1 = backoff[2]
+                                self.dut.preamp2 = backoff[3]
+
+                                #start measurement
+                                rssi = self.dut.rssiSin(freqBBHz = dfreq)
+                                irr = self.dut.irrSin(freqBBHz = dfreq)
+
+                                #write measures
+                                conf = {
+                                    "vdd":vdd,
+                                    "power":power,
+                                    "freq_rx":freq_rx,
+                                    "filter_rx":filter_rx,
+                                    "temp":self.temp,
+                                    "baseband":dfreq,
+                                    "backoff":backoff[0]
+                                }
+                                result = {
+                                    "refLevel":refLevel,
+                                    "rssi":rssi,
+                                    "irr":irr,
+                                    "gain-LNA":refLevel - rssi,
+                                    "gain":float(rssi) - float(power)
+                                }
+                                self.db.writeDataBase(self.__writeMeasure(conf, result))
+
+                                if self.simulate:
+                                    time.sleep(0.02)
+
+        #update status
         self.status = st().FINISHED
 
     def tcInit(self):
-        #update Status
+        #update status
         self.status = st().INIT
 
         #ate drivers init

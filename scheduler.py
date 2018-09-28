@@ -6,10 +6,7 @@ from etaprogress.progress import ProgressBar
 
 from acbbs.drivers.ate.ClimCham import ClimCham
 
-from acbbs.testcases.rxGainLNAs import rxGainLNAs
-from acbbs.testcases.rxIQImbalance import rxIQImbalance
-from acbbs.testcases.rxP1dBSaturation import rxP1dBSaturation
-from acbbs.testcases.rxMaximumGain import rxMaximumGain
+from acbbs.testcases.rxExcursion import rxExcursion
 
 from acbbs.testcases.txMaximumPower import txMaximumPower
 from acbbs.testcases.txPowVsAtt import txPowVsAtt

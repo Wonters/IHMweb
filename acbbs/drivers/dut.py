@@ -271,7 +271,9 @@ class Dut(object):
     def allMeasureAvailable(self):
         listAvailable = self._launchGetJson("%s/measures" % (self.address))['measures']
         if self.tapHw == "TAPMV4.0":
-            listAvailable.append('txok')
+            listAvailable.extend(self._launchGetJson("%s/radio/txok" % (self.address)).keys())
+            listAvailable.extend(self._launchGetJson("%s/radio/filter?mode=rx" % (self.address)).keys())
+            listAvailable.extend(self._launchGetJson("%s/radio/filter?mode=tx" % (self.address)).keys())
         return listAvailable
 
     @property
@@ -283,10 +285,12 @@ class Dut(object):
             allValueList = []
             for measure in allMeasuresList:
                 allValueList.append(self._launchGetJson("%s/measures/%s" % (self.address, measure))[measure])
+            allMeasuresDict = dict(zip(allMeasuresList, allValueList))
             if self.tapHw == "TAPMV4.0":
-                allMeasuresList.append('txok')
-                allValueList.append(self._launchGetJson("%s/radio/txok" % (self.address))['txok'])
-            return dict(zip(allMeasuresList, allValueList))
+                allMeasuresDict.update(self._launchGetJson("%s/radio/txok" % (self.address)))
+                allMeasuresDict.update(self._launchGetJson("%s/radio/filter?mode=rx" % (self.address)))
+                allMeasuresDict.update(self._launchGetJson("%s/radio/filter?mode=tx" % (self.address)))
+            return allMeasuresDict
 
     @property
     def freqTx(self):
@@ -350,16 +354,13 @@ class Dut(object):
 
     @property
     def preamp1(self):
-        if self.tapHw != "TAPMV4.0":
-            return self._launchGetJson("%s/radio/preamp?id=1" % (self.address))['preamp']
-        else:
-            return "NA"
+        return self._launchGetJson("%s/radio/preamp?id=1" % (self.address))['preamp']
+
 
     @preamp1.setter
     def preamp1(self, value):
-        if self.tapHw != "TAPMV4.0":
-            self.logger.info("Change preamp1 to %s" % value, ch = self.channel )
-            self._launchPostJson("%s/radio/preamp?id=1" % (self.address), {'preamp':value})
+        self.logger.info("Change preamp1 to %s" % value, ch = self.channel )
+        self._launchPostJson("%s/radio/preamp?id=1" % (self.address), {'preamp':value})
 
     @property
     def preamp2(self):
@@ -392,7 +393,7 @@ class Dut(object):
             else:
                 freqList = [freqBBHz]
             if self.tapHw == "TAPMV4.0":
-                timeSec = "7"
+                self._launchGetJson("%s/radio/txok" % (self.address))
                 if atten < 8:
                     atten = 8
                 fs = 280000

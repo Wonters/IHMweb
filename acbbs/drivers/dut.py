@@ -295,15 +295,6 @@ class Dut(object):
     @freqTx.setter
     def freqTx(self, value):
         self.logger.info("Change tx to %s" % str(value), ch = self.channel)
-        if self.tapHw == "TAPMV4.0":
-            if value in [868130000, 869525000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=1" % (self.address, self.mode.lower()))
-            if value in [902200000, 905800000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=2" % (self.address, self.mode.lower()))
-            if value in [923200000, 922200000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=3" % (self.address, self.mode.lower()))
-            if value in [920800000, 922300000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=4" % (self.address, self.mode.lower()))
         self._launchPostJson("%s/radio/freq/tx" % self.address, {"tx":value})
 
     @property
@@ -313,16 +304,27 @@ class Dut(object):
     @freqRx.setter
     def freqRx(self, value):
         self.logger.info("Change rx to %s" % str(value), ch = self.channel)
-        if self.tapHw == "TAPMV4.0":
-            if value in [868130000, 869525000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=1" % (self.address, self.mode.lower()))
-            if value in [902200000, 905800000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=2" % (self.address, self.mode.lower()))
-            if value in [923200000, 922200000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=3" % (self.address, self.mode.lower()))
-            if value in [920800000, 922300000]:
-                self._launchPostJson("%s/radio/filter?mode=%s&filter=4" % (self.address, self.mode.lower()))
         self._launchPostJson("%s/radio/freq/rx" % self.address, {"rx":value})
+
+    @property
+    def filterTx(self):
+        return 0 #TODO
+
+    @filterTx.setter
+    def filterTx(self, value):
+        self.logger.info("Change tx to %s" % str(value), ch = self.channel)
+        if self.tapHw == "TAPMV4.0":
+            self._launchPostJson("%s/radio/filter?mode=tx&filter=%s" % (self.address, str(value)))
+
+    @property
+    def filterRx(self):
+        return 0 #TODO
+
+    @filterRx.setter
+    def filterRx(self, value):
+        self.logger.info("Change rx to %s" % str(value), ch = self.channel)
+        if self.tapHw == "TAPMV4.0":
+            self._launchPostJson("%s/radio/filter?mode=rx&filter=%s" % (self.address, str(value)))
 
     @property
     def mode(self):

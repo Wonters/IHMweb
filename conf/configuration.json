@@ -1,6 +1,6 @@
 {
   "global":{
-    "version":"0.0.8",
+    "version":"0.0.9",
     "backoff":[
       ["BO Step 0", "LNA", "LNA", "LNA"],
       ["BO Step 2", "LNA", "LNA", "ATTEN"],
@@ -10,32 +10,40 @@
     ],
     "radio_configuration":{
       "rc1":{
-          "frequency_tx":[869525000],
-          "frequency_rx":[868130000]
+          "freq_tx":[869525000],
+          "freq_rx":[868130000],
+          "filter_tx":[1],
+          "filter_rx":[1]
       },
       "rc2":{
-          "frequency_tx":[905200000],
-          "frequency_rx":[902200000]
+          "freq_tx":[905200000],
+          "freq_rx":[902200000],
+          "filter_tx":[2],
+          "filter_rx":[2]
       },
       "rc3":{
-          "frequency_tx":[922200000],
-          "frequency_rx":[923200000]
+          "freq_tx":[922200000],
+          "freq_rx":[923200000],
+          "filter_tx":[3],
+          "filter_rx":[3]
       },
       "rc4":{
-          "frequency_tx":[922300000],
-          "frequency_rx":[902200000]
+          "freq_tx":[922300000],
+          "freq_rx":[920800000],
+          "filter_tx":[4],
+          "filter_rx":[4]
       },
       "rc5":{
-          "frequency_tx":[922250000],
-          "frequency_rx":[923250000, 923300000]
+          "freq_tx":[922300000],
+          "freq_rx":[923300000],
+          "filter_tx":[4],
+          "filter_rx":[4]
       },
       "rc6":{
-          "frequency_tx":[866300000],
-          "frequency_rx":[865200000]
-      },
-      "rc101":{
-          "frequency_tx":[72912500],
-          "frequency_rx":[68862500]
+          "freq_tx":[866300000],
+          "freq_rx":[865200000],
+          "filter_tx":[1],
+          "filter_rx":[1]
       }
     }
   },

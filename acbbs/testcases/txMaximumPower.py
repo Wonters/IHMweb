@@ -47,12 +47,13 @@ class txMaximumPower(baseTestCase):
                 self.DCPwr.voltage = vdd               #configure voltage
 
 
-                for freq in self.tcConf["freq_tx"]:
+                for freq_tx, filter_tx in zip(self.tcConf["freq_tx"],self.tcConf["filter_tx"]):
                     if self.status is st().ABORTING:
                         break
-                    self.dut.freqTx = freq
-                    self.PwrMeter.freq = freq + self.tcConf["bbFreq"]
-                    self.SpecAn.freqCenter = freq + self.tcConf["bbFreq"]
+                    self.dut.freqTx = freq_tx
+                    self.dut.filterTx = filter_tx
+                    self.PwrMeter.freq = freq_tx + self.tcConf["bbFreq"]
+                    self.SpecAn.freqCenter = freq_tx + self.tcConf["bbFreq"]
 
 
                     for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
@@ -78,7 +79,8 @@ class txMaximumPower(baseTestCase):
                         #write measures
                         conf = {
                             "vdd":vdd,
-                            "freq":freq,
+                            "freq_tx":freq_tx,
+                            "filter_tx":filter_tx,
                             "baseband":self.tcConf["bbFreq"],
                             "atten":att,
                             "temp":self.temp

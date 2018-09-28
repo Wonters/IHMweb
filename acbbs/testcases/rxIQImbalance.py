@@ -56,10 +56,11 @@ class rxIQImbalance(baseTestCase):
                     self.RFSigGen.power = power + RFSigGenOffset["smb100a"] #configure power
 
 
-                    for freq in self.tcConf["freq_rx"]:
+                    for freq_rx, filter_rx in zip(self.tcConf["freq_rx"],self.tcConf["filter_rx"]):
                         if self.status is st().ABORTING:
                             break
-                        self.dut.freqRx = freq         #configure dut freq
+                        self.dut.freqRx = freq_rx         #configure dut freq
+                        self.dut.filterRx = filter_rx
 
                         for dfreq in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
                             if self.status is st().ABORTING:
@@ -70,7 +71,7 @@ class rxIQImbalance(baseTestCase):
                             self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
 
                             #set SigGen freq
-                            self.RFSigGen.freq = freq + dfreq
+                            self.RFSigGen.freq = freq_rx + dfreq
 
                             #start measurement
                             irr = self.dut.irrSin(freqBBHz = dfreq)
@@ -79,7 +80,8 @@ class rxIQImbalance(baseTestCase):
                             conf = {
                                 "vdd":vdd,
                                 "power":power,
-                                "freq":freq,
+                                "freq_rx":freq_rx,
+                                "filter_rx":filter_rx,
                                 "temp":self.temp,
                                 "baseband":dfreq,
                                 "backoff":self.backoff[0]

@@ -36,7 +36,7 @@ To start scripts enter the following command :
 ```sh
 $ python scheduler.py -d TAPMVx.x
 ```
-Where **"TAPMVx.x"** can be TAPMV3.0 or TAPMV4.0
+Where **"TAPMVx.x"** can be TAPV3.0 or TAPMV4.0
 
 ## ToDo
 - **Climatic Chamber** drivers.

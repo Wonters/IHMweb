@@ -69,7 +69,7 @@ def main(args):
     exit(0)
 
 if __name__ == '__main__':
-    taplist = ["TAPMV3.0", "TAPMV4.0"]
+    taplist = ["TAPV3.0", "TAPMV4.0"]
     parser = argparse.ArgumentParser(
         description = "Scheduler for acbbs",
         fromfile_prefix_chars = '@' )

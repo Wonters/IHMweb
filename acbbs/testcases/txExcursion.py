@@ -75,7 +75,7 @@ class txExcursion(baseTestCase):
                             self.iteration += 1
 
                             #configure DUT
-                            self.dut.playBBSine(freqBBHz = dfreq, atten = att, timeSec = "10")
+                            self.dut.playBBSine(freqBBHz = dfreq, atten = att)
 
                             #configure ATE
                             self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average

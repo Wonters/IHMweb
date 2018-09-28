@@ -77,7 +77,7 @@ class txIM3Measurement(baseTestCase):
                         self.iteration += 1
 
                         #configure DUT
-                        self.dut.playBBSine(freqBBHz = [self.tcConf["bbFreq1"], self.tcConf["bbFreq2"]], atten = att, timeSec = "10")
+                        self.dut.playBBSine(freqBBHz = [self.tcConf["bbFreq1"], self.tcConf["bbFreq2"]], atten = att)
 
                         #configure ATE
                         self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average

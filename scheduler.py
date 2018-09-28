@@ -8,8 +8,6 @@ from acbbs.drivers.ate.ClimCham import ClimCham
 
 from acbbs.testcases.rxExcursion import rxExcursion
 
-from acbbs.testcases.txMaximumPower import txMaximumPower
-from acbbs.testcases.txPowVsAtt import txPowVsAtt
 from acbbs.testcases.txExcursion import txExcursion
 from acbbs.testcases.txIM3Measurement import txIM3Measurement
 from acbbs.testcases.txSpurious import txSpurious

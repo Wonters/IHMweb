@@ -17,22 +17,8 @@ class txExcursion(baseTestCase):
         #Tc version
         self.tcVersion = "1.0.0"
 
-        #get att list
-        self.attlist = []
-        if len(self.tcConf["attlist"]) == 0:
-            for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
-                self.attlist.append(att)
-        else:
-            self.attlist = self.tcConf["attlist"]
-
-
         #calcul iterations number
-        self.bbFreq = []
-        attIter = 0
-        for i in range(self.tcConf["bbFreqLow"], self.tcConf["bbFreqHigh"] + 1, self.tcConf["bbFreqStep"]):
-            if abs(i) >  self.tcConf["searchLimit"] * 2:
-                self.bbFreq.append(i)
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_tx"]) * len(self.bbFreq) * len(self.attlist)
+        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_tx"]) * len(self.tcConf["bbFreq"]) * len(self.tcConf["att"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -76,12 +62,12 @@ class txExcursion(baseTestCase):
                     self.SpecAn.freqCenter = OLfreq
 
 
-                    for dfreq in self.bbFreq:
+                    for dfreq in self.tcConf["bbFreq"]:
                         if self.status is st().ABORTING:
                             break
 
 
-                        for att in self.attlist:
+                        for att in self.tcConf["att"]:
                             if self.status is st().ABORTING:
                                 break
 

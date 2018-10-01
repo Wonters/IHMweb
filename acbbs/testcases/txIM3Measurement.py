@@ -157,7 +157,6 @@ class txIM3Measurement(baseTestCase):
         self.Swtch.setSwitch(sw2 = 4, sw3 = 4, sw4 = 2)
 
         #configure SpecAn
-        self.SpecAn.refLvlOffset = self.tcConf["refLvlOffset"]
         self.SpecAn.inputAtt = self.tcConf["inputAtt"]
         self.SpecAn.refLvl = self.tcConf["refLvl"]
         self.SpecAn.rbw = self.tcConf["rbw"]

@@ -146,10 +146,12 @@
     "cableLoss":2.82
   },
   "SpecAn":{
-    "ip":"192.168.0.11"
+    "ip":"192.168.0.11",
+    "cableLoss":24
   },
   "PwrMeter":{
     "ip":"192.168.0.11",
-    "avrCount":8
+    "avrCount":8,
+    "cableLoss":0
   }
 }

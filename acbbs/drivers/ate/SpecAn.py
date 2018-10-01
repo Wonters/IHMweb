@@ -35,6 +35,8 @@ class SpecAn(object):
                 self._readWrite("SYST:DISP:UPD ON")
             except :
                 raise AcbbsError("SpecAn Connection error: {0}".format(self.SpecAnConf["ip"]), log = self.logger)
+
+            self.refLvlOffset = self.SpecAnConf["cableLoss"]
         else :
             self.logger.info("Init SpecAn in Simulate")
             self.inst = self._simulate()

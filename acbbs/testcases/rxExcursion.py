@@ -68,7 +68,7 @@ class rxExcursion(baseTestCase):
                             self.dut.preamp2 = self.backoff[0][3]
 
                             #start measurement
-                            refLevel = self.dut.rssiSin(freqBBHz = dfreq)
+                            refLevel = self.dut.irrSin(freqBBHz = dfreq)["rssi"]
 
                             for backoff in self.backoff:
                                 if self.status is st().ABORTING:
@@ -84,8 +84,8 @@ class rxExcursion(baseTestCase):
                                 self.dut.preamp2 = backoff[3]
 
                                 #start measurement
-                                rssi = self.dut.rssiSin(freqBBHz = dfreq)
                                 irr = self.dut.irrSin(freqBBHz = dfreq)
+                                rssi = irr["rssi"]
 
                                 #write measures
                                 conf = {

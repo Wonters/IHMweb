@@ -474,98 +474,9 @@ class Dut(object):
             self._launchPost("%s/signal/stop" % (self.address))
             time.sleep(0.01)
 
-    def rssiSin(self, freqBBHz = 20000):
-        if self.simulate:
-            return 0.0
-        else:
-            maxRetry = 3
-            nbOfRetry = 0
-            status = False
-            while status is False:
-                try:
-                    resp = self.session.get("%s/signal/record" % (self.address), auth=('factory', 'factory'), stream=True, timeout=3)
-                    resp = self.session.get("%s/signal/record" % (self.address), stream=True, timeout=3)
-                    if resp.status_code not in [200, 204]:
-                        if resp.status_code == 500:
-                            raise AcbbsError("Errors To record signal Dump %s" % self.dumpErrors(),
-                                              ch=self.channel, log=self.logger)
-                        else:
-                            raise AcbbsError("Errors To record signal", ch=self.channel, log=self.logger)
-                    p = subprocess.Popen("%s/toolIQ -f %s --int-gain 0 --ext-gain 0" % (os.path.dirname(os.path.abspath(__file__)), freqBBHz), stdout=subprocess.PIPE, stdin=subprocess.PIPE, shell=True)
-                    pout = p.stdout
-                    acquire = True
-                    try:
-                        for chunk in resp.iter_content(chunk_size=1024):
-                            if acquire :
-                                try:
-                                    p.stdin.write(chunk)
-                                except:
-                                    self.stopBBSine()
-                                    acquire = False
-                    except:
-                        self.stopBBSine()
-                        raise AcbbsError("No Chunk receive", ch=self.channel, log=self.logger)
-                    result = pout.readlines()[2].split(" ")
-                    rssi = result[17]
-                    freq = float(result[14])
-                    if ((freq > (int(freqBBHz) + 2000)) or (freq < (int(freqBBHz) - 2000))):
-                        raise AcbbsError("ToolIQ bad freqBBHz freq read: %s expected: %s" % (freq, int(freqBBHz)),
-                                         ch=self.channel, log=self.logger)
-                    else:
-                        self.logger.debug("return = {0}".format(rssi))
-                        return float(rssi)
-                except:
-                    if nbOfRetry >= maxRetry:
-                        self.logger.error("Bad BB frequency rssiSin: 4 tries to receive the correct frequency", ch ="%s" % self.channel)
-                        return 0.0
-                    else:
-                        if nbOfRetry == maxRetry -1 :
-                            time.sleep(10)
-                            self.logger.debug("nbOfRetry rssiSin: %s" %nbOfRetry , ch ="%s" % self.channel)
-                        nbOfRetry = nbOfRetry + 1
-                else:
-                    status = True
-
-    def rssiSinNumpy(self, freqBBHz = 20000):
-        if self.simulate:
-            return 0.0
-        else:
-            self.logger.debug("Get rssiSin at freqBBHz = {0}".format(freqBBHz))
-            resp = self.session.get("%s/signal/record" % (self.address), stream=True, timeout=3)
-            if resp.status_code not in [200, 204]:
-                if resp.status_code == 500:
-                    raise AcbbsError("Errors To record signal Dump %s" % self.dumpErrors(),
-                                      ch=self.channel, log=self.logger)
-                else:
-                    raise AcbbsError("Errors To record signal", ch=self.channel, log=self.logger)
-
-            for chunk in resp.iter_content(chunk_size=768000):
-                c = chunk
-                self.stopBBSine()
-                break
-            # sys.stdout.write(c)
-            with open('data.raw', 'w') as f:
-                f.write(c)
-            os.system("sox -b 16 -c 2 -L -r 192000 -e signed-integer data.raw data.wav")
-            fs, data = wavfile.read('data.wav')
-            os.system("rm data.raw data.wav")
-            a = data.T[0] # this is a two channel soundtrack, I get the first track
-            b=[(ele/2**8.)*2-1 for ele in a] # this is 8-bit track, b is now normalized on [-1,1)
-            c = fft(b) # calculate fourier transform (complex numbers list)
-            d = len(c)/2  # you only need half of the fft list (real signal symmetry)
-            e = abs(c[:(d-1)])
-            # plt.plot(e)
-            # plt.show()
-
-            peak = 0
-            for i in e:
-                if i > peak and i < 100000:
-                    peak = i
-            return 10*math.log10(peak)
-
     def irrSin(self, freqBBHz = 20000):
         if self.simulate:
-            return {'dGain': 0.0, 'dPhase': 0.0, 'irr': 0.0}
+            return {'dGain': 0.0, 'dPhase': 0.0, 'irr': 0.0, 'rssi': 0.0}
         else:
             maxRetry = 3
             nbOfRetry = 0
@@ -595,7 +506,7 @@ class Dut(object):
                         self.stopBBSine()
                         raise AcbbsError("No Chunk receive", ch=self.channel, log=self.logger)
                     result = pout.readlines()[2].split(" ")
-                    irr = {'dGain': float(result[7]), 'dPhase': float(result[9]), 'IRR': float(result[11])}
+                    irr = {'dGain': float(result[7]), 'dPhase': float(result[9]), 'irr': float(result[11]), 'rssi': float(result[17])}
                     freq = float(result[14])
                     if ((freq > (int(freqBBHz) + 2000)) or (freq < (int(freqBBHz) - 2000))):
                         raise AcbbsError("ToolIQ bad freqBBHz freq read: %s expected: %s" % (freq, int(freqBBHz)),

@@ -27,7 +27,7 @@
     "vbw":1000,
     "span":200000,
     "countAverage":10,
-    "pwmeter":0,
+    "pwmeter":1,
     "searchLimit":1000
   },
   "txIM3Measurement":{
@@ -49,7 +49,7 @@
     "vbw":1000,
     "span":200000,
     "countAverage":10,
-    "pwmeter":0,
+    "pwmeter":1,
     "searchLimit":1000
   },
   "txSpurious":{
@@ -71,7 +71,7 @@
     "span":200000,
     "countAverage":10,
     "gabarit":"FCC-902",
-    "pwmeter":0,
+    "pwmeter":1,
     "searchLimit":1000
   },
   "scheduler":{

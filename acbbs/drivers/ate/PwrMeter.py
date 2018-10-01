@@ -22,7 +22,7 @@ class PwrMeter(object):
 
         #get configuration
         self.conf = configurationFile(file = self.__class__.__name__)
-        self.SpecAnConf = self.conf.getConfiguration()
+        self.PwrMeterConf = self.conf.getConfiguration()
 
         #simulation state
         self.simulate = simulate
@@ -30,11 +30,11 @@ class PwrMeter(object):
         if not simulate:
             self.logger.info("Init PwrMeter")
             try :
-                self.inst = Telnet(self.SpecAnConf["ip"], 5025, 1)
+                self.inst = Telnet(self.PwrMeterConf["ip"], 5025, 1)
                 self._readWrite("SENS:PMET:STAT 1")
-                self._readWrite("SENS:PMET:MTIM:AVER", self.SpecAnConf["avrCount"])
+                self._readWrite("SENS:PMET:MTIM:AVER", self.PwrMeterConf["avrCount"])
             except :
-                raise AcbbsError("PwrMeter Connection error: {0}".format(self.SpecAnConf["ip"]), log = self.logger)
+                raise AcbbsError("PwrMeter Connection error: {0}".format(self.PwrMeterConf["ip"]), log = self.logger)
         else :
             self.logger.info("Init PwrMeter in Simulate")
             self.inst = self._simulate()
@@ -100,7 +100,7 @@ class PwrMeter(object):
         if self.simulate:
             return 0.0
         else:
-            return(float(self._readWrite("READ:PMET?")))
+            return(float(self._readWrite("READ:PMET?")+self.PwrMeterConf["cableLoss"]))
 
     def _wait(self):
         self.inst.write("*WAI\n")

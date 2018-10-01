@@ -32,6 +32,7 @@ class PwrMeter(object):
             try :
                 self.inst = Telnet(self.PwrMeterConf["ip"], 5025, 1)
                 self._readWrite("SENS:PMET:STAT 1")
+                self._readWrite("SENS:PMET:ROFF 0")
                 self._readWrite("SENS:PMET:MTIM:AVER", self.PwrMeterConf["avrCount"])
             except :
                 raise AcbbsError("PwrMeter Connection error: {0}".format(self.PwrMeterConf["ip"]), log = self.logger)

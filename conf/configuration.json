@@ -143,7 +143,7 @@
   },
   "RFSigGen":{
     "ip":"192.168.0.10",
-    "cableLoss":2.82
+    "cableLoss":3
   },
   "SpecAn":{
     "ip":"192.168.0.11",
@@ -152,6 +152,6 @@
   "PwrMeter":{
     "ip":"192.168.0.11",
     "avrCount":8,
-    "cableLoss":0
+    "cableLoss":12.34
   }
 }

@@ -18,10 +18,7 @@ class txSpurious(baseTestCase):
         self.tcVersion = "1.0.0"
 
         #calcul iterations number
-        attIter = 0
-        for i in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
-            attIter += 1
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_tx"]) * attIter
+        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_tx"]) * len(self.tcConf["att"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -56,16 +53,17 @@ class txSpurious(baseTestCase):
                     self.SpecAn.freqCenter = freq_tx
 
                     #measure of OL frequency
+                    self.dut.playBBSine(atten=self.tcConf["inputAttCal"], freqBBHz=self.tcConf["bbFreqCal"])
                     self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
-                    self.SpecAn.runSingle()
-                    self.SpecAn.markerSearchLimit(status = 0)
-                    OLfreq = self.SpecAn.markerPeakSearch()[0]
+                    self.SpecAn.markerSearchLimit(freqleft = freq_tx + (self.tcConf["bbFreqCal"] - self.tcConf["searchLimit"]) , freqright = freq_tx + (self.tcConf["bbFreqCal"] +  self.tcConf["searchLimit"]))
+                    OLfreq = self.SpecAn.markerPeakSearch()[0] - self.tcConf["bbFreqCal"]
+                    self.dut.stopBBSine()
 
                     #Center SA
                     self.SpecAn.freqCenter = OLfreq
 
 
-                    for att in range(self.tcConf["attLow"], self.tcConf["attHigh"] + 1, self.tcConf["attStep"]):
+                    for att in self.tcConf["att"]:
                         if self.status is st().ABORTING:
                             break
 

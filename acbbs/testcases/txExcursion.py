@@ -53,10 +53,11 @@ class txExcursion(baseTestCase):
                     self.dut.filterTx = filter_tx
 
                     #measure of OL frequency
+                    self.dut.playBBSine(atten=self.tcConf["inputAttCal"], freqBBHz=self.tcConf["bbFreqCal"])
                     self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
-                    self.SpecAn.runSingle()
-                    self.SpecAn.markerSearchLimit(status = 0)
-                    OLfreq = self.SpecAn.markerPeakSearch()[0]
+                    self.SpecAn.markerSearchLimit(freqleft = freq_tx + (self.tcConf["bbFreqCal"] - self.tcConf["searchLimit"]) , freqright = freq_tx + (self.tcConf["bbFreqCal"] +  self.tcConf["searchLimit"]))
+                    OLfreq = self.SpecAn.markerPeakSearch()[0] - self.tcConf["bbFreqCal"]
+                    self.dut.stopBBSine()
 
                     #Center SA
                     self.SpecAn.freqCenter = OLfreq

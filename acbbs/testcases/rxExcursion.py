@@ -84,8 +84,7 @@ class rxExcursion(baseTestCase):
                                 self.dut.preamp2 = backoff[3]
 
                                 #start measurement
-                                irr = self.dut.irrSin(freqBBHz = dfreq)
-                                rssi = irr["rssi"]
+                                result = self.dut.irrSin(freqBBHz = dfreq)
 
                                 #write measures
                                 conf = {
@@ -99,10 +98,12 @@ class rxExcursion(baseTestCase):
                                 }
                                 result = {
                                     "refLevel":refLevel,
-                                    "rssi":rssi,
-                                    "irr":irr,
-                                    "gain-LNA":refLevel - rssi,
-                                    "gain":float(rssi) - float(power)
+                                    "rssi":result["rssi"],
+                                    "irr":result["irr"],
+                                    "dGain":result["dGain"],
+                                    "dPhase":result["dPhase"],
+                                    "gain-LNA":refLevel - result["rssi"],
+                                    "gain":float(result["rssi"]) - float(power)
                                 }
                                 self.db.writeDataBase(self.__writeMeasure(conf, result))
 

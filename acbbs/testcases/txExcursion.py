@@ -83,13 +83,18 @@ class txExcursion(baseTestCase):
 
                             #start measurement
                             resultPower = self.PwrMeter.power
-                            #measure carrier and image
+                            #measure carrier
                             self.SpecAn.markerSearchLimit(freqleft = OLfreq + (dfreq - self.tcConf["searchLimit"]) , freqright = OLfreq + (dfreq +  self.tcConf["searchLimit"]))
                             resultCarrier = self.SpecAn.markerPeakSearch()       #place marker
-                            resultImage = self.SpecAn.markerDelta(mode = "REL", delta = -2*dfreq)
+                            #measure image
+                            self.SpecAn.markerSearchLimit(freqleft = OLfreq + (-dfreq - self.tcConf["searchLimit"]) , freqright = OLfreq + (-dfreq +  self.tcConf["searchLimit"]))
+                            resultImage = self.SpecAn.markerPeakSearch()       #place marker
                             #measure OL
                             self.SpecAn.markerSearchLimit(freqleft = OLfreq -  self.tcConf["searchLimit"] , freqright = OLfreq +  self.tcConf["searchLimit"])
                             resultOL = self.SpecAn.markerPeakSearch()       #place marker
+
+                            #Mesure current
+                            current = self.DCPwr.currentReal
 
                             #stop measurement
                             self.dut.stopBBSine()
@@ -106,10 +111,11 @@ class txExcursion(baseTestCase):
                             result = {
                                 "carrier_x":resultCarrier[0],
                                 "carrier_y":resultCarrier[1],
-                                "image_x":-2*dfreq,
-                                "image_y":resultImage,
+                                "image_x":resultImage[0],
+                                "image_y":resultImage[1],
                                 "ol_x":resultOL[0],
                                 "ol_y":resultOL[1],
+                                "current":current,
                                 "power":resultPower
                             }
                             self.db.writeDataBase(self.__writeMeasure(conf, result))

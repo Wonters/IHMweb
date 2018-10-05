@@ -2,7 +2,7 @@
   "rxExcursion":{
     "channel":[1, 2],
     "voltage":[24],
-    "power":[-90, -85, -80, -75, -70, -65, -60],
+    "power":[-80, -75, -70, -65, -60],
     "radio_configuration":["rc1", "rc2"],
     "freq_tx":[],
     "freq_rx":[],

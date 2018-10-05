@@ -85,9 +85,14 @@ def main(args):
                 print("\n\nKeyboard Interrupt Aborting....")
                 threadTc.abort()
                 threadTc.join()
+                if schConf["climChamber"] == "True":
+                    clim.status = 1
                 sys.exit(0)
 
     print("TestCases finished")
+    if schConf["climChamber"] == "True":
+        print("Switch off climatic chamber")
+        clim.status = 1
     print(time.strftime("%Y-%m-%d %H:%M:%S"))
     exit(0)
 

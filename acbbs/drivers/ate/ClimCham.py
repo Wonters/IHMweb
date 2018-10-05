@@ -27,7 +27,7 @@ class ClimCham(object):
         self.simulate = simulate
 
         if not simulate:
-            self.logger.info("New climatic chamber instance")
+            self.logger.info("New climatic chamber instance at {0}".format(self.dcConf["ip"]))
             self._dev = ModbusClient(host=self.dcConf["ip"], auto_open=True, auto_close=True, timeout = 1, unit_id=255)
             
         else:

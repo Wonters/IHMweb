@@ -30,12 +30,35 @@ def main(args):
     else:
         simulate = False
 
+    #initialize climatic chamber
+    if schConf["climChamber"] == "True":
+        clim = ClimCham(simulate=simulate)
+        clim.status = 1
+
     #start loops
     for temp in schConf["temperature"]:
         #set temperature and wait
         print("\n#########################")
         print("Launch TestCases at {0}C".format(temp))
         print("#########################\n")
+
+        if schConf["climChamber"] == "True":
+            print("Set climatic chamber at {0} C".format(temp))
+            clim.tempConsigne = temp
+            print("Waiting for {0} seconds".format(schConf["climChamberDelay"]))
+            try:
+                for remaining in range(schConf["climChamberDelay"], 0, -1):
+                    sys.stdout.write("\r")
+                    sys.stdout.write("{:2d} seconds remaining.".format(remaining)) 
+                    sys.stdout.flush()
+                    time.sleep(1)
+
+            except KeyboardInterrupt:
+                print("\n\nKeyboard Interrupt. Stop countdown....")
+                sys.exit(0)
+
+
+            print("\n")
 
         for tc in schConf["tc2play"]:
             exec "threadTc = {0}(temp={1}, simulate={2})".format(tc, temp, simulate)

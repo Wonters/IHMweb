@@ -10,6 +10,7 @@ INSTALL_REQUIRES = [
     'scipy',
     'colorlog',
     'etaprogress',
+    'pyModbusTCP',
 ]
 
 with open('acbbs/__init__.py', 'r') as fd:

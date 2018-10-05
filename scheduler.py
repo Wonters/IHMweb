@@ -86,13 +86,13 @@ def main(args):
                 threadTc.abort()
                 threadTc.join()
                 if schConf["climChamber"] == "True":
-                    clim.status = 1
+                    clim.status = 0
                 sys.exit(0)
 
     print("TestCases finished")
     if schConf["climChamber"] == "True":
         print("Switch off climatic chamber")
-        clim.status = 1
+        clim.status = 0
     print(time.strftime("%Y-%m-%d %H:%M:%S"))
     exit(0)
 

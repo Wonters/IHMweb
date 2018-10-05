@@ -113,6 +113,7 @@ class txExcursion(baseTestCase):
                                 "carrier_y":resultCarrier[1],
                                 "image_x":resultImage[0],
                                 "image_y":resultImage[1],
+                                "image_dbc":resultImage[1]-resultCarrier[1],
                                 "ol_x":resultOL[0],
                                 "ol_y":resultOL[1],
                                 "current":current,

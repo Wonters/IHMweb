@@ -12,6 +12,16 @@ from acbbs.drivers.dut import Dut
 
 import time
 
+def test_ClimCham():
+    clim = ClimCham(simulate=False)
+    clim.tempConsigne = 25
+    print("status : {0}".format(clim.status))
+    print("tempConsigne : {0}".format(clim.tempConsigne))
+    print("tempReal : {0}".format(clim.tempReal))
+    clim.status = 1
+    time.sleep(5)
+    clim.status = 0
+
 def test_PwrMeter():
     SpecAna = SpecAn()
     # SpecAna.reset()
@@ -192,7 +202,8 @@ def main(args):
     # test_fft()
     # test_rssiSinNumpy()
     # test_SpsecAna()
-    test_PwrMeter()
+    # test_PwrMeter()
+    test_ClimCham()
     exit(0)
 
 if __name__ == '__main__':

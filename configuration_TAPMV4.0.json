@@ -78,6 +78,8 @@
   },
   "scheduler":{
     "simulate":"True",
+    "climChamberDelay":7200,
+    "climChamber":"True",
     "tc2play":["txIM3Measurement", "txExcursion", "rxExcursion"],
     "tc2playBack":["txExcursion", "txIM3Measurement", "rxExcursion"],
     "temperature":[25]

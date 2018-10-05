@@ -40,13 +40,10 @@ class ClimCham(object):
     @property
     def info(self):
         return {
-            "reference":self.reference,
-            "version":self.version,
             "error":self.errors,
             "temp_consigne":self.tempConsigne,
             "temp_real":self.tempReal,
-            "humidity_consigne":self.humidityConsigne,
-            "humidity_real":self.humidityReal
+            "status":self.status
         }
 
     @property
@@ -56,20 +53,6 @@ class ClimCham(object):
 
         else:
             return []
-
-    @property
-    def reference(self):
-        if self.reference_var is None:
-            #get reference
-            self.reference_var = "xxxx"
-        return self.reference_var
-
-    @property
-    def version(self):
-        if self.version_var is None:
-            #get reference
-            self.version_var = "xxxx"
-        return self.version_var
 
     @property
     def status(self):

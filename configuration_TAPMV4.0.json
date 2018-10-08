@@ -77,11 +77,11 @@
     "searchLimit":1000
   },
   "scheduler":{
-    "simulate":"True",
+    "simulate":"False",
     "climChamberDelay":7200,
     "climChamber":"True",
     "tc2play":["txIM3Measurement", "txExcursion", "rxExcursion"],
-    "tc2playBack":["txExcursion", "txIM3Measurement", "rxExcursion"],
-    "temperature":[25]
+    "tc2playBack":["txIM3Measurement", "txExcursion", "rxExcursion"],
+    "temperature":[-20, 0, 25, 55]
   }
 }

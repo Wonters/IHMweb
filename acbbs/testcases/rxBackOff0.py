@@ -69,27 +69,26 @@ class rxBackOff0(baseTestCase):
                             #start measurement
                             result = self.dut.irrSin(freqBBHz = dfreq)
 
-                            #write measures
+
                             if result["rssi"] != "NA":
-                                gain = float(result["rssi"]) - float(power)
-                            else:
-                                gain = "NA"
-                            conf = {
-                                "vdd":vdd,
-                                "power":power,
-                                "freq_rx":freq_rx,
-                                "filter_rx":filter_rx,
-                                "temp":self.temp,
-                                "baseband":dfreq
-                            }
-                            result = {
-                                "rssi":result["rssi"],
-                                "irr":result["irr"],
-                                "dGain":result["dGain"],
-                                "dPhase":result["dPhase"],
-                                "gain":gain
-                            }
-                            self.db.writeDataBase(self.__writeMeasure(conf, result))
+                                #write measures
+                                conf = {
+                                    "vdd":vdd,
+                                    "power":power,
+                                    "freq_rx":freq_rx,
+                                    "filter_rx":filter_rx,
+                                    "temp":self.temp,
+                                    "baseband":dfreq
+                                }
+                                result = {
+                                    "rssi":result["rssi"],
+                                    "irr":result["irr"],
+                                    "dGain":result["dGain"],
+                                    "dPhase":result["dPhase"],
+                                    "gain":float(result["rssi"]) - float(power)
+                                }
+                                self.db.writeDataBase(self.__writeMeasure(conf, result))
+
 
                             if self.simulate:
                                 time.sleep(0.02)

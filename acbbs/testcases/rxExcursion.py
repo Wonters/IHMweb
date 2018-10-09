@@ -87,32 +87,29 @@ class rxExcursion(baseTestCase):
                                 #start measurement
                                 result = self.dut.irrSin(freqBBHz = dfreq)
 
-                                #write measures
-                                if refLevel != "NA":
-                                    gainLNA = refLevel - result["rssi"]
-                                    gain = float(result["rssi"]) - float(power)
-                                else:
-                                    gainLNA = "NA"
-                                    gain = "NA"
-                                conf = {
-                                    "vdd":vdd,
-                                    "power":power,
-                                    "freq_rx":freq_rx,
-                                    "filter_rx":filter_rx,
-                                    "temp":self.temp,
-                                    "baseband":dfreq,
-                                    "backoff":backoff[0]
-                                }
-                                result = {
-                                    "refLevel":refLevel,
-                                    "rssi":result["rssi"],
-                                    "irr":result["irr"],
-                                    "dGain":result["dGain"],
-                                    "dPhase":result["dPhase"],
-                                    "gain-LNA":gainLNA,
-                                    "gain":gain
-                                }
-                                self.db.writeDataBase(self.__writeMeasure(conf, result))
+
+                                if result["rssi"] != "NA" and refLevel != "NA":
+                                    #write measures
+                                    conf = {
+                                        "vdd":vdd,
+                                        "power":power,
+                                        "freq_rx":freq_rx,
+                                        "filter_rx":filter_rx,
+                                        "temp":self.temp,
+                                        "baseband":dfreq,
+                                        "backoff":backoff[0]
+                                    }
+                                    result = {
+                                        "refLevel":refLevel,
+                                        "rssi":result["rssi"],
+                                        "irr":result["irr"],
+                                        "dGain":result["dGain"],
+                                        "dPhase":result["dPhase"],
+                                        "gain-LNA":refLevel - result["rssi"],
+                                        "gain":float(result["rssi"]) - float(power)
+                                    }
+                                    self.db.writeDataBase(self.__writeMeasure(conf, result))
+
 
                                 if self.simulate:
                                     time.sleep(0.02)

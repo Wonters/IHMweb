@@ -517,10 +517,10 @@ class Dut(object):
                 except:
                     if nbOfRetry >= maxRetry:
                         self.logger.error("Bad BB frequency irrSin: 4 tries to receive the correct frequency", ch ="%s" % self.channel)
-                        return 0.0
+                        return {'dGain': "NA", 'dPhase': "NA", 'irr': "NA", 'rssi': "NA"}
                     else:
                         if nbOfRetry == maxRetry -1 :
-                            time.sleep(10)
+                            time.sleep(5)
                             self.logger.debug("nbOfRetry rssiSin: %s" %nbOfRetry , ch ="%s" % self.channel)
                         nbOfRetry = nbOfRetry + 1
                 else:

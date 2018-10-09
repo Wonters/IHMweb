@@ -70,6 +70,10 @@ class rxBackOff0(baseTestCase):
                             result = self.dut.irrSin(freqBBHz = dfreq)
 
                             #write measures
+                            if result["rssi"] != "NA":
+                                gain = float(result["rssi"]) - float(power)
+                            else:
+                                gain = "NA"
                             conf = {
                                 "vdd":vdd,
                                 "power":power,
@@ -83,7 +87,7 @@ class rxBackOff0(baseTestCase):
                                 "irr":result["irr"],
                                 "dGain":result["dGain"],
                                 "dPhase":result["dPhase"],
-                                "gain":float(result["rssi"]) - float(power)
+                                "gain":gain
                             }
                             self.db.writeDataBase(self.__writeMeasure(conf, result))
 

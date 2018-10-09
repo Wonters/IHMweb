@@ -63,7 +63,7 @@ class rxExcursion(baseTestCase):
                             self.RFSigGen.freq = freq_rx + dfreq
 
                             #measure refLevel
-                            #configure ATE
+                            #configure DUT
                             self.dut.preamp0 = self.backoff[0][1]
                             self.dut.preamp1 = self.backoff[0][2]
                             self.dut.preamp2 = self.backoff[0][3]
@@ -88,6 +88,12 @@ class rxExcursion(baseTestCase):
                                 result = self.dut.irrSin(freqBBHz = dfreq)
 
                                 #write measures
+                                if refLevel != "NA":
+                                    gainLNA = refLevel - result["rssi"]
+                                    gain = float(result["rssi"]) - float(power)
+                                else:
+                                    gainLNA = "NA"
+                                    gain = "NA"
                                 conf = {
                                     "vdd":vdd,
                                     "power":power,
@@ -103,8 +109,8 @@ class rxExcursion(baseTestCase):
                                     "irr":result["irr"],
                                     "dGain":result["dGain"],
                                     "dPhase":result["dPhase"],
-                                    "gain-LNA":refLevel - result["rssi"],
-                                    "gain":float(result["rssi"]) - float(power)
+                                    "gain-LNA":gainLNA,
+                                    "gain":gain
                                 }
                                 self.db.writeDataBase(self.__writeMeasure(conf, result))
 

@@ -22,7 +22,7 @@ requests.packages.urllib3.connectionpool.log.__class__ = log
 #Rename log name
 requests.packages.urllib3.connectionpool.log.name = "connectionPool"
 
-TIMEOUT = 2
+TIMEOUT = 5
 
 class Dut(object):
     class _simulate(object):

@@ -56,6 +56,7 @@ def main(args):
 
             except KeyboardInterrupt:
                 print("\n\nKeyboard Interrupt. Stop countdown....")
+                clim.status = 0
                 sys.exit(0)
 
 

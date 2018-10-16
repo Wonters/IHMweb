@@ -4,6 +4,8 @@ from ...tools.configurationFile import configurationFile
 
 from telnetlib import Telnet
 
+TIMEOUT = 5
+
 class SpecAn(object):
     class _simulate(object):
         def __init__(self):
@@ -319,7 +321,7 @@ class SpecAn(object):
         self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
         if "?" in cmd:
             self.inst.write("%s\n" % cmd)
-            out = self.inst.read_until("\n")[:-1]
+            out = self.inst.read_until("\n", timeout=TIMEOUT)[:-1]
             self.logger.debug("out : {0}".format(out))
             try:
                 return float(out)

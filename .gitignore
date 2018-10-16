@@ -108,5 +108,8 @@ pip-selfcheck.json
 # mypy
 .mypy_cache/
 
+#other
+test.json
+
 
 # End of https://www.gitignore.io/api/python

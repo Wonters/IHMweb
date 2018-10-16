@@ -4,6 +4,8 @@ from ...tools.configurationFile import configurationFile
 
 from telnetlib import Telnet
 
+TIMEOUT = 5
+
 class PwrMeter(object):
     class _simulate(object):
         def __init__(self):
@@ -111,7 +113,7 @@ class PwrMeter(object):
         self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
         if "?" in cmd:
             self.inst.write("%s\n" % cmd)
-            out = self.inst.read_until("\n")[:-1]
+            out = self.inst.read_until("\n", timeout=TIMEOUT)[:-1]
             try:
                 return float(out)
             except:

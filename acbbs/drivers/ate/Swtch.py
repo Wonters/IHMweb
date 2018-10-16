@@ -4,6 +4,8 @@ from ...tools.configurationFile import configurationFile
 
 from telnetlib import Telnet
 
+TIMEOUT = 5
+
 class commutRackException(Exception):
     em = {0:  "No error"}
 

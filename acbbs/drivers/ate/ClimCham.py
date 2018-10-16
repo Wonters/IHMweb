@@ -5,6 +5,8 @@ from ...tools.configurationFile import configurationFile
 from pyModbusTCP.client import ModbusClient
 import ctypes
 
+TIMEOUT = 5
+
 class ClimCham(object):
     class _simulate(object):
         def __init__(self):
@@ -28,7 +30,7 @@ class ClimCham(object):
 
         if not simulate:
             self.logger.info("New climatic chamber instance at {0}".format(self.dcConf["ip"]))
-            self._dev = ModbusClient(host=self.dcConf["ip"], auto_open=True, auto_close=True, timeout = 1, unit_id=255)
+            self._dev = ModbusClient(host=self.dcConf["ip"], auto_open=True, auto_close=True, timeout = TIMEOUT, unit_id=255)
             
         else:
             self.logger.info("New climatic chamber instance in simulate")

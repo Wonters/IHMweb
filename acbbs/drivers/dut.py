@@ -68,11 +68,11 @@ class Dut(object):
         '''
         Constructor
         '''
+        #init logs
+        self.logger = get_logger(self.__class__.__name__)
 
         if ip is None and chan is None:
             raise AcbbsError("Ip or Channel mandatory", log=self.logger)
-        #init logs
-        self.logger = get_logger(self.__class__.__name__)
 
         #simulation state
         self.simulate = simulate

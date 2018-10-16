@@ -87,6 +87,13 @@ class rxExcursion(baseTestCase):
                                 #start measurement
                                 result = self.dut.irrSin(freqBBHz = dfreq)
 
+                                #get ate result
+                                ate_result = {
+                                    "DCPwr":self.DCPwr.info,
+                                    "ClimCham":self.Clim.info,
+                                    "RFSigGen":self.RFSigGen.info
+                                }
+
 
                                 if result["rssi"] != "NA" and refLevel != "NA":
                                     #write measures
@@ -99,7 +106,7 @@ class rxExcursion(baseTestCase):
                                         "baseband":dfreq,
                                         "backoff":backoff[0]
                                     }
-                                    result = {
+                                    dut_result = {
                                         "refLevel":refLevel,
                                         "rssi":result["rssi"],
                                         "irr":result["irr"],
@@ -108,7 +115,7 @@ class rxExcursion(baseTestCase):
                                         "gain-LNA":refLevel - result["rssi"],
                                         "gain":float(result["rssi"]) - float(power)
                                     }
-                                    self.db.writeDataBase(self.__writeMeasure(conf, result))
+                                    self.db.writeDataBase(self.__writeMeasure(conf, dut_result, ate_result))
 
 
                                 if self.simulate:
@@ -133,7 +140,7 @@ class rxExcursion(baseTestCase):
         self.RFSigGen.power = -130
         self.RFSigGen.status = 1
 
-    def __writeMeasure(self, conf, result):
+    def __writeMeasure(self, conf, dut_result, ate_result):
         return {
             "date-measure":time.time(),
             "date-tc":self.date,
@@ -142,10 +149,6 @@ class rxExcursion(baseTestCase):
             "status":self.status,
             "input-parameters":conf,
             "dut-info":self.dut.info,
-            "ate-result":{
-                "DCPwr":self.DCPwr.info,
-                "Clim":self.Clim.info,
-                "RFSigGen":self.RFSigGen.info
-            },
-            "dut-result":result
+            "ate-result":ate_result,
+            "dut-result":dut_result
         }

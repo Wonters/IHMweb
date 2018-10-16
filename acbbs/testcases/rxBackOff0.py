@@ -69,6 +69,12 @@ class rxBackOff0(baseTestCase):
                             #start measurement
                             result = self.dut.irrSin(freqBBHz = dfreq)
 
+                            #get ate result
+                            ate_result = {
+                                "DCPwr":self.DCPwr.info,
+                                "ClimCham":self.Clim.info,
+                                "RFSigGen":self.RFSigGen.info
+                            }
 
                             if result["rssi"] != "NA":
                                 #write measures
@@ -80,14 +86,14 @@ class rxBackOff0(baseTestCase):
                                     "temp":self.temp,
                                     "baseband":dfreq
                                 }
-                                result = {
+                                dut_result = {
                                     "rssi":result["rssi"],
                                     "irr":result["irr"],
                                     "dGain":result["dGain"],
                                     "dPhase":result["dPhase"],
                                     "gain":float(result["rssi"]) - float(power)
                                 }
-                                self.db.writeDataBase(self.__writeMeasure(conf, result))
+                                self.db.writeDataBase(self.__writeMeasure(conf, dut_result, ate_result))
 
 
                             if self.simulate:
@@ -112,7 +118,7 @@ class rxBackOff0(baseTestCase):
         self.RFSigGen.power = -130
         self.RFSigGen.status = 1
 
-    def __writeMeasure(self, conf, result):
+    def __writeMeasure(self, conf, dut_result, ate_result):
         return {
             "date-measure":time.time(),
             "date-tc":self.date,
@@ -121,10 +127,6 @@ class rxBackOff0(baseTestCase):
             "status":self.status,
             "input-parameters":conf,
             "dut-info":self.dut.info,
-            "ate-result":{
-                "DCPwr":self.DCPwr.info,
-                "Clim":self.Clim.info,
-                "RFSigGen":self.RFSigGen.info
-            },
-            "dut-result":result
+            "ate-result":ate_result,
+            "dut-result":dut_result
         }

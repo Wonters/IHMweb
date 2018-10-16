@@ -94,8 +94,13 @@ class txExcursion(baseTestCase):
                             self.SpecAn.markerSearchLimit(freqleft = OLfreq -  self.tcConf["searchLimit"] , freqright = OLfreq +  self.tcConf["searchLimit"])
                             resultOL = self.SpecAn.markerPeakSearch()       #place marker
 
-                            #Mesure current
-                            current = self.DCPwr.currentReal
+                            #get ate result
+                            ate_result = {
+                                "DCPwr":self.DCPwr.info,
+                                "PwrMeter":self.PwrMeter.info,
+                                "ClimCham":self.Clim.info,
+                                "SpecAn":self.SpecAn.info
+                            }
 
                             #stop measurement
                             self.dut.stopBBSine()
@@ -109,7 +114,7 @@ class txExcursion(baseTestCase):
                                 "atten":att,
                                 "temp":self.temp
                             }
-                            result = {
+                            dut_result = {
                                 "carrier_x":resultCarrier[0],
                                 "carrier_y":resultCarrier[1],
                                 "image_x":resultImage[0],
@@ -117,10 +122,9 @@ class txExcursion(baseTestCase):
                                 "image_dbc":resultImage[1]-resultCarrier[1],
                                 "ol_x":resultOL[0],
                                 "ol_y":resultOL[1],
-                                "current":current,
                                 "power":resultPower
                             }
-                            self.db.writeDataBase(self.__writeMeasure(conf, result))
+                            self.db.writeDataBase(self.__writeMeasure(conf, dut_result, ate_result))
 
                             if self.simulate:
                                 time.sleep(0.02)
@@ -151,7 +155,7 @@ class txExcursion(baseTestCase):
         self.SpecAn.vbw = self.tcConf["vbw"]
         self.SpecAn.freqSpan = self.tcConf["span"]
 
-    def __writeMeasure(self, conf, result):
+    def __writeMeasure(self, conf, dut_result, ate_result):
         return {
             "date-measure":time.time(),
             "date-tc":self.date,
@@ -160,11 +164,6 @@ class txExcursion(baseTestCase):
             "status":self.status,
             "input-parameters":conf,
             "dut-info":self.dut.info,
-            "ate-result":{
-                "DCPwr":self.DCPwr.info,
-                "PwrMeter":self.PwrMeter.info,
-                "Clim":self.Clim.info,
-                "SpecAn":self.SpecAn.info
-            },
-            "dut-result":result
+            "ate-result":ate_result,
+            "dut-result":dut_result
         }

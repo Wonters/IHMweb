@@ -107,6 +107,14 @@ class txIM3Measurement(baseTestCase):
                         self.SpecAn.markerSearchLimit(freqleft = searchLimitLeft4 , freqright = searchLimitRight4)
                         F2F1 = self.SpecAn.markerPeakSearch(marker = 4)
 
+                        #get ate result
+                        ate_result = {
+                            "DCPwr":self.DCPwr.info,
+                            "PwrMeter":self.PwrMeter.info,
+                            "ClimCham":self.Clim.info,
+                            "SpecAn":self.SpecAn.info
+                        }
+
                         #stop measurement
                         self.dut.stopBBSine()
 
@@ -120,7 +128,7 @@ class txIM3Measurement(baseTestCase):
                             "atten":att,
                             "temp":self.temp
                         }
-                        result = {
+                        dut_result = {
                             "F1_f":F1[0],
                             "F1_p":F1[1],
                             "F2_f":F2[0],
@@ -132,7 +140,7 @@ class txIM3Measurement(baseTestCase):
                             "power":resultPower,
                             "ip3":F1[1]+(F1[1]-F2F1[1])/2
                         }
-                        self.db.writeDataBase(self.__writeMeasure(conf, result))
+                        self.db.writeDataBase(self.__writeMeasure(conf, dut_result, ate_result))
 
                         if self.simulate:
                             time.sleep(0.02)
@@ -163,7 +171,7 @@ class txIM3Measurement(baseTestCase):
         self.SpecAn.vbw = self.tcConf["vbw"]
         self.SpecAn.freqSpan = self.tcConf["span"]
 
-    def __writeMeasure(self, conf, result):
+    def __writeMeasure(self, conf, dut_result, ate_result):
         return {
             "date-measure":time.time(),
             "date-tc":self.date,
@@ -172,11 +180,6 @@ class txIM3Measurement(baseTestCase):
             "status":self.status,
             "input-parameters":conf,
             "dut-info":self.dut.info,
-            "ate-result":{
-                "DCPwr":self.DCPwr.info,
-                "PwrMeter":self.PwrMeter.info,
-                "Clim":self.Clim.info,
-                "SpecAn":self.SpecAn.info
-            },
-            "dut-result":result
+            "ate-result":ate_result,
+            "dut-result":dut_result
         }

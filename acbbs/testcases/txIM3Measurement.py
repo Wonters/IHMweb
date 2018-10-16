@@ -74,6 +74,8 @@ class txIM3Measurement(baseTestCase):
 
                         #update progress
                         self.iteration += 1
+                        self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
+                        self.logger.info("input parameters : {0}C, chan {1}, {2}V, {3}Hz(DUT), atten {4}".format(self.temp, chan, vdd, freq_tx, att))
 
                         #configure DUT
                         self.dut.playBBSine(freqBBHz = [self.tcConf["bbFreq1"], self.tcConf["bbFreq2"]], atten = att)

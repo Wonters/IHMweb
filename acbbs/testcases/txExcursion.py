@@ -75,6 +75,8 @@ class txExcursion(baseTestCase):
 
                             #update progress
                             self.iteration += 1
+                            self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
+                            self.logger.info("input parameters : {0}C, chan {1}, {2}V, {3}Hz(DUT), {4}Hz(BBHz), atten {5}".format(self.temp, chan, vdd, freq_tx, dfreq, att))
 
                             #configure DUT
                             self.dut.playBBSine(freqBBHz = dfreq, atten = att)

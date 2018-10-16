@@ -78,6 +78,7 @@ class rxExcursion(baseTestCase):
                                 #update progress
                                 self.iteration += 1
                                 self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
+                                self.logger.info("input parameters : {0}C, chan {1}, {2}V, {3}dBm, {4}Hz(Gen), {5}Hz(BBHz), {6}".format(self.temp, chan, vdd, power, freq_rx, dfreq, backoff))
 
                                 #configure ATE
                                 self.dut.preamp0 = backoff[1]

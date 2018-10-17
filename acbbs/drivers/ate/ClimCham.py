@@ -46,10 +46,10 @@ class ClimCham(object):
     @property
     def info(self):
         return {
-            "error":self.errors,
-            "temp_consigne":self.tempConsigne,
-            "temp_real":self.tempReal,
-            "status":self.status
+            # "error":self.errors,
+            # "temp_consigne":self.tempConsigne,
+            # "temp_real":self.tempReal,
+            # "status":self.status
         }
 
     @property

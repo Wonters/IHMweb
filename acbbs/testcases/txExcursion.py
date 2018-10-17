@@ -96,17 +96,6 @@ class txExcursion(baseTestCase):
                             self.SpecAn.markerSearchLimit(freqleft = OLfreq -  self.tcConf["searchLimit"] , freqright = OLfreq +  self.tcConf["searchLimit"])
                             resultOL = self.SpecAn.markerPeakSearch()       #place marker
 
-                            #get ate result
-                            ate_result = {
-                                "DCPwr":self.DCPwr.info,
-                                "PwrMeter":self.PwrMeter.info,
-                                "ClimCham":self.Clim.info,
-                                "SpecAn":self.SpecAn.info
-                            }
-
-                            #stop measurement
-                            self.dut.stopBBSine()
-
                             #write measures
                             conf = {
                                 "vdd":vdd,
@@ -126,7 +115,10 @@ class txExcursion(baseTestCase):
                                 "ol_y":resultOL[1],
                                 "power":resultPower
                             }
-                            self.db.writeDataBase(self.__writeMeasure(conf, dut_result, ate_result))
+                            self.db.writeDataBase(self.__writeMeasure(conf, dut_result))
+                            
+                            #stop measurement
+                            self.dut.stopBBSine()
 
                             if self.simulate:
                                 time.sleep(0.02)
@@ -157,7 +149,7 @@ class txExcursion(baseTestCase):
         self.SpecAn.vbw = self.tcConf["vbw"]
         self.SpecAn.freqSpan = self.tcConf["span"]
 
-    def __writeMeasure(self, conf, dut_result, ate_result):
+    def __writeMeasure(self, conf, dut_result):
         return {
             "date-measure":time.time(),
             "date-tc":self.date,
@@ -166,6 +158,11 @@ class txExcursion(baseTestCase):
             "status":self.status,
             "input-parameters":conf,
             "dut-info":self.dut.info,
-            "ate-result":ate_result,
+            "ate-result":{
+                "DCPwr":self.DCPwr.info,
+                "PwrMeter":self.PwrMeter.info,
+                "ClimCham":self.Clim.info,
+                "SpecAn":self.SpecAn.info
+            },
             "dut-result":dut_result
         }

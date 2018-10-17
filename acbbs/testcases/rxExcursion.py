@@ -88,14 +88,6 @@ class rxExcursion(baseTestCase):
                                 #start measurement
                                 result = self.dut.irrSin(freqBBHz = dfreq)
 
-                                #get ate result
-                                ate_result = {
-                                    "DCPwr":self.DCPwr.info,
-                                    "ClimCham":self.Clim.info,
-                                    "RFSigGen":self.RFSigGen.info
-                                }
-
-
                                 if result["rssi"] != "NA" and refLevel != "NA":
                                     #write measures
                                     conf = {
@@ -116,7 +108,7 @@ class rxExcursion(baseTestCase):
                                         "gain-LNA":refLevel - result["rssi"],
                                         "gain":float(result["rssi"]) - float(power)
                                     }
-                                    self.db.writeDataBase(self.__writeMeasure(conf, dut_result, ate_result))
+                                    self.db.writeDataBase(self.__writeMeasure(conf, dut_result))
 
 
                                 if self.simulate:
@@ -141,7 +133,7 @@ class rxExcursion(baseTestCase):
         self.RFSigGen.power = -130
         self.RFSigGen.status = 1
 
-    def __writeMeasure(self, conf, dut_result, ate_result):
+    def __writeMeasure(self, conf, dut_result):
         return {
             "date-measure":time.time(),
             "date-tc":self.date,
@@ -150,6 +142,10 @@ class rxExcursion(baseTestCase):
             "status":self.status,
             "input-parameters":conf,
             "dut-info":self.dut.info,
-            "ate-result":ate_result,
+            "ate-result":{
+                "DCPwr":self.DCPwr.info,
+                "ClimCham":self.Clim.info,
+                "RFSigGen":self.RFSigGen.info
+            },
             "dut-result":dut_result
         }

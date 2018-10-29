@@ -39,10 +39,6 @@ class ClimCham(object):
         self.reference_var = None
         self.version_var = None
 
-    def __del__(self):
-        self.logger.info("ClimCham off")
-        self.status = 0
-
     @property
     def info(self):
         return {

@@ -137,7 +137,7 @@ class Dut(object):
                             stoped = 1
                         else:
                             ret = callback(resp, chunk)
-            if resp.status_code not in [200, 204]:
+            if resp.status_code not in [200, 204, 201]:
                 if resp.status_code == 500:
                     raise AcbbsError("Bad status code %u for GET on %s dump %s" %
                                      (resp.status_code, uri, self._dumpErrors()), ch=self.channel, log=self.logger)
@@ -384,7 +384,7 @@ class Dut(object):
             self.logger.info("Set Register %s to %s" % (group, index), ch = self.channel)
             self._launchPostJson("%s/radio/nxp?group=%s&command=%s&value=%s" % (self.address, group, index, value))
 
-    def playBBSine(self, freqBBHz = 20000, timeSec = 1, atten = 10):
+    def playBBSine(self, freqBBHz = 20000, timeSec = 1, atten = 10, dB = 0):
         if not self.simulate:
             try:
                 freqList = float(freqBBHz)
@@ -409,6 +409,7 @@ class Dut(object):
             signalRow[0::2] = samplesI
             signalRow[1::2] = samplesQ
             signalRow /= np.max(signalRow)
+            signalRow *= np.power(10.0, dB/20.0)
             signalRowF16_LE = (signalRow * 32766).astype(np.int16)
             dither = np.random.random_integers(-1, 1, len(signalRowF16_LE))
             signalRowF16_LE += dither

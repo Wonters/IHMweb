@@ -4,7 +4,6 @@ from ..testcases.baseTestCase import baseTestCase, st
 from ..drivers.ate.DCPwr import DCPwr
 from ..drivers.ate.RFSigGen import RFSigGen
 from ..drivers.ate.Swtch import Swtch
-from ..drivers.ate.ClimCham import ClimCham
 from ..drivers.dut import Dut
 from .. import __version__
 import time
@@ -126,7 +125,6 @@ class rxExcursion(baseTestCase):
         self.DCPwr = DCPwr(simulate=self.simulate)
         self.RFSigGen = RFSigGen(simulate=self.simulate)
         self.Swtch = Swtch(simulate=self.simulate)
-        self.Clim = ClimCham(simulate=self.simulate)
 
         #ate configuration
         self.Swtch.setSwitch(sw2 = 4, sw3 = 3, sw4 = 1)
@@ -144,7 +142,6 @@ class rxExcursion(baseTestCase):
             "dut-info":self.dut.info,
             "ate-result":{
                 "DCPwr":self.DCPwr.info,
-                "ClimCham":self.Clim.info,
                 "RFSigGen":self.RFSigGen.info
             },
             "dut-result":dut_result

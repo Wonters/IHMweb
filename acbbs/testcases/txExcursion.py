@@ -6,7 +6,6 @@ from ..drivers.ate.DCPwr import DCPwr
 from ..drivers.ate.SpecAn import SpecAn
 from ..drivers.ate.PwrMeter import PwrMeter
 from ..drivers.ate.Swtch import Swtch
-from ..drivers.ate.ClimCham import ClimCham
 from ..drivers.dut import Dut
 from .. import __version__
 import time
@@ -140,7 +139,6 @@ class txExcursion(baseTestCase):
             self.PwrMeter = PwrMeter(simulate=True)
         self.Swtch = Swtch(simulate=self.simulate)
         self.Swtch.setSwitch(sw2 = 4, sw3 = 4, sw4 = 2)
-        self.Clim = ClimCham(simulate=self.simulate)
 
         #configure SpecAn
         self.SpecAn.inputAtt = self.tcConf["inputAtt"]
@@ -161,7 +159,6 @@ class txExcursion(baseTestCase):
             "ate-result":{
                 "DCPwr":self.DCPwr.info,
                 "PwrMeter":self.PwrMeter.info,
-                "ClimCham":self.Clim.info,
                 "SpecAn":self.SpecAn.info
             },
             "dut-result":dut_result

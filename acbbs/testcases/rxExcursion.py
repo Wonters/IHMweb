@@ -9,14 +9,14 @@ from .. import __version__
 import time
 
 class rxExcursion(baseTestCase):
-    def __init__(self, temp, simulate):
-        baseTestCase.__init__(self, temp, simulate)
+    def __init__(self, temp, simulate, conf):
+        baseTestCase.__init__(self, temp, simulate, conf)
 
         #Tc version
         self.tcVersion = "1.0.0"
 
         #get backoff
-        self.backoff = self.conf.getBackoff()
+        self.backoff = self.conf.getBackoff(self.tcConf["backoff"])
 
         #calcul iterations number
         self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["freq_rx"]) * len(self.tcConf["bbFreq"]) * len(self.tcConf["backoff"])

@@ -24,17 +24,18 @@ class configurationFile(object):
         self.logger.debug("Get Version")
         return self.json_allConf["global"]["version"]
 
-    def getConfiguration(self):
-        self.logger.debug("Get configuration for \"{0}\"".format(self.file))
+    def getConfiguration(self, file=None):
+        if file is None:
+            file = self.file
+        self.logger.debug("Get configuration for \"{0}\"".format(file))
         try :            
-            return self.json_allConf[self.file]
+            return self.json_allConf[file]
         except:
-            raise AcbbsError("Errors: Configuration {0} not present".format(self.file))   
+            raise AcbbsError("Errors: Configuration {0} not present".format(file))   
 
-    def getFrequencies(self):
+    def getFrequencies(self, radioConfiguration):
         self.logger.debug("Get frequencies for \"{0}\"".format(self.file))
         try:
-            radioConfiguration = self.json_allConf[self.file]["radio_configuration"]
             freq_list_tx = []
             freq_list_rx = []
             for rc in radioConfiguration:
@@ -56,10 +57,9 @@ class configurationFile(object):
         except:
             raise AcbbsError("Errors: Frequencies {0} not present".format(self.file))  
 
-    def getFilters(self):
+    def getFilters(self, radioConfiguration):
         self.logger.debug("Get filters for \"{0}\"".format(self.file))
         try:
-            radioConfiguration = self.json_allConf[self.file]["radio_configuration"]
             filter_list_tx = []
             filter_list_rx = []
             for rc in radioConfiguration:
@@ -82,9 +82,8 @@ class configurationFile(object):
             raise AcbbsError("Errors: Filters {0} not present".format(self.file))  
 
 
-    def getBackoff(self):
+    def getBackoff(self, bo):
         backoff = []
-        bo = self.json_allConf[self.file]["backoff"]
         if isinstance(bo,(list,)):
             for backoffTc in bo:
                 for backoffGlobal in self.json_allConf["global"]["backoff"]:

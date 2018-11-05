@@ -16,7 +16,7 @@ class st():
     FINISHED = "FINISHED"
 
 class baseTestCase(Thread):
-    def __init__(self, temp, simulate):
+    def __init__(self, temp, simulate, conf):
         #init thread
         Thread.__init__(self)
 
@@ -37,17 +37,17 @@ class baseTestCase(Thread):
 
         #get configuration testcases
         self.conf = configurationFile(file = self.__class__.__name__)
-        self.tcConf = self.conf.getConfiguration()
+        self.tcConf = conf
 
         #parse frequencies
-        freq_tx, freq_rx = self.conf.getFrequencies()        
+        freq_tx, freq_rx = self.conf.getFrequencies(self.tcConf["radio_configuration"])        
         if len(self.tcConf["freq_tx"]) == 0:
             self.tcConf["freq_tx"] = freq_tx
         if len(self.tcConf["freq_rx"]) == 0:
             self.tcConf["freq_rx"] = freq_rx
 
         #parse filters
-        filter_tx, filter_rx = self.conf.getFilters()
+        filter_tx, filter_rx = self.conf.getFilters(self.tcConf["radio_configuration"])
         if len(self.tcConf["filter_tx"]) == 0:
             self.tcConf["filter_tx"] = filter_tx
         if len(self.tcConf["filter_rx"]) == 0:

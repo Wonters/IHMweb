@@ -11,8 +11,8 @@ from .. import __version__
 import time
 
 class txExcursion(baseTestCase):
-    def __init__(self, temp, simulate):
-        baseTestCase.__init__(self, temp, simulate)
+    def __init__(self, temp, simulate, conf):
+        baseTestCase.__init__(self, temp, simulate, conf)
 
         #Tc version
         self.tcVersion = "1.0.0"

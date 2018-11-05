@@ -7,11 +7,9 @@ from etaprogress.progress import ProgressBar
 from acbbs.drivers.ate.ClimCham import ClimCham
 
 from acbbs.testcases.rxExcursion import rxExcursion
-from acbbs.testcases.rxBackOff0 import rxBackOff0
 
 from acbbs.testcases.txExcursion import txExcursion
 from acbbs.testcases.txIM3Measurement import txIM3Measurement
-from acbbs.testcases.txSpurious import txSpurious
 
 from acbbs.tools.configurationFile import configurationFile
 
@@ -63,33 +61,34 @@ def main(args):
             print("\n")
 
         for tc in schConf["tc2play"]:
-            exec "threadTc = {0}(temp={1}, simulate={2})".format(tc, temp, simulate)
+            for conf_number in range (0, len(conf.getConfiguration(file=tc))):
+                exec "threadTc = {0}(temp={1}, simulate={2}, conf={3})".format(tc, temp, simulate, conf.getConfiguration(file=tc)[conf_number])
 
-            print("Processing {0}".format(tc))
-            print(time.strftime("%Y-%m-%d %H:%M:%S"))
-            bar = ProgressBar(threadTc.iterationsNumber, max_width=70)
+                print("Processing {0} -- Conf {1}/{2}".format(tc, conf_number + 1, len(conf.getConfiguration(file=tc))))
+                print(time.strftime("%Y-%m-%d %H:%M:%S"))
+                bar = ProgressBar(threadTc.iterationsNumber, max_width=70)
 
-            threadTc.tcInit()
-            threadTc.start()
+                threadTc.tcInit()
+                threadTc.start()
 
-            i = threadTc.iteration
-            try:
-                while threadTc.is_alive():
-                    time.sleep(0.1)
-                    if threadTc.iteration != i:
-                        i = threadTc.iteration
-                        bar.numerator = i
-                        print (bar, end='\r')
-                        sys.stdout.flush()
-                print("\n\n")
+                i = threadTc.iteration
+                try:
+                    while threadTc.is_alive():
+                        time.sleep(0.1)
+                        if threadTc.iteration != i:
+                            i = threadTc.iteration
+                            bar.numerator = i
+                            print (bar, end='\r')
+                            sys.stdout.flush()
+                    print("\n\n")
 
-            except KeyboardInterrupt:
-                print("\n\nKeyboard Interrupt Aborting....")
-                threadTc.abort()
-                threadTc.join()
-                if schConf["climChamber"] == "True":
-                    clim.status = 0
-                sys.exit(0)
+                except KeyboardInterrupt:
+                    print("\n\nKeyboard Interrupt Aborting....")
+                    threadTc.abort()
+                    threadTc.join()
+                    if schConf["climChamber"] == "True":
+                        clim.status = 0
+                    sys.exit(0)
 
     print("TestCases finished")
     if schConf["climChamber"] == "True":

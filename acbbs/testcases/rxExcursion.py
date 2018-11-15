@@ -9,8 +9,8 @@ from .. import __version__
 import time
 
 class rxExcursion(baseTestCase):
-    def __init__(self, temp, simulate, conf):
-        baseTestCase.__init__(self, temp, simulate, conf)
+    def __init__(self, temp, simulate, conf, comment):
+        baseTestCase.__init__(self, temp, simulate, conf, comment)
 
         #Tc version
         self.tcVersion = "1.0.0"
@@ -133,6 +133,8 @@ class rxExcursion(baseTestCase):
 
     def __writeMeasure(self, conf, dut_result):
         return {
+            "comment":self.comment,
+            "config":self.tcConf,
             "date-measure":time.time(),
             "date-tc":self.date,
             "tc_version":self.tcVersion,

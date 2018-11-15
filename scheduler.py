@@ -62,7 +62,7 @@ def main(args):
 
         for tc in schConf["tc2play"]:
             for conf_number in range (0, len(conf.getConfiguration(file=tc))):
-                exec "threadTc = {0}(temp={1}, simulate={2}, conf={3})".format(tc, temp, simulate, conf.getConfiguration(file=tc)[conf_number])
+                exec "threadTc = {0}(temp={1}, simulate={2}, conf={3}, comment=\"{4}\")".format(tc, temp, simulate, conf.getConfiguration(file=tc)[conf_number], args.comment)
 
                 print("Processing {0} -- Conf {1}/{2}".format(tc, conf_number + 1, len(conf.getConfiguration(file=tc))))
                 print(time.strftime("%Y-%m-%d %H:%M:%S"))
@@ -106,6 +106,11 @@ if __name__ == '__main__':
         "-d",
         "--dut",
         help="set type of DUT",
+        required = True)
+    parser.add_argument(
+        "-m",
+        "--comment",
+        help="set comment for this measure",
         required = True)
     args = parser.parse_args()
     main(args)

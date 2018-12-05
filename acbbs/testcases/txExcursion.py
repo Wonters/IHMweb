@@ -97,22 +97,22 @@ class txExcursion(baseTestCase):
 
                             #write measures
                             conf = {
-                                "vdd":vdd,
-                                "freq_tx":freq_tx,
-                                "filter_tx":filter_tx,
-                                "baseband":dfreq,
-                                "atten":att,
-                                "temp":self.temp
+                                "Supply_voltage_(V)":vdd,
+                                "RF_Output_Frequency_(Hz)":freq_tx,
+                                "DUT_TX_Filter_ID":filter_tx,
+                                "TX_Baseband_Frequency_(Hz)":dfreq,
+                                "DUT_TX_Level_Control":att,
+                                "Oven_Temperature_(C)":self.temp
                             }
                             dut_result = {
-                                "carrier_x":resultCarrier[0],
-                                "carrier_y":resultCarrier[1],
-                                "image_x":resultImage[0],
-                                "image_y":resultImage[1],
-                                "image_dbc":resultImage[1]-resultCarrier[1],
-                                "ol_x":resultOL[0],
-                                "ol_y":resultOL[1],
-                                "power":resultPower
+                                "DUT_TX_Carrier_Frequency_(Hz)":resultCarrier[0],
+                                "DUT_TX_Carrier_Power_(dBm)":resultCarrier[1],
+                                "DUT_TX_Image_Frequency_(Hz)":resultImage[0],
+                                "DUT_TX_Image_Power_(dBm)":resultImage[1],
+                                "DUT_TX_Image_Rejection_(dBc)":resultImage[1]-resultCarrier[1],
+                                "DUT_TX_OL_Frequency_(Hz)":resultOL[0],
+                                "DUT_TX_OL_Power_(dBm)":resultOL[1],
+                                "DUT_TX_Total_Output_Power_(dBm)":resultPower
                             }
                             self.db.writeDataBase(self.__writeMeasure(conf, dut_result))
                             

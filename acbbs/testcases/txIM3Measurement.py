@@ -110,25 +110,25 @@ class txIM3Measurement(baseTestCase):
 
                         #write measures
                         conf = {
-                            "vdd":vdd,
-                            "freq_tx":freq_tx,
-                            "filter_tx":filter_tx,
-                            "baseband1":self.tcConf["bbFreq1"],
-                            "baseband2":self.tcConf["bbFreq2"],
-                            "atten":att,
-                            "temp":self.temp
+                            "Supply_voltage_(V)":vdd,
+                            "RF_Output_Frequency_(Hz)":freq_tx,
+                            "DUT_TX_Filter_ID":filter_tx,
+                            "TX_Baseband1_Frequency_(Hz)":self.tcConf["bbFreq1"],
+                            "TX_Baseband2_Frequency_(Hz)":self.tcConf["bbFreq2"],
+                            "DUT_TX_Level_Control":att,
+                            "Oven_Temperature_(C)":self.temp
                         }
                         dut_result = {
-                            "F1_f":F1[0],
-                            "F1_p":F1[1],
-                            "F2_f":F2[0],
-                            "F2_p":F2[1],
-                            "F1F2_f":F1F2[0],
-                            "F1F2_p":F1F2[1],
-                            "F2F1_f":F2F1[0],
-                            "F2F1_p":F2F1[1],
-                            "power":resultPower,
-                            "ip3":F1[1]+(F1[1]-F2F1[1])/2
+                            "DUT_TX_Baseband1_Frequency_(Hz)":F1[0],
+                            "DUT_TX_Baseband1_Power_(dBm)":F1[1],
+                            "DUT_TX_Baseband2_Frequency_(Hz)":F2[0],
+                            "DUT_TX_Baseband2_Power_(dBm)":F2[1],
+                            "DUT_TX_IM3_p_Frequency_(Hz)":F1F2[0],
+                            "DUT_TX_IM3_p_Power_(dBm)":F1F2[1],
+                            "DUT_TX_IM3_m_Frequency_(Hz)":F2F1[0],
+                            "DUT_TX_IM3_m_Power_(dBm)":F2F1[1],
+                            "DUT_TX_Total_Output_Power_(dBm)":resultPower,
+                            "DUT_TX_OIP3_(dBm)":F1[1]+(F1[1]-F2F1[1])/2
                         }
                         self.db.writeDataBase(self.__writeMeasure(conf, dut_result))
                         

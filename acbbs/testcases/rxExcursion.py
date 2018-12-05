@@ -90,22 +90,22 @@ class rxExcursion(baseTestCase):
                                 if result["rssi"] != "NA" and refLevel != "NA":
                                     #write measures
                                     conf = {
-                                        "vdd":vdd,
-                                        "power":power,
-                                        "freq_rx":freq_rx,
-                                        "filter_rx":filter_rx,
-                                        "temp":self.temp,
-                                        "baseband":dfreq,
-                                        "backoff":backoff[0]
+                                        "Supply_voltage_(V)":vdd,
+                                        "RF_Input_Power_(dBm)":power,
+                                        "RF_Input_Frequency_(Hz)":freq_rx,
+                                        "DUT_RX_Filter_ID":filter_rx,
+                                        "Oven_Temperature_(C)":self.temp,
+                                        "RX_Baseband_Frequency_(Hz)":dfreq,
+                                        "DUT_Backoff_ID":backoff[0]
                                     }
                                     dut_result = {
-                                        "refLevel":refLevel,
-                                        "rssi":result["rssi"],
-                                        "irr":result["irr"],
-                                        "dGain":result["dGain"],
-                                        "dPhase":result["dPhase"],
-                                        "gain-LNA":refLevel - result["rssi"],
-                                        "gain":float(result["rssi"]) - float(power)
+                                        "DUT_RX_Max_Power_(dBtIQ)":refLevel,
+                                        "DUT_RSSI_Vs_Backoff_(dBtIQ)":result["rssi"],
+                                        "DUT_RX_IRR_(dBc)":result["irr"],
+                                        "DUT_RX_dGain_()":result["dGain"],
+                                        "DUT_RX_dPhase_()":result["dPhase"],
+                                        "DUT_RX_Backoff_Gain_(dB)":refLevel - result["rssi"],
+                                        "DUT_Gain_Vs_Backoff_(dB)":float(result["rssi"]) - float(power)
                                     }
                                     self.db.writeDataBase(self.__writeMeasure(conf, dut_result))
 

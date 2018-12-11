@@ -92,7 +92,7 @@ class txExcursion(baseTestCase):
                             self.SpecAn.markerSearchLimit(freqleft = OLfreq + (-dfreq - self.tcConf["searchLimit"]) , freqright = OLfreq + (-dfreq +  self.tcConf["searchLimit"]))
                             resultImage = self.SpecAn.markerPeakSearch()       #place marker
                             #measure OL
-                            self.SpecAn.markerSearchLimit(freqleft = OLfreq -  self.tcConf["searchLimit"] , freqright = OLfreq +  self.tcConf["searchLimit"])
+                            self.SpecAn.markerSearchLimit(freqleft = OLfreq - self.tcConf["searchLimit"] , freqright = OLfreq +  self.tcConf["searchLimit"])
                             resultOL = self.SpecAn.markerPeakSearch()       #place marker
 
                             #write measures

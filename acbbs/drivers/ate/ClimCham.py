@@ -43,8 +43,8 @@ class ClimCham(object):
     def info(self):
         return {
             # "error":self.errors,
-            # "temp_consigne":self.tempConsigne,
-            # "temp_real":self.tempReal,
+            # "Oven_Prog_Temperature_(C)":self.tempConsigne,
+            # "Oven_Temperature_(C)":self.tempReal,
             # "status":self.status
         }
 

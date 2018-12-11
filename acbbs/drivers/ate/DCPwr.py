@@ -63,10 +63,10 @@ class DCPwr(object):
             "version":self.version,
             "error":self.errors,
             "status":self.status,
-            "current_consigne":self.currentConsigne,
-            "current_real":self.currentReal,
-            "voltage_consigne":self.voltageConsigne,
-            "voltage_real":self.voltageReal
+            "Power_Supply_Max_Current_(A)":self.currentConsigne,
+            "Power_Supply_Current_(A)":self.currentReal,
+            "Power_Supply_Prog_Voltage_(V)":self.voltageConsigne,
+            "Power_Supply_Voltage_(V)":self.voltageReal
         }
 
     def reset(self):

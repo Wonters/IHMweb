@@ -102,8 +102,8 @@ class rxExcursion(baseTestCase):
                                         "DUT_RX_Max_Power_(dBtIQ)":refLevel,
                                         "DUT_RSSI_Vs_Backoff_(dBtIQ)":result["rssi"],
                                         "DUT_RX_IRR_(dBc)":result["irr"],
-                                        "DUT_RX_dGain_()":result["dGain"],
-                                        "DUT_RX_dPhase_()":result["dPhase"],
+                                        "DUT_RX_dGain_(degtIQ)":result["dGain"],
+                                        "DUT_RX_dPhase_(degtIQ)":result["dPhase"],
                                         "DUT_RX_Backoff_Gain_(dB)":refLevel - result["rssi"],
                                         "DUT_Gain_Vs_Backoff_(dB)":float(result["rssi"]) - float(power)
                                     }

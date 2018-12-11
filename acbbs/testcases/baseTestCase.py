@@ -15,7 +15,7 @@ class st():
     FINISHED = "FINISHED"
 
 class baseTestCase(Thread):
-    def __init__(self, temp, simulate, conf, comment, date):
+    def __init__(self, temp, simulate, conf, comment, date, channel):
         #init thread
         Thread.__init__(self)
 
@@ -29,6 +29,7 @@ class baseTestCase(Thread):
         self.simulate = simulate
         self.comment = comment
         self.date = date
+        self.channel = channel
 
         #init logs
         self.logger = get_logger(self.__class__.__name__)

@@ -29,8 +29,18 @@ def main(args):
     else:
         simulate = False
 
+    print(simulate)
+
+    try:
+        dut_channel = args.channel.split(",")
+        for i in range(0, len(dut_channel)):
+            dut_channel[i] = int(dut_channel[i])
+    except:
+        print("Error parsing DUT channel")
+        exit(0)
+
     #initialize climatic chamber
-    if args.climchamb is False:
+    if args.noclimchamb is False:
         clim = ClimCham(simulate=simulate)
         clim.status = 1
 
@@ -41,7 +51,7 @@ def main(args):
         print("Launch TestCases at {0}C".format(temp))
         print("#########################\n")
 
-        if args.climchamb is False:
+        if args.noclimchamb is False:
             print("Set climatic chamber at {0} C".format(temp))
             clim.tempConsigne = temp
             print("Waiting for {0} seconds".format(schConf["climChamberDelay"]))
@@ -62,7 +72,7 @@ def main(args):
 
         for tc in schConf["tc2play"]:
             for conf_number in range (0, len(conf.getConfiguration(file=tc))):
-                exec "threadTc = {0}(temp={1}, simulate={2}, conf={3}, comment=\"{4}\", date={5})".format(tc, temp, simulate, conf.getConfiguration(file=tc)[conf_number], args.comment, time.time())
+                exec "threadTc = {0}(temp={1}, simulate={2}, conf={3}, comment=\"{4}\", date={5}, channel={6})".format(tc, temp, simulate, conf.getConfiguration(file=tc)[conf_number], args.comment, time.time(), dut_channel)
 
                 print("Processing {0} -- Conf {1}/{2}".format(tc, conf_number + 1, len(conf.getConfiguration(file=tc))))
                 print(time.strftime("%Y-%m-%d %H:%M:%S"))
@@ -86,12 +96,12 @@ def main(args):
                     print("\n\nKeyboard Interrupt Aborting....")
                     threadTc.abort()
                     threadTc.join()
-                    if args.climchamb is False:
+                    if args.noclimchamb is False:
                         clim.status = 0
                     sys.exit(0)
 
     print("TestCases finished")
-    if args.climchamb is False:
+    if args.noclimchamb is False:
         print("Switch off climatic chamber")
         clim.status = 0
     print(time.strftime("%Y-%m-%d %H:%M:%S"))
@@ -105,7 +115,7 @@ if __name__ == '__main__':
     parser.add_argument(
         "-d",
         "--dut",
-        help="set type of DUT",
+        help="set type of DUT. Use configuration_assistant.py -l to list DUT",
         required = True)
     parser.add_argument(
         "-m",
@@ -113,16 +123,18 @@ if __name__ == '__main__':
         help="set comment for this measure",
         required = True)
     parser.add_argument(
-        "-s",
         "--simulate",
-        help="set comment for this measure",
+        help="play testcases in simulation",
         required = False,
         action="store_true")
     parser.add_argument(
-        "-c",
-        "--climchamb",
+        "--noclimchamb",
         help="disable climatic chamber",
         required = False,
         action="store_true")
+    parser.add_argument(
+        "--channel",
+        help="set DUT channel separate by comma (ex: 1,2,3,4,5,6,7,8)",
+        required = True,)
     args = parser.parse_args()
     main(args)

@@ -24,13 +24,13 @@ def main(args):
     #get configuration
     conf = configurationFile(file = "scheduler", taphw = args.dut)
     schConf = conf.getConfiguration()
-    if schConf["simulate"] == "True":
+    if args.simulate:
         simulate = True
     else:
         simulate = False
 
     #initialize climatic chamber
-    if schConf["climChamber"] == "True":
+    if args.climchamb is False:
         clim = ClimCham(simulate=simulate)
         clim.status = 1
 
@@ -41,7 +41,7 @@ def main(args):
         print("Launch TestCases at {0}C".format(temp))
         print("#########################\n")
 
-        if schConf["climChamber"] == "True":
+        if args.climchamb is False:
             print("Set climatic chamber at {0} C".format(temp))
             clim.tempConsigne = temp
             print("Waiting for {0} seconds".format(schConf["climChamberDelay"]))
@@ -86,12 +86,12 @@ def main(args):
                     print("\n\nKeyboard Interrupt Aborting....")
                     threadTc.abort()
                     threadTc.join()
-                    if schConf["climChamber"] == "True":
+                    if args.climchamb is False:
                         clim.status = 0
                     sys.exit(0)
 
     print("TestCases finished")
-    if schConf["climChamber"] == "True":
+    if args.climchamb is False:
         print("Switch off climatic chamber")
         clim.status = 0
     print(time.strftime("%Y-%m-%d %H:%M:%S"))
@@ -112,5 +112,17 @@ if __name__ == '__main__':
         "--comment",
         help="set comment for this measure",
         required = True)
+    parser.add_argument(
+        "-s",
+        "--simulate",
+        help="set comment for this measure",
+        required = False,
+        action="store_true")
+    parser.add_argument(
+        "-c",
+        "--climchamb",
+        help="disable climatic chamber",
+        required = False,
+        action="store_true")
     args = parser.parse_args()
     main(args)

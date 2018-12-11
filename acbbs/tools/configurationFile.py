@@ -1,7 +1,6 @@
 # coding=UTF-8
 
 from ..tools.log import get_logger, AcbbsError
-from ..tools import dataBaseConfiguration
 
 import json
 from os import getcwd

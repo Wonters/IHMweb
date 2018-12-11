@@ -62,7 +62,7 @@ def main(args):
 
         for tc in schConf["tc2play"]:
             for conf_number in range (0, len(conf.getConfiguration(file=tc))):
-                exec "threadTc = {0}(temp={1}, simulate={2}, conf={3}, comment=\"{4}\")".format(tc, temp, simulate, conf.getConfiguration(file=tc)[conf_number], args.comment)
+                exec "threadTc = {0}(temp={1}, simulate={2}, conf={3}, comment=\"{4}\", date={5})".format(tc, temp, simulate, conf.getConfiguration(file=tc)[conf_number], args.comment, time.time())
 
                 print("Processing {0} -- Conf {1}/{2}".format(tc, conf_number + 1, len(conf.getConfiguration(file=tc))))
                 print(time.strftime("%Y-%m-%d %H:%M:%S"))

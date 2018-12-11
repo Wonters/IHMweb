@@ -5,7 +5,6 @@ from ..tools.dataBase import dataBase
 from ..tools.configurationFile import configurationFile
 from ..tools.log import get_logger, AcbbsError
 from threading import Thread
-import time
 
 class st():
     NOT_RUNNING = "NOT_RUNNING"
@@ -16,7 +15,7 @@ class st():
     FINISHED = "FINISHED"
 
 class baseTestCase(Thread):
-    def __init__(self, temp, simulate, conf, comment):
+    def __init__(self, temp, simulate, conf, comment, date):
         #init thread
         Thread.__init__(self)
 
@@ -29,6 +28,7 @@ class baseTestCase(Thread):
         self.temp = temp
         self.simulate = simulate
         self.comment = comment
+        self.date = date
 
         #init logs
         self.logger = get_logger(self.__class__.__name__)
@@ -59,9 +59,6 @@ class baseTestCase(Thread):
             raise AcbbsError("Errors: filter_tx and freq_tx lists has not the same size.")  
         if len(self.tcConf["filter_rx"]) != len(self.tcConf["freq_rx"]):
             raise AcbbsError("Errors: filter_rx and freq_rx lists has not the same size.")  
-
-        #get date key value
-        self.date = time.time()
 
     @property
     def percent(self):

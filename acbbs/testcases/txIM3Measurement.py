@@ -11,8 +11,8 @@ from .. import __version__
 import time
 
 class txIM3Measurement(baseTestCase):
-    def __init__(self, temp, simulate, conf, comment):
-        baseTestCase.__init__(self, temp, simulate, conf, comment)
+    def __init__(self, temp, simulate, conf, comment, date):
+        baseTestCase.__init__(self, temp, simulate, conf, comment, date)
 
         #Tc version
         self.tcVersion = "1.0.0"

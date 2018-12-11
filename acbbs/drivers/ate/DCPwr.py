@@ -141,18 +141,18 @@ class DCPwr(object):
 
     @property
     def errors(self):
-        if not self.simulate:
-            err = ""
-            errList = []
-            while "No error" not in err:
-                err = self._readWrite("SYST:ERR?")
-                if "No error" not in err:
-                    errList.append(err)
-                    self.logger.debug("read error %s" % err, ch = self.channel)
-            return errList
+        # if not self.simulate:
+        #     err = ""
+        #     errList = []
+        #     while "No error" not in err:
+        #         err = self._readWrite("SYST:ERR?")
+        #         if "No error" not in err:
+        #             errList.append(err)
+        #             self.logger.debug("read error %s" % err, ch = self.channel)
+        #     return errList
 
-        else:
-            return []
+        # else:
+        return []
 
     def setChan(self, dutChan):
         if int(dutChan) in [1, 2, 3, 4, 5, 6, 7, 8]:

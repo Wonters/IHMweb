@@ -11,14 +11,14 @@ from .. import __version__
 import time
 
 class txIM3Measurement(baseTestCase):
-    def __init__(self, temp, simulate, conf, comment, date):
-        baseTestCase.__init__(self, temp, simulate, conf, comment, date)
+    def __init__(self, temp, simulate, conf, comment, date, channel):
+        baseTestCase.__init__(self, temp, simulate, conf, comment, date, channel)
 
         #Tc version
         self.tcVersion = "1.0.0"
 
         #calcul iterations number
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_tx"]) * len(self.tcConf["att"])
+        self.iterationsNumber = len(self.channel) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_tx"]) * len(self.tcConf["att"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -27,7 +27,7 @@ class txIM3Measurement(baseTestCase):
 
         #start loop
         self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
-        for chan in self.tcConf["channel"]:
+        for chan in self.channel:
             if self.status is st().ABORTING:
                 break
             self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel

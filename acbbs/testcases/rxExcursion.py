@@ -9,8 +9,8 @@ from .. import __version__
 import time
 
 class rxExcursion(baseTestCase):
-    def __init__(self, temp, simulate, conf, comment, date):
-        baseTestCase.__init__(self, temp, simulate, conf, comment, date)
+    def __init__(self, temp, simulate, conf, comment, date, channel):
+        baseTestCase.__init__(self, temp, simulate, conf, comment, date, channel)
 
         #Tc version
         self.tcVersion = "1.0.0"
@@ -19,7 +19,7 @@ class rxExcursion(baseTestCase):
         self.backoff = self.conf.getBackoff(self.tcConf["backoff"])
 
         #calcul iterations number
-        self.iterationsNumber = len(self.tcConf["channel"]) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["freq_rx"]) * len(self.tcConf["bbFreq"]) * len(self.tcConf["backoff"])
+        self.iterationsNumber = len(self.channel) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["freq_rx"]) * len(self.tcConf["bbFreq"]) * len(self.tcConf["backoff"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -28,7 +28,7 @@ class rxExcursion(baseTestCase):
 
         #start loop
         self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
-        for chan in self.tcConf["channel"]:
+        for chan in self.channel:
             if self.status is st().ABORTING:
                 break
             RFSigGenOffset = self.Swtch.setSwitch(sw1 = chan) #configure Swtch channel

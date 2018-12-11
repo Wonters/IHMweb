@@ -6,6 +6,53 @@ import json
 from os import getcwd
 from os.path import basename, splitext, realpath
 
+from pymongo import MongoClient
+from pymongo.errors import ServerSelectionTimeoutError, DuplicateKeyError
+
+class dataBaseConfiguration(object):
+    def __init__(self, ip, port, name, maxDelay):
+        #init logs
+        self.logger = get_logger(self.__class__.__name__)
+
+        self.databaseIP = ip
+        self.databasePort = port
+        self.databaseName = name
+        self.max_delay = maxDelay
+
+        self.__openDataBase()
+
+    def __openDataBase(self):
+        #get server, port and database from json configuration file
+        server = self.databaseIP
+        port = self.databasePort
+        database = self.databaseName
+        maxSevSelDelay = self.max_delay
+        self.logger.debug("Open MongoDB database \"{0}\" at : {1}:{2}".format(database, server, port))
+
+        try:
+            #open MongoDB server
+            self.client = MongoClient(server, int(port), serverSelectionTimeoutMS=maxSevSelDelay)
+
+            #check if connection is well
+            self.client.server_info()
+        except ServerSelectionTimeoutError as err:
+            self.logger.error(err)
+            exit(0)
+
+        #open MongoDB database
+        self.db = self.client[database]
+
+    def get_available_collection(self):
+        return self.db.collection_names()
+
+    def get_collection(self, collection):
+        self.logger.debug("Open collection {0}".format(collection))
+        if collection not in self.get_available_collection():
+            self.logger.error("conf {0} does not exist.".format(collection))
+            exit(0)
+        else:
+            return self.db[collection].find({})
+
 class configurationFile(object):
     dutGlobal = None
     def __init__(self, file = None, simulate = False, taphw = None):
@@ -19,6 +66,9 @@ class configurationFile(object):
 
         self.file = file
         self.__openConfigurationFile()
+
+        self.d = dataBaseConfiguration(self.json_allConf["dataBaseConfiguration"]["ip"], self.json_allConf["dataBaseConfiguration"]["port"], self.json_allConf["dataBaseConfiguration"]["database"], self.json_allConf["dataBaseConfiguration"]["maxSevSelDelay"])
+        self.__openDUTConfigurationFile()
 
     def getVersion(self):
         self.logger.debug("Get Version")
@@ -97,8 +147,10 @@ class configurationFile(object):
 
     def __openConfigurationFile(self):
         with open("/etc/acbbs/configuration.json") as json_file:
-            self.json_allConf = json.load(json_file)                
+            self.json_allConf = json.load(json_file)
+
+    def __openDUTConfigurationFile(self):
         if configurationFile.dutGlobal is not None:
-            with open(configurationFile.dutGlobal) as json_file:
-                self.json_allConf.update(json.load(json_file))
+            for doc in self.d.get_collection(configurationFile.dutGlobal):
+                self.json_allConf.update(doc)
         

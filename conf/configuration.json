@@ -77,6 +77,12 @@
     "database":"acbbs",
     "maxSevSelDelay":"500"
   },
+  "dataBaseConfiguration":{
+    "ip":"127.0.0.1",
+    "port":"27017",
+    "database":"acbbs-configuration",
+    "maxSevSelDelay":"500"
+  },
   "DCPwr":{
     "powerDevice1-ip":"192.168.0.30",
     "powerDevice2-ip":"192.168.0.31"

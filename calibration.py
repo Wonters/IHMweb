@@ -145,18 +145,35 @@ def main(args):
         print("\nConnect generator on channel {0}".format(channel))
         for key, value in LIST_PATH.items():
             t_key = key.replace("x", str(channel+8))
-            print("\nConnect power meter on output {0}".format(value["port"]))
-            raw_input("Press Enter key to start measure...")
-            swtch.setSwitch(sw1 = channel, sw3=value["sw3"], sw4=value["sw4"])
-            rfsiggen.status = 1
-            time.sleep(1)
-            loss = OUTPUT_POWER_CALIBRATION - total_loss - pwrmeter.power
-            rfsiggen.status = 0
+            retry = True
+            while(retry):
+                print("\nConnect power meter on output {0}".format(value["port"]))
+                raw_input("Press Enter key to start measure...")
+                swtch.setSwitch(sw1 = channel, sw3=value["sw3"], sw4=value["sw4"])
+                rfsiggen.status = 1
+                time.sleep(1)
+                loss = OUTPUT_POWER_CALIBRATION - total_loss - pwrmeter.power
+                rfsiggen.status = 0
 
-            print("\n{0}\t previous loss : {1}dB\t actual loss : {2}dB\t Delta : {3}".format(
-                t_key, rw.read_cal(path=t_key), loss, abs(rw.read_cal(path=t_key)-loss)))
+                print("\n{0}\t previous loss : {1}dB\t actual loss : {2}dB\t Delta : {3}".format(
+                    t_key, rw.read_cal(path=t_key), loss, abs(rw.read_cal(path=t_key)-loss)))
 
-            rw.write_cal(path=t_key, value=loss)
+                if loss < value["min"] or loss > value["max"]:
+                    print("Error. Loss should be between {0}dB and {1}dB.".format(value["min"], value["max"]))
+                    c = 0
+                    while c != 'r' and c != 'k' and c!= 'p':
+                        c = raw_input("Retry (r), keep this value (k) or pass and keep previous value (p)\n")
+                        if c == 'r':
+                            pass
+                        elif c == 'k':
+                            rw.write_cal(path=t_key, value=loss)
+                            retry = False
+                        elif c == 'p':
+                            retry = False
+                else:
+                    rw.write_cal(path=t_key, value=loss)
+                    retry = False
+
     
 
 if __name__ == '__main__':

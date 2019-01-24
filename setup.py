@@ -26,10 +26,14 @@ if not confpath:
     raise RuntimeError('Cannot find confpath')
 
 if not os.path.exists(confpath):
-    os.system("sudo mkdir %s" % confpath)
-    os.system("sudo chown $(whoami):$(whoami) %s" % confpath)
+    os.system("mkdir %s" % confpath)
+    os.system("chown $(whoami):$(whoami) %s" % confpath)
 if not os.path.exists(confpath + "/configuration.json"):
     os.system("cp conf/configuration.json %s/" % confpath)
+
+os.system("cp acbbs-scheduler.py acbbs-config.py /etc/acbbs")
+os.system("ln -s /etc/acbbs/acbbs-scheduler.py /usr/bin/acbbs-scheduler")
+os.system("ln -s /etc/acbbs/acbbs-config.py /usr/bin/acbbs-config")
 
 setup(
     version=version,

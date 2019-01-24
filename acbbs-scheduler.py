@@ -29,8 +29,6 @@ def main(args):
     else:
         simulate = False
 
-    print(simulate)
-
     try:
         dut_channel = args.channel.split(",")
         for i in range(0, len(dut_channel)):

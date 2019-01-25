@@ -11,9 +11,7 @@ This package is a library that provides functions to drive automated test **equi
 
 Install ACBBS :
 
-    $ git clone ...
-	$ cd acbbs
-	$ python setup.py install
+    $ pip install git+https://lchagnoleau@bitbucket.sigfox.com/scm/acbbs/acbbs.git
 
 Add your user in specific group :
 
@@ -23,15 +21,15 @@ Add your user in specific group :
 
 ## Configuration
 
-ACBBS will search its configuration from a database. So, before to launch ACBBS, you need to put at least one configuration into database. For it, you should use **configuration_assistant.py**:
+ACBBS will search its configuration from a database. So, before to launch ACBBS, you need to put at least one configuration into database. For it, you should use **acbbs-config**:
 
 For help :
 
-    $ python configuration_assistant.py -h
+    $ acbbs-config -h
 
 For add configuration :
   
-    $ python configuration_assistant.py -w configuration_TAPMV4.0.json
+    $ acbbs-config -w configuration_TAPMV4.0.json
 
 ## Logs
 
@@ -43,13 +41,13 @@ To have all logs in real time in a specific terminal, enter this command :
 
 ## Execute
 
-Use **scheduler.py** for launch testcases. For display help :
+Use **acbbs-scheduler** for launch testcases. For display help :
 
-    $ python scheduler.py -h
+    $ acbbs-scheduler -h
 
 To launch it :
 
-    $ python scheduler.py -d configuration_TAPMV4.0 --channel 1,2 -m "TEST"
+    $ acbbs-scheduler -d configuration_TAPMV4.0 --channel 1,2 -m "TEST"
 
 Where :
 
@@ -59,4 +57,4 @@ Where :
 
 For list all available configuration use :
 
-    $ python configuration_assistant.py -l
+    $ acbbs-config -l

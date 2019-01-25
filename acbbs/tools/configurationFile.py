@@ -65,7 +65,7 @@ class configurationFile(object):
             configurationFile.dutGlobal = taphw
 
         self.file = file
-        self.__openConfigurationFile()
+        self.__openConfigurationFiles()
 
         self.d = dataBaseConfiguration(self.json_allConf["dataBaseConfiguration"]["ip"], self.json_allConf["dataBaseConfiguration"]["port"], self.json_allConf["dataBaseConfiguration"]["database"], self.json_allConf["dataBaseConfiguration"]["maxSevSelDelay"])
         self.__openDUTConfigurationFile()
@@ -145,9 +145,11 @@ class configurationFile(object):
                 if "BO Step {0}".format(bo) == backoffGlobal[0]:
                     return backoffGlobal
 
-    def __openConfigurationFile(self):
+    def __openConfigurationFiles(self):
         with open("/etc/acbbs/configuration.json") as json_file:
             self.json_allConf = json.load(json_file)
+        with open("/etc/acbbs/swtch_cal.json") as json_file:
+            self.json_allConf.update(json.load(json_file))
 
     def __openDUTConfigurationFile(self):
         if configurationFile.dutGlobal is not None:

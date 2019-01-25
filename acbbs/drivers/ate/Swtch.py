@@ -55,6 +55,11 @@ class Swtch(object):
 
         #simulation state
         self.simulate = simulate
+        if self.simulate:
+            self.sw1 = 1
+            self.sw2 = 1
+            self.sw3 = 1
+            self.sw4 = 1
 
     def __connect(self):
         if not self.simulate:
@@ -96,28 +101,35 @@ class Swtch(object):
 
         else:
             if sw1 is None:
-                sw1 = 1
+                sw1 = self.sw1
+            else:
+                self.sw1 = sw1
             if sw2 is None:
-                sw2 = 4
+                sw2 = self.sw2
+            else:
+                self.sw2 = sw2
             if sw3 is None:
-                sw3 = 3
+                sw3 = self.sw3
+            else:
+                self.sw3 = sw3
             if sw4 is None:
-                sw4 = 1
+                sw4 = self.sw4
+            else:
+                self.sw4 = sw4
 
         #return correct offset depending of switch configurationFile
-
         if sw3 == 2:
             return {"noise-soure":self.swtchConf["loss"]["J{0}-J18".format(sw1+8)]}
-        elif sw3 == 3 and sw4 == 1:
+        elif sw3 == 4 and sw4 == 2:
             return {"pwr-meter":self.swtchConf["loss"]["J{0}-J2".format(sw1+8)],
                     "fsv-fswr":self.swtchConf["loss"]["J{0}-J5".format(sw1+8)],
                     "smb100a":self.swtchConf["loss"]["J{0}-J4_20dB".format(sw1+8)]}
-        elif sw3 == 3 and sw4 == 2:
+        elif sw3 == 4 and sw4 == 1:
             return {"pwr-meter":self.swtchConf["loss"]["J{0}-J2".format(sw1+8)],
                     "fsv-fswr":self.swtchConf["loss"]["J{0}-J5".format(sw1+8)]}
-        elif sw3 == 4 and sw4 == 1:
+        elif sw3 == 3 and sw4 == 2:
             return {"smbv100a":self.swtchConf["loss"]["J{0}-J3".format(sw1+8)]}
-        elif sw3 == 4 and sw4 == 2:
+        elif sw3 == 3 and sw4 == 1:
             return {"smbv100a":self.swtchConf["loss"]["J{0}-J3".format(sw1+8)],
                     "smb100a":self.swtchConf["loss"]["J{0}-J4".format(sw1+8)]}
         else:

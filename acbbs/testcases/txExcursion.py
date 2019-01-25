@@ -30,12 +30,15 @@ class txExcursion(baseTestCase):
         for chan in self.channel:
             if self.status is st().ABORTING:
                 break
-            self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
-            self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
-            self.dut = Dut(chan=chan, simulate=self.simulate)  #dut drivers init
+            swtch_loss = self.Swtch.setSwitch(sw1 = chan)           #configure Swtch channel
+            self.DCPwr.setChan(dutChan = chan)                      #configure DCPwr channel
+            self.dut = Dut(chan=chan, simulate=self.simulate)       #dut drivers init
 
             #configuration dut
             self.dut.mode = "TX"
+
+            #set SpecAn Offset
+            self.SpecAn.refLvlOffset = swtch_loss["fsv-fswr"] 
 
 
             for vdd in self.tcConf["voltage"]:
@@ -84,7 +87,7 @@ class txExcursion(baseTestCase):
                             self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
 
                             #start measurement
-                            resultPower = self.PwrMeter.power
+                            resultPower = self.PwrMeter.power + swtch_loss["pwr-meter"]
                             #measure carrier
                             self.SpecAn.markerSearchLimit(freqleft = OLfreq + (dfreq - self.tcConf["searchLimit"]) , freqright = OLfreq + (dfreq +  self.tcConf["searchLimit"]))
                             resultCarrier = self.SpecAn.markerPeakSearch()       #place marker

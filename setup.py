@@ -30,10 +30,13 @@ if not os.path.exists(confpath):
     os.system("chown $(whoami):$(whoami) %s" % confpath)
 if not os.path.exists(confpath + "/configuration.json"):
     os.system("cp conf/configuration.json %s/" % confpath)
+if not os.path.exists(confpath + "/swtch_cal.json"):
+    os.system("cp conf/swtch_cal.json %s/" % confpath)
 
-os.system("cp acbbs-scheduler.py acbbs-config.py /etc/acbbs")
+os.system("cp acbbs-scheduler.py acbbs-config.py acbbs-calibration.py /etc/acbbs")
 os.system("ln -s /etc/acbbs/acbbs-scheduler.py /usr/bin/acbbs-scheduler")
 os.system("ln -s /etc/acbbs/acbbs-config.py /usr/bin/acbbs-config")
+os.system("ln -s /etc/acbbs/acbbs-calibration.py /usr/bin/acbbs-calibration")
 
 setup(
     version=version,

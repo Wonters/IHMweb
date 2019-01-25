@@ -100,7 +100,7 @@ class RFSigGen(object):
     @power.setter
     def power(self, value):
         self.logger.info("Change power to %s" % value)
-        self._readWrite("SOUR:POW:LEV:IMM:AMPL", float(value) + float(self.sigGenConf["cableLoss"]))
+        self._readWrite("SOUR:POW:LEV:IMM:AMPL", float(value))
 
     @property
     def freq(self):

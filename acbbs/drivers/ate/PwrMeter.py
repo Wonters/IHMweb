@@ -103,7 +103,7 @@ class PwrMeter(object):
         if self.simulate:
             return 0.0
         else:
-            return(float(self._readWrite("READ:PMET?")+self.PwrMeterConf["cableLoss"]))
+            return(float(self._readWrite("READ:PMET?")))
 
     def _wait(self):
         self.inst.write("*WAI\n")

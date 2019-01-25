@@ -31,7 +31,7 @@ class rxExcursion(baseTestCase):
         for chan in self.channel:
             if self.status is st().ABORTING:
                 break
-            RFSigGenOffset = self.Swtch.setSwitch(sw1 = chan) #configure Swtch channel
+            swtch_loss = self.Swtch.setSwitch(sw1 = chan) #configure Swtch channel
             self.DCPwr.setChan(dutChan = chan)         #configure DCPwr channel
             self.dut = Dut(chan=chan, simulate=self.simulate) #dut drivers init
 
@@ -47,7 +47,7 @@ class rxExcursion(baseTestCase):
                 for power in self.tcConf["power"]:
                     if self.status is st().ABORTING:
                         break
-                    self.RFSigGen.power = power + RFSigGenOffset["smb100a"] #configure power
+                    self.RFSigGen.power = power + swtch_loss["smb100a"] #configure power
 
 
                     for freq_rx, filter_rx in zip(self.tcConf["freq_rx"],self.tcConf["filter_rx"]):

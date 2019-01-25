@@ -109,7 +109,7 @@ class Dut(object):
         else:
             raise AcbbsError("Connection Errors", ch=self.channel, log=self.logger)
         if self.tapHw == "TAPMV4.0":
-		    self.preamp1 = "LNA"
+            self.preamp1 = "LNA"
 
     def __del__(self):
         self.logger.info("dut off")
@@ -366,7 +366,7 @@ class Dut(object):
         self.logger.info("Change preamp1 to %s" % value, ch = self.channel )
         self._launchPostJson("%s/radio/preamp?id=1" % (self.address), {'preamp':value})
         if self.tapHw == "TAPMV4.0":
-		    self.preamp1_var = value
+            self.preamp1_var = value
 
     @property
     def preamp2(self):

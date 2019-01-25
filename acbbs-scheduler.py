@@ -5,21 +5,19 @@ from __future__ import print_function
 from etaprogress.progress import ProgressBar
 
 from acbbs.drivers.ate.ClimCham import ClimCham
-
 from acbbs.testcases.rxExcursion import rxExcursion
-
 from acbbs.testcases.txExcursion import txExcursion
 from acbbs.testcases.txIM3Measurement import txIM3Measurement
-
 from acbbs.tools.configurationFile import configurationFile
+from acbbs import __version__
 
 import argparse
 import time
 import sys
 
 def main(args):
-    #print date
-    print(time.strftime("%Y-%m-%d %H:%M:%S"))
+    #print date and version
+    print("ACBBS V{} -- {}".format(__version__, time.strftime("%Y-%m-%d %H:%M:%S")))
 
     #get configuration
     conf = configurationFile(file = "scheduler", taphw = args.dut)

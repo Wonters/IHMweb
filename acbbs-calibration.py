@@ -15,7 +15,7 @@ CONF_PATH = "/etc/acbbs/swtch_cal.json"
 LIST_PATH = {
     "Jx-J2":{
         "port":"J2",
-        "min":10,
+        "min":5,
         "max":15,
         "sw3":2,
         "sw4":1
@@ -77,7 +77,7 @@ class read_write(object):
 
     def __del__(self):
         with open(self.file, "w") as json_file:
-            json.dump(self.data, json_file, indent=2)
+            json.dump(self.data, json_file, indent=2, sort_keys=True)
 
 
 def main(args):

@@ -149,7 +149,7 @@ class configurationFile(object):
         with open("/etc/acbbs/configuration.json") as json_file:
             self.json_allConf = json.load(json_file)
         with open("/etc/acbbs/swtch_cal.json") as json_file:
-            self.json_allConf.update(json.load(json_file))
+            self.json_allConf["Swtch"].update(json.load(json_file))
 
     def __openDUTConfigurationFile(self):
         if configurationFile.dutGlobal is not None:

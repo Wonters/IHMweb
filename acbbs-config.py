@@ -39,7 +39,7 @@ class database(object):
         self.db = self.client[database]
 
     def get_available_collection(self):
-        return self.db.collection_names()
+        return self.db.list_collection_names()
 
     def get_collection(self, collection):
         if collection not in self.get_available_collection():

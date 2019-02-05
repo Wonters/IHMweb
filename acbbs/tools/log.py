@@ -19,7 +19,7 @@ class log(logging.Logger):
 
     def info(self, msg, *args, **kwargs):
         channel = 'N'
-        if kwargs.has_key('ch'):
+        if "ch" in kwargs:
             channel = kwargs['ch']
             del kwargs['ch']
         kwargs['extra'] = {'channel': str(channel)}
@@ -27,7 +27,7 @@ class log(logging.Logger):
 
     def warning(self, msg, *args, **kwargs):
         channel = 'N'
-        if kwargs.has_key('ch'):
+        if "ch" in kwargs:
             channel = kwargs['ch']
             del kwargs['ch']
         kwargs['extra'] = {'channel': str(channel)}
@@ -35,7 +35,7 @@ class log(logging.Logger):
 
     def debug(self, msg, *args, **kwargs):
         channel = 'N'
-        if kwargs.has_key('ch'):
+        if "ch" in kwargs:
             channel = kwargs['ch']
             del kwargs['ch']
         kwargs['extra'] = {'channel': str(channel)}
@@ -43,7 +43,7 @@ class log(logging.Logger):
 
     def error(self, msg, *args, **kwargs):
         channel = 'N'
-        if kwargs.has_key('ch'):
+        if "ch" in kwargs:
             channel = kwargs['ch']
             del kwargs['ch']
         kwargs['extra'] = {'channel': str(channel)}

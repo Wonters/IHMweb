@@ -43,7 +43,7 @@ class dataBaseConfiguration(object):
         self.db = self.client[database]
 
     def get_available_collection(self):
-        return self.db.collection_names()
+        return self.db.list_collection_names()
 
     def get_collection(self, collection):
         self.logger.debug("Open collection {0}".format(collection))

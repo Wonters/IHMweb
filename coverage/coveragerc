@@ -1,0 +1,24 @@
+[run]
+branch = True
+data_file = coverage/.coverage
+omit =
+    */.virtualenvs/*
+    */__init__.py
+    */test_coverage.py
+
+[report]
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+    # Don't complain if tests don't hit defensive assertion code:
+    raise AssertionError
+    raise NotImplementedError
+    raise AcbbsError
+    raise commutRackException
+
+ignore_errors = True
+
+[html]
+directory = coverage/coverage_html_report

@@ -11,7 +11,7 @@ This package is a library that provides functions to drive automated test **equi
 
 Install ACBBS :
 
-    $ pip install git+https://lchagnoleau@bitbucket.sigfox.com/scm/acbbs/acbbs.git
+    $ pip install git+https://{USER}@bitbucket.sigfox.com/scm/acbbs/acbbs.git
 
 Add your user in specific group :
 

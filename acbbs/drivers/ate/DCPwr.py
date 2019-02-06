@@ -196,6 +196,10 @@ class DCPwr(object):
                 return float(out)
             except:
                 return out
+
+        elif value is None:
+            self._channelSel().write("%s\n" % (cmd))
+            self._wait()
         else:
             self._channelSel().write("%s %s\n" % (cmd, int(value)))
             self._wait()

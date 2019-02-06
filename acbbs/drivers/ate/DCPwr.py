@@ -59,6 +59,7 @@ class DCPwr(object):
 
     @property
     def info(self):
+        self.logger.debug("Get info")
         return {
             "version":self.version,
             "error":self.errors,
@@ -70,6 +71,7 @@ class DCPwr(object):
         }
 
     def reset(self):
+        self.logger.debug("Reset")
         self._readWrite("*RST")
 
     @property
@@ -79,33 +81,38 @@ class DCPwr(object):
                 self.version_var = self._readWrite("SYST:VERS?")
             else:
                 self.version_var = 0.0
+        self.logger.debug("Get version : {}".format(self.version_var))
         return self.version_var
 
     @property
     def status(self):
         if not self.simulate:
-            return self._readWrite("OUTP:STAT?")
+            value = self._readWrite("OUTP:STAT?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get status : {}".format(value), ch = self.channel)
+        return value
 
     @status.setter
     def status(self, value):
-        self.logger.info("Change status to %s" % value, ch = self.channel)
+        self.logger.debug("Set status : {}".format(value), ch = self.channel)
         self._readWrite("OUTP:STAT", value)
 
     @property
     def voltageConsigne(self):
         if not self.simulate:
-            return self._readWrite("VOLT?")
+            value = self._readWrite("VOLT?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get voltageConsigne : {}".format(value), ch = self.channel)
+        return value
 
     @property
     def voltageReal(self):
         if not self.simulate:
-            return self._readWrite("MEAS:VOLT?")
+            value = self._readWrite("MEAS:VOLT?")
         else:
-            return 0.0
+            value = 0.0
 
     @property
     def voltage(self):

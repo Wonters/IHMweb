@@ -14,7 +14,7 @@ class PwrMeter(object):
             return '0'
         def read(self, val, timeout=None):
             return '0'
-        def read_until(self, val):
+        def read_until(self, val, timeout=None):
             return '0'
 
     def __init__(self, simulate = False):

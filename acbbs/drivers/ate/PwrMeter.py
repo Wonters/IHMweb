@@ -14,7 +14,7 @@ class PwrMeter(object):
             return '0'
         def read(self, val, timeout=None):
             return '0'
-        def read_until(self, val):
+        def read_until(self, val, timeout=None):
             return '0'
 
     def __init__(self, simulate = False):
@@ -51,12 +51,14 @@ class PwrMeter(object):
 
     @property
     def info(self):
+        self.logger.debug("Get info")
         return {
             "version":self.version,
             "error":self.errors
         }
 
     def reset(self):
+        self.logger.debug("Reset")
         self._readWrite("SYST:PRES")
 
     @property
@@ -66,44 +68,55 @@ class PwrMeter(object):
                 self.version_var = self._readWrite("SYST:VERS?")
             else:
                 self.version_var = 0.0
+        self.logger.debug("Get version : {}".format(self.version_var))
         return self.version_var
 
     @property
     def errors(self):
-        if not self.simulate:
-            err = ""
-            errList = []
-            while "No error" not in err:
-                err = self._readWrite("SYST:ERR?")
-                if "No error" not in err:
-                    errList.append(err)
-                    raise AcbbsError("read error %s" % err, log = self.logger)
-            return errList
+        # if not self.simulate:
+        #     err = ""
+        #     errList = []
+        #     while "No error" not in err:
+        #         err = self._readWrite("SYST:ERR?")
+        #         if "No error" not in err:
+        #             errList.append(err)
+        #             raise AcbbsError("read error %s" % err, log = self.logger)
+        #     return errList
 
-        else:
-            return []
+        # else:
+        return []
 
     @property
     def status(self):
-        return self._readWrite("SENS:PMET:STAT?")
+        if not self.simulate:
+            value = self._readWrite("SENS:PMET:STAT?")
+        else:
+            value = 0.0
+        self.logger.debug("Get status : {}".format(value))
+        return value
 
     @property
     def freq(self, value = None):
         if not self.simulate:
-            return self._readWrite("SENS:PMET:FREQ?")
+            value = self._readWrite("SENS:PMET:FREQ?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get freq : {}".format(value))
+        return value
 
     @freq.setter
     def freq(self, value):
+        self.logger.debug("Set freq : {}".format(value))
         self._readWrite("SENS:PMET:FREQ", value)
 
     @property
     def power(self):
         if self.simulate:
-            return 0.0
+            value = 0.0
         else:
-            return(float(self._readWrite("READ:PMET?")))
+            value = (float(self._readWrite("READ:PMET?")))
+        self.logger.debug("Get power : {}".format(value))
+        return value
 
     def _wait(self):
         self.inst.write("*WAI\n")

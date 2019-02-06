@@ -62,6 +62,7 @@ class Swtch(object):
             self.sw4 = 1
 
     def __connect(self):
+        self.logger.debug("Connect")
         if not self.simulate:
             self.tn = Telnet(self.swtchConf["ip"], 23, 2)
             self.tn.write('enable \r\n')
@@ -75,11 +76,13 @@ class Swtch(object):
             self.tn = self._simulate()
 
     def __disconnect(self):
+        self.logger.debug("Disconnect")
         self.tn.write(chr(12))
         self.tn.read_until("#", 1)
         self.tn.close()
 
     def setSwitch(self, sw1 = None, sw2 = None, sw3 = None, sw4 = None):
+        self.logger.debug("Set switch : {}, {}, {}, {}".format(sw1, sw2, sw3, sw4))
         if sw1 is not None:
             self.channel = sw1
         if not self.simulate:
@@ -119,18 +122,21 @@ class Swtch(object):
 
         #return correct offset depending of switch configurationFile
         if sw3 == 2:
-            return {"noise-soure":self.swtchConf["loss"]["J{0}-J18".format(sw1+8)]}
+            value = {"noise-soure":self.swtchConf["loss"]["J{0}-J18".format(sw1+8)]}
         elif sw3 == 4 and sw4 == 2:
-            return {"pwr-meter":self.swtchConf["loss"]["J{0}-J2".format(sw1+8)],
+            value = {"pwr-meter":self.swtchConf["loss"]["J{0}-J2".format(sw1+8)],
                     "fsv-fswr":self.swtchConf["loss"]["J{0}-J5".format(sw1+8)],
                     "smb100a":self.swtchConf["loss"]["J{0}-J4_20dB".format(sw1+8)]}
         elif sw3 == 4 and sw4 == 1:
-            return {"pwr-meter":self.swtchConf["loss"]["J{0}-J2".format(sw1+8)],
+            value = {"pwr-meter":self.swtchConf["loss"]["J{0}-J2".format(sw1+8)],
                     "fsv-fswr":self.swtchConf["loss"]["J{0}-J5".format(sw1+8)]}
         elif sw3 == 3 and sw4 == 2:
-            return {"smbv100a":self.swtchConf["loss"]["J{0}-J3".format(sw1+8)]}
+            value = {"smbv100a":self.swtchConf["loss"]["J{0}-J3".format(sw1+8)]}
         elif sw3 == 3 and sw4 == 1:
-            return {"smbv100a":self.swtchConf["loss"]["J{0}-J3".format(sw1+8)],
+            value = {"smbv100a":self.swtchConf["loss"]["J{0}-J3".format(sw1+8)],
                     "smb100a":self.swtchConf["loss"]["J{0}-J4".format(sw1+8)]}
         else:
             raise commutRackException()
+        
+        self.logger.debug("Get offset : {}".format(value))
+        return value

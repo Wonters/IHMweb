@@ -41,6 +41,7 @@ class ClimCham(object):
 
     @property
     def info(self):
+        self.logger.debug("Get info")
         return {
             # "error":self.errors,
             # "Oven_Prog_Temperature_(C)":self.tempConsigne,
@@ -51,34 +52,39 @@ class ClimCham(object):
     @property
     def errors(self):
         if not self.simulate:
-            return []
-
+            value = []
         else:
-            return []
+            value = []
+        self.logger.debug("Get errors : {}".format(value))
+        return value
 
     @property
     def status(self):
-        return self._dev.read_holding_registers(5953, 1)[0]
+        value = self._dev.read_holding_registers(5953, 1)[0]
+        self.logger.debug("Get status : {}".format(value))
+        return value
 
     @status.setter
     def status(self, value):
-        self.logger.info("Change status to %s" % value)
+        self.logger.debug("Set status : {}".format(value))
         self._dev.write_single_register(5953, int(value))
 
     @property
     def tempConsigne(self):
-        return float(ctypes.c_short(self._dev.read_holding_registers(2)[0]).value) / 10
+        value = float(ctypes.c_short(self._dev.read_holding_registers(2)[0]).value) / 10
+        self.logger.debug("Get tempConsigne : {}".format(value))
     
     @tempConsigne.setter
     def tempConsigne(self,value):
+        self.logger.debug("Set tempConsigne : {}".format(value))
         if value > 100 or value < -50:
             raise AcbbsError("the temperature must be between -50 and 100 val : %s" % value, log = self.logger)
-        self.logger.info("set temperature to %s" % value)
         self._dev.write_single_register(2, ctypes.c_ushort(int(value*10)).value)
 
     @property
     def tempReal(self):
-        return float(ctypes.c_short(self._dev.read_holding_registers(1)[0]).value) / 10
+        value = float(ctypes.c_short(self._dev.read_holding_registers(1)[0]).value) / 10
+        self.logger.debug("Get tempReal : {}".format(value))
 
     @property
     def humidityConsigne(self):

@@ -14,7 +14,7 @@ class SpecAn(object):
             return '0'
         def read(self, val, timeout=None):
             return '0'
-        def read_until(self, val):
+        def read_until(self, val, timeout=None):
             return '0'
 
     def __init__(self, simulate = False):
@@ -47,12 +47,14 @@ class SpecAn(object):
 
     @property
     def info(self):
+        self.logger.debug("Get info")
         return {
             "version":self.version,
             "error":self.errors
         }
 
     def reset(self):
+        self.logger.debug("Reset")
         self._readWrite("SYST:PRES")
 
     @property
@@ -62,6 +64,7 @@ class SpecAn(object):
                 self.version_var = self._readWrite("SYST:VERS?")
             else:
                 self.version_var = "xxxx"
+        self.logger.debug("Get version : {}".format(self.version_var))
         return self.version_var
 
     @property
@@ -74,166 +77,215 @@ class SpecAn(object):
                 if "No error" not in err:
                     errList.append(err)
                     raise AcbbsError("read error %s" % err, log = self.logger)
-            return errList
+            value = errList
 
         else:
-            return []
+            value = []
+        self.logger.debug("Get errors : {}".format(value))
+        return value
 
     @property
     def freqStart(self):
-        if not self.simulate:
-            return self._readWrite("FREQ:START?")
+        if not self.simulate: 
+            value = self._readWrite("FREQ:START?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get Freq Start: {}".format(value))
+        return value
 
     @freqStart.setter
     def freqStart(self, value):
+        self.logger.debug("Set Freq Start: {}".format(value))
         return self._readWrite("FREQ:START", value)
 
     @property
     def freqCenter(self, value = None):
         if not self.simulate:
-            return self._readWrite("FREQ:CENT?")
+            value = self._readWrite("FREQ:CENT?")
         else:
-            return 0.0
+            value =  0.0
+        self.logger.debug("Set Freq Center : {}".format(value))
+        return value
 
     @freqCenter.setter
     def freqCenter(self, value):
-        self._readWrite("FREQ:CENT", value)
+        self.logger.debug("Get Freq Center : {}".format(value))
+        return self._readWrite("FREQ:CENT", value)
 
     @property
     def freqStop(self):
         if not self.simulate:
-            return self._readWrite("FREQ:STOP?")
+            value = self._readWrite("FREQ:STOP?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get Freq Stop : {}".format(value))
+        return value
 
     @freqStop.setter
     def freqStop(self, value):
+        self.logger.debug("Set Freq Stop : {}".format(value))
         return self._readWrite("FREQ:STOP", value)
 
     @property
     def freqSpan(self):
         if not self.simulate:
-            return self._readWrite("FREQ:SPAN?")
+            value = self._readWrite("FREQ:SPAN?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get Freq Span : {}".format(value))
+        return value
 
     @freqSpan.setter
     def freqSpan(self, value):
+        self.logger.debug("Set Freq Span : {}".format(value))
         return self._readWrite("FREQ:SPAN", value)
 
     @property
     def refLvl(self):
         if not self.simulate:
-            return self._readWrite("DISP:TRAC1:Y:RLEVel?")
+            value = self._readWrite("DISP:TRAC1:Y:RLEVel?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get Ref Lvl : {}".format(value))
+        return value
 
     @refLvl.setter
     def refLvl(self, value):
+        self.logger.debug("Set Ref Lvl : {}".format(value))
         return self._readWrite("DISP:TRAC1:Y:RLEVel", value)
 
     @property
     def refLvlOffset(self):
         if not self.simulate:
-            return self._readWrite("DISP:TRAC1:Y:RLEV:OFFS?")
+            value = self._readWrite("DISP:TRAC1:Y:RLEV:OFFS?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get Ref Lvl Offset : {}".format(value))
+        return value
 
     @refLvlOffset.setter
     def refLvlOffset(self, value):
+        self.logger.debug("Set Ref Lvl Offset : {}".format(value))
         return self._readWrite("DISP:TRAC1:Y:RLEV:OFFS", value)
 
     @property
     def inputAtten(self):
         if not self.simulate:
-            return self._readWrite("INP:ATT?")
+            value = self._readWrite("INP:ATT?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get Input Atten: {}".format(value))
+        return value
 
     @inputAtten.setter
     def inputAtten(self, value):
+        self.logger.debug("Set Input Atten : {}".format(value))
         return self._readWrite("INP:ATT", value)
 
     @property
     def rbw(self):
         if not self.simulate:
-            return self._readWrite("SENS:BWID:RES?")
+            value = self._readWrite("SENS:BWID:RES?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get RBW : {}".format(value))
+        return value
 
     @rbw.setter
     def rbw(self, value):
+        self.logger.debug("Set RBW : {}".format(value))
         return self._readWrite("SENS:BWID:RES", value)
 
     @property
     def vbw(self):
         if not self.simulate:
-            return self._readWrite("SENS:BWID:VID?")
+            value = self._readWrite("SENS:BWID:VID?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get VBW : {}".format(value))
+        return value
 
     @vbw.setter
     def vbw(self, value):
+        self.logger.debug("Set VBW : {}".format(value))
         return self._readWrite("SENS:BWID:VID", value)
 
     @property
     def sweep(self):
         if not self.simulate:
-            return self._readWrite("SENS:SWE:TIME?")
+            value = self._readWrite("SENS:SWE:TIME?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get Sweep : {}".format(value))
+        return value
 
     @sweep.setter
     def sweep(self, value):
+        self.logger.debug("Set Sweep : {}".format(value))
         return self._readWrite("SENS:SWE:TIME", value)
 
     def refreshDisplay(self):
+        self.logger.debug("Refresh Display")
         self._readWrite("INIT:CONT OFF")
         self._readWrite("DISP:TRAC:MODE WRIT")
         self._readWrite("INIT:CONT ON")
 
     def averageCount(self, value):
+        self.logger.debug("Average Count")
         self._readWrite("DISP:TRAC:MODE AVER")
         self._readWrite("INIT:CONT OFF")
         self._readWrite("AVER:COUN", value)
         self.runSingle()
 
     def maxHoldCount(self, value):
+        self.logger.debug("Max Hold Count")
         self._readWrite("INIT:CONT OFF")
         self._readWrite("SWE:COUN", value)
         self._readWrite("DISP:TRAC:MODE MAXH")
 
     def runSingle(self):
+        self.logger.debug("Run Single")
         self._readWrite("INIT;*WAI")
 
     def markerPeakSearch(self, marker = 1):
         if self.simulate:
-            return [0.0, 0.0]
+            value = [0.0, 0.0]
         else:
             self._readWrite("CALC:MARK{0}:MAX".format(marker))
-            return [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
+            value [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
+        self.logger.debug("Get Marker peak at marker {} : {}".format(marker, value))
+        return value
 
     def markerSearch(self, marker = 1, dir = None):
-        if dir == 'r':
-            self._readWrite("CALC:MARK{0}:MAX:RIGH".format(marker))
-        if dir == 'l':
-            self._readWrite("CALC:MARK{0}:MAX:LEFT".format(marker))
-        if dir == 'n':
-            self._readWrite("CALC:MARK{0}:MAX:NEXT".format(marker))
-        return [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
+        if self.simulate:
+            value = [0.0, 0.0]
+        else:
+            if dir == 'r':
+                self._readWrite("CALC:MARK{0}:MAX:RIGH".format(marker))
+            if dir == 'l':
+                self._readWrite("CALC:MARK{0}:MAX:LEFT".format(marker))
+            if dir == 'n':
+                self._readWrite("CALC:MARK{0}:MAX:NEXT".format(marker))
+            value = [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
+        self.logger.debug("Get Marker Search at marker {}, dir {} : {}".format(marker, dir, value))
+        return value
 
     def markerSet(self, marker = 1, freq = None, status = 1):
+        self.logger.debug("Set Marker {} at {}Hz. (Status = {})".format(marker, freq, status))
         if freq is not None:
             self._readWrite("CALC:MARK{0}:X".format(marker), freq)
         self._readWrite("CALC:MARK{0}".format(marker), status)
 
     def markerGet(self, marker = 1):
-        return [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
+        if self.simulate:
+            value = [0.0, 0.0]
+        else:
+            value = [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
+        self.logger.debug("Get Marker {} : {}".format(marker, value))
+        return value
 
     def markerSearchLimit(self, marker = 1, freqleft = None, freqright = None, status = 1):
-        self.logger.debug("marker = {0}, freqleft = {1}, freqright = {2}, status = {3}".format(marker, freqleft, freqright, status))
+        self.logger.debug("Set limit at marker {} : freqleft = {}, freqright = {}. (status = {})".format(marker, freqleft, freqright, status))
         if not self.simulate:
             self._readWrite("CALC:MARK{0}:X:SLIM".format(marker), status)
             if freqleft is not None and freqright is not None:
@@ -242,14 +294,15 @@ class SpecAn(object):
 
     def markerDelta(self, marker = 1, mode = None, delta = None, status = 1):
         if self.simulate:
-            return 0.0
+            value = 0.0
         else:
             self._readWrite("CALC:DELT{0}".format(marker), status)
             if mode is not None and delta is not None:
                 self._readWrite("CALC:DELT{0}:MODE".format(marker), mode)
                 self._readWrite("CALC:DELT{0}:X".format(marker), delta)
 
-            return float(self._readWrite("CALC:DELT{0}:Y?".format(marker)))
+            value = float(self._readWrite("CALC:DELT{0}:Y?".format(marker)))
+        self.logger.debug("Get Marker Delta at marker {}, mode {}, delta {} : {}".format(marker, mode, delta, value))
 
     def display(self, mode = None):
         """
@@ -271,6 +324,7 @@ class SpecAn(object):
         pass
 
     def limitLineHSet(self, line = 1, power = None, status = None):
+        self.logger.debug("Set horizontal limit line {} at {}dBm. (status = {})".format(line, power, status))
         if status is not None:
             self._readWrite("CALC:DLIN{0}:STAT".format(line), status)
         else:
@@ -278,6 +332,7 @@ class SpecAn(object):
             self._readWrite("CALC:DLIN{0}".format(line), power)
 
     def limitLineVSet(self, line = 1, freq = None, status = None):
+        self.logger.debug("Set vertical limit line {} at {}Hz. (status = {})".format(line, freq, status))
         if status is not None:
             self._readWrite("CALC:FLIN{0}:STAT".format(line), status)
         else:
@@ -285,6 +340,7 @@ class SpecAn(object):
             self._readWrite("CALC:FLIN{0}".format(line), freq)
 
     def limitSet(self, limit = 1, freq = None, power = None, margin = 0):
+        self.logger.debug("Set limit at {}dBm, {}Hz, margin : {}".format(power, freq, margin))
         if len(freq) != len(power):
             raise AcbbsError("freq and power not same size", log = self.logger)
 
@@ -307,10 +363,13 @@ class SpecAn(object):
         self._readWrite("CALC:LIM{0}:STAT ON".format(limit))
 
     def limitState(self, limit = 1, status = None):
+        self.logger.debug("Set limit state. (status = {})".format(status))
         self._readWrite("CALC:LIM{0}:STAT".format(limit), status)
 
     def limitCheck(self, limit = 1):
-        return self._readWrite("CALC:LIM{0}:FAIL?".format(limit))
+        value = self._readWrite("CALC:LIM{0}:FAIL?".format(limit))
+        self.logger.debug("Get limit {} check : {}".format(limit, value))
+        return value
 
     def _wait(self):
         self.inst.write("*WAI\n")

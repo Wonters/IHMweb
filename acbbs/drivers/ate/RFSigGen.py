@@ -46,12 +46,14 @@ class RFSigGen(object):
 
     @property
     def info(self):
+        self.logger.debug("Get info")
         return {
             "version":self.version,
             "error":self.errors
         }
 
     def reset(self):
+        self.logger.debug("Reset")
         self._readWrite("SYST:PRES")
 
     @property
@@ -61,57 +63,64 @@ class RFSigGen(object):
                 self.version_var = self._readWrite("SYST:VERS?")
             else:
                 self.version_var = 0.0
+        self.logger.debug("Get version : {}".format(self.version_var))
         return self.version_var
 
     @property
     def errors(self):
-        if not self.simulate:
-            err = ""
-            errList = []
-            while "No error" not in err:
-                err = self._readWrite("SYST:ERR?")
-                if "No error" not in err:
-                    errList.append(err)
-                    self.logger.debug("read error %s" % err)
-            return errList
+        # if not self.simulate:
+        #     err = ""
+        #     errList = []
+        #     while "No error" not in err:
+        #         err = self._readWrite("SYST:ERR?")
+        #         if "No error" not in err:
+        #             errList.append(err)
+        #             self.logger.debug("read error %s" % err)
+        #     return errList
 
-        else:
-            return []
+        # else:
+        return []
 
     @property
     def status(self):
         if not self.simulate:
-            return self._readWrite("OUTP:STAT?")
+            value = self._readWrite("OUTP:STAT?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get status : {}".format(value))
+        return value
 
     @status.setter
     def status(self, value):
-        self.logger.info("Change status to %s" % value)
+        self.logger.debug("Set status : {}".format(value))
         self._readWrite("OUTP:STAT", value)
 
     @property
     def power(self):
         if not self.simulate:
-            return self._readWrite("SOUR:POW:LEV:IMM:AMPL?")
+            value = self._readWrite("SOUR:POW:LEV:IMM:AMPL?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get power : {}".format(value))
+        return value
 
     @power.setter
     def power(self, value):
-        self.logger.info("Change power to %s" % value)
+        self.logger.debug("Set power : {}".format(value))
         self._readWrite("SOUR:POW:LEV:IMM:AMPL", float(value))
 
     @property
     def freq(self):
         if not self.simulate:
-            return self._readWrite("SOUR:FREQ:CW?")
+            value = self._readWrite("SOUR:FREQ:CW?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get freq : {}".format(value))
+        return value
 
     @freq.setter
     def freq(self, value):
-        self.logger.info("Change freq to %s" % value)
+        self.logger.debug("Set freq : {}".format(value))
         self._readWrite("SOUR:FREQ:CW", value)
 
     def _wait(self):

@@ -113,6 +113,8 @@ class DCPwr(object):
             value = self._readWrite("MEAS:VOLT?")
         else:
             value = 0.0
+        self.logger.debug("Get voltageReal : {}".format(value), ch = self.channel)
+        return value
 
     @property
     def voltage(self):
@@ -126,16 +128,20 @@ class DCPwr(object):
     @property
     def currentConsigne(self):
         if not self.simulate:
-            return self._readWrite("CURR?")
+            value = self._readWrite("CURR?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get currentConsigne : {}".format(value), ch = self.channel)
+        return value
 
     @property
     def currentReal(self):
         if not self.simulate:
-            return self._readWrite("MEAS:CURR?")
+            value = self._readWrite("MEAS:CURR?")
         else:
-            return 0.0
+            value = 0.0
+        self.logger.debug("Get currentReal : {}".format(value), ch = self.channel)
+        return value
 
     @property
     def current(self):
@@ -162,6 +168,7 @@ class DCPwr(object):
         return []
 
     def setChan(self, dutChan):
+        self.logger.debug("Set channel : {}".format(dutChan))
         if int(dutChan) in [1, 2, 3, 4, 5, 6, 7, 8]:
             self.logger.info("Change channel to %s" % dutChan, ch = self.channel)
             self.channel = dutChan

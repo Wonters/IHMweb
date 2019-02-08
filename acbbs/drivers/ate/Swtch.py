@@ -68,7 +68,7 @@ class Swtch(object):
             self.tn.write(('enable \r\n').encode('ascii'))
             self.tn.read_until(("(enable)#").encode('ascii'))
             self.tn.write(('connect line 2 \r\n').encode('ascii'))
-            result = str(self.tn.read_until(("Connected to line 2.\r\n").encode('ascii'), 1))
+            result = (self.tn.read_until(("Connected to line 2.\r\n").encode('ascii'), 1)).decode("utf-8")
             if "Connected" not in result:
                 raise commutRackException(result)
             self.tn.read_until(("\r\n").encode('ascii'))
@@ -89,7 +89,9 @@ class Swtch(object):
             #configure switch
             self.__connect()
             self.tn.write(("S\r\n").encode('ascii'))
-            ret = self.tn.read_until(("\r\n").encode('ascii'))
+            ret = (self.tn.read_until(("\r\n").encode('ascii'))).decode("utf-8")
+            print(ret)
+            print(ret[1])
             if sw1 is None:
                 sw1 = int(ret[1])
             if sw2 is None:
@@ -99,7 +101,7 @@ class Swtch(object):
             if sw4 is None:
                 sw4 = int(ret[4])
             self.tn.write(('c' + str(sw1) + str(sw2) + str(sw3) + str(sw4) + '\r\n').encode('ascii'))
-            ret = self.tn.read_until(("\r\n").encode('ascii'))
+            ret = (self.tn.read_until(("\r\n").encode('ascii'))).decode("utf-8")
             self.__disconnect()
 
         else:

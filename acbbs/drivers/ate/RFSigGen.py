@@ -131,7 +131,7 @@ class RFSigGen(object):
         self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
         if "?" in cmd:
             self.inst.write(("%s\n" % cmd).encode('ascii'))
-            out = self.inst.read_until(("\n").encode('ascii'), timeout=TIMEOUT)[:-1]
+            out = (self.inst.read_until(("\n").encode('ascii'), timeout=TIMEOUT)).decode("utf-8")[:-1]
             try:
                 return float(out)
             except:

@@ -48,8 +48,8 @@ class DCPwr(object):
                 self.powerDevice2 = Telnet(self.dcConf["powerDevice2-ip"], 5025, 1)
             except :
                 raise AcbbsError("hmp4040 2 Connection error : {0}".format(self.dcConf["powerDevice2-ip"]), log = self.logger)
-            self.powerDevice1.write("OUTP:GEN ON\n")
-            self.powerDevice2.write("OUTP:GEN ON\n")
+            self.powerDevice1.write(("OUTP:GEN ON\n").encode('ascii'))
+            self.powerDevice2.write(("OUTP:GEN ON\n").encode('ascii'))
         else:
             self.logger.info("New power instance in Simulate")
             self.powerDevice1 = self._simulate()
@@ -178,10 +178,10 @@ class DCPwr(object):
     def _wait(self):
         if self.channel != None:
             if self.channel in [1, 2, 3, 4]:
-                self.powerDevice1.write("*WAI\n")
+                self.powerDevice1.write(("*WAI\n").encode('ascii'))
                 return
             elif self.channel in [5, 6, 7, 8]:
-                self.powerDevice2.write("*WAI\n")
+                self.powerDevice2.write(("*WAI\n").encode('ascii'))
                 return
 
         else:
@@ -190,18 +190,18 @@ class DCPwr(object):
     def _readWrite(self, cmd = None, value = None):
         if "?" in cmd:
             device = self._channelSel()
-            device.write("%s\n" % cmd)
-            out = device.read_until("\n", timeout=TIMEOUT)[:-1]
+            device.write(("%s\n" % cmd).encode('ascii'))
+            out = device.read_until(("\n").encode('ascii'), timeout=TIMEOUT)[:-1]
             try:
                 return float(out)
             except:
                 return out
 
         elif value is None:
-            self._channelSel().write("%s\n" % (cmd))
+            self._channelSel().write(("%s\n" % (cmd)).encode('ascii'))
             self._wait()
         else:
-            self._channelSel().write("%s %s\n" % (cmd, int(value)))
+            self._channelSel().write(("%s %s\n" % (cmd, int(value))).encode('ascii'))
             self._wait()
 
         err = self.errors
@@ -218,18 +218,18 @@ class DCPwr(object):
 
     def _channelSel(self):
         if int(self.channel) in [1, 2, 3, 4]:
-            self.powerDevice1.write("INST:NSEL?\n")
-            if self.powerDevice1.read_until("\n", timeout=TIMEOUT)[:-1] != str(self.channel):
+            self.powerDevice1.write(("INST:NSEL?\n").encode('ascii'))
+            if self.powerDevice1.read_until(("\n").encode('ascii'), timeout=TIMEOUT)[:-1] != str(self.channel):
                 self.logger.debug("Write on channel %s on powerDevice1" % self.channel, ch = self.channel)
-                self.powerDevice1.write("%s %s\n" % ("INST:NSEL", int(self.channel)))
+                self.powerDevice1.write(("%s %s\n" % ("INST:NSEL", int(self.channel))).encode('ascii'))
                 self._wait()
             return self.powerDevice1
         elif int(self.channel) in [5, 6, 7, 8]:
             channel = (int(self.channel) - 4)
-            self.powerDevice2.write("INST:NSEL?\n")
-            if self.powerDevice2.read_until("\n", timeout=TIMEOUT)[:-1] != str(channel):
+            self.powerDevice2.write(("INST:NSEL?\n").encode('ascii'))
+            if self.powerDevice2.read_until(("\n").encode('ascii'), timeout=TIMEOUT)[:-1] != str(channel):
                 self.logger.debug("Write on channel %s on powerDevice2" % channel, ch = self.channel)
-                self.powerDevice2.write("%s %s\n" % ("INST:NSEL", int(channel)))
+                self.powerDevice2.write(("%s %s\n" % ("INST:NSEL", int(channel))).encode('ascii'))
                 self._wait()
             return self.powerDevice2
         else:

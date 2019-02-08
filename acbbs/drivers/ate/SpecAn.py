@@ -252,7 +252,7 @@ class SpecAn(object):
             value = [0.0, 0.0]
         else:
             self._readWrite("CALC:MARK{0}:MAX".format(marker))
-            value [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
+            value = [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
         self.logger.debug("Get Marker peak at marker {} : {}".format(marker, value))
         return value
 
@@ -372,22 +372,22 @@ class SpecAn(object):
         return value
 
     def _wait(self):
-        self.inst.write("*WAI\n")
+        self.inst.write(("*WAI\n").encode('ascii'))
         return
 
     def _readWrite(self, cmd = None, value = None):
         self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
         if "?" in cmd:
-            self.inst.write("%s\n" % cmd)
-            out = self.inst.read_until("\n", timeout=TIMEOUT)[:-1]
+            self.inst.write(("%s\n" % cmd).encode('ascii'))
+            out = self.inst.read_until(("\n").encode('ascii'), timeout=TIMEOUT)[:-1]
             self.logger.debug("out : {0}".format(out))
             try:
                 return float(out)
             except:
-                return out
+                return str(out)
         elif value is None:
-            self.inst.write("%s\n" % (cmd))
+            self.inst.write(("%s\n" % (cmd)).encode('ascii'))
             self._wait()
         else:
-            self.inst.write("%s %s\n" % (cmd, value))
+            self.inst.write(("%s %s\n" % (cmd, value)).encode('ascii'))
             self._wait()

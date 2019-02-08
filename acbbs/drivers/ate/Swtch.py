@@ -65,20 +65,20 @@ class Swtch(object):
         self.logger.debug("Connect")
         if not self.simulate:
             self.tn = Telnet(self.swtchConf["ip"], 23, 2)
-            self.tn.write('enable \r\n')
-            self.tn.read_until("(enable)#")
-            self.tn.write('connect line 2 \r\n')
-            result = self.tn.read_until("Connected to line 2.\r\n", 1)
+            self.tn.write(('enable \r\n').encode('ascii'))
+            self.tn.read_until(("(enable)#").encode('ascii'))
+            self.tn.write(('connect line 2 \r\n').encode('ascii'))
+            result = str(self.tn.read_until(("Connected to line 2.\r\n").encode('ascii'), 1))
             if "Connected" not in result:
                 raise commutRackException(result)
-            self.tn.read_until("\r\n")
+            self.tn.read_until(("\r\n").encode('ascii'))
         else:
             self.tn = self._simulate()
 
     def __disconnect(self):
         self.logger.debug("Disconnect")
-        self.tn.write(chr(12))
-        self.tn.read_until("#", 1)
+        self.tn.write((chr(12)).encode('ascii'))
+        self.tn.read_until(("#").encode('ascii'), 1)
         self.tn.close()
 
     def setSwitch(self, sw1 = None, sw2 = None, sw3 = None, sw4 = None):
@@ -88,8 +88,8 @@ class Swtch(object):
         if not self.simulate:
             #configure switch
             self.__connect()
-            self.tn.write("S\r\n")
-            ret = self.tn.read_until("\r\n")
+            self.tn.write(("S\r\n").encode('ascii'))
+            ret = self.tn.read_until(("\r\n").encode('ascii'))
             if sw1 is None:
                 sw1 = int(ret[1])
             if sw2 is None:
@@ -98,8 +98,8 @@ class Swtch(object):
                 sw3 = int(ret[3])
             if sw4 is None:
                 sw4 = int(ret[4])
-            self.tn.write('c' + str(sw1) + str(sw2) + str(sw3) + str(sw4) + '\r\n')
-            ret = self.tn.read_until("\r\n")
+            self.tn.write(('c' + str(sw1) + str(sw2) + str(sw3) + str(sw4) + '\r\n').encode('ascii'))
+            ret = self.tn.read_until(("\r\n").encode('ascii'))
             self.__disconnect()
 
         else:

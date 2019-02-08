@@ -90,8 +90,6 @@ class Swtch(object):
             self.__connect()
             self.tn.write(("S\r\n").encode('ascii'))
             ret = (self.tn.read_until(("\r\n").encode('ascii'))).decode("utf-8")
-            print(ret)
-            print(ret[1])
             if sw1 is None:
                 sw1 = int(ret[1])
             if sw2 is None:

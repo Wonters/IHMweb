@@ -73,18 +73,18 @@ class PwrMeter(object):
 
     @property
     def errors(self):
-        # if not self.simulate:
-        #     err = ""
-        #     errList = []
-        #     while "No error" not in err:
-        #         err = self._readWrite("SYST:ERR?")
-        #         if "No error" not in err:
-        #             errList.append(err)
-        #             raise AcbbsError("read error %s" % err, log = self.logger)
-        #     return errList
+        if not self.simulate:
+            err = ""
+            errList = []
+            while "No error" not in err:
+                err = self._readWrite("SYST:ERR?")
+                if "No error" not in err:
+                    errList.append(err)
+                    raise AcbbsError("read error %s" % err, log = self.logger)
+            return errList
 
-        # else:
-        return []
+        else:
+            return []
 
     @property
     def status(self):

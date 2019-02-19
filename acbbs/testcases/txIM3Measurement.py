@@ -39,6 +39,7 @@ class txIM3Measurement(baseTestCase):
 
             #set SpecAn Offset
             self.SpecAn.refLvlOffset = swtch_loss["fsv-fswr"]
+            self.SpecAn.refLvl = self.tcConf["refLvl"]
 
 
             for vdd in self.tcConf["voltage"]:
@@ -161,7 +162,6 @@ class txIM3Measurement(baseTestCase):
 
         #configure SpecAn
         self.SpecAn.inputAtt = self.tcConf["inputAtt"]
-        self.SpecAn.refLvl = self.tcConf["refLvl"]
         self.SpecAn.rbw = self.tcConf["rbw"]
         self.SpecAn.vbw = self.tcConf["vbw"]
         self.SpecAn.freqSpan = self.tcConf["span"]

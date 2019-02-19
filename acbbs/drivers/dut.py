@@ -512,7 +512,7 @@ class Dut(object):
                     except:
                         self.stopBBSine()
                         raise AcbbsError("No Chunk receive", ch=self.channel, log=self.logger)
-                    result = pout.readlines()[2].split(" ")
+                    result = pout.readlines()[2].decode("utf-8").split(" ")
                     irr = {'dGain': float(result[7]), 'dPhase': float(result[9]), 'irr': float(result[11]), 'rssi': float(result[17])}
                     freq = float(result[14])
                     if ((freq > (int(freqBBHz) + 2000)) or (freq < (int(freqBBHz) - 2000))):

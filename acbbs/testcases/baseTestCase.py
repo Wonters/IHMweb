@@ -28,7 +28,7 @@ class baseTestCase(Thread):
         self.temp = temp
         self.simulate = simulate
         self.comment = comment
-        self.date = date
+        self.date = int(date)
         self.channel = channel
 
         #init logs

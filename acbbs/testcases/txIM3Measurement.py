@@ -170,7 +170,7 @@ class txIM3Measurement(baseTestCase):
         return {
             "comment":self.comment,
             "config":self.tcConf,
-            "date-measure":time.time(),
+            "date-measure":int(time.time()),
             "date-tc":self.date,
             "tc_version":self.tcVersion,
             "acbbs_version":__version__,

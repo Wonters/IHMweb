@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block nav %}
+
+{% endblock %}
+
+{% block contents %}
+
+<p> Fichier de configuration :  {{name}} </p>
+<h1>Scheduler</h1>
+{% for keys,values in scheduler.items %}
+	<div><strong>{{keys}}</strong> : {{values}}</div>
+{% endfor %}
+<form action="{% url "writeConf" %}" role="form" method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<ul>
+{% for testcase, list in configs.items %}
+		{% for testcase_i in list %}
+		<h1><strong>{{testcase}}  {{testcase_i.name}}</strong></h1>
+			{% for conf, value in testcase_i.items %}
+			<p><strong>{{conf}}</strong>: <input type="texte" name="{{testcase}}{{conf}}" value="{{value}}"> </p>
+			{% endfor %}
+		{% endfor %}
+{% endfor %}
+</ul>
+<div class=""> 
+<button type="submit" class="btn btn-default" value="Submit">SAVE</button>    <!-- envoie le formulaire et renvoie le template read -->
+</div>
+</form>
+
+
+{% endblock %}

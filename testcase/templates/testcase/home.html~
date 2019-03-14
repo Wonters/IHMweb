@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+TESTCASE
+{% endblock %}
+
+{% block nav%}
+
+
+<!-- ajouter une barre de progression -->
+{% endblock %}
+
+{% block contents %}
+<form action="{% url "start" %}" role="form" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="row">
+                            <div class="">
+                                <label for="name">Name</label>
+                                <input id="name" class="form-control" name="testcase_nameCarac"></input>
+                            </div>
+                            <div class="">
+                                <label for="simulated">Simulated</label>
+                                <input type="boolean" id="simulated" class="form-control" name="testcase_simulation">
+                            </div>
+                            <div class="">
+                                <label for="configfile">Configuration file</label>
+                                <input type="name" id="configfile" class="form-control" name="testcase_configFile"></input>
+                            </div>
+                            <div class="">
+                                <label for="climChamber">Climatic chamber </label>
+                                <input type="boolean" id="climChamber" name="testcase_climChamber" class="form-control"></input>
+                            </div>
+                            <div class="">
+                                <label for="channel">Channel </label>
+                                <input type="box" id="channel" name="testcase_channel" class="form-control"></input>
+                            </div>
+                            <div class="">
+                                <button type="submit" class="btn btn-default">START</button>    <!-- remplacer à terme par un bouton start -->
+                            </div>
+                        </div>
+</form>
+<div><a href="/testcase/stop"><button> STOP </button> </a> <!-- bouton qui lance le script acbbs-schedule.py dans le dossier /etc/abbs/ --> 
+</div>
+{% endblock %}
+

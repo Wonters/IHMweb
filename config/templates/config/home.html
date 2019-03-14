@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Configuration
+{% endblock %}
+
+
+{% block contents %}
+    <form action="{% url "read" %}" role="form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="row">
+            <div class="">
+                <h1>Select a file</h1>
+                <label class="cmd" for="name">Configuration file in the database</label>
+                <select name="configname" class="form-control">
+                    {% for conf in listConf %}
+                        <option value="{{ conf }}"> {{ conf }} </option>
+                    {% endfor %}
+                </select>
+                <div class="">
+                    <button type="submit" id="button" class="btn btn-default" value="Submit">READ</button>
+                    <!-- envoie le formulaire et renvoie le template read -->
+                </div>
+            </div>
+        </div>
+    </form>
+    <div>
+        <a href="/config/create">
+            <button id="button"> CREATE</button>
+        </a>
+    </div>
+
+    <div>
+        <a id="delete" href="#">
+            <button id="button"> DELETE</button>
+        </a>
+    </div>
+
+    <div>
+        <form action="{% url "add" %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="file" id="nameConfAdd" name="nameConfAdd">
+            <button type="submit" id="button"> load</button>
+        </form>
+    </div>
+
+    <script>
+        var button_delete = document.querySelector('#delete');
+        button_delete.addEventListener("click", function (event) {
+
+            if (confirm("Etes vous sûr de vouloir supprimer cette configuration ?")) {
+                document.location.href = "/config/delete"
+            }
+        });
+
+    </script>
+{% endblock %}
+

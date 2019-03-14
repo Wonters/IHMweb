@@ -1,0 +1,17 @@
+#! /usr/bin/python3 
+# coding=UTF-8
+
+from django.db import models
+from django import forms
+from django.forms import ModelForm
+import django.core.management as manage
+from django.views.generic import *
+#sources
+# models
+
+
+import os
+
+class selectConfigDbForm(forms.Form):
+	configName = forms.TypedChoiceField(widget=forms.Select)#(coerce="string",error_messages={'required': 'Please choose a configuration'})
+	

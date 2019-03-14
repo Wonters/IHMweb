@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block static %}
+    <link href="/static/css/configform.css" rel="stylesheet" type="text/css"/>-
+{% endblock %}
+
+
+{% block nav %}
+
+{% endblock %}
+
+{% block contents %}
+
+    <form action="{% url "write" %}" role="form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <ul>
+            {% for conf, value in testcase.items %}
+                <label for="config"> {{ conf }} : </label>
+                <input id="config" type="text" name="{{ conf }}" value="{{ value }}">
+            {% endfor %}
+        </ul>
+        <div class="">
+            <button type="submit" class="btn btn-default" value="Submit">SAVE</button>
+            <!-- envoie le formulaire et renvoie le template read -->
+        </div>
+    </form>
+
+    <script>
+
+        var configs = document.querySelectorAll('p');
+        for (var config = 0; config < configs.length; config++) {
+
+            if (configs[config].id === 'att' | configs[config].id === 'bbFreq' | configs[config].id === 'power') {
+                var pas = document.createElement('input');
+                var min = document.createElement('input');
+                var max = document.createElement('input');
+                var p = document.createElement('p');
+                pas.id = "pas";
+                min.id = "min";
+                max.id = "max";
+                pas.class = '';
+                min.class = '';
+                max.class = 'input1';
+                var list = [min, max, pas];
+                for (var i = 0; i < list.length; i++) {
+                    p.appendChild(document.createTextNode(list[i].id));
+                    p.appendChild(list[i]);
+                }
+                alert(p);
+                configs[config].appendChild(p);
+            }
+        }
+
+    </script>
+{% endblock %}
+
+
+
+
+

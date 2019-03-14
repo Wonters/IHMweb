@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% block contents %}
+
+    <input id="data" value="{{ configs_json }}" type="hidden">
+    <input id="info" value="{{ testcases }}" type="hidden">
+
+    <p class="test"></p>
+    <form action="{% url "write" %}" role="form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <ul>
+            <p> Fichier de configuration : <input type="text" name="nameconf"></p>
+        </ul>
+        <div class="">
+            <button type="submit" class="btn btn-default" value="Submit">SAVE</button>
+            <!-- envoie le formulaire et renvoie le template read -->
+        </div>
+    </form>
+
+    <script src="/static/js/createconfig_v2.js">
+    </script>
+
+{% endblock %}

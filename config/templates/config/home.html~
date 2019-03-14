@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+Configuration
+{% endblock %}
+
+{% block nav%}
+<ul> 
+<li> <a href=""><button>  </button> </a></li> <!-- bouton qui lance le script acbbs-schedule.py dans le dossier /etc/abbs/ -->
+<li> <a href=""><button> STOP </button> </a></li> <!-- bouton qui lance le script acbbs-schedule.py dans le dossier /etc/abbs/ -->
+<!-- ajouter une barre de progression -->
+</ul>
+{% endblock %}
+
+{% block contents %}
+<form action="{% url "read" %}" role="form" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="row">
+                            <div class="">
+                            	<h1>Select a file</h1>
+                                <label for="name">Configuration file in the database</label>
+                                <select name="configname" class="form-control"> 
+                                <option value="configuration_TAPV3.0">configuration_TAPV3.0</option> 
+								<option value="test2">test2</option>                                
+                                </select>
+                            <div class="">
+                                <button type="submit" class="btn btn-default" value="Submit">READ</button>    <!-- envoie le formulaire et renvoie le template read -->
+                            </div>
+                        </div>
+                    </form>
+
+{% endblock %}
+

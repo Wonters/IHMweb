@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+
+{% block contents %}
+
+    <input id="data" value="{{ configs_json }}" type="hidden">
+    <input id="info" value="{{ testcases }}" type="hidden">
+
+    <p class="test"></p>
+    <form action="{% url "write" %}" role="form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <ul>
+            <p> Fichier de configuration : <input type="text" name="nameconf"></p>
+
+            {% for testcase, list in configs.items %}
+                {% for testcase_i in list %}
+                    <h1><strong>{{ testcase }} {{ testcase_i.name }}</strong></h1>
+                    {% for conf, value in testcase_i.items %}
+                        <p class="conf"><strong>{{ conf }}</strong>: <input class="conf" type="number"
+                                                                            name="{{ testcase }},{{ conf }}"
+                                                                            value="{{ value }}"></p>
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        </ul>
+        <div class="">
+            <button type="submit" class="btn btn-default" value="Submit">SAVE</button>
+            <!-- envoie le formulaire et renvoie le template read -->
+
+        </div>
+    </form>
+
+
+    <script>
+        function createRange(balise, field_range) {
+
+            for (var i = 0; i < balise.length; i++) {
+                for (var u = 0; u < field_range.length; u++) {
+                    if (balise[i].name.indexOf(field_range[u]) !== -1) {
+                        var pas = document.createElement('input');
+                        var min = document.createElement('input');
+                        var max = document.createElement('input');
+                        var p = document.createElement('p');
+                        pas.id = "pas";
+                        min.id = "min";
+                        max.id = "max";
+                        pas.class = 'input1';
+                        min.class = 'input1';
+                        max.class = 'input1';
+                        var list = [min, max, pas];
+                        for (var i = 0; i < list.length; i++) {
+                            p.appendChild(document.createTextNode(list[i].id));
+                            p.appendChild(list[i]);
+                        }
+
+                        balise.appendChild(p);
+                    }
+                }
+            }
+        }
+
+        var field = ['bbFreq2', 'bbFreq1', 'bbFreqCal', 'inputAttCal', 'inputAtt', 'refLvl', 'rbw', 'vbw',
+            'span', 'countAverage', 'pwmeter', 'searchLimit'];
+
+        var baliseinput = document.querySelectorAll('.conf input');
+        var balisep = document.querySelectorAll('p');
+        var balisetest = document.querySelector('.test');
+
+        var inputdata = document.getElementById('data');
+        var config_json = JSON.parse(inputdata.value);
+        var inputhidden = document.getElementById('info');
+        var info = JSON.stringify(eval('(' + inputhidden.value + ')'));
+        info = JSON.parse(info);
+
+        for (var mode in config_json) {
+            balisetest.appendChild(document.createTextNode(mode + "/n"));
+            for (var tc_num in config_json[mode]) {
+                balisetest.appendChild(document.createTextNode(tc_num + "/n"));
+                for (var name_conf in config_json[mode][tc_num]) {
+                    var element = document.createElement('input');
+                    var baliseElement = document.createElement('p');
+                    element.name = name_conf;
+                    element.value = config_json[mode][tc_num][name_conf];
+                    element.id = name_conf;
+                    baliseElement.style.fontSize.big();
+                    baliseElement.appendChild(document.createTextNode(element.id));
+                    baliseElement.appendChild(element);
+                    balisetest.appendChild(baliseElement);
+                    createRange(balisetest, field);
+                }
+            }
+        }
+
+
+    </script>
+
+{% endblock %}

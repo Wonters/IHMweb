@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block nav %}
+
+{% endblock %}
+
+{% block contents %}
+
+    <p> Fichier de configuration : {{ name }} </p>
+
+    <ul>
+        {% for testcase, list in configs.items %}
+            {% for testcase_i in list %}
+                <h1><strong>{{ testcase }} {{ testcase_i.name }}</strong></h1>
+                {% for conf, value in testcase_i.items %}
+                    <p><strong>{{ conf }}</strong>: {{ value }} </p>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

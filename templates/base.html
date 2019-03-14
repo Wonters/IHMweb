@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='fr'>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    {% block static %}
+        {% load static %}
+        <link rel="stylesheet" href="/static/css/home.css"/>
+    {% endblock %}
+    <title>{% block title %}ACBBS{% endblock %}</title>
+    {% block script %}
+    {% endblock %}
+</head>
+
+<body>
+<header>
+    <img src="/static/img/sigfox.png" width="820" height="360" alt="logo" style="align-content: center; opacity: 0.7">
+</header>
+<!--commentaire corp du texte-->
+<section style="padding-bottom: 1200px;">
+    <!--commentaire barre de navigation-->
+    <nav style="text-align: center;">
+        {% block nav %}<!--commentaire mettre les liens url pour pouvoir rédiriger l'action de la barre de navigation
+            -->
+            <a href="/home/">
+                <button id="button">HELP</button>
+            </a>   <!-- return a page to explain how to use the IHM Web -->
+            <a href="/testcase/">
+                <button id="button"> TESTCASE</button>
+            </a> <!-- return the page to the testcase application -->
+            <a href="/config/">
+                <button id="button"> CONFIG</button>
+            </a>
+            <a href="/calibration/">
+                <button id="button"> CALIBRATION</button>
+            </a> <!-- pas encore implémenter-->
+        {% endblock %}
+    </nav>
+
+    <article>
+        {% block contents %}
+
+        {% endblock %}
+    </article>
+</section>
+
+<!--commentaire pied de page-->
+<footer>
+    {% block footer %}
+        <p style="padding: 10px; text-align: center;">&copy; ACBBS</p>
+    {% endblock %}
+</footer>
+</body>
+
+
+</html>

@@ -11,9 +11,9 @@ class RFSigGen(object):
         def __init__(self):
             return
         def write(self, val):
-            return '0'
+            return b'0'
         def read(self, val, timeout=None): 
-            return '0'
+            return b'0'
 
     def __init__(self, simulate = False):
 

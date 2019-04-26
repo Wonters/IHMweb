@@ -7,12 +7,27 @@ from ..drivers.ate.SpecAn import SpecAn
 from ..drivers.ate.PwrMeter import PwrMeter
 from ..drivers.ate.Swtch import Swtch
 from ..drivers.dut import Dut
+from ..tools.log import get_logger, AcbbsError
 from .. import __version__
 import time
 
 class txIM3Measurement(baseTestCase):
     def __init__(self, temp, simulate, conf, comment, date, channel):
         baseTestCase.__init__(self, temp, simulate, conf, comment, date, channel)
+
+        #parse frequencies
+        freq_tx, freq_rx = self.conf.getFrequencies(self.tcConf["radio_configuration"])        
+        if len(self.tcConf["freq_tx"]) == 0:
+            self.tcConf["freq_tx"] = freq_tx
+
+        #parse filters
+        filter_tx, filter_rx = self.conf.getFilters(self.tcConf["radio_configuration"])
+        if len(self.tcConf["filter_tx"]) == 0:
+            self.tcConf["filter_tx"] = filter_tx
+
+        #check for filters and frequencies number
+        if len(self.tcConf["filter_tx"]) != len(self.tcConf["freq_tx"]):
+            raise AcbbsError("Errors: filter_tx and freq_tx lists has not the same size.")
 
         #Tc version
         self.tcVersion = "1.0.0"

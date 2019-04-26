@@ -41,26 +41,6 @@ class baseTestCase(Thread):
         self.conf = configurationFile(file = self.__class__.__name__)
         self.tcConf = conf
 
-        #parse frequencies
-        freq_tx, freq_rx = self.conf.getFrequencies(self.tcConf["radio_configuration"])        
-        if len(self.tcConf["freq_tx"]) == 0:
-            self.tcConf["freq_tx"] = freq_tx
-        if len(self.tcConf["freq_rx"]) == 0:
-            self.tcConf["freq_rx"] = freq_rx
-
-        #parse filters
-        filter_tx, filter_rx = self.conf.getFilters(self.tcConf["radio_configuration"])
-        if len(self.tcConf["filter_tx"]) == 0:
-            self.tcConf["filter_tx"] = filter_tx
-        if len(self.tcConf["filter_rx"]) == 0:
-            self.tcConf["filter_rx"] = filter_rx
-
-        #check for filters and frequencies number
-        if len(self.tcConf["filter_tx"]) != len(self.tcConf["freq_tx"]):
-            raise AcbbsError("Errors: filter_tx and freq_tx lists has not the same size.")  
-        if len(self.tcConf["filter_rx"]) != len(self.tcConf["freq_rx"]):
-            raise AcbbsError("Errors: filter_rx and freq_rx lists has not the same size.")  
-
     @property
     def percent(self):
         return (self.iteration/self.iterationsNumber)*100.0

@@ -4,36 +4,31 @@ from ..testcases.baseTestCase import baseTestCase
 from ..testcases.baseTestCase import st
 from ..drivers.ate.DCPwr import DCPwr
 from ..drivers.ate.SpecAn import SpecAn
-from ..drivers.ate.PwrMeter import PwrMeter
 from ..drivers.ate.Swtch import Swtch
 from ..drivers.dut import Dut
 from ..tools.log import get_logger, AcbbsError
 from .. import __version__
 import time
 
-class txExcursion(baseTestCase):
+class txPowVsFreq(baseTestCase):
     def __init__(self, temp, simulate, conf, comment, date, channel):
         baseTestCase.__init__(self, temp, simulate, conf, comment, date, channel)
-
-        #parse frequencies
-        freq_tx, freq_rx = self.conf.getFrequencies(self.tcConf["radio_configuration"])        
-        if len(self.tcConf["freq_tx"]) == 0:
-            self.tcConf["freq_tx"] = freq_tx
-
-        #parse filters
-        filter_tx, filter_rx = self.conf.getFilters(self.tcConf["radio_configuration"])
-        if len(self.tcConf["filter_tx"]) == 0:
-            self.tcConf["filter_tx"] = filter_tx
-
-        #check for filters and frequencies number
-        if len(self.tcConf["filter_tx"]) != len(self.tcConf["freq_tx"]):
-            raise AcbbsError("Errors: filter_tx and freq_tx lists has not the same size.")
 
         #Tc version
         self.tcVersion = "1.0.0"
 
+        #set freq list
+        self.freq_tx = {}
+        len_freq = 0
+        for filter_tx_key, filter_tx_value in self.tcConf["filter_tx"].items():
+            self.freq_tx[filter_tx_key] = []
+            for i in range (filter_tx_value["freq_tx_min"], filter_tx_value["freq_tx_max"] + 1, self.tcConf["freq_tx_step"]):
+                self.freq_tx[filter_tx_key].append(i)
+                len_freq += 1
+
+
         #calcul iterations number
-        self.iterationsNumber = len(self.channel) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_tx"]) * len(self.tcConf["bbFreq"]) * len(self.tcConf["att"])
+        self.iterationsNumber = len(self.channel) * len(self.tcConf["voltage"]) * len_freq * len(self.tcConf["att"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -63,28 +58,17 @@ class txExcursion(baseTestCase):
                 self.DCPwr.voltage = vdd               #configure voltage
 
 
-                for freq_tx, filter_tx in zip(self.tcConf["freq_tx"],self.tcConf["filter_tx"]):
+                for filter_tx in self.freq_tx.keys():
                     if self.status is st().ABORTING:
                         break
-                    self.dut.freqTx = freq_tx
-                    self.PwrMeter.freq = freq_tx
-                    self.SpecAn.freqCenter = freq_tx
                     self.dut.filterTx = filter_tx
 
-                    #measure of OL frequency
-                    self.dut.playBBSine(atten=self.tcConf["inputAttCal"], freqBBHz=self.tcConf["bbFreqCal"])
-                    self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
-                    self.SpecAn.markerSearchLimit(freqleft = freq_tx + (self.tcConf["bbFreqCal"] - self.tcConf["searchLimit"]) , freqright = freq_tx + (self.tcConf["bbFreqCal"] +  self.tcConf["searchLimit"]))
-                    OLfreq = self.SpecAn.markerPeakSearch()[0] - self.tcConf["bbFreqCal"]
-                    self.dut.stopBBSine()
 
-                    #Center SA
-                    self.SpecAn.freqCenter = OLfreq
-
-
-                    for dfreq in self.tcConf["bbFreq"]:
+                    for freq_tx in self.freq_tx[filter_tx]:
                         if self.status is st().ABORTING:
                             break
+                        self.dut.freqTx = freq_tx
+                        self.SpecAn.freqCenter = freq_tx
 
 
                         for att in self.tcConf["att"]:
@@ -94,44 +78,29 @@ class txExcursion(baseTestCase):
                             #update progress
                             self.iteration += 1
                             self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
-                            self.logger.info("input parameters : {0}C, chan {1}, {2}V, {3}Hz(DUT), {4}Hz(BBHz), atten {5}".format(self.temp, chan, vdd, freq_tx, dfreq, att))
+                            self.logger.info("input parameters : {0}C, chan {1}, {2}V, {3}Hz(DUT), atten {4}".format(self.temp, chan, vdd, freq_tx, att))
 
                             #configure DUT
-                            self.dut.playBBSine(freqBBHz = dfreq, atten = att)
+                            self.dut.playBBSine(freqBBHz = self.tcConf["dFreq"], atten = att)
 
                             #configure ATE
                             self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
 
-                            #start measurement
-                            resultPower = self.PwrMeter.power + swtch_loss["pwr-meter"]
                             #measure carrier
-                            self.SpecAn.markerSearchLimit(freqleft = OLfreq + (dfreq - self.tcConf["searchLimit"]) , freqright = OLfreq + (dfreq +  self.tcConf["searchLimit"]))
+                            self.SpecAn.markerSearchLimit(freqleft = freq_tx + (self.tcConf["dFreq"] - self.tcConf["searchLimit"]) , freqright = freq_tx + (self.tcConf["dFreq"] +  self.tcConf["searchLimit"]))
                             resultCarrier = self.SpecAn.markerPeakSearch()       #place marker
-                            #measure image
-                            self.SpecAn.markerSearchLimit(freqleft = OLfreq + (-dfreq - self.tcConf["searchLimit"]) , freqright = OLfreq + (-dfreq +  self.tcConf["searchLimit"]))
-                            resultImage = self.SpecAn.markerPeakSearch()       #place marker
-                            #measure OL
-                            self.SpecAn.markerSearchLimit(freqleft = OLfreq - self.tcConf["searchLimit"] , freqright = OLfreq +  self.tcConf["searchLimit"])
-                            resultOL = self.SpecAn.markerPeakSearch()       #place marker
 
                             #write measures
                             conf = {
                                 "Supply_voltage_(V)":vdd,
                                 "RF_Output_Frequency_(Hz)":freq_tx,
                                 "DUT_TX_Filter_ID":filter_tx,
-                                "TX_Baseband_Frequency_(Hz)":dfreq,
                                 "DUT_TX_Level_Control":att,
                                 "Oven_Temperature_(C)":self.temp
                             }
                             dut_result = {
                                 "DUT_TX_Carrier_Frequency_(Hz)":resultCarrier[0],
-                                "DUT_TX_Carrier_Power_(dBm)":resultCarrier[1],
-                                "DUT_TX_Image_Frequency_(Hz)":resultImage[0],
-                                "DUT_TX_Image_Power_(dBm)":resultImage[1],
-                                "DUT_TX_Image_Rejection_(dBc)":resultImage[1]-resultCarrier[1],
-                                "DUT_TX_OL_Frequency_(Hz)":resultOL[0],
-                                "DUT_TX_OL_Power_(dBm)":resultOL[1],
-                                "DUT_TX_Total_Output_Power_(dBm)":resultPower
+                                "DUT_TX_Carrier_Power_(dBm)":resultCarrier[1]
                             }
                             self.db.writeDataBase(self.__writeMeasure(conf, dut_result))
                             
@@ -152,10 +121,6 @@ class txExcursion(baseTestCase):
         self.logger.debug("Init ate")
         self.DCPwr = DCPwr(simulate=self.simulate)
         self.SpecAn = SpecAn(simulate=self.simulate)
-        if self.tcConf["pwmeter"] is 1:
-            self.PwrMeter = PwrMeter(simulate=self.simulate)
-        else:
-            self.PwrMeter = PwrMeter(simulate=True)
         self.Swtch = Swtch(simulate=self.simulate)
         self.Swtch.setSwitch(sw2 = 4, sw3 = 4, sw4 = 2)
 
@@ -175,10 +140,9 @@ class txExcursion(baseTestCase):
             "acbbs_version":__version__,
             "status":self.status,
             "input-parameters":conf,
-            "dut-info":self.dut.info,
+            "dut-info":{},
             "ate-result":{
                 "DCPwr":self.DCPwr.info,
-                "PwrMeter":self.PwrMeter.info,
                 "SpecAn":self.SpecAn.info
             },
             "dut-result":dut_result

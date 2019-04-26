@@ -6,6 +6,7 @@ from etaprogress.progress import ProgressBar
 from acbbs.drivers.ate.ClimCham import ClimCham
 from acbbs.testcases.rxExcursion import rxExcursion
 from acbbs.testcases.txExcursion import txExcursion
+from acbbs.testcases.txPowVsFreq import txPowVsFreq
 from acbbs.testcases.txIM3Measurement import txIM3Measurement
 from acbbs.tools.configurationFile import configurationFile
 from acbbs import __version__
@@ -17,7 +18,8 @@ import sys
 TESTCASES = {
     "rxExcursion":rxExcursion,
     "txExcursion":txExcursion,
-    "txIM3Measurement":txIM3Measurement
+    "txIM3Measurement":txIM3Measurement,
+    "txPowVsFreq":txPowVsFreq
 }
 
 

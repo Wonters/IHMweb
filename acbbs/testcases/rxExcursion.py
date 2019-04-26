@@ -5,12 +5,27 @@ from ..drivers.ate.DCPwr import DCPwr
 from ..drivers.ate.RFSigGen import RFSigGen
 from ..drivers.ate.Swtch import Swtch
 from ..drivers.dut import Dut
+from ..tools.log import get_logger, AcbbsError
 from .. import __version__
 import time
 
 class rxExcursion(baseTestCase):
     def __init__(self, temp, simulate, conf, comment, date, channel):
         baseTestCase.__init__(self, temp, simulate, conf, comment, date, channel)
+        
+        #parse frequencies
+        freq_tx, freq_rx = self.conf.getFrequencies(self.tcConf["radio_configuration"])
+        if len(self.tcConf["freq_rx"]) == 0:
+            self.tcConf["freq_rx"] = freq_rx
+
+        #parse filters
+        filter_tx, filter_rx = self.conf.getFilters(self.tcConf["radio_configuration"])
+        if len(self.tcConf["filter_rx"]) == 0:
+            self.tcConf["filter_rx"] = filter_rx
+
+        #check for filters and frequencies number
+        if len(self.tcConf["filter_rx"]) != len(self.tcConf["freq_rx"]):
+            raise AcbbsError("Errors: filter_rx and freq_rx lists has not the same size.") 
 
         #Tc version
         self.tcVersion = "1.0.0"

@@ -74,6 +74,16 @@ class configurationFile(object):
         self.logger.debug("Get Version")
         return self.json_allConf["global"]["version"]
 
+    def getConfKeys(self):
+        config = {}
+        for doc in self.d.get_collection(configurationFile.dutGlobal):
+            config.update(doc)
+        try:
+            config.pop("_id")
+        except:
+            pass
+        return list(config.keys())
+
     def getConfiguration(self, file=None):
         if file is None:
             file = self.file

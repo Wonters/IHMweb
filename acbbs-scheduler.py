@@ -28,8 +28,7 @@ def main(args):
     print("ACBBS V{} -- {}".format(__version__, time.strftime("%Y-%m-%d %H:%M:%S")))
 
     #get configuration
-    conf = configurationFile(file = "scheduler", taphw = args.dut)
-    schConf = conf.getConfiguration()
+    conf = configurationFile(file = "scheduler", taphw = args.configname)
     if args.simulate:
         simulate = True
     else:
@@ -43,13 +42,21 @@ def main(args):
         print("Error parsing DUT channel")
         exit(0)
 
+    try:
+        temperature = args.temp.split(",")
+        for i in range(0, len(temperature)):
+            temperature[i] = int(temperature[i])
+    except:
+        print("Error parsing temperature")
+        exit(0)
+
     #initialize climatic chamber
     if args.noclimchamb is False:
         clim = ClimCham(simulate=simulate)
         clim.status = 1
 
     #start loops
-    for temp in schConf["temperature"]:
+    for temp in temperature:
         #set temperature and wait
         print("\n#########################")
         print("Launch TestCases at {0}C".format(temp))
@@ -58,9 +65,9 @@ def main(args):
         if args.noclimchamb is False:
             print("Set climatic chamber at {0} C".format(temp))
             clim.tempConsigne = temp
-            print("Waiting for {0} seconds".format(schConf["climChamberDelay"]))
+            print("Waiting for {0} seconds".format(int(args.temp)))
             try:
-                for remaining in range(schConf["climChamberDelay"], 0, -1):
+                for remaining in range(int(args.temp), 0, -1):
                     sys.stdout.write("\r")
                     sys.stdout.write("{:2d} seconds remaining.".format(remaining)) 
                     sys.stdout.flush()
@@ -74,7 +81,7 @@ def main(args):
 
             print("\n")
 
-        for tc in schConf["tc2play"]:
+        for tc in conf.getConfKeys():
             for conf_number in range (0, len(conf.getConfiguration(file=tc))):
                 threadTc = TESTCASES[tc](temp=temp, simulate=simulate, conf=conf.getConfiguration(file=tc)[conf_number], comment=args.comment, date=time.time(), channel=dut_channel)
 
@@ -117,8 +124,8 @@ if __name__ == '__main__':
         description = "Scheduler for acbbs",
         fromfile_prefix_chars = '@' )
     parser.add_argument(
-        "-d",
-        "--dut",
+        "-c",
+        "--configname",
         help="set type of DUT. Use configuration_assistant.py -l to list DUT",
         required = True)
     parser.add_argument(
@@ -140,5 +147,13 @@ if __name__ == '__main__':
         "--channel",
         help="set DUT channel separate by comma (ex: 1,2,3,4,5,6,7,8)",
         required = True,)
+    parser.add_argument(
+        "--temp",
+        help="set temperature for climatic chamber separate by comma (ex: 0,25,55)",
+        required = True,)
+    parser.add_argument(
+        "--climchambdelay",
+        help="set climatic chamber delay in sec (default : 7200)",
+        required = False,)
     args = parser.parse_args()
     main(args)

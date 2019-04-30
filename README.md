@@ -47,13 +47,14 @@ Use **acbbs-scheduler** for launch testcases. For display help :
 
 To launch it :
 
-    $ acbbs-scheduler -d configuration_TAPMV4.0 --channel 1,2 -m "TEST"
+    $ acbbs-scheduler -c configuration_TAPMV4.0 --channel 1,2 -m "TEST" --temp 0,25,55
 
 Where :
 
  - --channel can be 1,2,3,4,5,6,7,8 and correspond of available channel.
  - -m is the comment.
- - -d is configuration we will use
+ - -c is configuration we will use
+ - --temp is the temperature of climatic chamber
 
 For list all available configuration use :
 

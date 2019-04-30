@@ -34,6 +34,11 @@ def main(args):
     else:
         simulate = False
 
+    if args.climchambdelay:
+        climchambdelay = int(args.climchambdelay)
+    else:
+        climchambdelay = 7200
+
     try:
         dut_channel = args.channel.split(",")
         for i in range(0, len(dut_channel)):
@@ -65,9 +70,9 @@ def main(args):
         if args.noclimchamb is False:
             print("Set climatic chamber at {0} C".format(temp))
             clim.tempConsigne = temp
-            print("Waiting for {0} seconds".format(int(args.temp)))
+            print("Waiting for {0} seconds".format(climchambdelay))
             try:
-                for remaining in range(int(args.temp), 0, -1):
+                for remaining in range(climchambdelay, 0, -1):
                     sys.stdout.write("\r")
                     sys.stdout.write("{:2d} seconds remaining.".format(remaining)) 
                     sys.stdout.flush()

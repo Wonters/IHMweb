@@ -28,7 +28,7 @@ class txPowVsFreq(baseTestCase):
 
 
         #calcul iterations number
-        self.iterationsNumber = len(self.channel) * len(self.tcConf["voltage"]) * len_freq * len(self.tcConf["att"])
+        self.iterationsNumber = len(self.channel) * len(self.tcConf["voltage"]) * len_freq * len(self.tcConf["att"]) * len(self.tcConf["dFreq"])
         self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
@@ -75,40 +75,45 @@ class txPowVsFreq(baseTestCase):
                             if self.status is st().ABORTING:
                                 break
 
-                            #update progress
-                            self.iteration += 1
-                            self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
-                            self.logger.info("input parameters : {0}C, chan {1}, {2}V, {3}Hz(DUT), atten {4}".format(self.temp, chan, vdd, freq_tx, att))
 
-                            #configure DUT
-                            self.dut.playBBSine(freqBBHz = self.tcConf["dFreq"], atten = att)
+                            for dfreq in self.tcConf["dFreq"]:
+                                if self.status is st().ABORTING:
+                                    break
 
-                            #configure ATE
-                            self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
+                                #update progress
+                                self.iteration += 1
+                                self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
+                                self.logger.info("input parameters : {0}C, chan {1}, {2}V, {3}Hz(DUT), atten {4}".format(self.temp, chan, vdd, freq_tx, att))
 
-                            #measure carrier
-                            self.SpecAn.markerSearchLimit(freqleft = freq_tx + (self.tcConf["dFreq"] - self.tcConf["searchLimit"]) , freqright = freq_tx + (self.tcConf["dFreq"] +  self.tcConf["searchLimit"]))
-                            resultCarrier = self.SpecAn.markerPeakSearch()       #place marker
+                                #configure DUT
+                                self.dut.playBBSine(freqBBHz = dfreq, atten = att)
 
-                            #write measures
-                            conf = {
-                                "Supply_voltage_(V)":vdd,
-                                "RF_Output_Frequency_(Hz)":freq_tx,
-                                "DUT_TX_Filter_ID":filter_tx,
-                                "DUT_TX_Level_Control":att,
-                                "Oven_Temperature_(C)":self.temp
-                            }
-                            dut_result = {
-                                "DUT_TX_Carrier_Frequency_(Hz)":resultCarrier[0],
-                                "DUT_TX_Carrier_Power_(dBm)":resultCarrier[1]
-                            }
-                            self.db.writeDataBase(self.__writeMeasure(conf, dut_result))
-                            
-                            #stop measurement
-                            self.dut.stopBBSine()
+                                #configure ATE
+                                self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
 
-                            if self.simulate:
-                                time.sleep(0.02)
+                                #measure carrier
+                                self.SpecAn.markerSearchLimit(freqleft = freq_tx + (dfreq - self.tcConf["searchLimit"]) , freqright = freq_tx + (dfreq +  self.tcConf["searchLimit"]))
+                                resultCarrier = self.SpecAn.markerPeakSearch()       #place marker
+
+                                #write measures
+                                conf = {
+                                    "Supply_voltage_(V)":vdd,
+                                    "RF_Output_Frequency_(Hz)":freq_tx,
+                                    "DUT_TX_Filter_ID":filter_tx,
+                                    "DUT_TX_Level_Control":att,
+                                    "Oven_Temperature_(C)":self.temp
+                                }
+                                dut_result = {
+                                    "DUT_TX_Carrier_Frequency_(Hz)":resultCarrier[0],
+                                    "DUT_TX_Carrier_Power_(dBm)":resultCarrier[1]
+                                }
+                                self.db.writeDataBase(self.__writeMeasure(conf, dut_result))
+                                
+                                #stop measurement
+                                self.dut.stopBBSine()
+
+                                if self.simulate:
+                                    time.sleep(0.02)
 
         #update status
         self.status = st().FINISHED

@@ -144,8 +144,9 @@ class SpecAn(object):
         self.logger.debug("Set Freq Span : {}".format(value))
         return self._readWrite("FREQ:SPAN", value)
 
-    def freqTrack(self, center, status):
-        self._readWrite("FREQ:CENT", center)
+    def freqTrack(self, status, center = None):
+        if center is not None:
+            self._readWrite("FREQ:CENT", center)
         self._readWrite("CALC:MARK:FUNC:STR", status)
 
     @property
@@ -292,14 +293,18 @@ class SpecAn(object):
         self.logger.debug("Get Marker {} : {}".format(marker, value))
         return value
 
+    def markerSetFreqAccuracy(self, status, marker = 1):
+        self._readWrite("CALC:MARK{0}:COUN".format(marker), status)
+
     def markerGetFreqAccuracy(self, marker = 1):
         if self.simulate:
             value = 0.0
         else:
+            self._readWrite("INIT:CONT OFF")
             self._readWrite("CALC:MARK{0}:COUN ON".format(marker))
             self._readWrite("INIT;*WAI")
             value = float(self._readWrite("CALC:MARK{0}:COUN:FREQ?".format(marker)))
-            self._readWrite("CALC:MARK{0}:COUN OFF".format(marker))
+            self._readWrite("INIT:CONT ON")
         self.logger.debug("Get Marker Frequency {} : {}".format(marker, value))
         return value
 

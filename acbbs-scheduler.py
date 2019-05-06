@@ -65,38 +65,39 @@ def main(args):
         clim.status = 1
 
     #precheck
-    for tc in conf.getConfKeys():
-            for conf_number in range (0, len(conf.getConfiguration(file=tc))):
-                threadTc = TESTCASES[tc](temp=25, simulate=simulate, conf=conf.getConfiguration(file=tc)[conf_number], comment="TEST", date=time.time(), channel=dut_channel)
+    for ch in dut_channel:
+        for tc in conf.getConfKeys():
+                for conf_number in range (0, len(conf.getConfiguration(file=tc))):
+                    threadTc = TESTCASES[tc](temp=25, simulate=simulate, conf=conf.getConfiguration(file=tc)[conf_number], comment="TEST", date=time.time(), channel=[ch])
 
-                print("Processing {0} (Precheck) -- Conf {1}/{2}".format(threadTc.__class__.__name__, conf_number+1, len(conf.getConfiguration(file=threadTc.__class__.__name__))))
-                print(time.strftime("%Y-%m-%d %H:%M:%S"))
-                bar = ProgressBar(PRECHECK, max_width=70)
+                    print("Processing {0} (Precheck) -- Conf {1}/{2} -- Channel {3}/{4}".format(threadTc.__class__.__name__, conf_number+1, len(conf.getConfiguration(file=threadTc.__class__.__name__)), ch, len(dut_channel)))
+                    print(time.strftime("%Y-%m-%d %H:%M:%S"))
+                    bar = ProgressBar(PRECHECK, max_width=70)
 
-                threadTc.tcInit()
-                threadTc.start()
+                    threadTc.tcInit()
+                    threadTc.start()
 
-                i = threadTc.iteration
-                try:
-                    while threadTc.is_alive():
-                        time.sleep(0.1)
-                        if threadTc.iteration >= PRECHECK:
-                            threadTc.abort()
-                            threadTc.join()
-                        if threadTc.iteration != i:
-                            i = threadTc.iteration
-                            bar.numerator = i
-                            print (bar, end='\r')
-                            sys.stdout.flush()
-                    print("\n\n")
+                    i = threadTc.iteration
+                    try:
+                        while threadTc.is_alive():
+                            time.sleep(0.1)
+                            if threadTc.iteration >= PRECHECK:
+                                threadTc.abort()
+                                threadTc.join()
+                            if threadTc.iteration != i:
+                                i = threadTc.iteration
+                                bar.numerator = i
+                                print (bar, end='\r')
+                                sys.stdout.flush()
+                        print("\n\n")
 
-                except KeyboardInterrupt:
-                    print("\n\nKeyboard Interrupt Aborting....")
-                    threadTc.abort()
-                    threadTc.join()
-                    if args.noclimchamb is False:
-                        clim.status = 0
-                    sys.exit(0)
+                    except KeyboardInterrupt:
+                        print("\n\nKeyboard Interrupt Aborting....")
+                        threadTc.abort()
+                        threadTc.join()
+                        if args.noclimchamb is False:
+                            clim.status = 0
+                        sys.exit(0)
 
     #start loops
     for temp in temperature:

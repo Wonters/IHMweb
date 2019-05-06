@@ -17,14 +17,18 @@ class SpecAn(object):
         def read_until(self, val, timeout=None):
             return b'0'
 
-    def __init__(self, simulate = False):
+    def __init__(self, simulate = False, ip = None):
 
         #init logs
         self.logger = get_logger(self.__class__.__name__)
 
         #get configuration
-        self.conf = configurationFile(file = self.__class__.__name__)
-        self.SpecAnConf = self.conf.getConfiguration()
+        if ip is None:
+            self.conf = configurationFile(file = self.__class__.__name__)
+            self.SpecAnConf = self.conf.getConfiguration()
+            self.ip = self.SpecAnConf["ip"]
+        else:
+            self.ip = ip
 
         #simulation state
         self.simulate = simulate
@@ -32,11 +36,11 @@ class SpecAn(object):
         if not simulate:
             self.logger.info("Init SpecAn")
             try :
-                self.inst = Telnet(self.SpecAnConf["ip"], 5025, 1)
+                self.inst = Telnet(self.ip, 5025, 1)
                 self._readWrite("SYST:PRES")
                 self._readWrite("SYST:DISP:UPD ON")
             except :
-                raise AcbbsError("SpecAn Connection error: {0}".format(self.SpecAnConf["ip"]), log = self.logger)
+                raise AcbbsError("SpecAn Connection error: {0}".format(self.ip), log = self.logger)
 
         else :
             self.logger.info("Init SpecAn in Simulate")
@@ -139,6 +143,10 @@ class SpecAn(object):
     def freqSpan(self, value):
         self.logger.debug("Set Freq Span : {}".format(value))
         return self._readWrite("FREQ:SPAN", value)
+
+    def freqTrack(self, center, status):
+        self._readWrite("FREQ:CENT", center)
+        self._readWrite("CALC:MARK:FUNC:STR", status)
 
     @property
     def refLvl(self):
@@ -282,6 +290,17 @@ class SpecAn(object):
         else:
             value = [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
         self.logger.debug("Get Marker {} : {}".format(marker, value))
+        return value
+
+    def markerGetFreqAccuracy(self, marker = 1):
+        if self.simulate:
+            value = 0.0
+        else:
+            self._readWrite("CALC:MARK{0}:COUN ON".format(marker))
+            self._readWrite("INIT;*WAI")
+            value = float(self._readWrite("CALC:MARK{0}:COUN:FREQ?".format(marker)))
+            self._readWrite("CALC:MARK{0}:COUN OFF".format(marker))
+        self.logger.debug("Get Marker Frequency {} : {}".format(marker, value))
         return value
 
     def markerSearchLimit(self, marker = 1, freqleft = None, freqright = None, status = 1):

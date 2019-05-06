@@ -145,7 +145,7 @@ class txPowVsFreq(baseTestCase):
             "acbbs_version":__version__,
             "status":self.status,
             "input-parameters":conf,
-            "dut-info":{},
+            "dut-info":self.dut.info,
             "ate-result":{
                 "DCPwr":self.DCPwr.info,
                 "SpecAn":self.SpecAn.info

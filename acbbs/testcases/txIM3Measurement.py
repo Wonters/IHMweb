@@ -72,10 +72,10 @@ class txIM3Measurement(baseTestCase):
                     self.dut.filterTx = filter_tx
 
                     #measure of OL frequency
-                    self.dut.playBBSine(atten=self.tcConf["inputAttCal"], freqBBHz=self.tcConf["bbFreqCal"])
+                    self.dut.playBBSine(dB = -80)
                     self.SpecAn.averageCount(self.tcConf["countAverage"])   #get an average
-                    self.SpecAn.markerSearchLimit(freqleft = freq_tx + (self.tcConf["bbFreqCal"] - self.tcConf["searchLimit"]) , freqright = freq_tx + (self.tcConf["bbFreqCal"] +  self.tcConf["searchLimit"]))
-                    OLfreq = self.SpecAn.markerPeakSearch()[0] - self.tcConf["bbFreqCal"]
+                    self.SpecAn.markerSearchLimit(freqleft = freq_tx - self.tcConf["searchLimit"] , freqright = freq_tx + self.tcConf["searchLimit"])
+                    OLfreq = self.SpecAn.markerPeakSearch()[0]
                     self.dut.stopBBSine()
 
                     #calcul F1 and F2

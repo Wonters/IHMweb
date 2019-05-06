@@ -75,7 +75,7 @@ class txOLFrequency(baseTestCase):
                     self.logger.info("input parameters : {}C, chan {}, {}V, {}Hz(DUT)".format(self.temp, chan, vdd, freq_tx))
 
                     #configure DUT
-                    self.dut.playBBSine(freqBBHz = 0, atten = 28)
+                    self.dut.playBBSine(freqBBHz = 10000, atten = 28, dB = -80)
 
                     #configure ATE
                     self.SpecAn.freqSpan = 200000
@@ -84,7 +84,8 @@ class txOLFrequency(baseTestCase):
                     self.SpecAn.markerSet()
                     self.SpecAn.markerPeakSearch()
                     time.sleep(10)
-                    resultOLFrequency = self.SpecAn.markerGetFreqAccuracy() 
+                    resultOLFrequency = self.SpecAn.markerGetFreqAccuracy()
+                    delta = round(resultOLFrequency-freq_tx,1)
 
                     #write measures
                     conf = {
@@ -95,7 +96,8 @@ class txOLFrequency(baseTestCase):
                     }
                     dut_result = {
                         "DUT_TX_OL_Frequency_(Hz)":resultOLFrequency,
-                        "DUT_TX_OL_Frequency_Delta_(Hz)":round(abs(resultOLFrequency-freq_tx),1)
+                        "DUT_TX_OL_Frequency_Delta_(Hz)":delta,
+                        "DUT_TX_OL_Frequency_Variation_(PPM)":round((delta * 1000000) / freq_tx, 2)
                     }
                     self.db.writeDataBase(self.__writeMeasure(conf, dut_result))
 

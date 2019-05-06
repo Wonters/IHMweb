@@ -147,9 +147,51 @@ def test_rssiSinNumpy():
     sigGen.power = -60
     sigGen.freq = 902220000
     sigGen.status = 1
-    ref = dutClass.rssiSinNumpy()
     print("dutClass.rssiSin() return {0}".format(ref))
     ################
+
+def test_freqAcc():
+    d = Dut(chan=1, simulate=False)
+    s = SpecAn(simulate=False)
+
+    inputAtt = 18
+    span = 10000000
+    refLvl = 42
+    refLvlOffset = 24
+
+    freq_tx_list = [869525000, 869527000]
+    filter_tx = 1
+
+
+    s.inputAtt = inputAtt
+    s.freqSpan = span
+
+    for freq_tx in freq_tx_list:
+
+        d.mode = "TX"
+
+        s.refLvlOffset = refLvlOffset
+        s.refLvl = refLvl
+
+        d.freqTx = freq_tx
+        d.filterTx = filter_tx
+        s.freqCenter = freq_tx
+
+        d.playBBSine(freqBBHz = 0, atten = 28)
+
+        s.freqSpan = 200000
+        s._readWrite("CALC:MARK{0} ON".format(1))
+        s._readWrite("CALC:MARK{0}:MAX".format(1))
+        time.sleep(10)
+
+        s._readWrite("CALC:MARK{0}:COUN ON".format(1))
+        resultOLFrequency = float(s._readWrite("CALC:MARK{0}:COUN:FREQ?".format(1)))
+
+        print("result = {}".format(resultOLFrequency))
+        print("delta = {:.1f}".format(abs(resultOLFrequency-freq_tx)))
+
+        d.stopBBSine()
+
 
 def test_irrSin():
     ### dut test ###
@@ -203,7 +245,8 @@ def main(args):
     # test_rssiSinNumpy()
     # test_SpsecAna()
     # test_PwrMeter()
-    test_ClimCham()
+    # test_ClimCham()
+    test_freqAcc()
     exit(0)
 
 if __name__ == '__main__':

@@ -300,11 +300,8 @@ class SpecAn(object):
         if self.simulate:
             value = 0.0
         else:
-            self._readWrite("INIT:CONT OFF")
             self._readWrite("CALC:MARK{0}:COUN ON".format(marker))
-            self._readWrite("INIT;*WAI")
             value = float(self._readWrite("CALC:MARK{0}:COUN:FREQ?".format(marker)))
-            self._readWrite("INIT:CONT ON")
         self.logger.debug("Get Marker Frequency {} : {}".format(marker, value))
         return value
 

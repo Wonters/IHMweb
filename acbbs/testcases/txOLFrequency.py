@@ -78,17 +78,13 @@ class txOLFrequency(baseTestCase):
                     self.dut.playBBSine(freqBBHz = 0, atten = 28)
 
                     #configure ATE
-                    self.SpecAn.freqSpan = self.tcConf["span"]
-                    self.SpecAn.freqTrack(status = 1, center = freq_tx)
-                    self.SpecAn.freqSpan = 100000
+                    self.SpecAn.freqSpan = 200000
 
                     #get frequency
-                    resultOLFrequency = self.SpecAn.markerGetFreqAccuracy()
-
-                    #unset marker
-                    self.SpecAn.markerSetFreqAccuracy(status = 0)
-                    self.SpecAn.markerSet(status = 0)
-                    self.SpecAn.freqTrack(status = 0)
+                    self.SpecAn.markerSet()
+                    self.SpecAn.markerPeakSearch()
+                    time.sleep(10)
+                    resultOLFrequency = self.SpecAn.markerGetFreqAccuracy() 
 
                     #write measures
                     conf = {
@@ -98,7 +94,8 @@ class txOLFrequency(baseTestCase):
                         "Oven_Temperature_(C)":self.temp
                     }
                     dut_result = {
-                        "DUT_TX_OL_Frequency_(Hz)":resultOLFrequency
+                        "DUT_TX_OL_Frequency_(Hz)":resultOLFrequency,
+                        "DUT_TX_OL_Frequency_Delta_(Hz)":round(abs(resultOLFrequency-freq_tx),1)
                     }
                     self.db.writeDataBase(self.__writeMeasure(conf, dut_result))
 

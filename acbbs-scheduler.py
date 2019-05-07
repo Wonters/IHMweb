@@ -59,45 +59,44 @@ def main(args):
         print("Error parsing temperature")
         exit(0)
 
+    if not args.noprecheck:
+        #precheck
+        for ch in dut_channel:
+            for tc in conf.getConfKeys():
+                    for conf_number in range (0, len(conf.getConfiguration(file=tc))):
+                        threadTc = TESTCASES[tc](temp=25, simulate=simulate, conf=conf.getConfiguration(file=tc)[conf_number], comment="TEST", date=time.time(), channel=[ch])
+
+                        print("Processing {0} (Precheck) -- Conf {1}/{2} -- Channel {3}/{4}".format(threadTc.__class__.__name__, conf_number+1, len(conf.getConfiguration(file=threadTc.__class__.__name__)), ch, len(dut_channel)))
+                        print(time.strftime("%Y-%m-%d %H:%M:%S"))
+                        bar = ProgressBar(PRECHECK, max_width=70)
+
+                        threadTc.tcInit()
+                        threadTc.start()
+
+                        i = threadTc.iteration
+                        try:
+                            while threadTc.is_alive():
+                                time.sleep(0.1)
+                                if threadTc.iteration >= PRECHECK:
+                                    threadTc.abort()
+                                    threadTc.join()
+                                if threadTc.iteration != i:
+                                    i = threadTc.iteration
+                                    bar.numerator = i
+                                    print (bar, end='\r')
+                                    sys.stdout.flush()
+                            print("\n\n")
+
+                        except KeyboardInterrupt:
+                            print("\n\nKeyboard Interrupt Aborting....")
+                            threadTc.abort()
+                            threadTc.join()
+                            sys.exit(0)
+
     #initialize climatic chamber
     if args.noclimchamb is False:
         clim = ClimCham(simulate=simulate)
         clim.status = 1
-
-    #precheck
-    for ch in dut_channel:
-        for tc in conf.getConfKeys():
-                for conf_number in range (0, len(conf.getConfiguration(file=tc))):
-                    threadTc = TESTCASES[tc](temp=25, simulate=simulate, conf=conf.getConfiguration(file=tc)[conf_number], comment="TEST", date=time.time(), channel=[ch])
-
-                    print("Processing {0} (Precheck) -- Conf {1}/{2} -- Channel {3}/{4}".format(threadTc.__class__.__name__, conf_number+1, len(conf.getConfiguration(file=threadTc.__class__.__name__)), ch, len(dut_channel)))
-                    print(time.strftime("%Y-%m-%d %H:%M:%S"))
-                    bar = ProgressBar(PRECHECK, max_width=70)
-
-                    threadTc.tcInit()
-                    threadTc.start()
-
-                    i = threadTc.iteration
-                    try:
-                        while threadTc.is_alive():
-                            time.sleep(0.1)
-                            if threadTc.iteration >= PRECHECK:
-                                threadTc.abort()
-                                threadTc.join()
-                            if threadTc.iteration != i:
-                                i = threadTc.iteration
-                                bar.numerator = i
-                                print (bar, end='\r')
-                                sys.stdout.flush()
-                        print("\n\n")
-
-                    except KeyboardInterrupt:
-                        print("\n\nKeyboard Interrupt Aborting....")
-                        threadTc.abort()
-                        threadTc.join()
-                        if args.noclimchamb is False:
-                            clim.status = 0
-                        sys.exit(0)
 
     #start loops
     for temp in temperature:
@@ -198,6 +197,10 @@ if __name__ == '__main__':
     parser.add_argument(
         "--climchambdelay",
         help="set climatic chamber delay in sec (default : 7200)",
+        required = False,)
+    parser.add_argument(
+        "--noprecheck",
+        help="disable automatic precheck",
         required = False,)
     args = parser.parse_args()
     main(args)

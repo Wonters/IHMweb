@@ -201,6 +201,7 @@ if __name__ == '__main__':
     parser.add_argument(
         "--noprecheck",
         help="disable automatic precheck",
-        required = False,)
+        required = False,
+        action="store_true")
     args = parser.parse_args()
     main(args)

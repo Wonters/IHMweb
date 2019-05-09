@@ -5,62 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c79180d6-eb0b-46d5-a5a9-c92cd82c1c0a" name="Default Changelist" comment="version2">
-      <change afterPath="$PROJECT_DIR$/config/templates/config/createconfig_v2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/createconfig_v2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/testcase_home_v2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testcase/static/js/home_v2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testcase/templates/testcase/home_v2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/test_bench.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/test_bench.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acbbs-calibration.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/acbbs-config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/acbbs-scheduler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/calibration/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/calibration/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calibration/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/calibration/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calibration/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/calibration/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calibration/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/calibration/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calibration/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/calibration/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/static/css/configform.css" beforeDir="false" afterPath="$PROJECT_DIR$/config/static/css/configform.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/templates/config/createconfig.html" beforeDir="false" afterPath="$PROJECT_DIR$/config/templates/config/createconfig.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/templates/config/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/config/templates/config/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/templates/config/showconfig.html" beforeDir="false" afterPath="$PROJECT_DIR$/config/templates/config/showconfig.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/templates/config/showtc.html" beforeDir="false" afterPath="$PROJECT_DIR$/config/templates/config/showtc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/templates/config/showtcform.html" beforeDir="false" afterPath="$PROJECT_DIR$/config/templates/config/showtcform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_test_bench.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db_test_bench.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/templates/home/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/home/templates/home/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/home/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scheduler.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_bench/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_bench/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_bench/celery.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_bench/celery.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_bench/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_bench/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_bench/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_bench/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_bench/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_bench/wsgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcase/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcase/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcase/celery.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcase/celery.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcase/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcase/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcase/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcase/logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcase/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcase/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcase/static/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/testcase/static/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcase/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcase/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcase/templates/testcase/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/testcase/templates/testcase/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcase/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcase/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcase/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcase/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testcase/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/testcase/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +34,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testcase/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
+            <state relative-caret-position="735">
               <caret line="61" selection-start-line="61" selection-end-line="61" />
               <folding>
                 <element signature="e#36#47#0" expanded="true" />
@@ -99,8 +46,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="734">
-              <caret line="231" column="45" selection-start-line="231" selection-start-column="45" selection-end-line="231" selection-end-column="45" />
+            <state relative-caret-position="102">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -213,8 +160,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1039" />
-    <option name="y" value="97" />
+    <option name="x" value="548" />
+    <option name="y" value="666" />
     <option name="width" value="928" />
     <option name="height" value="1020" />
   </component>
@@ -235,28 +182,13 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="test_bench_version2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test_bench_version2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test_bench_version2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test_bench_version2" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/venv" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -460,6 +392,7 @@
       <workItem from="1552039129711" duration="48653000" />
       <workItem from="1552386071170" duration="43168000" />
       <workItem from="1552556178205" duration="15661000" />
+      <workItem from="1557400920096" duration="451000" />
     </task>
     <task id="LOCAL-00001" summary="introduction du logger">
       <created>1552386158286</created>
@@ -472,7 +405,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="431413000" />
+    <option name="totallyTimeSpent" value="431864000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -484,10 +417,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1039" y="97" width="928" height="1020" extended-state="0" />
+    <frame x="481" y="62" width="928" height="1020" extended-state="0" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.34240362" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.6201814" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.26854753" />
       <window_info anchor="bottom" id="Inspection Results" order="1" weight="0.20775028" />
@@ -885,7 +818,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testcase/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
+        <state relative-caret-position="735">
           <caret line="61" selection-start-line="61" selection-end-line="61" />
           <folding>
             <element signature="e#36#47#0" expanded="true" />
@@ -895,8 +828,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="734">
-          <caret line="231" column="45" selection-start-line="231" selection-start-column="45" selection-end-line="231" selection-end-column="45" />
+        <state relative-caret-position="102">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

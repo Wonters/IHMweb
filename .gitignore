@@ -111,5 +111,10 @@ pip-selfcheck.json
 #other
 test.json
 
+#sqlite
+db.sqlite3
+db_test_bench.sqlite3
+dump.rdb
+
 
 # End of https://www.gitignore.io/api/python

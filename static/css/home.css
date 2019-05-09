@@ -1,13 +1,6 @@
 
-h1 {
-    opacity: 1;
-    background-color: #41a1d7;
-    border: none;
-    color: #5e5d5d;
-    text-align: center;
-    font-weight: bold;
-    font-size: 50px;
-}
+
+
 
 nav {
     margin: auto;
@@ -27,44 +20,12 @@ label {
     text-align: center;
 }
 
-.colonne1{
-    width: 25%;
-    position: absolute;
-    visibility: visible;
-    margin-bottom: 100px;
-}
-
-.colonne2{
-    margin-left: 25%;
-    width:25%;
-    position: absolute;
-    visibility: visible;
-    margin-bottom: 100px;
-}
-
-.colonne3{
-    width: 25%;
-    margin-left: 50%;
-    position: absolute;
-    visibility: visible;
-    margin-bottom: 100px;
-}
-
-.colonne4{
-    margin-left: 75%;
-    width:25%;
-    position: absolute;
-    visibility: visible;
-    margin-bottom: 100px;
-}
-
 
 .degrade{
     background-image: linear-gradient(#41a1d7, white);
 }
 
 .testcase{
-    text-align: center;
     padding: 20px 90px;
 
 }
@@ -73,19 +34,19 @@ label {
     margin: 20px 90px;
 }
 
-.scheduler{
-    margin-bottom: 250px;
-}
+
 
 .cmd{
     font-size: 30px;
     font-weight: bold;
+    margin: auto;
 
 }
 
 .form-control{
-    font-size: 20px;
+    font-size: large;
     font-weight: bold;
+    margin: 5px;
 }
 
 .testcase-button {
@@ -145,6 +106,13 @@ label {
     overflow: hidden;
 }
 
+
+.input1 {
+
+    width: 40px;
+}
+
+
 #button {
     background-color: #41a1d7;
     border: none;
@@ -158,23 +126,51 @@ label {
 
 }
 
-#scheduler{
-
-}
 
 #sigfox {
     width: 80px;
     height: 103px;
     padding: 0;
     text-align: center;
-
 }
 
 #progresstc{
     border-radius: 20px;
     background-color: #79aec8;
     text-align: center;
-    width: 250px;
 
 
+}
+
+#background{
+    background: url('/static/img/Rohde-Schwarz-Test-Equipment.jpg') fixed no-repeat 50% 50%;
+    opacity: 0.4;
+}
+
+
+#cmd-button-start{
+
+    margin: 5px;
+    padding-right: 100%;
+    background-color: #ff0500;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+}
+
+#cmd-button-stop{
+
+    margin: 5px;
+    padding-right: 100%;
+    background-color: #ff0500;
+    font-weight: bold;
+    font-size: large;
+}
+
+#addtemperature {
+    margin: 2px;
+}
+
+#lesstemperature{
+    margin: 2px;
 }

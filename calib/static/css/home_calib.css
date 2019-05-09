@@ -1,0 +1,16 @@
+.rond{
+	width:20px;
+	height:20px;
+	background:chartreuse;
+	border: solid 2px #d7b08f;
+	-webkit-border-radius:100px;
+	-moz-border-radius:100px;
+	-o-border-radius:100px;
+	border-radius:100px;
+}
+
+.btn-calib{
+	background-color: #447e9b;
+	margin: 5px;
+
+}

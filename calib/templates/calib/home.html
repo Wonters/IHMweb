@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block contents %}
+    <link href="/static/css/home_calib.css" rel="stylesheet">
+    <div class="row">
+        <label class="form-control">Dernière calibraton: 15/03/2018 {{ date }} </label>
+    </div>
+
+    <div class="historique">
+    <label class="h3"> Historique des calibration </label>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="">
+                <a href="/calib/test">
+                <button class="btn btn-calib btn-lg"> CALIBRER</button>
+                </a>
+            </div>
+            <div class="">
+                <a href="/calib/bonjour">
+                <button class="btn btn-calib btn-lg"> Voir la dernière calibration</button>
+                </a>
+            </div>
+        </div>
+        <div class="col">
+            <label class="h6"> Connexion des appareils : </label>
+            <div class="rond"></div>
+        </div>
+
+    <div class="calibration">
+
+    </div>
+
+    </div>
+{% endblock %}
+
+

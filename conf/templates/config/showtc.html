@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+    TESTCASE
+{% endblock %}
+{% block contents %}
+    <div>
+        <a href="/carac/">
+        <button class="button"> return </button>
+        </a>
+    </div>
+    <ul>
+        {% for conf, value in testcase.items %}
+            <p id="{{ conf }}"><strong> {{ conf }} :</strong> {{ value }} </p>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
+
+
+
+
+

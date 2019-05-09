@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    CARACTERISATION
+{% endblock %}
+
+{% block contents %}
+    <link href="/static/css/home_carac.css" rel="stylesheet">
+
+    <input id="listTc" value="{{ listTc }}" type="hidden">
+    <input id="listConf" value="{{ listConf }}" type="hidden">
+
+    <label class="cmd h6" for="simulated">Simulated</label>
+    <div class="h6">
+        <select type="boolean" id="simulated" class="form-control" name="testcase_simulation">
+            <option value="yes">YES</option>
+            <option value="no">NO</option>
+        </select>
+    </div>
+    <div class="row">
+        <div id="configuration" class="col">
+            <h1 class="custom-h1"> Campaign </h1>
+            <label for="baseStation" class="cmd">Select the base station</label>
+            <div class="h3">
+                <select type="name" id="baseStation" class="form-control" name="baseStation" onclick="loadConf(value)"
+                        data-toggle="tooltip" data-placement="bottom" title="stay press to select">
+                        <option value="TAPV3" class="h3"> TAPV3 (tiger) </option>
+                        <option value="TAPMV4" class="h3"> TAPMV4 (lynx) </option>
+                </select>
+            </div>
+            <label for="configfile" class="cmd">Select a campagn of testcases</label>
+            <div class="h3">
+                <select type="name" id="configfile" class="form-control" name="configname" onclick="loadConf(value)"
+                        data-toggle="tooltip" data-placement="bottom" title="stay press to select">
+                    {% for conf in listConf %}
+                        <option value="{{ conf }}" class="h3"> {{ conf }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div id="scheduler" class="col">
+            <h1 class="custom-h1">Scheduler</h1>
+            <div class="scheduler">
+                <div class="climChamber">
+                    <label class="cmd" for="climChamber">Climatic chamber </label>
+                    <div class="h3">
+                        <select type="boolean" id="climChamber" name="testcase_climChamber" class="form-control"
+                                onclick="showTempSetting()">
+                            <option value="yes" class="h3">YES</option>
+                            <option value="no" selected="selected" class="h3">NO</option>
+                        </select>
+                    </div>
+                    <div id="tempSetting">
+                        <div class="row">
+                            <div class="col"><label class="custom-label-climCham" for="temperature"> Chamber temp
+                                °C </label></div>
+                            <div class="col"><label class="custom-label-climCham" for="delay"> Chamber delay </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="number" id="temp" name="temp" value="0">
+                                <button type="button" id="addtemperature" class="btn btn-info btn-lg"
+                                        onclick="moreTemperature()">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                                <button type="button" id="lesstemperature" class="btn btn-info btn-lg"
+                                        onclick="lessTemperature()">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </div>
+                            <div class="col">
+                                <input type="number" id="delay" name="delay" value="2000" class="h3">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col"><input disabled="disabled" type="text" id="temperature" name="temperature"
+                                                    value="20,45,50" class="h3">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div><label> TESTCASES AVAILABLE </label></div>
+            </div>
+        </div>
+        <div id="setting" class="col">
+            <h1 class="custom-h1"> Settings </h1>
+            <div id="commande">
+                <label class="cmd" for="name">Output type</label>
+                <div class="h3">
+                    <select type="name" id="type" class="form-control" name="testcase_type">
+                        <option value="officiel"> Officiel</option>
+                        <option value="test"> Test</option>
+                    </select>
+                </div>
+                <label class="cmd" for="name">Name</label>
+                <div class="h3">
+                    <input id="name" class="form-control" name="testcase_nameCarac" value="test">
+                </div>
+
+                <label class="cmd" for="channel"> Channel </label>
+
+                <div class="h3 col">
+                    <SELECT type="box" class="form-control" id="channel">
+                        {% for channel in channels %}
+                            <option value="{{ channel }}"> {{ channel }} </option>
+                        {% endfor %}
+                    </SELECT>
+                    <button type="button" id="addchannel" class="btn btn-info btn-lg" onclick="moreChannel()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button type="button" id="lesschannel" class="btn btn-info btn-lg" onclick="lessChannel()">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                    <input disabled="disabled" type="text" id="channels" class="form-control"
+                           name="testcase_channels" value="1,3,4">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <button type="button" id="cmd-button-start" class="btn btn-lg " onclick="startProgress()"> START</button>
+        <!-- remplacer à terme par un bouton start -->
+    </div>
+    <div class="row">
+        <button type="submit" id="cmd-button-stop" class="btn btn-lg" onclick="stopProgress()"> STOP</button>
+    </div>
+
+    <div class="progress row" style="height: 50px;" role="progressbar">
+        <div class="span" id="progress-bar" style="background-color: blue; width: 0; opacity: 0.8">
+            &nbsp;
+        </div>
+        <div id="progress-bar-message" class="h4" style="text-align: center; margin-left: 50%;"> Waiting for progress to
+            start...
+        </div>
+
+    </div>
+
+    <div id="progress" class="">
+        <p style="font-weight: bold; text-align: center" class="h3"> Température </p>
+        <p id="which-temperature" class="h4" style="font-weight: bold; text-align: center;"></p>
+        <p style="font-weight: bold; text-align: center;" class="h3"> Testcase en cours</p>
+        <p id="name-tc" style="text-align: center;" class="h4"></p>
+        <p id="iteration-mesure" style="text-align: center;" class="h4"></p>
+        <div class="progress row" style="height: 50px; text-align: center;" role="progressbar">
+            <div class="span" id="progress-bar-tc" style="background-color: blue; width: 0; opacity: 0.8">
+                &nbsp;
+            </div>
+            <div id="progress-bar-message-tc" class="h4" style="text-align: center;margin-left: 50%;"> Waiting for
+                progress to start...
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/static/js/carac_home_v2.js">
+    </script>
+
+{% endblock %}
+
+
+

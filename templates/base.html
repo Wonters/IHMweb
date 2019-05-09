@@ -6,6 +6,10 @@
     {% block static %}
         {% load static %}
         <link rel="stylesheet" href="/static/css/home.css"/>
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
     {% endblock %}
     <title>{% block title %}ACBBS{% endblock %}</title>
     {% block script %}
@@ -13,30 +17,31 @@
 </head>
 
 <body>
-<header>
-    <img src="/static/img/sigfox.png" width="820" height="360" alt="logo" style="align-content: center; opacity: 0.7">
-</header>
-<!--commentaire corp du texte-->
-<section style="padding-bottom: 1200px;">
-    <!--commentaire barre de navigation-->
-    <nav style="text-align: center;">
-        {% block nav %}<!--commentaire mettre les liens url pour pouvoir rédiriger l'action de la barre de navigation
-            -->
-            <a href="/home/">
-                <button id="button">HELP</button>
-            </a>   <!-- return a page to explain how to use the IHM Web -->
-            <a href="/testcase/">
-                <button id="button"> TESTCASE</button>
-            </a> <!-- return the page to the testcase application -->
-            <a href="/config/">
-                <button id="button"> CONFIG</button>
-            </a>
-            <a href="/calibration/">
-                <button id="button"> CALIBRATION</button>
-            </a> <!-- pas encore implémenter-->
-        {% endblock %}
-    </nav>
 
+<!--commentaire corp du texte-->
+<section style="">
+    <div id="background"></div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <img src="/static/img/logo.png" width="820" height="360" alt="logo" style="align-content: center; opacity: 0.7; height: 10%; width: 10%">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home/help">HELP </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/carac/">CARACTERISATION</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/conf/">CONFIGURATION</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/calib/">CALIBRATION</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <article>
         {% block contents %}
 
@@ -47,10 +52,15 @@
 <!--commentaire pied de page-->
 <footer>
     {% block footer %}
-        <p style="padding: 10px; text-align: center;">&copy; ACBBS</p>
+
     {% endblock %}
+        <p style="padding: 10px; text-align: center;">&copy; ACBBS</p>
 </footer>
 </body>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
 
 
 </html>

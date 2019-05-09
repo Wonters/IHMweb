@@ -40,12 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_celery_results',
-    'celery_progress',
     'home',
-    'testcase',
-    'config',
-    'calibration',
+    'carac',
+    'conf',
+    'calib',
 ]
 
 MIDDLEWARE = [
@@ -63,9 +61,12 @@ ROOT_URLCONF = 'test_bench.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'testcase/templates'),
-                 os.path.join(BASE_DIR, 'config/templates'), os.path.join(BASE_DIR, 'home/templates'),
-                 os.path.join(BASE_DIR, 'calibration/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),
+                 os.path.join(BASE_DIR, 'carac/templates'),
+                 os.path.join(BASE_DIR, 'conf/templates'),
+                 os.path.join(BASE_DIR, 'home/templates'),
+                 os.path.join(BASE_DIR, 'calib/templates'),
+                 os.path.join(BASE_DIR, 'switch/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,16 +132,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'home/static'),
-    os.path.join(BASE_DIR, 'config/static'),
-    os.path.join(BASE_DIR, 'testcase/static'),
-    os.path.join(BASE_DIR, 'calibration/static'),
+    os.path.join(BASE_DIR, 'conf/static'),
+    os.path.join(BASE_DIR, 'carac/static'),
+    os.path.join(BASE_DIR, 'calib/static'),
 )
 
 # CELERY STUFF
@@ -151,27 +151,4 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 
-# LOGGING
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler'
-        }
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
+

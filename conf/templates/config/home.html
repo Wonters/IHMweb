@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+    CONFIG
+{% endblock %}
+
+
+{% block contents %}
+    <div class="row">
+        <div class="col">
+            <form action="{% url "init" %}" role="form" method="post" id="select-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <h1>Select a file</h1>
+                <label for="name">Configuration file in the database</label>
+                <select name="configname" id="select" class="form-control" onclick="initConf(value)">
+                    {% for conf in listConf %}
+                        <option value="{{ conf }}"> {{ conf }} </option>
+                    {% endfor %}
+                </select>
+                <!-- envoie le formulaire et renvoie le template read -->
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <a href="/conf/read">
+                <button id="button" class="btn btn-default">READ</button>
+            </a>
+            <a href="/conf/create">
+                <button id="button" class="btn btn-default"> CREATE</button>
+            </a>
+            <button id="button" class="btn btn-default" onclick="deleteConf()"> DELETE</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <form action="{% url "add" %}" method="post" enctype="multipart/form-data" class="loadfile">
+                {% csrf_token %}
+                <input type="file" id="file" name="file" class="">
+            </form>
+            <button id="button" class="btn btn-default" onclick="addConf()"> LOAD </button>
+        </div>
+    </div>
+
+    <div id="treeview1" class="treeview">
+
+    </div>
+
+    <script src="/static/js/home.js"></script>
+{% endblock %}
+

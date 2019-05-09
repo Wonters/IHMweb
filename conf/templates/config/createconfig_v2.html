@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title  %}
+    CREATE
+{% endblock %}
+
+
+
+
+
+{% block contents %}
+    <div>
+        <a href="/conf/">
+            <button class="btn col btn-info "> return</button>
+        </a>
+    </div>
+    <input id="typeconf" value="{{ type_config }}" type="hidden">
+
+    <p class="h3 col"> Fichier de configuration : <input type="text" name="nameconf" id="nameConf" value="test">
+    </p>
+    <div id="tree"></div>
+    <div class="createConfigFile"></div>
+    <div class="">
+        <button type="submit" class="btn btn-success col btn-lg" value="Submit" onclick="save()"> SAVE </button>
+        <!-- envoie le formulaire et renvoie le template read -->
+    </div>
+
+    <script src="/static/js/createconfig_v2.js"> </script>
+
+{% endblock %}

@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c79180d6-eb0b-46d5-a5a9-c92cd82c1c0a" name="Default Changelist" comment="version2">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/test_bench.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/test_bench.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_bench/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_bench/__init__.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,10 +30,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testcase/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
+            <state relative-caret-position="915">
               <caret line="61" selection-start-line="61" selection-end-line="61" />
               <folding>
                 <element signature="e#36#47#0" expanded="true" />
@@ -43,14 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/views.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///usr/lib/python3.5/importlib/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="213">
+              <caret line="125" selection-start-line="125" selection-end-line="125" />
             </state>
           </provider>
         </entry>
@@ -126,7 +122,6 @@
         <option value="$PROJECT_DIR$/config/static/css/config.css" />
         <option value="$PROJECT_DIR$/config/templates/config/showconfig.html" />
         <option value="$PROJECT_DIR$/test_bench/urls.py" />
-        <option value="$PROJECT_DIR$/test_bench/__init__.py" />
         <option value="$PROJECT_DIR$/test_bench/celery.py" />
         <option value="$PROJECT_DIR$/testcase/models.py" />
         <option value="$PROJECT_DIR$/testcase/tasks.py" />
@@ -156,12 +151,13 @@
         <option value="$PROJECT_DIR$/config/templates/config/home.html" />
         <option value="$PROJECT_DIR$/testcase/views.py" />
         <option value="$PROJECT_DIR$/config/views.py" />
+        <option value="$PROJECT_DIR$/test_bench/__init__.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="548" />
-    <option name="y" value="666" />
+    <option name="x" value="637" />
+    <option name="y" value="219" />
     <option name="width" value="928" />
     <option name="height" value="1020" />
   </component>
@@ -171,6 +167,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="test_bench_version4" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test_bench_version4" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -182,7 +189,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -393,6 +399,7 @@
       <workItem from="1552386071170" duration="43168000" />
       <workItem from="1552556178205" duration="15661000" />
       <workItem from="1557400920096" duration="451000" />
+      <workItem from="1557401388290" duration="681000" />
     </task>
     <task id="LOCAL-00001" summary="introduction du logger">
       <created>1552386158286</created>
@@ -405,7 +412,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="431864000" />
+    <option name="totallyTimeSpent" value="432545000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -417,15 +424,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="481" y="62" width="928" height="1020" extended-state="0" />
+    <frame x="637" y="219" width="928" height="1020" extended-state="0" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.6201814" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.4297052" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.26854753" />
       <window_info anchor="bottom" id="Inspection Results" order="1" weight="0.20775028" />
       <window_info anchor="bottom" id="Database Changes" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="3" sideWeight="0.49751243" visible="true" weight="0.32586786" />
+      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.49751243" visible="true" weight="0.32586786" />
       <window_info anchor="bottom" id="Version Control" order="4" weight="0.32810867" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50248754" side_tool="true" weight="0.2904911" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
@@ -494,7 +501,6 @@
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/acbbs-scheduler.py" />
     <entry file="file://$PROJECT_DIR$/acbbs-config.py" />
     <entry file="file://$PROJECT_DIR$/config/templates/config/showtc.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -524,16 +530,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_bench/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="11" lean-forward="true" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/celery/app/task.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
@@ -545,16 +541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_bench/celery.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -816,22 +802,46 @@
     <entry file="file://$PROJECT_DIR$/testcase/forms.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/testcase/views.py">
+    <entry file="file://$PROJECT_DIR$/test_bench/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        <state relative-caret-position="60">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.5/importlib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_bench/celery.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
           <folding>
-            <element signature="e#36#47#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testcase/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="915">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="e#36#47#0" expanded="true" />
           </folding>
         </state>
       </provider>

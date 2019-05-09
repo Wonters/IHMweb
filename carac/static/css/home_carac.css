@@ -1,0 +1,33 @@
+
+
+.custom-control-lg .custom-control-label::before,
+.custom-control-lg .custom-control-label::after {
+    top: 0.1rem !important;
+    left: -2rem !important;
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+}
+
+.custom-control-lg .custom-control-label {
+    margin-left: 0.5rem !important;
+    font-size: 1rem !important;
+}
+
+.custom-h1{
+
+    opacity: 1;
+    background-color: #41a1d7;
+    border-radius: 8px;
+    color: #5e5d5d;
+    text-align: center;
+    font-weight: bold;
+    font-size: 50px;
+}
+
+.custom-label-climCham{
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+
+}
+

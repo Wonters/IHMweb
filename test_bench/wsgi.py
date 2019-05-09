@@ -1,5 +1,5 @@
 """
-WSGI config for test_bench project.
+WSGI conf for test_bench project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

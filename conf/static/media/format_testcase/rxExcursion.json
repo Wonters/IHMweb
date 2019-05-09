@@ -1,0 +1,14 @@
+{
+  "rxExcursion": {
+    "name":"rxExcursion backoff",
+    "voltage": [12],
+    "power": [-80],
+    "radio_configuration": ["rc1", "rc6"],
+    "freq_tx": [],
+    "freq_rx": [],
+    "filter_tx": [],
+    "filter_rx": [],
+    "backoff": [0,3,6],
+    "bbFreq": [20000]
+  }
+}

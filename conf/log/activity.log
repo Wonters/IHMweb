@@ -1,0 +1,1536 @@
+2019-04-10 14:26:40,964 :: DEBUG :: before : dict_keys(['txIM3Measurement', 'txExcursion', 'rxExcursion']) 
+2019-04-10 14:26:42,377 :: INFO :: GET list mongo
+2019-04-10 14:26:42,377 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:26:42,382 :: INFO :: GET configurations:test
+2019-04-10 14:26:47,338 :: INFO :: GET list mongo
+2019-04-10 14:26:47,338 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:26:47,341 :: INFO :: GET configurations:test
+2019-04-10 14:26:54,573 :: INFO :: GET list mongo
+2019-04-10 14:26:54,573 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:26:54,577 :: INFO :: GET configurations:test
+2019-04-10 14:26:57,866 :: INFO :: GET list mongo
+2019-04-10 14:26:57,867 :: INFO :: GET POST: test
+2019-04-10 14:26:57,869 :: INFO :: GET configurations:test
+2019-04-10 14:27:00,502 :: INFO :: GET list mongo
+2019-04-10 14:27:00,503 :: INFO :: GET POST: test
+2019-04-10 14:27:00,510 :: INFO :: GET configurations:test
+2019-04-10 14:27:04,221 :: INFO :: GET list mongo
+2019-04-10 14:27:04,222 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:27:04,225 :: INFO :: GET configurations:test
+2019-04-10 14:27:04,226 :: DEBUG :: fichier configuration_TAPMV4.0 enregistré sur la base de donnée
+2019-04-10 14:27:06,185 :: INFO :: GET list mongo
+2019-04-10 14:27:06,186 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-10 14:27:06,192 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:27:06,808 :: DEBUG :: before : dict_keys(['txIM3Measurement', 'txExcursion', 'rxExcursion']) 
+2019-04-10 14:27:09,621 :: INFO :: GET list mongo
+2019-04-10 14:27:09,622 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:27:09,628 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:27:10,755 :: INFO :: GET list mongo
+2019-04-10 14:27:10,756 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:27:10,761 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:27:16,584 :: INFO :: GET list mongo
+2019-04-10 14:27:16,585 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:27:16,588 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:27:18,695 :: INFO :: GET list mongo
+2019-04-10 14:27:18,696 :: INFO :: GET POST: test
+2019-04-10 14:27:18,702 :: INFO :: GET configurations:test
+2019-04-10 14:27:19,475 :: INFO :: GET list mongo
+2019-04-10 14:27:19,476 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:27:19,479 :: INFO :: GET configurations:test
+2019-04-10 14:27:21,552 :: INFO :: GET list mongo
+2019-04-10 14:27:21,553 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:27:21,559 :: INFO :: GET configurations:test
+2019-04-10 14:27:23,529 :: INFO :: GET list mongo
+2019-04-10 14:27:23,530 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-10 14:27:23,539 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:27:24,108 :: INFO :: GET list mongo
+2019-04-10 14:27:24,109 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:27:24,112 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:27:54,800 :: INFO :: file configuration_TAPMV4.0 is delete
+2019-04-10 14:27:54,801 :: INFO :: GET list mongo
+2019-04-10 14:27:54,801 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:27:54,801 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-10 14:27:54,808 :: INFO :: GET list mongo
+2019-04-10 14:27:54,808 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:27:54,810 :: INFO :: GET configurations:test
+2019-04-10 14:27:57,174 :: INFO :: GET list mongo
+2019-04-10 14:27:57,174 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:27:57,177 :: INFO :: GET configurations:test
+2019-04-10 14:28:00,741 :: INFO :: GET list mongo
+2019-04-10 14:28:00,742 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-10 14:28:00,746 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:28:01,258 :: DEBUG :: before : dict_keys(['txIM3Measurement', 'txExcursion', 'rxExcursion']) 
+2019-04-10 14:28:18,723 :: INFO :: GET list mongo
+2019-04-10 14:28:18,727 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:28:18,730 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:29:08,853 :: DEBUG :: before : dict_keys(['txIM3Measurement', 'txExcursion', 'rxExcursion']) 
+2019-04-10 14:29:12,019 :: INFO :: GET list mongo
+2019-04-10 14:29:12,020 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:29:12,027 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:29:14,229 :: INFO :: GET list mongo
+2019-04-10 14:29:14,230 :: INFO :: GET POST: test
+2019-04-10 14:29:14,233 :: INFO :: GET configurations:test
+2019-04-10 14:29:14,738 :: DEBUG :: before : dict_keys(['txIM3Measurement', 'txExcursion', 'rxExcursion']) 
+2019-04-10 14:29:17,725 :: INFO :: GET list mongo
+2019-04-10 14:29:17,725 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:29:17,726 :: INFO :: GET configurations:test
+2019-04-10 14:29:19,234 :: INFO :: GET list mongo
+2019-04-10 14:29:19,235 :: INFO :: GET POST: test
+2019-04-10 14:29:19,241 :: INFO :: GET configurations:test
+2019-04-10 14:29:20,449 :: INFO :: GET list mongo
+2019-04-10 14:29:20,450 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-10 14:29:20,455 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:29:21,159 :: INFO :: GET list mongo
+2019-04-10 14:29:21,159 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:29:21,165 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:31:09,881 :: INFO :: GET list mongo
+2019-04-10 14:31:09,882 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:31:09,884 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:31:16,804 :: INFO :: GET list mongo
+2019-04-10 14:31:16,805 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:31:16,807 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:31:16,808 :: DEBUG :: fichier configuration_TAPV3.0 enregistré sur la base de donnée
+2019-04-10 14:31:20,026 :: INFO :: GET list mongo
+2019-04-10 14:31:20,027 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-10 14:31:20,034 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-10 14:31:20,666 :: INFO :: GET list mongo
+2019-04-10 14:31:20,668 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:31:20,673 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-10 14:32:05,806 :: INFO :: GET list mongo
+2019-04-10 14:32:05,806 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:32:05,810 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-10 14:32:26,040 :: INFO :: file configuration_TAPV3.0 is delete
+2019-04-10 14:32:26,043 :: INFO :: GET list mongo
+2019-04-10 14:32:26,044 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:32:26,044 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-10 14:32:26,056 :: INFO :: GET list mongo
+2019-04-10 14:32:26,057 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:32:26,058 :: INFO :: GET configurations:test
+2019-04-10 14:32:27,110 :: INFO :: GET list mongo
+2019-04-10 14:32:27,110 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:32:27,112 :: INFO :: GET configurations:test
+2019-04-10 14:32:29,425 :: INFO :: GET list mongo
+2019-04-10 14:32:29,427 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-10 14:32:29,432 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-10 14:32:29,931 :: DEBUG :: before : dict_keys(['txIM3Measurement', 'txExcursion', 'rxExcursion']) 
+2019-04-10 14:32:41,117 :: INFO :: GET list mongo
+2019-04-10 14:32:41,118 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:32:41,121 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-10 14:32:45,295 :: INFO :: file test is delete
+2019-04-10 14:32:45,300 :: INFO :: GET list mongo
+2019-04-10 14:32:45,301 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:32:45,306 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-10 14:32:45,369 :: INFO :: GET list mongo
+2019-04-10 14:32:45,371 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:32:45,377 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-10 14:32:46,811 :: INFO :: GET list mongo
+2019-04-10 14:32:46,812 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:32:46,816 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:32:47,809 :: INFO :: GET list mongo
+2019-04-10 14:32:47,809 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-10 14:32:47,810 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:32:48,641 :: INFO :: GET list mongo
+2019-04-10 14:32:48,642 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-10 14:32:48,646 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-10 14:32:56,043 :: INFO :: AJAX send:{'delay': ['2000'], 'temperature': ['[]'], 'tc2play': ['{"1,txIM3Measurement":false,"0,txIM3Measurement":false,"0,txExcursion":false}']}
+2019-04-10 14:32:56,044 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'temperature': [], 'tc2play': {'txIM3Measurement': [], 'txExcursion': []}}
+2019-04-10 14:32:56,128 :: DEBUG :: DEBUG: name of the carac : test
+2019-04-10 14:32:56,129 :: INFO :: formulare input: {'testcase_simulation': True, 'testcase_nameCarac': 'test', 'testcase_channel': 1, 'testcase_type': 'officiel', 'testcase_climChamber': True} 
+2019-04-10 14:32:56,186 :: INFO :: Start is running ....
+2019-04-10 14:34:36,882 :: INFO :: IHMweb_acbbs running ....
+2019-04-10 14:34:36,885 :: INFO :: IHMweb_acbbs running ....
+2019-04-10 14:34:37,235 :: INFO :: GET list mongo
+2019-04-10 14:34:37,236 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-10 14:34:37,236 :: INFO :: Configuration class initialization
+2019-04-10 14:34:37,239 :: INFO :: GET list mongo
+2019-04-10 14:34:37,239 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-10 14:34:37,239 :: INFO :: Configuration class initialization
+2019-04-10 14:34:41,022 :: INFO :: GET list mongo
+2019-04-10 14:34:41,023 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:34:41,029 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:34:41,620 :: INFO :: GET list mongo
+2019-04-10 14:34:41,621 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:34:41,626 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:34:43,624 :: INFO :: GET list mongo
+2019-04-10 14:34:43,626 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:34:43,631 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:34:43,982 :: INFO :: GET list mongo
+2019-04-10 14:34:43,983 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 14:34:43,985 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:34:46,329 :: INFO :: GET list mongo
+2019-04-10 14:34:46,330 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-10 14:34:46,332 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-10 14:35:54,445 :: INFO :: AJAX send:{'temperature': ['[0,8]'], 'delay': ['2000'], 'tc2play': ['{"0,txExcursion":true,"0,txIM3Measurement":false,"1,txIM3Measurement":false}']}
+2019-04-10 14:35:54,446 :: INFO :: Scheduler cmd : {'temperature': [0, 8], 'tc2play': {'txExcursion': ['0'], 'txIM3Measurement': []}, 'climChamberDelay': 2000}
+2019-04-10 14:35:54,496 :: DEBUG :: DEBUG: name of the carac : txExcursion
+2019-04-10 14:35:54,497 :: INFO :: formulare input: {'testcase_nameCarac': 'txExcursion', 'testcase_channel': 7, 'testcase_simulation': True, 'testcase_type': 'test', 'testcase_climChamber': True} 
+2019-04-10 14:35:54,527 :: INFO :: Start is running ....
+2019-04-10 17:26:36,267 :: INFO :: IHMweb_acbbs running ....
+2019-04-10 17:26:36,927 :: INFO :: IHMweb_acbbs running ....
+2019-04-10 17:26:36,930 :: INFO :: GET list mongo
+2019-04-10 17:26:36,930 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-10 17:26:36,930 :: INFO :: Configuration class initialization
+2019-04-10 17:26:36,933 :: INFO :: GET list mongo
+2019-04-10 17:26:36,933 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-10 17:26:36,933 :: INFO :: Configuration class initialization
+2019-04-10 17:27:00,125 :: INFO :: IHMweb_acbbs running ....
+2019-04-10 17:27:00,432 :: INFO :: IHMweb_acbbs running ....
+2019-04-10 17:27:00,435 :: INFO :: GET list mongo
+2019-04-10 17:27:00,435 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-10 17:27:00,435 :: INFO :: Configuration class initialization
+2019-04-10 17:27:00,437 :: INFO :: GET list mongo
+2019-04-10 17:27:00,438 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-10 17:27:00,438 :: INFO :: Configuration class initialization
+2019-04-10 17:27:18,928 :: INFO :: GET list mongo
+2019-04-10 17:27:18,929 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-10 17:27:18,930 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-10 17:27:21,447 :: INFO :: GET list mongo
+2019-04-10 17:27:21,448 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-10 17:27:21,454 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 11:16:03,630 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 11:16:04,332 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 11:16:04,356 :: INFO :: GET list mongo
+2019-04-12 11:16:04,356 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 11:16:04,357 :: INFO :: Configuration class initialization
+2019-04-12 11:16:04,368 :: INFO :: GET list mongo
+2019-04-12 11:16:04,369 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 11:16:04,369 :: INFO :: Configuration class initialization
+2019-04-12 11:16:24,391 :: INFO :: GET list mongo
+2019-04-12 11:16:24,391 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 11:16:24,395 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 11:17:34,895 :: INFO :: GET list mongo
+2019-04-12 11:17:34,897 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 11:17:34,908 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 11:18:08,653 :: INFO :: GET list mongo
+2019-04-12 11:18:08,654 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 11:18:08,661 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 11:18:09,957 :: INFO :: GET list mongo
+2019-04-12 11:18:09,958 :: INFO :: GET POST: test
+2019-04-12 11:18:09,964 :: INFO :: GET configurations:test
+2019-04-12 11:18:12,890 :: INFO :: GET list mongo
+2019-04-12 11:18:12,892 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-12 11:18:12,900 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 11:18:14,134 :: INFO :: AJAX send:{'temperature': ['[20,45,50]'], 'tc2play': ['{"0,txIM3Measurement":true,"1,rxExcursion":true,"2,rxExcursion":true,"0,rxExcursion":true,"1,txExcursion":true,"0,txExcursion":true}'], 'delay': ['2000']}
+2019-04-12 11:18:14,135 :: INFO :: Scheduler cmd : {'temperature': [20, 45, 50], 'tc2play': {'txIM3Measurement': ['0'], 'rxExcursion': ['2', '1', '0'], 'txExcursion': ['0', '1']}, 'climChamberDelay': 2000}
+2019-04-12 11:18:14,180 :: DEBUG :: DEBUG: name of the carac : test
+2019-04-12 11:18:14,181 :: INFO :: formulare input: {'testcase_channel': 8, 'testcase_nameCarac': 'test', 'testcase_climChamber': True, 'testcase_simulation': True, 'testcase_type': 'officiel'} 
+2019-04-12 11:18:14,242 :: INFO :: Start is running ....
+2019-04-12 11:36:50,263 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 11:36:50,565 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 11:36:50,568 :: INFO :: GET list mongo
+2019-04-12 11:36:50,568 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 11:36:50,568 :: INFO :: Configuration class initialization
+2019-04-12 11:36:50,570 :: INFO :: GET list mongo
+2019-04-12 11:36:50,570 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 11:36:50,571 :: INFO :: Configuration class initialization
+2019-04-12 11:36:52,505 :: INFO :: GET list mongo
+2019-04-12 11:36:52,506 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-12 11:36:52,511 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 11:36:56,343 :: INFO :: AJAX send:{'delay': ['2000'], 'tc2play': ['{"1,txExcursion":true,"0,txExcursion":true,"0,rxExcursion":true,"2,rxExcursion":true,"1,rxExcursion":true,"0,txIM3Measurement":true}'], 'temperature': ['[20,45,50]']}
+2019-04-12 11:36:56,344 :: INFO :: Scheduler cmd : {'tc2play': {'txExcursion': ['1', '0'], 'txIM3Measurement': ['0'], 'rxExcursion': ['1', '2', '0']}, 'climChamberDelay': 2000, 'temperature': [20, 45, 50]}
+2019-04-12 11:36:56,383 :: DEBUG :: debug: formulare is not valide
+2019-04-12 11:36:56,384 :: INFO :: Scheduler starting is not valide
+2019-04-12 11:37:20,636 :: INFO :: GET list mongo
+2019-04-12 11:37:20,637 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 11:37:20,641 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 11:37:21,714 :: INFO :: AJAX send:{'delay': ['2000'], 'tc2play': ['{"1,txExcursion":true,"0,txExcursion":true,"2,rxExcursion":true,"1,rxExcursion":true,"0,rxExcursion":true,"0,txIM3Measurement":true}'], 'temperature': ['[20,45,50]']}
+2019-04-12 11:37:21,715 :: INFO :: Scheduler cmd : {'tc2play': {'txExcursion': ['1', '0'], 'txIM3Measurement': ['0'], 'rxExcursion': ['1', '2', '0']}, 'climChamberDelay': 2000, 'temperature': [20, 45, 50]}
+2019-04-12 11:37:21,768 :: DEBUG :: debug: formulare is not valide
+2019-04-12 11:37:21,768 :: INFO :: Scheduler starting is not valide
+2019-04-12 11:37:57,550 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 11:37:57,957 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 11:37:57,960 :: INFO :: GET list mongo
+2019-04-12 11:37:57,960 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 11:37:57,960 :: INFO :: Configuration class initialization
+2019-04-12 11:37:57,963 :: INFO :: GET list mongo
+2019-04-12 11:37:57,963 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 11:37:57,963 :: INFO :: Configuration class initialization
+2019-04-12 11:38:00,471 :: INFO :: GET list mongo
+2019-04-12 11:38:00,472 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 11:38:00,475 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 11:38:02,406 :: INFO :: GET list mongo
+2019-04-12 11:38:02,406 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 11:38:02,409 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 11:38:03,181 :: INFO :: GET list mongo
+2019-04-12 11:38:03,182 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-12 11:38:03,188 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 11:38:04,609 :: INFO :: AJAX send:{'tc2play': ['{"2,rxExcursion":true,"0,rxExcursion":true,"1,rxExcursion":true,"0,txIM3Measurement":true,"1,txExcursion":true,"0,txExcursion":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-12 11:38:04,609 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'tc2play': {'txIM3Measurement': ['0'], 'rxExcursion': ['0', '2', '1'], 'txExcursion': ['0', '1']}, 'temperature': [20, 45, 50]}
+2019-04-12 11:38:04,644 :: DEBUG :: debug: formulare is not valide
+2019-04-12 11:38:04,644 :: INFO :: Scheduler starting is not valide
+2019-04-12 11:40:45,210 :: INFO :: GET list mongo
+2019-04-12 11:40:45,211 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 11:40:45,217 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 11:40:47,172 :: INFO :: GET list mongo
+2019-04-12 11:40:47,174 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-12 11:40:47,179 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 11:40:48,273 :: INFO :: AJAX send:{'tc2play': ['{"2,rxExcursion":true,"1,rxExcursion":true,"0,rxExcursion":true,"0,txIM3Measurement":true,"0,txExcursion":true,"1,txExcursion":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-12 11:40:48,275 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'tc2play': {'txIM3Measurement': ['0'], 'rxExcursion': ['0', '2', '1'], 'txExcursion': ['0', '1']}, 'temperature': [20, 45, 50]}
+2019-04-12 11:40:48,314 :: DEBUG :: debug: formulare is not valide
+2019-04-12 11:40:48,315 :: INFO :: Scheduler starting is not valide
+2019-04-12 11:44:49,210 :: INFO :: GET list mongo
+2019-04-12 11:44:49,211 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 11:44:49,217 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 11:44:50,405 :: INFO :: AJAX send:{'tc2play': ['{"0,rxExcursion":true,"1,rxExcursion":true,"2,rxExcursion":true,"0,txIM3Measurement":true,"1,txExcursion":true,"0,txExcursion":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-12 11:44:50,406 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'tc2play': {'txIM3Measurement': ['0'], 'rxExcursion': ['0', '2', '1'], 'txExcursion': ['0', '1']}, 'temperature': [20, 45, 50]}
+2019-04-12 11:44:50,440 :: DEBUG :: debug: formulare is not valide
+2019-04-12 11:44:50,440 :: INFO :: Scheduler starting is not valide
+2019-04-12 11:46:05,451 :: INFO :: GET list mongo
+2019-04-12 11:46:05,451 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 11:46:05,455 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 11:46:35,059 :: INFO :: GET list mongo
+2019-04-12 11:46:35,060 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-12 11:46:35,066 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 11:46:36,245 :: INFO :: AJAX send:{'tc2play': ['{"1,rxExcursion":true,"0,rxExcursion":true,"2,rxExcursion":true,"0,txIM3Measurement":true,"0,txExcursion":true,"1,txExcursion":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-12 11:46:36,245 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'tc2play': {'txIM3Measurement': ['0'], 'rxExcursion': ['0', '2', '1'], 'txExcursion': ['0', '1']}, 'temperature': [20, 45, 50]}
+2019-04-12 11:46:36,282 :: DEBUG :: debug: formulare is not valide
+2019-04-12 11:46:36,283 :: INFO :: Scheduler starting is not valide
+2019-04-12 12:00:38,549 :: INFO :: GET list mongo
+2019-04-12 12:00:38,550 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:00:38,555 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 12:01:08,944 :: INFO :: GET list mongo
+2019-04-12 12:01:08,946 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:01:08,951 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 12:02:04,156 :: INFO :: GET list mongo
+2019-04-12 12:02:04,157 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:02:04,163 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 12:06:08,840 :: INFO :: GET list mongo
+2019-04-12 12:06:08,841 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:06:08,847 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 12:22:23,528 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:22:24,001 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:22:24,009 :: INFO :: GET list mongo
+2019-04-12 12:22:24,010 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:22:24,011 :: INFO :: Configuration class initialization
+2019-04-12 12:22:24,017 :: INFO :: GET list mongo
+2019-04-12 12:22:24,017 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:22:24,017 :: INFO :: Configuration class initialization
+2019-04-12 12:22:24,094 :: INFO :: GET list mongo
+2019-04-12 12:22:24,095 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:22:24,101 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:22:30,929 :: INFO :: GET list mongo
+2019-04-12 12:22:30,929 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 12:22:30,931 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:22:32,966 :: INFO :: AJAX send:{'temperature': ['[20,45,50]'], 'tc2play': ['{"1,txExcursion":true,"0,txExcursion":true,"0,txIM3Measurement":true,"0,rxExcursion":true,"2,rxExcursion":true,"1,rxExcursion":true}'], 'delay': ['2000']}
+2019-04-12 12:22:32,967 :: INFO :: Scheduler cmd : {'temperature': [20, 45, 50], 'tc2play': {'txExcursion': ['0', '1'], 'txIM3Measurement': ['0'], 'rxExcursion': ['1', '0', '2']}, 'climChamberDelay': 2000}
+2019-04-12 12:27:46,370 :: INFO :: GET list mongo
+2019-04-12 12:27:46,370 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:27:46,376 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:27:48,890 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:27:49,210 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:27:49,212 :: INFO :: GET list mongo
+2019-04-12 12:27:49,213 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:27:49,213 :: INFO :: Configuration class initialization
+2019-04-12 12:27:49,215 :: INFO :: GET list mongo
+2019-04-12 12:27:49,215 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:27:49,215 :: INFO :: Configuration class initialization
+2019-04-12 12:27:53,933 :: INFO :: GET list mongo
+2019-04-12 12:27:53,933 :: INFO :: GET POST: test
+2019-04-12 12:27:53,938 :: INFO :: GET configurations:test
+2019-04-12 12:27:56,220 :: INFO :: GET list mongo
+2019-04-12 12:27:56,222 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 12:27:56,226 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:27:57,363 :: INFO :: AJAX send:{'delay': ['2000'], 'temperature': ['[20,45,50]'], 'tc2play': ['{"0,txIM3Measurement":true,"0,rxExcursion":true,"2,rxExcursion":true,"1,rxExcursion":true,"1,txExcursion":true,"0,txExcursion":true}']}
+2019-04-12 12:27:57,367 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'temperature': [20, 45, 50], 'tc2play': {'txIM3Measurement': ['0'], 'rxExcursion': ['0', '2', '1'], 'txExcursion': ['1', '0']}}
+2019-04-12 12:27:57,456 :: ERROR :: Internal Server Error: /carac/start
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/views.py", line 136, in start
+    if self.get_parametersCmd(request) == True:
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/views.py", line 94, in get_parametersCmd
+    logger.debug("DEBUG: name of the carac : {0}".format(form['testcase_nameCarac']))
+KeyError: 'testcase_nameCarac'
+2019-04-12 12:28:09,939 :: ERROR :: Internal Server Error: /carac/stop
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view carac.views.method.__call__ didn't return an HttpResponse object. It returned None instead.
+2019-04-12 12:28:53,987 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:28:54,361 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:28:54,364 :: INFO :: GET list mongo
+2019-04-12 12:28:54,364 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:28:54,364 :: INFO :: Configuration class initialization
+2019-04-12 12:28:54,366 :: INFO :: GET list mongo
+2019-04-12 12:28:54,366 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:28:54,366 :: INFO :: Configuration class initialization
+2019-04-12 12:28:56,312 :: INFO :: GET list mongo
+2019-04-12 12:28:56,312 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:28:56,316 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:28:59,766 :: INFO :: GET list mongo
+2019-04-12 12:28:59,767 :: INFO :: GET POST: test
+2019-04-12 12:28:59,771 :: INFO :: GET configurations:test
+2019-04-12 12:29:01,006 :: INFO :: GET list mongo
+2019-04-12 12:29:01,008 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 12:29:01,015 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:29:02,879 :: INFO :: AJAX send:{'tc2play': ['{"0,txIM3Measurement":true,"1,rxExcursion":true,"0,rxExcursion":true,"2,rxExcursion":true,"1,txExcursion":true,"0,txExcursion":true}'], 'temperature': ['[20,45,50]'], 'delay': ['2000']}
+2019-04-12 12:29:02,879 :: INFO :: Scheduler cmd : {'tc2play': {'txIM3Measurement': ['0'], 'rxExcursion': ['0', '2', '1'], 'txExcursion': ['0', '1']}, 'temperature': [20, 45, 50], 'climChamberDelay': 2000}
+2019-04-12 12:29:02,886 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-12 12:29:02,886 :: INFO :: formulare input: {'climChamber': ['yes'], 'channel': ['1,3,4'], 'simulate': ['yes'], 'type': ['officiel'], 'nameCarac': ['test']} 
+2019-04-12 12:29:02,886 :: INFO :: Start is running ....
+2019-04-12 12:29:02,940 :: ERROR :: Internal Server Error: /carac/start
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/tasks.py", line 41, in scheduler_start
+    dut_channel = str(cmd["channels"][0]).split(
+KeyError: 'channels'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/views.py", line 138, in start
+    response = scheduler_start(self)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/tasks.py", line 47, in scheduler_start
+    breakpoint()
+NameError: name 'breakpoint' is not defined
+2019-04-12 12:30:05,097 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:30:05,413 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:30:05,415 :: INFO :: GET list mongo
+2019-04-12 12:30:05,415 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:30:05,416 :: INFO :: Configuration class initialization
+2019-04-12 12:30:05,418 :: INFO :: GET list mongo
+2019-04-12 12:30:05,418 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:30:05,419 :: INFO :: Configuration class initialization
+2019-04-12 12:30:08,073 :: INFO :: GET list mongo
+2019-04-12 12:30:08,074 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:30:08,079 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:30:10,545 :: INFO :: GET list mongo
+2019-04-12 12:30:10,546 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 12:30:10,550 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:30:11,959 :: INFO :: AJAX send:{'tc2play': ['{"1,rxExcursion":true,"2,rxExcursion":true,"0,rxExcursion":true,"1,txExcursion":true,"0,txExcursion":true,"0,txIM3Measurement":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-12 12:30:11,960 :: INFO :: Scheduler cmd : {'tc2play': {'rxExcursion': ['1', '0', '2'], 'txExcursion': ['0', '1'], 'txIM3Measurement': ['0']}, 'climChamberDelay': 2000, 'temperature': [20, 45, 50]}
+2019-04-12 12:30:11,973 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-12 12:30:11,973 :: INFO :: formulare input: {'simulate': ['yes'], 'nameCarac': ['test'], 'channel': ['1,3,4'], 'climChamber': ['yes'], 'type': ['officiel']} 
+2019-04-12 12:30:11,973 :: INFO :: Start is running ....
+2019-04-12 12:30:12,018 :: ERROR :: Internal Server Error: /carac/start
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/tasks.py", line 42, in scheduler_start
+    dut_channel = str(cmd["channels"][0]).split(
+KeyError: 'channels'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/views.py", line 138, in start
+    response = scheduler_start(self)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/tasks.py", line 48, in scheduler_start
+    breakpoint()
+NameError: name 'breakpoint' is not defined
+2019-04-12 12:31:34,105 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:31:34,434 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:31:34,437 :: INFO :: GET list mongo
+2019-04-12 12:31:34,437 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:31:34,437 :: INFO :: Configuration class initialization
+2019-04-12 12:31:34,439 :: INFO :: GET list mongo
+2019-04-12 12:31:34,440 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:31:34,440 :: INFO :: Configuration class initialization
+2019-04-12 12:31:37,964 :: INFO :: GET list mongo
+2019-04-12 12:31:37,965 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:31:37,975 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:31:40,678 :: INFO :: GET list mongo
+2019-04-12 12:31:40,679 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 12:31:40,682 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:31:42,378 :: INFO :: AJAX send:{'temperature': ['[20,45,50]'], 'tc2play': ['{"0,txIM3Measurement":true,"1,txExcursion":true,"0,txExcursion":true,"1,rxExcursion":true,"0,rxExcursion":true,"2,rxExcursion":true}'], 'delay': ['2000']}
+2019-04-12 12:31:42,378 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'temperature': [20, 45, 50], 'tc2play': {'rxExcursion': ['0', '1', '2'], 'txExcursion': ['0', '1'], 'txIM3Measurement': ['0']}}
+2019-04-12 12:31:42,392 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-12 12:31:42,392 :: INFO :: formulare input: {'type': ['officiel'], 'nameCarac': ['test'], 'channel': ['1,3,4'], 'climChamber': ['yes'], 'simulate': ['yes']} 
+2019-04-12 12:31:42,392 :: INFO :: Start is running ....
+2019-04-12 12:31:42,441 :: ERROR :: Internal Server Error: /carac/start
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/tasks.py", line 42, in scheduler_start
+    dut_channel = cmd["channels"][0].split(
+KeyError: 'channels'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/views.py", line 138, in start
+    response = scheduler_start(self)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/tasks.py", line 48, in scheduler_start
+    breakpoint()
+NameError: name 'breakpoint' is not defined
+2019-04-12 12:32:07,042 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:32:07,360 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:32:07,362 :: INFO :: GET list mongo
+2019-04-12 12:32:07,362 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:32:07,363 :: INFO :: Configuration class initialization
+2019-04-12 12:32:07,365 :: INFO :: GET list mongo
+2019-04-12 12:32:07,365 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:32:07,366 :: INFO :: Configuration class initialization
+2019-04-12 12:32:07,728 :: INFO :: GET list mongo
+2019-04-12 12:32:07,728 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:32:07,731 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:32:09,491 :: INFO :: GET list mongo
+2019-04-12 12:32:09,492 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 12:32:09,495 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:32:10,626 :: INFO :: AJAX send:{'tc2play': ['{"0,rxExcursion":true,"1,rxExcursion":true,"2,rxExcursion":true,"0,txIM3Measurement":true,"0,txExcursion":true,"1,txExcursion":true}'], 'temperature': ['[20,45,50]'], 'delay': ['2000']}
+2019-04-12 12:32:10,628 :: INFO :: Scheduler cmd : {'tc2play': {'rxExcursion': ['0', '1', '2'], 'txIM3Measurement': ['0'], 'txExcursion': ['1', '0']}, 'temperature': [20, 45, 50], 'climChamberDelay': 2000}
+2019-04-12 12:32:10,656 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-12 12:32:10,656 :: INFO :: formulare input: {'nameCarac': ['test'], 'channel': ['1,3,4'], 'climChamber': ['yes'], 'simulate': ['yes'], 'type': ['officiel']} 
+2019-04-12 12:32:10,656 :: INFO :: Start is running ....
+2019-04-12 12:38:21,585 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:38:21,892 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:38:21,894 :: INFO :: GET list mongo
+2019-04-12 12:38:21,895 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:38:21,895 :: INFO :: Configuration class initialization
+2019-04-12 12:38:21,897 :: INFO :: GET list mongo
+2019-04-12 12:38:21,897 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:38:21,897 :: INFO :: Configuration class initialization
+2019-04-12 12:38:24,711 :: INFO :: GET list mongo
+2019-04-12 12:38:24,712 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:38:24,717 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:38:27,554 :: INFO :: GET list mongo
+2019-04-12 12:38:27,558 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 12:38:27,564 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:38:34,738 :: INFO :: AJAX send:{'tc2play': ['{"0,txIM3Measurement":false,"0,rxExcursion":false,"1,rxExcursion":false,"2,rxExcursion":false,"1,txExcursion":true,"0,txExcursion":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-12 12:38:34,738 :: INFO :: Scheduler cmd : {'tc2play': {'txIM3Measurement': [], 'txExcursion': ['1', '0'], 'rxExcursion': []}, 'climChamberDelay': 2000, 'temperature': [20, 45, 50]}
+2019-04-12 12:38:34,751 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-12 12:38:34,752 :: INFO :: formulare input: {'channel': ['1,3,4'], 'nameCarac': ['test'], 'climChamber': ['yes'], 'type': ['officiel'], 'simulate': ['yes']} 
+2019-04-12 12:38:34,752 :: INFO :: Start is running ....
+2019-04-12 12:38:58,522 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:38:58,828 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:38:58,830 :: INFO :: GET list mongo
+2019-04-12 12:38:58,831 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:38:58,831 :: INFO :: Configuration class initialization
+2019-04-12 12:38:58,833 :: INFO :: GET list mongo
+2019-04-12 12:38:58,833 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:38:58,833 :: INFO :: Configuration class initialization
+2019-04-12 12:39:39,186 :: INFO :: GET list mongo
+2019-04-12 12:39:39,186 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:39:39,191 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:39:42,015 :: INFO :: GET list mongo
+2019-04-12 12:39:42,016 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 12:39:42,024 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:39:47,174 :: INFO :: AJAX send:{'tc2play': ['{"0,txIM3Measurement":false,"0,rxExcursion":false,"1,rxExcursion":false,"2,rxExcursion":true,"1,txExcursion":false,"0,txExcursion":false}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-12 12:39:47,175 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'tc2play': {'txIM3Measurement': [], 'rxExcursion': ['2'], 'txExcursion': []}, 'temperature': [20, 45, 50]}
+2019-04-12 12:39:47,183 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-12 12:39:47,184 :: INFO :: formulare input: {'type': ['officiel'], 'nameCarac': ['test'], 'channel': ['1,3,4'], 'simulate': ['yes'], 'climChamber': ['yes']} 
+2019-04-12 12:39:47,184 :: INFO :: Start is running ....
+2019-04-12 12:42:46,587 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:42:46,910 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:42:46,912 :: INFO :: GET list mongo
+2019-04-12 12:42:46,912 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:42:46,912 :: INFO :: Configuration class initialization
+2019-04-12 12:42:46,915 :: INFO :: GET list mongo
+2019-04-12 12:42:46,915 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:42:46,915 :: INFO :: Configuration class initialization
+2019-04-12 12:42:47,693 :: INFO :: GET list mongo
+2019-04-12 12:42:47,693 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:42:47,695 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:42:48,804 :: INFO :: GET list mongo
+2019-04-12 12:42:48,804 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:42:48,809 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:42:55,972 :: INFO :: GET list mongo
+2019-04-12 12:42:55,973 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 12:42:55,974 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:42:56,622 :: INFO :: GET list mongo
+2019-04-12 12:42:56,624 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-12 12:42:56,629 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 12:42:58,096 :: INFO :: AJAX send:{'tc2play': ['{"1,rxExcursion":true,"2,rxExcursion":true,"0,rxExcursion":true,"0,txIM3Measurement":true,"1,txExcursion":true,"0,txExcursion":true}'], 'temperature': ['[20,45,50]'], 'delay': ['2000']}
+2019-04-12 12:42:58,098 :: INFO :: Scheduler cmd : {'tc2play': {'rxExcursion': ['2', '0', '1'], 'txIM3Measurement': ['0'], 'txExcursion': ['1', '0']}, 'temperature': [20, 45, 50], 'climChamberDelay': 2000}
+2019-04-12 12:42:58,140 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-12 12:42:58,140 :: INFO :: formulare input: {'nameCarac': ['test'], 'channel': ['1,3,4'], 'simulate': ['yes'], 'type': ['officiel'], 'climChamber': ['yes']} 
+2019-04-12 12:42:58,141 :: INFO :: Start is running ....
+2019-04-12 12:44:47,954 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:44:48,248 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:44:48,251 :: INFO :: GET list mongo
+2019-04-12 12:44:48,251 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:44:48,251 :: INFO :: Configuration class initialization
+2019-04-12 12:44:48,253 :: INFO :: GET list mongo
+2019-04-12 12:44:48,253 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:44:48,254 :: INFO :: Configuration class initialization
+2019-04-12 12:44:48,258 :: INFO :: GET list mongo
+2019-04-12 12:44:48,259 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:44:48,259 :: INFO :: Configuration class initialization
+2019-04-12 12:45:02,362 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:45:02,683 :: INFO :: IHMweb_acbbs running ....
+2019-04-12 12:45:02,686 :: INFO :: GET list mongo
+2019-04-12 12:45:02,686 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:45:02,686 :: INFO :: Configuration class initialization
+2019-04-12 12:45:02,689 :: INFO :: GET list mongo
+2019-04-12 12:45:02,690 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-12 12:45:02,690 :: INFO :: Configuration class initialization
+2019-04-12 12:45:05,544 :: INFO :: GET list mongo
+2019-04-12 12:45:05,545 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:45:05,550 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:45:13,880 :: INFO :: GET list mongo
+2019-04-12 12:45:13,880 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:45:13,881 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:45:15,372 :: INFO :: GET list mongo
+2019-04-12 12:45:15,373 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:45:15,378 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:45:17,275 :: INFO :: GET list mongo
+2019-04-12 12:45:17,275 :: INFO :: GET POST: test33
+2019-04-12 12:45:17,278 :: INFO :: GET configurations:test33
+2019-04-12 12:45:17,782 :: DEBUG :: before : dict_keys(['txExcursion', 'txIM3Measurement', 'rxExcursion']) 
+2019-04-12 12:45:19,264 :: INFO :: GET list mongo
+2019-04-12 12:45:19,265 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:45:19,269 :: INFO :: GET configurations:test33
+2019-04-12 12:45:20,964 :: INFO :: GET list mongo
+2019-04-12 12:45:20,965 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:45:20,971 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 12:45:23,252 :: INFO :: GET list mongo
+2019-04-12 12:45:23,254 :: INFO :: GET POST: test33
+2019-04-12 12:45:23,259 :: INFO :: GET configurations:test33
+2019-04-12 12:45:26,223 :: INFO :: GET list mongo
+2019-04-12 12:45:26,224 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:45:26,228 :: INFO :: GET configurations:test33
+2019-04-12 12:46:03,232 :: INFO :: GET list mongo
+2019-04-12 12:46:03,233 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:46:03,238 :: INFO :: GET configurations:test33
+2019-04-12 12:46:06,020 :: INFO :: GET list mongo
+2019-04-12 12:46:06,021 :: INFO :: GET POST: test33
+2019-04-12 12:46:06,025 :: INFO :: GET configurations:test33
+2019-04-12 12:47:47,451 :: INFO :: GET list mongo
+2019-04-12 12:47:47,453 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:47:47,465 :: INFO :: GET configurations:test33
+2019-04-12 12:48:28,067 :: INFO :: GET list mongo
+2019-04-12 12:48:28,068 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:48:28,072 :: INFO :: GET configurations:test33
+2019-04-12 12:49:00,285 :: INFO :: GET list mongo
+2019-04-12 12:49:00,285 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:49:00,288 :: INFO :: GET configurations:test33
+2019-04-12 12:49:21,677 :: INFO :: GET list mongo
+2019-04-12 12:49:21,678 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:49:21,681 :: INFO :: GET configurations:test33
+2019-04-12 12:50:06,664 :: INFO :: GET list mongo
+2019-04-12 12:50:06,665 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:50:06,670 :: INFO :: GET configurations:test33
+2019-04-12 12:51:46,080 :: INFO :: GET list mongo
+2019-04-12 12:51:46,081 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:51:46,086 :: INFO :: GET configurations:test33
+2019-04-12 12:52:36,496 :: INFO :: GET list mongo
+2019-04-12 12:52:36,496 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:52:36,501 :: INFO :: GET configurations:test33
+2019-04-12 12:53:39,148 :: INFO :: GET list mongo
+2019-04-12 12:53:39,148 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:53:39,151 :: INFO :: GET configurations:test33
+2019-04-12 12:57:24,768 :: INFO :: GET list mongo
+2019-04-12 12:57:24,769 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:57:24,773 :: INFO :: GET configurations:test33
+2019-04-12 12:58:28,871 :: INFO :: GET list mongo
+2019-04-12 12:58:28,872 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:58:28,874 :: INFO :: GET configurations:test33
+2019-04-12 12:59:17,002 :: INFO :: GET list mongo
+2019-04-12 12:59:17,004 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-12 12:59:17,008 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 12:59:30,774 :: INFO :: GET list mongo
+2019-04-12 12:59:30,774 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 12:59:30,778 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 13:00:15,128 :: INFO :: GET list mongo
+2019-04-12 13:00:15,129 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 13:00:15,131 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 13:01:46,918 :: INFO :: GET list mongo
+2019-04-12 13:01:46,918 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 13:01:46,921 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 13:02:18,318 :: INFO :: GET list mongo
+2019-04-12 13:02:18,319 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 13:02:18,321 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 13:02:44,538 :: INFO :: GET list mongo
+2019-04-12 13:02:44,539 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 13:02:44,541 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 13:04:00,835 :: INFO :: GET list mongo
+2019-04-12 13:04:00,836 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 13:04:00,845 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 13:05:46,609 :: INFO :: GET list mongo
+2019-04-12 13:05:46,610 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 13:05:46,612 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 13:06:36,848 :: INFO :: GET list mongo
+2019-04-12 13:06:36,849 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 13:06:36,851 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 13:06:49,679 :: INFO :: GET list mongo
+2019-04-12 13:06:49,680 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-12 13:06:49,685 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 13:08:04,790 :: INFO :: GET list mongo
+2019-04-12 13:08:04,792 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-12 13:08:04,798 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-12 13:08:08,436 :: INFO :: GET list mongo
+2019-04-12 13:08:08,437 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-12 13:08:08,442 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-12 13:08:19,933 :: INFO :: AJAX send:{'temperature': ['[20,45,50]'], 'tc2play': ['{"1,txExcursion":true,"0,txExcursion":true,"0,txIM3Measurement":true,"1,rxExcursion":true,"0,rxExcursion":true,"2,rxExcursion":true}'], 'delay': ['2000']}
+2019-04-12 13:08:19,933 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'tc2play': {'txExcursion': ['1', '0'], 'txIM3Measurement': ['0'], 'rxExcursion': ['0', '1', '2']}, 'temperature': [20, 45, 50]}
+2019-04-12 13:08:19,943 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-12 13:08:19,944 :: INFO :: formulare input: {'type': ['officiel'], 'nameCarac': ['test'], 'channel': ['1,3,4'], 'climChamber': ['yes'], 'simulate': ['yes']} 
+2019-04-12 13:08:19,944 :: INFO :: Start is running ....
+2019-04-18 15:25:22,312 :: INFO :: IHMweb_acbbs running ....
+2019-04-18 15:25:22,720 :: INFO :: IHMweb_acbbs running ....
+2019-04-18 15:25:22,741 :: INFO :: GET list mongo
+2019-04-18 15:25:22,741 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-18 15:25:22,741 :: INFO :: Configuration class initialization
+2019-04-18 15:25:22,748 :: INFO :: GET list mongo
+2019-04-18 15:25:22,748 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-18 15:25:22,748 :: INFO :: Configuration class initialization
+2019-04-18 15:26:43,752 :: INFO :: IHMweb_acbbs running ....
+2019-04-18 15:26:45,463 :: INFO :: IHMweb_acbbs running ....
+2019-04-18 15:26:45,777 :: INFO :: IHMweb_acbbs running ....
+2019-04-18 15:26:45,780 :: INFO :: GET list mongo
+2019-04-18 15:26:45,780 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-18 15:26:45,780 :: INFO :: Configuration class initialization
+2019-04-18 15:26:45,782 :: INFO :: GET list mongo
+2019-04-18 15:26:45,782 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-18 15:26:45,782 :: INFO :: Configuration class initialization
+2019-04-18 15:27:43,215 :: ERROR :: Internal Server Error: /calib/test
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/calib/views.py", line 12, in test_ping
+    ping.do_one()
+TypeError: do_one() missing 1 required positional argument: 'timeout'
+2019-04-18 15:27:53,402 :: INFO :: IHMweb_acbbs running ....
+2019-04-18 15:27:53,770 :: INFO :: IHMweb_acbbs running ....
+2019-04-18 15:27:53,773 :: INFO :: GET list mongo
+2019-04-18 15:27:53,773 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-18 15:27:53,773 :: INFO :: Configuration class initialization
+2019-04-18 15:27:53,779 :: INFO :: GET list mongo
+2019-04-18 15:27:53,779 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-18 15:27:53,779 :: INFO :: Configuration class initialization
+2019-04-18 15:27:58,653 :: ERROR :: Internal Server Error: /calib/test
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/calib/views.py", line 12, in test_ping
+    ping.do_one(3)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/calib/tasks.py", line 118, in do_one
+    self.my_socket = socket.socket(socket.AF_INET, socket.SOCK_RAW, icmp)
+  File "/usr/lib/python3.5/socket.py", line 134, in __init__
+    _socket.socket.__init__(self, family, type, proto, fileno)
+PermissionError: [Errno 1] Operation not permitted
+2019-04-18 15:46:17,795 :: INFO :: IHMweb_acbbs running ....
+2019-04-18 15:46:18,104 :: INFO :: IHMweb_acbbs running ....
+2019-04-18 15:46:18,107 :: INFO :: GET list mongo
+2019-04-18 15:46:18,107 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-18 15:46:18,107 :: INFO :: Configuration class initialization
+2019-04-18 15:46:18,109 :: INFO :: GET list mongo
+2019-04-18 15:46:18,109 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-18 15:46:18,110 :: INFO :: Configuration class initialization
+2019-04-18 15:46:32,462 :: INFO :: GET list mongo
+2019-04-18 15:46:32,463 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-18 15:46:32,471 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-18 15:46:33,767 :: INFO :: GET list mongo
+2019-04-18 15:46:33,768 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-18 15:46:33,769 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-18 15:46:34,597 :: INFO :: GET list mongo
+2019-04-18 15:46:34,598 :: INFO :: GET POST: test
+2019-04-18 15:46:34,604 :: INFO :: GET configurations:test
+2019-04-18 15:46:37,886 :: INFO :: AJAX send:{'delay': ['2000'], 'temperature': ['[20,45,50]'], 'tc2play': ['{"0,txIM3Measurement":true,"0,rxExcursion":true,"0,txExcursion":true}']}
+2019-04-18 15:46:37,886 :: INFO :: Scheduler cmd : {'temperature': [20, 45, 50], 'climChamberDelay': 2000, 'tc2play': {'txIM3Measurement': ['0'], 'rxExcursion': ['0'], 'txExcursion': ['0']}}
+2019-04-18 15:46:37,898 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-18 15:46:37,899 :: INFO :: formulare input: {'climChamber': ['yes'], 'channel': ['1,3,4'], 'nameCarac': ['test'], 'type': ['officiel'], 'simulate': ['yes']} 
+2019-04-18 15:46:37,899 :: INFO :: Start is running ....
+2019-04-18 15:52:20,054 :: INFO :: IHMweb_acbbs running ....
+2019-04-18 15:52:20,375 :: INFO :: IHMweb_acbbs running ....
+2019-04-18 15:52:20,377 :: INFO :: GET list mongo
+2019-04-18 15:52:20,377 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-18 15:52:20,378 :: INFO :: Configuration class initialization
+2019-04-18 15:52:20,380 :: INFO :: GET list mongo
+2019-04-18 15:52:20,380 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-18 15:52:20,380 :: INFO :: Configuration class initialization
+2019-04-18 15:52:26,068 :: INFO :: GET list mongo
+2019-04-18 15:52:26,069 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-18 15:52:26,073 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-18 15:52:27,672 :: INFO :: GET list mongo
+2019-04-18 15:52:27,672 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-18 15:52:27,673 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-18 15:52:28,748 :: INFO :: GET list mongo
+2019-04-18 15:52:28,749 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-18 15:52:28,752 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-18 15:52:30,522 :: INFO :: AJAX send:{'tc2play': ['{"1,txExcursion":true,"0,txExcursion":true,"0,rxExcursion":true,"2,rxExcursion":true,"1,rxExcursion":true,"0,txIM3Measurement":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-18 15:52:30,523 :: INFO :: Scheduler cmd : {'tc2play': {'txExcursion': ['1', '0'], 'rxExcursion': ['0', '1', '2'], 'txIM3Measurement': ['0']}, 'climChamberDelay': 2000, 'temperature': [20, 45, 50]}
+2019-04-18 15:52:30,541 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-18 15:52:30,541 :: INFO :: formulare input: {'simulate': ['yes'], 'climChamber': ['yes'], 'nameCarac': ['test'], 'type': ['officiel'], 'channel': ['1,3,4']} 
+2019-04-18 15:52:30,542 :: INFO :: Start is running ....
+2019-04-19 11:46:39,524 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 11:46:54,476 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 11:55:56,656 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 11:55:56,963 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 11:55:56,966 :: INFO :: GET list mongo
+2019-04-19 11:55:56,966 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 11:55:56,966 :: INFO :: Configuration class initialization
+2019-04-19 11:55:56,969 :: INFO :: GET list mongo
+2019-04-19 11:55:56,969 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 11:55:56,969 :: INFO :: Configuration class initialization
+2019-04-19 11:56:03,309 :: INFO :: GET list mongo
+2019-04-19 11:56:03,310 :: INFO :: GET POST: test
+2019-04-19 11:56:03,313 :: INFO :: GET configurations:test
+2019-04-19 11:56:07,088 :: INFO :: GET list mongo
+2019-04-19 11:56:07,090 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-19 11:56:07,095 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-19 11:56:19,080 :: INFO :: GET list mongo
+2019-04-19 11:56:19,082 :: INFO :: GET POST: test33
+2019-04-19 11:56:19,088 :: INFO :: GET configurations:test33
+2019-04-19 11:57:31,790 :: INFO :: AJAX send:{'tc2play': ['{"0,rxExcursion":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-19 11:57:31,791 :: INFO :: Scheduler cmd : {'tc2play': {'rxExcursion': ['0']}, 'climChamberDelay': 2000, 'temperature': [20, 45, 50]}
+2019-04-19 11:57:31,829 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-19 11:57:31,829 :: INFO :: formulare input: {'nameCarac': ['test'], 'simulate': ['yes'], 'channel': ['1,3,4'], 'climChamber': ['yes'], 'type': ['officiel']} 
+2019-04-19 11:57:31,830 :: INFO :: Start is running ....
+2019-04-19 12:03:24,260 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:03:24,555 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:03:24,558 :: INFO :: GET list mongo
+2019-04-19 12:03:24,558 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:03:24,558 :: INFO :: Configuration class initialization
+2019-04-19 12:03:24,560 :: INFO :: GET list mongo
+2019-04-19 12:03:24,560 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:03:24,560 :: INFO :: Configuration class initialization
+2019-04-19 12:04:01,001 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:04:03,306 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:04:03,644 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:04:03,648 :: INFO :: GET list mongo
+2019-04-19 12:04:03,648 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:04:03,648 :: INFO :: Configuration class initialization
+2019-04-19 12:04:03,652 :: INFO :: GET list mongo
+2019-04-19 12:04:03,652 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:04:03,652 :: INFO :: Configuration class initialization
+2019-04-19 12:04:14,299 :: ERROR :: Internal Server Error: /calib/test
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/calib/views.py", line 12, in test_ping
+    ping.do_one(3)
+AttributeError: 'Ping' object has no attribute 'do_one'
+2019-04-19 12:05:14,262 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:05:14,622 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:05:14,627 :: INFO :: GET list mongo
+2019-04-19 12:05:14,628 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:05:14,628 :: INFO :: Configuration class initialization
+2019-04-19 12:05:14,631 :: INFO :: GET list mongo
+2019-04-19 12:05:14,631 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:05:14,632 :: INFO :: Configuration class initialization
+2019-04-19 12:05:18,836 :: ERROR :: Internal Server Error: /calib/test
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/calib/views.py", line 11, in test_ping
+    Ping.ping()
+TypeError: ping() missing 1 required positional argument: 'self'
+2019-04-19 12:05:56,555 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:05:56,877 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:05:56,879 :: INFO :: GET list mongo
+2019-04-19 12:05:56,879 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:05:56,880 :: INFO :: Configuration class initialization
+2019-04-19 12:05:56,882 :: INFO :: GET list mongo
+2019-04-19 12:05:56,882 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:05:56,883 :: INFO :: Configuration class initialization
+2019-04-19 12:06:00,826 :: ERROR :: Internal Server Error: /calib/test
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/calib/views.py", line 11, in test_ping
+    Pg = Ping()
+TypeError: __init__() missing 1 required positional argument: 'IP'
+2019-04-19 12:06:22,413 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:06:22,904 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:06:22,906 :: INFO :: GET list mongo
+2019-04-19 12:06:22,907 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:06:22,907 :: INFO :: Configuration class initialization
+2019-04-19 12:06:22,911 :: INFO :: GET list mongo
+2019-04-19 12:06:22,911 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:06:22,911 :: INFO :: Configuration class initialization
+2019-04-19 12:07:16,278 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:07:16,577 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:07:16,580 :: INFO :: GET list mongo
+2019-04-19 12:07:16,580 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:07:16,580 :: INFO :: Configuration class initialization
+2019-04-19 12:07:16,582 :: INFO :: GET list mongo
+2019-04-19 12:07:16,582 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:07:16,582 :: INFO :: Configuration class initialization
+2019-04-19 12:07:54,140 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:07:54,595 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:07:54,600 :: INFO :: GET list mongo
+2019-04-19 12:07:54,600 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:07:54,600 :: INFO :: Configuration class initialization
+2019-04-19 12:07:54,609 :: INFO :: GET list mongo
+2019-04-19 12:07:54,609 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:07:54,610 :: INFO :: Configuration class initialization
+2019-04-19 12:08:22,126 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:08:22,444 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:08:22,447 :: INFO :: GET list mongo
+2019-04-19 12:08:22,447 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:08:22,447 :: INFO :: Configuration class initialization
+2019-04-19 12:08:22,450 :: INFO :: GET list mongo
+2019-04-19 12:08:22,450 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:08:22,450 :: INFO :: Configuration class initialization
+2019-04-19 12:08:23,642 :: ERROR :: Internal Server Error: /calib/test
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/calib/views.py", line 13, in test_ping
+    Calib = Calibration()
+TypeError: __init__() missing 1 required positional argument: 'parent'
+2019-04-19 12:08:38,489 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:08:38,789 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:08:38,791 :: INFO :: GET list mongo
+2019-04-19 12:08:38,791 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:08:38,791 :: INFO :: Configuration class initialization
+2019-04-19 12:08:38,794 :: INFO :: GET list mongo
+2019-04-19 12:08:38,794 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:08:38,794 :: INFO :: Configuration class initialization
+2019-04-19 12:09:37,443 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:09:37,815 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 12:09:37,818 :: INFO :: GET list mongo
+2019-04-19 12:09:37,818 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:09:37,818 :: INFO :: Configuration class initialization
+2019-04-19 12:09:37,821 :: INFO :: GET list mongo
+2019-04-19 12:09:37,821 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 12:09:37,821 :: INFO :: Configuration class initialization
+2019-04-19 15:08:35,125 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:08:35,427 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:08:35,430 :: INFO :: GET list mongo
+2019-04-19 15:08:35,430 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:08:35,430 :: INFO :: Configuration class initialization
+2019-04-19 15:08:35,432 :: INFO :: GET list mongo
+2019-04-19 15:08:35,433 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:08:35,433 :: INFO :: Configuration class initialization
+2019-04-19 15:15:30,983 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:15:31,291 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:15:31,294 :: INFO :: GET list mongo
+2019-04-19 15:15:31,294 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:15:31,294 :: INFO :: Configuration class initialization
+2019-04-19 15:15:31,297 :: INFO :: GET list mongo
+2019-04-19 15:15:31,297 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:15:31,297 :: INFO :: Configuration class initialization
+2019-04-19 15:16:17,639 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:16:17,947 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:16:17,950 :: INFO :: GET list mongo
+2019-04-19 15:16:17,950 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:16:17,950 :: INFO :: Configuration class initialization
+2019-04-19 15:16:17,952 :: INFO :: GET list mongo
+2019-04-19 15:16:17,952 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:16:17,952 :: INFO :: Configuration class initialization
+2019-04-19 15:18:07,078 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:18:07,384 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:18:07,387 :: INFO :: GET list mongo
+2019-04-19 15:18:07,387 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:18:07,387 :: INFO :: Configuration class initialization
+2019-04-19 15:18:07,389 :: INFO :: GET list mongo
+2019-04-19 15:18:07,389 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:18:07,390 :: INFO :: Configuration class initialization
+2019-04-19 15:19:03,843 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:19:04,149 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:19:04,151 :: INFO :: GET list mongo
+2019-04-19 15:19:04,152 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:19:04,152 :: INFO :: Configuration class initialization
+2019-04-19 15:19:04,154 :: INFO :: GET list mongo
+2019-04-19 15:19:04,154 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:19:04,155 :: INFO :: Configuration class initialization
+2019-04-19 15:26:27,757 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:26:28,134 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:26:28,136 :: INFO :: GET list mongo
+2019-04-19 15:26:28,136 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:26:28,136 :: INFO :: Configuration class initialization
+2019-04-19 15:26:28,138 :: INFO :: GET list mongo
+2019-04-19 15:26:28,139 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:26:28,139 :: INFO :: Configuration class initialization
+2019-04-19 15:26:43,067 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:26:43,371 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:26:43,374 :: INFO :: GET list mongo
+2019-04-19 15:26:43,374 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:26:43,374 :: INFO :: Configuration class initialization
+2019-04-19 15:26:43,384 :: INFO :: GET list mongo
+2019-04-19 15:26:43,384 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:26:43,384 :: INFO :: Configuration class initialization
+2019-04-19 15:26:47,312 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:26:47,616 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:26:47,618 :: INFO :: GET list mongo
+2019-04-19 15:26:47,619 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:26:47,619 :: INFO :: Configuration class initialization
+2019-04-19 15:26:47,621 :: INFO :: GET list mongo
+2019-04-19 15:26:47,621 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:26:47,622 :: INFO :: Configuration class initialization
+2019-04-19 15:27:08,027 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:27:08,456 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:27:08,458 :: INFO :: GET list mongo
+2019-04-19 15:27:08,459 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:27:08,459 :: INFO :: Configuration class initialization
+2019-04-19 15:27:08,461 :: INFO :: GET list mongo
+2019-04-19 15:27:08,461 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:27:08,461 :: INFO :: Configuration class initialization
+2019-04-19 15:29:20,527 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:29:20,833 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:29:20,835 :: INFO :: GET list mongo
+2019-04-19 15:29:20,836 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:29:20,836 :: INFO :: Configuration class initialization
+2019-04-19 15:29:20,839 :: INFO :: GET list mongo
+2019-04-19 15:29:20,839 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:29:20,839 :: INFO :: Configuration class initialization
+2019-04-19 15:30:19,594 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:30:19,911 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:30:19,913 :: INFO :: GET list mongo
+2019-04-19 15:30:19,913 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:30:19,913 :: INFO :: Configuration class initialization
+2019-04-19 15:30:19,919 :: INFO :: GET list mongo
+2019-04-19 15:30:19,919 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:30:19,920 :: INFO :: Configuration class initialization
+2019-04-19 15:30:35,312 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:30:35,633 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:30:35,638 :: INFO :: GET list mongo
+2019-04-19 15:30:35,638 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:30:35,638 :: INFO :: Configuration class initialization
+2019-04-19 15:30:35,644 :: INFO :: GET list mongo
+2019-04-19 15:30:35,644 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:30:35,644 :: INFO :: Configuration class initialization
+2019-04-19 15:31:50,639 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:31:51,054 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:31:51,057 :: INFO :: GET list mongo
+2019-04-19 15:31:51,057 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:31:51,057 :: INFO :: Configuration class initialization
+2019-04-19 15:31:51,060 :: INFO :: GET list mongo
+2019-04-19 15:31:51,060 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:31:51,060 :: INFO :: Configuration class initialization
+2019-04-19 15:43:40,094 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:43:40,410 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:43:40,413 :: INFO :: GET list mongo
+2019-04-19 15:43:40,413 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:43:40,413 :: INFO :: Configuration class initialization
+2019-04-19 15:43:40,416 :: INFO :: GET list mongo
+2019-04-19 15:43:40,417 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:43:40,417 :: INFO :: Configuration class initialization
+2019-04-19 15:45:22,602 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:45:22,990 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:45:22,999 :: INFO :: GET list mongo
+2019-04-19 15:45:22,999 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:45:22,999 :: INFO :: Configuration class initialization
+2019-04-19 15:45:23,001 :: INFO :: GET list mongo
+2019-04-19 15:45:23,001 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:45:23,001 :: INFO :: Configuration class initialization
+2019-04-19 15:49:28,295 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:49:28,602 :: INFO :: IHMweb_acbbs running ....
+2019-04-19 15:49:28,605 :: INFO :: GET list mongo
+2019-04-19 15:49:28,605 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:49:28,605 :: INFO :: Configuration class initialization
+2019-04-19 15:49:28,607 :: INFO :: GET list mongo
+2019-04-19 15:49:28,608 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-19 15:49:28,608 :: INFO :: Configuration class initialization
+2019-04-21 14:19:40,608 :: INFO :: IHMweb_acbbs running ....
+2019-04-21 14:19:40,947 :: INFO :: IHMweb_acbbs running ....
+2019-04-21 14:19:40,950 :: INFO :: GET list mongo
+2019-04-21 14:19:40,950 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-21 14:19:40,950 :: INFO :: Configuration class initialization
+2019-04-21 14:19:40,953 :: INFO :: GET list mongo
+2019-04-21 14:19:40,953 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-21 14:19:40,953 :: INFO :: Configuration class initialization
+2019-04-21 14:20:04,004 :: INFO :: GET list mongo
+2019-04-21 14:20:04,005 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-21 14:20:04,007 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-21 14:20:11,205 :: INFO :: GET list mongo
+2019-04-21 14:20:11,206 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-21 14:20:11,208 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-21 14:20:12,118 :: INFO :: GET list mongo
+2019-04-21 14:20:12,119 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-21 14:20:12,123 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-21 14:20:19,272 :: INFO :: GET list mongo
+2019-04-21 14:20:19,274 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-21 14:20:19,280 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-21 14:20:20,759 :: INFO :: GET list mongo
+2019-04-21 14:20:20,760 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-21 14:20:20,761 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-21 14:20:26,382 :: INFO :: GET list mongo
+2019-04-21 14:20:26,384 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-21 14:20:26,389 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-21 14:21:02,542 :: INFO :: AJAX send:{'tc2play': ['{"1,txExcursion":false,"0,txExcursion":false,"0,txIM3Measurement":false,"1,rxExcursion":true,"2,rxExcursion":true,"0,rxExcursion":true}'], 'delay': ['2000'], 'temperature': ['[0,17,17]']}
+2019-04-21 14:21:02,543 :: INFO :: Scheduler cmd : {'temperature': [0, 17, 17], 'climChamberDelay': 2000, 'tc2play': {'txExcursion': [], 'txIM3Measurement': [], 'rxExcursion': ['1', '2', '0']}}
+2019-04-21 14:21:02,560 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-21 14:21:02,561 :: INFO :: formulare input: {'type': ['officiel'], 'simulate': ['yes'], 'nameCarac': ['test'], 'climChamber': ['no'], 'channel': ['1,3,4,1,1,1']} 
+2019-04-21 14:21:02,561 :: INFO :: Start is running ....
+2019-04-23 09:54:00,223 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 09:54:00,621 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 09:54:00,624 :: INFO :: GET list mongo
+2019-04-23 09:54:00,624 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 09:54:00,624 :: INFO :: Configuration class initialization
+2019-04-23 09:54:00,627 :: INFO :: GET list mongo
+2019-04-23 09:54:00,627 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 09:54:00,627 :: INFO :: Configuration class initialization
+2019-04-23 09:54:50,613 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 09:54:50,916 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 09:54:50,919 :: INFO :: GET list mongo
+2019-04-23 09:54:50,919 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 09:54:50,919 :: INFO :: Configuration class initialization
+2019-04-23 09:54:50,921 :: INFO :: GET list mongo
+2019-04-23 09:54:50,921 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 09:54:50,922 :: INFO :: Configuration class initialization
+2019-04-23 09:56:05,914 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 09:56:06,236 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 09:56:06,239 :: INFO :: GET list mongo
+2019-04-23 09:56:06,239 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 09:56:06,239 :: INFO :: Configuration class initialization
+2019-04-23 09:56:06,242 :: INFO :: GET list mongo
+2019-04-23 09:56:06,242 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 09:56:06,242 :: INFO :: Configuration class initialization
+2019-04-23 09:57:39,890 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 09:57:40,244 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 09:57:40,246 :: INFO :: GET list mongo
+2019-04-23 09:57:40,247 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 09:57:40,247 :: INFO :: Configuration class initialization
+2019-04-23 09:57:40,249 :: INFO :: GET list mongo
+2019-04-23 09:57:40,249 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 09:57:40,249 :: INFO :: Configuration class initialization
+2019-04-23 09:58:06,736 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 09:58:07,045 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 09:58:07,047 :: INFO :: GET list mongo
+2019-04-23 09:58:07,048 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 09:58:07,048 :: INFO :: Configuration class initialization
+2019-04-23 09:58:07,050 :: INFO :: GET list mongo
+2019-04-23 09:58:07,050 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 09:58:07,050 :: INFO :: Configuration class initialization
+2019-04-23 10:01:23,372 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 10:01:23,708 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 10:01:23,713 :: INFO :: GET list mongo
+2019-04-23 10:01:23,713 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 10:01:23,713 :: INFO :: Configuration class initialization
+2019-04-23 10:01:23,716 :: INFO :: GET list mongo
+2019-04-23 10:01:23,716 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 10:01:23,716 :: INFO :: Configuration class initialization
+2019-04-23 10:11:31,186 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 10:11:31,489 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 10:11:31,492 :: INFO :: GET list mongo
+2019-04-23 10:11:31,492 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 10:11:31,492 :: INFO :: Configuration class initialization
+2019-04-23 10:11:31,494 :: INFO :: GET list mongo
+2019-04-23 10:11:31,494 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 10:11:31,494 :: INFO :: Configuration class initialization
+2019-04-23 10:26:02,053 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 10:26:02,360 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 10:26:02,362 :: INFO :: GET list mongo
+2019-04-23 10:26:02,362 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 10:26:02,362 :: INFO :: Configuration class initialization
+2019-04-23 10:26:02,365 :: INFO :: GET list mongo
+2019-04-23 10:26:02,365 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 10:26:02,365 :: INFO :: Configuration class initialization
+2019-04-23 10:43:07,758 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 10:43:08,068 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 10:43:08,070 :: INFO :: GET list mongo
+2019-04-23 10:43:08,070 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 10:43:08,071 :: INFO :: Configuration class initialization
+2019-04-23 10:43:08,073 :: INFO :: GET list mongo
+2019-04-23 10:43:08,073 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 10:43:08,073 :: INFO :: Configuration class initialization
+2019-04-23 10:54:09,360 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 10:54:09,667 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 10:54:09,670 :: INFO :: GET list mongo
+2019-04-23 10:54:09,670 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 10:54:09,671 :: INFO :: Configuration class initialization
+2019-04-23 10:54:09,673 :: INFO :: GET list mongo
+2019-04-23 10:54:09,673 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 10:54:09,673 :: INFO :: Configuration class initialization
+2019-04-23 14:19:36,664 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:19:36,978 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:19:36,981 :: INFO :: GET list mongo
+2019-04-23 14:19:36,981 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:19:36,981 :: INFO :: Configuration class initialization
+2019-04-23 14:19:36,983 :: INFO :: GET list mongo
+2019-04-23 14:19:36,984 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:19:36,984 :: INFO :: Configuration class initialization
+2019-04-23 14:19:53,927 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:19:54,235 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:19:54,238 :: INFO :: GET list mongo
+2019-04-23 14:19:54,238 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:19:54,238 :: INFO :: Configuration class initialization
+2019-04-23 14:19:54,241 :: INFO :: GET list mongo
+2019-04-23 14:19:54,241 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:19:54,241 :: INFO :: Configuration class initialization
+2019-04-23 14:19:56,434 :: INFO :: GET list mongo
+2019-04-23 14:19:56,434 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:19:56,436 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:19:57,391 :: INFO :: GET list mongo
+2019-04-23 14:19:57,393 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:19:57,399 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:20:01,203 :: INFO :: GET list mongo
+2019-04-23 14:20:01,204 :: INFO :: GET POST: test
+2019-04-23 14:20:01,207 :: INFO :: GET configurations:test
+2019-04-23 14:20:03,851 :: INFO :: GET list mongo
+2019-04-23 14:20:03,851 :: INFO :: GET POST: test
+2019-04-23 14:20:03,853 :: INFO :: GET configurations:test
+2019-04-23 14:20:05,402 :: INFO :: GET list mongo
+2019-04-23 14:20:05,403 :: INFO :: GET POST: test33
+2019-04-23 14:20:05,408 :: INFO :: GET configurations:test33
+2019-04-23 14:20:06,851 :: INFO :: GET list mongo
+2019-04-23 14:20:06,852 :: INFO :: GET POST: test33
+2019-04-23 14:20:06,854 :: INFO :: GET configurations:test33
+2019-04-23 14:20:07,621 :: INFO :: GET list mongo
+2019-04-23 14:20:07,622 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:20:07,626 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:20:52,591 :: INFO :: GET list mongo
+2019-04-23 14:20:52,592 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:20:52,593 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:20:55,648 :: INFO :: GET list mongo
+2019-04-23 14:20:55,649 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-23 14:20:55,653 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-23 14:21:05,263 :: INFO :: GET list mongo
+2019-04-23 14:21:05,264 :: INFO :: GET POST: test33
+2019-04-23 14:21:05,268 :: INFO :: GET configurations:test33
+2019-04-23 14:21:08,589 :: INFO :: GET list mongo
+2019-04-23 14:21:08,590 :: INFO :: GET POST: test33
+2019-04-23 14:21:08,593 :: INFO :: GET configurations:test33
+2019-04-23 14:21:09,516 :: INFO :: GET list mongo
+2019-04-23 14:21:09,517 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:21:09,523 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:21:13,306 :: INFO :: GET list mongo
+2019-04-23 14:21:13,307 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:21:13,310 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:21:16,802 :: INFO :: GET list mongo
+2019-04-23 14:21:16,803 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:21:16,805 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:21:17,809 :: INFO :: GET list mongo
+2019-04-23 14:21:17,811 :: INFO :: GET POST: test
+2019-04-23 14:21:17,816 :: INFO :: GET configurations:test
+2019-04-23 14:22:39,458 :: INFO :: GET list mongo
+2019-04-23 14:22:39,458 :: INFO :: GET POST: test
+2019-04-23 14:22:39,460 :: INFO :: GET configurations:test
+2019-04-23 14:22:41,028 :: INFO :: GET list mongo
+2019-04-23 14:22:41,029 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:22:41,034 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:22:47,743 :: INFO :: GET list mongo
+2019-04-23 14:22:47,743 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:22:47,745 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:22:49,292 :: INFO :: GET list mongo
+2019-04-23 14:22:49,292 :: INFO :: GET POST: test
+2019-04-23 14:22:49,294 :: INFO :: GET configurations:test
+2019-04-23 14:22:55,793 :: INFO :: GET list mongo
+2019-04-23 14:22:55,794 :: INFO :: GET POST: test33
+2019-04-23 14:22:55,799 :: INFO :: GET configurations:test33
+2019-04-23 14:23:21,931 :: INFO :: GET list mongo
+2019-04-23 14:23:21,932 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:23:21,935 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:23:26,401 :: INFO :: GET list mongo
+2019-04-23 14:23:26,402 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:23:26,405 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:23:28,721 :: INFO :: GET list mongo
+2019-04-23 14:23:28,723 :: INFO :: GET POST: test
+2019-04-23 14:23:28,728 :: INFO :: GET configurations:test
+2019-04-23 14:23:35,068 :: INFO :: GET list mongo
+2019-04-23 14:23:35,069 :: INFO :: GET POST: test
+2019-04-23 14:23:35,071 :: INFO :: GET configurations:test
+2019-04-23 14:23:36,715 :: INFO :: GET list mongo
+2019-04-23 14:23:36,716 :: INFO :: GET POST: test33
+2019-04-23 14:23:36,718 :: INFO :: GET configurations:test33
+2019-04-23 14:34:58,670 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:34:58,986 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:34:58,989 :: INFO :: GET list mongo
+2019-04-23 14:34:58,989 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:34:58,990 :: INFO :: Configuration class initialization
+2019-04-23 14:34:58,992 :: INFO :: GET list mongo
+2019-04-23 14:34:58,992 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:34:58,992 :: INFO :: Configuration class initialization
+2019-04-23 14:35:00,410 :: INFO :: GET list mongo
+2019-04-23 14:35:00,413 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:35:00,419 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:35:02,148 :: INFO :: GET list mongo
+2019-04-23 14:35:02,149 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:35:02,151 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:35:03,095 :: INFO :: GET list mongo
+2019-04-23 14:35:03,096 :: INFO :: GET POST: test
+2019-04-23 14:35:03,100 :: INFO :: GET configurations:test
+2019-04-23 14:35:06,266 :: INFO :: file test is delete
+2019-04-23 14:35:06,267 :: INFO :: GET list mongo
+2019-04-23 14:35:06,268 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:35:06,269 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:35:06,276 :: INFO :: GET list mongo
+2019-04-23 14:35:06,276 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:35:06,279 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:35:07,758 :: INFO :: GET list mongo
+2019-04-23 14:35:07,758 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:35:07,760 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:39:52,791 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:39:53,097 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:39:53,100 :: INFO :: GET list mongo
+2019-04-23 14:39:53,100 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:39:53,100 :: INFO :: Configuration class initialization
+2019-04-23 14:39:53,102 :: INFO :: GET list mongo
+2019-04-23 14:39:53,103 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:39:53,103 :: INFO :: Configuration class initialization
+2019-04-23 14:39:56,274 :: INFO :: GET list mongo
+2019-04-23 14:39:56,274 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:39:56,276 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:39:58,957 :: INFO :: GET list mongo
+2019-04-23 14:39:58,957 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:39:58,958 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:41:29,097 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:41:29,416 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:41:29,419 :: INFO :: GET list mongo
+2019-04-23 14:41:29,419 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:41:29,419 :: INFO :: Configuration class initialization
+2019-04-23 14:41:29,424 :: INFO :: GET list mongo
+2019-04-23 14:41:29,424 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:41:29,424 :: INFO :: Configuration class initialization
+2019-04-23 14:52:24,162 :: INFO :: AJAX send:{'tc2play': ['{"1,rxExcursion":true,"0,rxExcursion":true,"2,rxExcursion":true,"0,txIM3Measurement":true,"1,txExcursion":true,"0,txExcursion":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-23 14:52:24,164 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'temperature': [20, 45, 50], 'tc2play': {'rxExcursion': ['1', '2', '0'], 'txExcursion': ['0', '1'], 'txIM3Measurement': ['0']}}
+2019-04-23 14:52:24,193 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-23 14:52:24,193 :: INFO :: formulare input: {'type': ['officiel'], 'simulate': ['yes'], 'nameCarac': ['test'], 'climChamber': ['yes'], 'channel': ['1,3,4']} 
+2019-04-23 14:52:24,193 :: INFO :: Start is running ....
+2019-04-23 14:52:24,232 :: ERROR :: Internal Server Error: /carac/start
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/views.py", line 137, in start
+    response = scheduler_start(self)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/tasks.py", line 79, in scheduler_start
+    conf=self.cf.configs[mode][int(i)],
+KeyError: 'rxExcursion'
+2019-04-23 14:52:39,764 :: ERROR :: Internal Server Error: /carac/stop
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 137, in _get_response
+    "returned None instead." % (callback.__module__, view_name)
+ValueError: The view carac.views.method.__call__ didn't return an HttpResponse object. It returned None instead.
+2019-04-23 14:52:45,294 :: INFO :: AJAX send:{'tc2play': ['{"1,rxExcursion":true,"0,rxExcursion":true,"2,rxExcursion":true,"0,txIM3Measurement":true,"1,txExcursion":true,"0,txExcursion":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-23 14:52:45,296 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'temperature': [20, 45, 50], 'tc2play': {'rxExcursion': ['1', '2', '0'], 'txExcursion': ['0', '1'], 'txIM3Measurement': ['0']}}
+2019-04-23 14:52:45,310 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-23 14:52:45,311 :: INFO :: formulare input: {'type': ['officiel'], 'simulate': ['yes'], 'nameCarac': ['test'], 'climChamber': ['yes'], 'channel': ['1,3,4']} 
+2019-04-23 14:52:45,311 :: INFO :: Start is running ....
+2019-04-23 14:52:45,328 :: ERROR :: Internal Server Error: /carac/start
+Traceback (most recent call last):
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py", line 34, in inner
+    response = get_response(request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py", line 124, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/views.py", line 137, in start
+    response = scheduler_start(self)
+  File "/home/tristan/Documents/Python/IHMweb_acbbs/test_bench_version3/carac/tasks.py", line 79, in scheduler_start
+    conf=self.cf.configs[mode][int(i)],
+KeyError: 'rxExcursion'
+2019-04-23 14:52:55,455 :: INFO :: GET list mongo
+2019-04-23 14:52:55,456 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:52:55,457 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:52:57,645 :: INFO :: GET list mongo
+2019-04-23 14:52:57,645 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:52:57,647 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:53:00,034 :: INFO :: AJAX send:{'tc2play': ['{"1,rxExcursion":true,"2,rxExcursion":true,"0,rxExcursion":true,"0,txExcursion":true,"1,txExcursion":true,"0,txIM3Measurement":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-23 14:53:00,035 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'temperature': [20, 45, 50], 'tc2play': {'rxExcursion': ['1', '2', '0'], 'txExcursion': ['0', '1'], 'txIM3Measurement': ['0']}}
+2019-04-23 14:53:00,056 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-23 14:53:00,056 :: INFO :: formulare input: {'type': ['officiel'], 'simulate': ['yes'], 'nameCarac': ['test'], 'climChamber': ['yes'], 'channel': ['1,3,4']} 
+2019-04-23 14:53:00,056 :: INFO :: Start is running ....
+2019-04-23 14:54:29,424 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:54:34,401 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:54:34,757 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:54:34,760 :: INFO :: GET list mongo
+2019-04-23 14:54:34,760 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:54:34,760 :: INFO :: Configuration class initialization
+2019-04-23 14:54:34,762 :: INFO :: GET list mongo
+2019-04-23 14:54:34,762 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:54:34,763 :: INFO :: Configuration class initialization
+2019-04-23 14:54:37,526 :: INFO :: GET list mongo
+2019-04-23 14:54:37,527 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:54:37,532 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:54:39,419 :: INFO :: GET list mongo
+2019-04-23 14:54:39,419 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 14:54:39,420 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:54:40,799 :: INFO :: GET list mongo
+2019-04-23 14:54:40,800 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-23 14:54:40,806 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-23 14:54:43,708 :: INFO :: AJAX send:{'tc2play': ['{"1,txExcursion":true,"0,txExcursion":true,"0,txIM3Measurement":true,"2,rxExcursion":true,"0,rxExcursion":true,"1,rxExcursion":true}'], 'temperature': ['[20,45,50]'], 'delay': ['2000']}
+2019-04-23 14:54:43,709 :: INFO :: Scheduler cmd : {'climChamberDelay': 2000, 'tc2play': {'txExcursion': ['0', '1'], 'txIM3Measurement': ['0'], 'rxExcursion': ['1', '2', '0']}, 'temperature': [20, 45, 50]}
+2019-04-23 14:54:43,720 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-23 14:54:43,720 :: INFO :: formulare input: {'simulate': ['yes'], 'nameCarac': ['test'], 'type': ['officiel'], 'climChamber': ['yes'], 'channel': ['1,3,4']} 
+2019-04-23 14:54:43,720 :: INFO :: Start is running ....
+2019-04-23 14:55:24,267 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:55:24,671 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:55:24,674 :: INFO :: GET list mongo
+2019-04-23 14:55:24,675 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:55:24,675 :: INFO :: Configuration class initialization
+2019-04-23 14:55:24,677 :: INFO :: GET list mongo
+2019-04-23 14:55:24,678 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:55:24,678 :: INFO :: Configuration class initialization
+2019-04-23 14:56:11,954 :: INFO :: GET list mongo
+2019-04-23 14:56:11,954 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:56:11,956 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:56:27,908 :: INFO :: GET list mongo
+2019-04-23 14:56:27,909 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-23 14:56:27,914 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-23 14:56:29,734 :: INFO :: AJAX send:{'tc2play': ['{"1,rxExcursion":true,"2,rxExcursion":true,"0,rxExcursion":true,"0,txExcursion":true,"1,txExcursion":true,"0,txIM3Measurement":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-23 14:56:29,734 :: INFO :: Scheduler cmd : {'tc2play': {'rxExcursion': ['1', '2', '0'], 'txExcursion': ['1', '0'], 'txIM3Measurement': ['0']}, 'climChamberDelay': 2000, 'temperature': [20, 45, 50]}
+2019-04-23 14:56:29,748 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-23 14:56:29,748 :: INFO :: formulare input: {'simulate': ['yes'], 'type': ['officiel'], 'nameCarac': ['test'], 'channel': ['1,3,4'], 'climChamber': ['yes']} 
+2019-04-23 14:56:29,748 :: INFO :: Start is running ....
+2019-04-23 14:56:51,794 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:56:52,134 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:56:52,137 :: INFO :: GET list mongo
+2019-04-23 14:56:52,137 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:56:52,137 :: INFO :: Configuration class initialization
+2019-04-23 14:56:52,139 :: INFO :: GET list mongo
+2019-04-23 14:56:52,139 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:56:52,139 :: INFO :: Configuration class initialization
+2019-04-23 14:56:55,080 :: INFO :: GET list mongo
+2019-04-23 14:56:55,081 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:56:55,087 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:56:58,508 :: INFO :: GET list mongo
+2019-04-23 14:56:58,509 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-23 14:56:58,513 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-23 14:57:00,821 :: INFO :: AJAX send:{'tc2play': ['{"0,txIM3Measurement":true,"0,txExcursion":true,"1,txExcursion":true,"2,rxExcursion":true,"1,rxExcursion":true,"0,rxExcursion":true}'], 'delay': ['2000'], 'temperature': ['[20,45,50]']}
+2019-04-23 14:57:00,822 :: INFO :: Scheduler cmd : {'tc2play': {'txIM3Measurement': ['0'], 'txExcursion': ['1', '0'], 'rxExcursion': ['2', '1', '0']}, 'climChamberDelay': 2000, 'temperature': [20, 45, 50]}
+2019-04-23 14:57:00,836 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-23 14:57:00,837 :: INFO :: formulare input: {'simulate': ['yes'], 'climChamber': ['yes'], 'channel': ['1,3,4'], 'type': ['officiel'], 'nameCarac': ['test']} 
+2019-04-23 14:57:00,837 :: INFO :: Start is running ....
+2019-04-23 14:57:21,976 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:57:22,279 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:57:22,281 :: INFO :: GET list mongo
+2019-04-23 14:57:22,281 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:57:22,282 :: INFO :: Configuration class initialization
+2019-04-23 14:57:22,284 :: INFO :: GET list mongo
+2019-04-23 14:57:22,284 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:57:22,284 :: INFO :: Configuration class initialization
+2019-04-23 14:57:32,195 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:57:32,506 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:57:32,509 :: INFO :: GET list mongo
+2019-04-23 14:57:32,509 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:57:32,509 :: INFO :: Configuration class initialization
+2019-04-23 14:57:32,513 :: INFO :: GET list mongo
+2019-04-23 14:57:32,513 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:57:32,513 :: INFO :: Configuration class initialization
+2019-04-23 14:58:14,439 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:58:14,743 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 14:58:14,746 :: INFO :: GET list mongo
+2019-04-23 14:58:14,746 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:58:14,746 :: INFO :: Configuration class initialization
+2019-04-23 14:58:14,748 :: INFO :: GET list mongo
+2019-04-23 14:58:14,748 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 14:58:14,748 :: INFO :: Configuration class initialization
+2019-04-23 14:58:19,352 :: INFO :: GET list mongo
+2019-04-23 14:58:19,352 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 14:58:19,355 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 14:58:21,990 :: INFO :: GET list mongo
+2019-04-23 14:58:21,991 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-23 14:58:21,995 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-23 14:58:23,694 :: INFO :: AJAX send:{'temperature': ['[20,45,50]'], 'delay': ['2000'], 'tc2play': ['{"2,rxExcursion":true,"1,rxExcursion":true,"0,rxExcursion":true,"0,txIM3Measurement":true,"0,txExcursion":true,"1,txExcursion":true}']}
+2019-04-23 14:58:23,694 :: INFO :: Scheduler cmd : {'temperature': [20, 45, 50], 'climChamberDelay': 2000, 'tc2play': {'rxExcursion': ['1', '2', '0'], 'txIM3Measurement': ['0'], 'txExcursion': ['1', '0']}}
+2019-04-23 14:58:23,704 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-23 14:58:23,704 :: INFO :: formulare input: {'nameCarac': ['test'], 'simulate': ['yes'], 'channel': ['1,3,4'], 'climChamber': ['yes'], 'type': ['officiel']} 
+2019-04-23 14:58:23,704 :: INFO :: Start is running ....
+2019-04-23 15:02:16,724 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:02:17,028 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:02:17,031 :: INFO :: GET list mongo
+2019-04-23 15:02:17,031 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:02:17,031 :: INFO :: Configuration class initialization
+2019-04-23 15:02:17,035 :: INFO :: GET list mongo
+2019-04-23 15:02:17,035 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:02:17,035 :: INFO :: Configuration class initialization
+2019-04-23 15:02:17,500 :: INFO :: GET list mongo
+2019-04-23 15:02:17,500 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 15:02:17,502 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 15:02:19,690 :: INFO :: GET list mongo
+2019-04-23 15:02:19,692 :: INFO :: GET POST: configuration_TAPV3.0
+2019-04-23 15:02:19,695 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 15:02:20,805 :: INFO :: GET list mongo
+2019-04-23 15:02:20,806 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-23 15:02:20,810 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-23 15:03:09,498 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:03:09,804 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:03:09,806 :: INFO :: GET list mongo
+2019-04-23 15:03:09,807 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:03:09,807 :: INFO :: Configuration class initialization
+2019-04-23 15:03:09,809 :: INFO :: GET list mongo
+2019-04-23 15:03:09,809 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:03:09,809 :: INFO :: Configuration class initialization
+2019-04-23 15:03:14,631 :: INFO :: GET list mongo
+2019-04-23 15:03:14,632 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 15:03:14,635 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 15:03:17,489 :: INFO :: GET list mongo
+2019-04-23 15:03:17,491 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-23 15:03:17,496 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-23 15:03:19,242 :: INFO :: AJAX send:{'temperature': ['[20,45,50]'], 'delay': ['2000'], 'tc2play': ['{"1,rxExcursion":true,"2,rxExcursion":true,"0,rxExcursion":true,"0,txIM3Measurement":true,"0,txExcursion":true,"1,txExcursion":true}']}
+2019-04-23 15:03:19,243 :: INFO :: Scheduler cmd : {'temperature': [20, 45, 50], 'climChamberDelay': 2000, 'tc2play': {'txIM3Measurement': ['0'], 'rxExcursion': ['2', '1', '0'], 'txExcursion': ['1', '0']}}
+2019-04-23 15:03:19,255 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-23 15:03:19,255 :: INFO :: formulare input: {'climChamber': ['yes'], 'type': ['officiel'], 'simulate': ['yes'], 'nameCarac': ['test'], 'channel': ['1,3,4']} 
+2019-04-23 15:03:19,255 :: INFO :: Start is running ....
+2019-04-23 15:28:50,055 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:28:50,351 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:28:50,353 :: INFO :: GET list mongo
+2019-04-23 15:28:50,354 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:28:50,354 :: INFO :: Configuration class initialization
+2019-04-23 15:28:50,356 :: INFO :: GET list mongo
+2019-04-23 15:28:50,356 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:28:50,356 :: INFO :: Configuration class initialization
+2019-04-23 15:29:17,618 :: INFO :: GET list mongo
+2019-04-23 15:29:17,619 :: ERROR :: AJAX: get_nameConf 'configname' is not a key
+2019-04-23 15:29:17,621 :: INFO :: GET configurations:configuration_TAPV3.0
+2019-04-23 15:29:19,767 :: INFO :: GET list mongo
+2019-04-23 15:29:19,768 :: INFO :: GET POST: configuration_TAPMV4.0
+2019-04-23 15:29:19,773 :: INFO :: GET configurations:configuration_TAPMV4.0
+2019-04-23 15:29:25,856 :: INFO :: AJAX send:{'tc2play': ['{"1,rxExcursion":true,"2,rxExcursion":true,"0,rxExcursion":true,"0,txExcursion":true,"1,txExcursion":true,"0,txIM3Measurement":true}'], 'temperature': ['[20,45,50]'], 'delay': ['2000']}
+2019-04-23 15:29:25,857 :: INFO :: Scheduler cmd : {'tc2play': {'rxExcursion': ['2', '0', '1'], 'txExcursion': ['1', '0'], 'txIM3Measurement': ['0']}, 'temperature': [20, 45, 50], 'climChamberDelay': 2000}
+2019-04-23 15:29:25,873 :: DEBUG :: DEBUG: name of the carac : ['test']
+2019-04-23 15:29:25,873 :: INFO :: formulare input: {'nameCarac': ['test'], 'type': ['officiel'], 'climChamber': ['yes'], 'simulate': ['yes'], 'channel': ['1,3,4']} 
+2019-04-23 15:29:25,874 :: INFO :: Start is running ....
+2019-04-23 15:50:55,797 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:50:56,103 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:50:56,106 :: INFO :: GET list mongo
+2019-04-23 15:50:56,106 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:50:56,106 :: INFO :: Configuration class initialization
+2019-04-23 15:50:56,108 :: INFO :: GET list mongo
+2019-04-23 15:50:56,108 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:50:56,109 :: INFO :: Configuration class initialization
+2019-04-23 15:51:02,987 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:51:03,296 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:51:03,299 :: INFO :: GET list mongo
+2019-04-23 15:51:03,300 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:51:03,300 :: INFO :: Configuration class initialization
+2019-04-23 15:51:03,304 :: INFO :: GET list mongo
+2019-04-23 15:51:03,305 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:51:03,305 :: INFO :: Configuration class initialization
+2019-04-23 15:58:11,177 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:58:11,485 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 15:58:11,487 :: INFO :: GET list mongo
+2019-04-23 15:58:11,488 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:58:11,488 :: INFO :: Configuration class initialization
+2019-04-23 15:58:11,490 :: INFO :: GET list mongo
+2019-04-23 15:58:11,490 :: ERROR ::  ERROR configName is not in the list, the first conf of the list be choosed 
+2019-04-23 15:58:11,490 :: INFO :: Configuration class initialization
+2019-04-23 17:10:54,441 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 17:11:33,386 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 17:15:26,777 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 17:16:28,646 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 17:16:50,391 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 17:17:17,890 :: INFO :: IHMweb_acbbs running ....
+2019-04-23 17:17:56,166 :: INFO :: IHMweb_acbbs running ....

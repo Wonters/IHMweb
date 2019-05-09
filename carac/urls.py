@@ -1,3 +1,5 @@
+#!/usr/bin/python3 
+# coding=UTF-8
 """test_bench URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -13,15 +15,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path
 
-# url of the project ---> redicection to urls.py of each application
+from carac.views import Caracterisation
+
+carac = Caracterisation()  # obligation d'initialiser pour lire le constructeur
+
+# url of carac application
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('carac/', include('carac.urls')),
-    path('conf/', include('conf.urls')),
-    path('calib/', include('calib.urls')),
-    path('home/', include('home.urls')),
+    path('', carac.home, name='home'),
+    path('start', carac.start, name='start'),
+    path('stop', carac.stop, name='stop'),
+    path('load', carac.load, name='load'),
+    path('readtc', carac.readtc, name='readtc'),
+    path('counter', carac.counter, name='counter'),
+    path('writeschedule', carac.write_schedule, name='write schedule'),
 ]

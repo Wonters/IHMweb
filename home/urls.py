@@ -21,4 +21,5 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='welcom'),
+    path('help', views.help, name='help'),
 ]

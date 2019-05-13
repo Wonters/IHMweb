@@ -14,8 +14,28 @@
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-          <list size="1">
+          <list size="21">
             <item index="0" class="java.lang.String" itemvalue="acbbs" />
+            <item index="1" class="java.lang.String" itemvalue="scipy" />
+            <item index="2" class="java.lang.String" itemvalue="pymongo" />
+            <item index="3" class="java.lang.String" itemvalue="colorlog" />
+            <item index="4" class="java.lang.String" itemvalue="amqp" />
+            <item index="5" class="java.lang.String" itemvalue="httplib2" />
+            <item index="6" class="java.lang.String" itemvalue="kombu" />
+            <item index="7" class="java.lang.String" itemvalue="numpy" />
+            <item index="8" class="java.lang.String" itemvalue="requests" />
+            <item index="9" class="java.lang.String" itemvalue="redis" />
+            <item index="10" class="java.lang.String" itemvalue="chardet" />
+            <item index="11" class="java.lang.String" itemvalue="Django" />
+            <item index="12" class="java.lang.String" itemvalue="pyModbusTCP" />
+            <item index="13" class="java.lang.String" itemvalue="certifi" />
+            <item index="14" class="java.lang.String" itemvalue="anyjson" />
+            <item index="15" class="java.lang.String" itemvalue="etaprogress" />
+            <item index="16" class="java.lang.String" itemvalue="pytz" />
+            <item index="17" class="java.lang.String" itemvalue="urllib3" />
+            <item index="18" class="java.lang.String" itemvalue="vine" />
+            <item index="19" class="java.lang.String" itemvalue="billiard" />
+            <item index="20" class="java.lang.String" itemvalue="idna" />
           </list>
         </value>
       </option>

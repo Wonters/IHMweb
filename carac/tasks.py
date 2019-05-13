@@ -1,13 +1,13 @@
 from __future__ import absolute_import, unicode_literals
 
-import sys
 import time
 
-from acbbs import __version__
 from acbbs.drivers.ate.ClimCham import ClimCham
 from acbbs.testcases.rxExcursion import rxExcursion
 from acbbs.testcases.txExcursion import txExcursion
 from acbbs.testcases.txIM3Measurement import txIM3Measurement
+from acbbs.testcases.txPowVsFreq import txPowVsFreq
+from acbbs.testcases.txOLFrequency import txOLFrequency
 ###########
 from acbbs.tools.log import get_logger
 from etaprogress.progress import ProgressBar
@@ -24,8 +24,8 @@ TESTCASES = {
     "rxExcursion": rxExcursion,
     "txExcursion": txExcursion,
     "txIM3Measurement": txIM3Measurement,
-    "txPowVsFreq": txPowVsFreq,
-    "txOLFrequency": txOLFrequency,
+    ##"txPowVsFreq": txPowVsFreq,
+    ##"txOLFrequency": txOLFrequency,
     ## nouveau testcase ##
 
 }

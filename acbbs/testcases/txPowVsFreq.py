@@ -59,7 +59,6 @@ class txPowVsFreq(baseTestCase):
 
 
                 for filter_tx in self.freq_tx.keys():
-                    filter_tx = int(filter_tx)
                     if self.status is st().ABORTING:
                         break
                     self.dut.filterTx = filter_tx
@@ -100,7 +99,7 @@ class txPowVsFreq(baseTestCase):
                                 conf = {
                                     "Supply_voltage_(V)":vdd,
                                     "RF_Output_Frequency_(Hz)":freq_tx,
-                                    "DUT_TX_Filter_ID":filter_tx,
+                                    "DUT_TX_Filter_ID":int(filter_tx),
                                     "DUT_TX_Level_Control":att,
                                     "Oven_Temperature_(C)":self.temp
                                 }

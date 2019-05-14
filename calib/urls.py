@@ -22,5 +22,6 @@ from . import views
 urlpatterns = [
     path('', views.home),
     path('check', views.checkInstrument, name='check'),
-    path('calibwires', views.start_calibWires, name='wires')
+    path('calibwires', views.start_calibWires, name='wires'),
+    path('calibswitch', views.start_calibSwitch, name='switch')
 ]

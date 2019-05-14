@@ -3,47 +3,45 @@ import json
 from django.shortcuts import HttpResponse, render
 from django.http import JsonResponse
 
-
 from .tasks import SwitchCalibration
 from .tasks import WiresCalibration
 from .tasks import NetworkEquipment
+
+from .tasks import LIST_PATH
+from .tasks import CHANNELS
+from .tasks import INPUTS
 
 
 # Create your views here.
 
 def home(request):
-    return render(request, "calib/home.html")
+    return render(request, "calib/home.html", {"portsIN": INPUTS, "channels": CHANNELS})
 
 
 def checkInstrument(request):
-    equipement = NetworkEquipment()
+    equipement = NetworkEquipment(simu=True)
     result = equipement.check_all_instruments()
     if result == 0:
-        return JsonResponse({'msg': "done"})
+        return JsonResponse({'msg': result})
     else:
-        return JsonResponse({'msg': "error"})
+        return JsonResponse({'msg': result})
 
 
 # obtenir les configurartions de la calibration
-
-def get_calibParameters(request):
-    # ajax request to get freiquency range from the front
-    if request.is_ajax():
-        parameters = dict(request.GET[0])
-    return parameters
-
-
 def start_calibSwitch(request):
-    parameters = get_calibParameters(request)
-    # Calib = Calibration(parent=None, freq=parameters['calibFreq'],channels=parameters['calibChannels'],
-    #                     simu= parameters['simulate'],pwr=parameters['calibPwr'],conf=parameters['calibConf'])
-    #calib = SwitchCalibration(parent='None', freq=3, pwr=2, channels=[1, 2, 3], conf=None, simu=True)
-    print()
+    if request.is_ajax():
+        print(request.GET)
+        calib = SwitchCalibration(pwr=2, tab_freq=[1, 3, 4, 5, 6], simu=True)
+        calib.calibrate()
+    return JsonResponse({'response': 'Switch calibrate'})
+
 
 def start_calibWires(request):
-
-    calib = WiresCalibration(tab_freq=[3, 4, 5], pwr=2, channels=[1, 2, 3], simu=True, inputs=["J2", "J4", "J18"])
-    calib.calibrate()
-
-    return HttpResponse('OK')
-
+    if request.is_ajax():
+        data = request.GET['parameters']
+        data = json.loads(data)
+        print(data)
+        calib = WiresCalibration(tab_freq=data['freq'].split(','), pwr=data['pwr'], channels=data['channels'],
+                                 simu=True, inputs=data['ports'])
+        calib.calibrate()
+    return JsonResponse({'response': 'Wires calibrate'})

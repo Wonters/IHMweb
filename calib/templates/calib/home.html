@@ -10,32 +10,58 @@
         <label class="h3"> Historique des calibration </label>
     </div>
 
-    <div class="row">
-        <div class="col">
-            <div class="">
+    <div class="check">
+        <div class="row">
+            <div class="col">
                 <button class="btn btn-calib btn-lg" onclick="checkInstrument()"> CHECK</button>
             </div>
+            <div class="col">
+                <label class="h6"> Connexion des appareils : </label>
+                <div class="rond" id="led1"></div>
+            </div>
         </div>
-        <div class="col">
-            <label class="h6"> Connexion des appareils : </label>
-            <div class="rond" id="led1"></div>
-        </div>
+    </div>
 
     </div>
 
-    <div class="row">
-        <div class="calibration">
-            <div class="">
-                <div class="">
-                <button class="btn btn-calib btn-lg" onclick=""></button>
+    <div class="switch">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-calib btn-lg" onclick="switchCalibration()"> Switch Calibration</button>
             </div>
-                <a href="/calib/calibwires">
-                    <button class="btn btn-calib btn-lg"> Calibrate Wires</button>
-                </a>
-            </div>
-
         </div>
     </div>
+
+    <div class="wires">
+        <div class="row">
+            <div class="col">
+                <label for="calibWireFreq" class="h6"> Frequency </label>
+                <input id="calibWireFreq" value="3,3,2,3,4,5">
+                <label for="calibWirePower" class="h6"> Power </label>
+                <input id="calibWirePower" value="30">
+            </div>
+            <div class="col">
+                <label class="h3"> Input wires to calibrate </label>
+                {% for port in portsIN %}
+                    <div style="text-align: center;">
+                        <label for="portIN" class="h6"> {{ port }} </label>
+                        <input id="portIN" type="checkbox" value="{{ port }}" name="{{ port }}">
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col">
+                <label class="h3"> Output wires to calibrate </label>
+                {% for channel in channels %}
+                    <div style="text-align: center;">
+                        <label for="portOUT" class="h6"> {{ channel }}</label>
+                        <input id="portOUT" type="checkbox" value="{{ channel }}" name="{{ channel }}">
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="btn btn-calib btn-lg" onclick="wiresCalibration()"> Wires Calibration</button>
+        </div>
+    </div>
+
     <script src="/static/js/calib.js"></script>
 {% endblock %}
 

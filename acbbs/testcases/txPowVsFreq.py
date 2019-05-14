@@ -59,6 +59,7 @@ class txPowVsFreq(baseTestCase):
 
 
                 for filter_tx in self.freq_tx.keys():
+                    filter_tx = int(filter_tx)
                     if self.status is st().ABORTING:
                         break
                     self.dut.filterTx = filter_tx

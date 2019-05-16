@@ -3,8 +3,7 @@ import json
 from django.shortcuts import HttpResponse, render
 from django.http import JsonResponse
 
-from .tasks import SwitchCalibration
-from .tasks import WiresCalibration
+from .tasks import Calibration
 from .tasks import NetworkEquipment
 
 from .tasks import LIST_PATH
@@ -28,20 +27,9 @@ def checkInstrument(request):
 
 
 # obtenir les configurartions de la calibration
-def start_calibSwitch(request):
+def start_calib(request):
     if request.is_ajax():
-        print(request.GET)
-        calib = SwitchCalibration(pwr=2, tab_freq=[1, 3, 4, 5, 6], simu=True)
+        calib = Calibration(pwr=2, tab_freq=[1, 3, 4, 5, 6], simu=True)
         calib.calibrate()
     return JsonResponse({'response': 'Switch calibrate'})
 
-
-def start_calibWires(request):
-    if request.is_ajax():
-        data = request.GET['parameters']
-        data = json.loads(data)
-        print(data)
-        calib = WiresCalibration(tab_freq=data['freq'].split(','), pwr=data['pwr'], channels=data['channels'],
-                                 simu=True, inputs=data['ports'])
-        calib.calibrate()
-    return JsonResponse({'response': 'Wires calibrate'})

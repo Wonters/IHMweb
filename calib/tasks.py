@@ -13,6 +13,9 @@ from acbbs.drivers.ate.Swtch import Swtch
 from acbbs.tools.configurationFile import configurationFile
 from acbbs.tools.log import get_logger
 
+from .drivers.PwrMeterCal import PowerMeterCal
+from .drivers.RFSigGenCal import RFSigGenCal
+
 logger = get_logger('calib')
 
 if sys.platform == "win32":
@@ -82,41 +85,26 @@ LIST_PATH = {
 class NetworkEquipment(object):
     def __init__(self, simu):
         logger.info('class Ping init')
-        self.PwMeter = PwrMeter(simulate=simu)
+        self.PwrMeter = PwrMeter(simulate=simu)
         self.SpecAn = SpecAn(simulate=simu)
         self.RFSigGen = RFSigGen(simulate=simu)
         self.RFSigGenV = RFSigGenV(simulate=simu)
         self.Swtch = Swtch(simulate=simu)
         self.ClimCham = ClimCham(simulate=simu)
         self.DCPwr = DCPwr(simulate=simu)
+        self.PwrMeterCal = PowerMeterCal(simulate=simu)
+        self.RFSigGenCal = RFSigGenCal(simulate=simu)
 
         self.get_ip()
 
     def get_ip(self):
-        conf = configurationFile(file=self.SpecAn.__class__.__name__)
-        self.specAnConf = conf.getConfiguration()
-        ip_specAn = self.specAnConf['ip']
-
-        conf = configurationFile(file=self.RFSigGen.__class__.__name__)
-        self.sigGenConf = conf.getConfiguration()
-        ip_sigGen = self.sigGenConf['ip']
-
-        conf = configurationFile(file=self.PwMeter.__class__.__name__)
-        self.pwMeterConf = conf.getConfiguration()
-        ip_pwMeter = self.pwMeterConf['ip']
-
-        conf = configurationFile(file=self.RFSigGenV.__class__.__name__)
-        self.sigGenVConf = conf.getConfiguration()
-        ip_sigGenV = self.sigGenVConf['ip']
-
-        conf = configurationFile(file=self.ClimCham.__class__.__name__)
-        self.ClimChamConf = conf.getConfiguration()
-        ip_ClimCham = self.ClimChamConf['ip']
-
-        conf = configurationFile(file=self.DCPwr.__class__.__name__)
-        self.DCPwrConf = conf.getConfiguration()
-        ip_dc1 = self.DCPwrConf['powerDevice1-ip']
-        ip_dc2 = self.DCPwrConf['powerDevice2-ip']
+        ip_specAn = self.SpecAn.SpecAnConf['ip']
+        ip_sigGen = self.RFSigGen.sigGenConf['ip']
+        ip_pwMeter = self.PwrMeter.PwrMeterConf['ip']
+        ip_sigGenV = self.RFSigGenV.sigGenConf['ip']
+        ip_ClimCham = self.ClimCham.dcConf['ip']
+        ip_dc1 = self.DCPwr.dcConf['powerDevice1-ip']
+        ip_dc2 = self.DCPwr.dcConf['powerDevice2-ip']
 
         self.listIP = {'rx': {'RFSigGen': ip_sigGen, 'RFSigGenV': ip_sigGenV},
                        'tx': {'PwrMeter': ip_pwMeter, 'SpecAn': ip_specAn},
@@ -141,8 +129,8 @@ class NetworkEquipment(object):
         return list_pingReturn
 
     def check_one_instrument(self, instrum):
+        global result
         for mode, instrums in self.listIP.items():
-            print(instrum, instrums.keys())
             if instrum in instrums.keys():
                 result = self.ping_one(self.listIP[mode][instrum])
                 break
@@ -179,136 +167,163 @@ class MatrixCal(object):
             json.dump(self.data, json_file, indent=2, sort_keys=True)
 
 
-class SwitchCalibration(NetworkEquipment):
+class Calibration(object):
     def __init__(self, tab_freq, pwr, simu):
-        print('switch calibration')
         self.equipement = NetworkEquipment(simu=simu)
         self.tab_freq = tab_freq
-        self.pwr = int(pwr)
+        self.OUTPUT_POWER_CALIBRATION = int(pwr)
         self.channels = CHANNELS
         self.simu = simu
 
         self.paths = LIST_PATH
 
-        self.OUTPUT_POWER_CALIBRATION = self.pwr
         self.matSwtchLoss = MatrixCal(CONF_PATH)
 
-        self.lossSwtch = {}
+        self.loss = {"J5": {}, "J4": {}, "J4_20dB": {}, "J2": {}, "J3": {}, "J18": {}}
+        self.delta = {}
+
+        self.pathlist = list()
+        for i in self.paths.keys():
+            self.pathlist.append(i)
 
     def calibrate(self):
-
-        #checkPwrMeter = self.equipement.check_one_instrument("PwrMeter")
-        #checkRFSigGen = self.equipement.check_one_instrument("RFSigGen")
-
-        #if checkPwrMeter == 0 and checkRFSigGen == 0:
-        #    print('Instruments are connected')
-
-        print('Switch calibration')
-        for path, settings in self.paths.items():
-            for channel in self.channels:
-                for freq in self.tab_freq:
-                    self.mesureLoss(path=path, freq=freq, channel=channel, swtch_settings=settings)
-
-        print(self.lossSwtch)
-
-    def mesureLoss(self, path, freq, channel, swtch_settings):
-        lossSwtch_per_freq = {}
-        path_to_calibrate = path.replace("x", str(channel + 8))
-        self.equipement.RFSigGen.freq = freq
-        self.equipement.RFSigGen.power = self.OUTPUT_POWER_CALIBRATION
-        self.equipement.PwMeter.freq = freq
-        self.equipement.Swtch.setSwitch(sw1=channel, sw3=swtch_settings["sw3"], sw4=swtch_settings["sw4"])
-        self.equipement.RFSigGen.status = 1
-        time.sleep(1)
-        lossSwtch_per_freq[
-            freq] = self.OUTPUT_POWER_CALIBRATION - self.equipement.PwMeter.power - self.matSwtchLoss.read_cal(
-            path_to_calibrate)
-        self.lossSwtch[path_to_calibrate.split('-')[0]] = lossSwtch_per_freq
-        self.equipement.RFSigGen.status = 0
-
-        return self.lossSwtch
-
-
-class WiresCalibration(object):
-    def __init__(self, channels, inputs, tab_freq, pwr, simu):
-        print("wires calibration")
-        self.equipement = NetworkEquipment(simu=simu)
-        self.tab_freq = tab_freq
-        self.pwr = int(pwr)
-        self.channels = channels
-        self.inputs = inputs
-        self.simu = simu
-
-        self.paths = LIST_PATH
-
-        self.OUTPUT_POWER_CALIBRATION = self.pwr
-
-        self.lossWires = {"input": {}, "output": {}}
-
-        self.matSwtchLoss = MatrixCal(CONF_PATH)
-
-    def calibrate(self):
-        # ping all instuments rx
 
         # checkPwrMeter = self.equipement.check_one_instrument("PwrMeter")
         # checkRFSigGen = self.equipement.check_one_instrument("RFSigGen")
 
-        port_cal_wrDUT = 'J5'
-        port_cal_wrINST = 'J9'
-        path_cal = 'Jx-' + port_cal_wrDUT
-
         # if checkPwrMeter == 0 and checkRFSigGen == 0:
-        # print('Instruments are connected')
+        #    print('Instruments are connected')
 
-        #### calibrate DUT wires
-        print('plug the RFSigGen on J5')
-        print('wires calibrates to output channels:')
+        print('calibration')
+        self.SMBCal()
+        self.SMBVCal()
+        self.PwrMeterCal()
+        self.FSWCal()
+        self.NoiseCal()
+
+        self.makeDelta()
+        self.makeMatrixCal()
+        print(self.loss)
+
+
+    def SMBCal(self):
+        loss = {"J4": {}, "J4_20dB": {}}
+
+        pathJ4Jx = self.pathlist[1]
+
+        # calibration of J4_20dB - J9
+        print(" calibration of SMB -20dB, plug the power meter cal to J9")
+        self.equipement.Swtch.setSwitch(sw1=1, sw3=self.paths[pathJ4Jx]["sw3"], sw4=self.paths[pathJ4Jx]["sw4"])
+        for freq in self.tab_freq:
+            self.equipement.RFSigGen.freq = freq
+            self.equipement.RFSigGen.power = self.OUTPUT_POWER_CALIBRATION
+            # self.equipement.PowerMeterCal = freq
+            self.equipement.RFSigGen.status = 1
+            time.sleep(1)
+            loss["J4_20dB"][freq] = self.OUTPUT_POWER_CALIBRATION - self.equipement.PwrMeterCal.power(nbr_mes=1)
+            self.equipement.RFSigGen.status = 0
+        self.loss["J4_20dB"]["J9"] = loss["J4_20dB"]
+
+        print(" calibration of SMB, plug the power meter of the cal to J9 to start")
+        # calibration of J4 - Jx
         for channel in self.channels:
-            path_to_calibrate = path_cal.replace("x", str(int(channel) + 8))
-            print(path_to_calibrate, self.matSwtchLoss.read_cal(path_to_calibrate))
-            self.msrLossFreqOUT(path_cal, path_to_calibrate)
+            print(" plug the power meter cal to J{0}".format(channel + 8))
+            port = pathJ4Jx.replace("Jx", "J" + str(channel + 8))
+            self.equipement.Swtch.setSwitch(sw1=channel, sw3=self.paths[pathJ4Jx]["sw3"],
+                                            sw4=self.paths[pathJ4Jx]["sw4"])
+            for freq in self.tab_freq:
+                self.equipement.RFSigGen.freq = freq
+                self.equipement.RFSigGen.power = self.OUTPUT_POWER_CALIBRATION
+                # self.equipement.PowerMeterCal = freq
+                self.equipement.RFSigGen.status = 1
+                time.sleep(1)
+                loss["J4"][freq] = self.OUTPUT_POWER_CALIBRATION - self.equipement.PwrMeterCal.power(nbr_mes=1)
+                self.equipement.RFSigGen.status = 0
+            self.loss["J4"]["J" + str(channel + 8)] = loss["J4"]
 
+    def SMBVCal(self):
+        loss = {"J3": {}}
 
-        ### calibrate INPUT wires inputs = [J2, J3, J4, J4_20dB, J5, J18]
-        print('plug the PwrMeter on J9')
-        print('wires calibrates to input instruments')
-        for path in self.paths:
-            port = path.split('-')
-            for input in self.inputs:
-                if input == port[1]:
-                    path_to_calibrate = path.replace("Jx", port_cal_wrINST)
-                    print(path_to_calibrate, self.matSwtchLoss.read_cal(path_to_calibrate))
-                    self.msrLossFreqIN(path, path_to_calibrate)
+        pathJ3Jx = self.pathlist[3]
 
-        print(self.lossWires)
-
-    # mesure les perte en fréquence de input
-    def msrLossFreqIN(self, path, path_to_calibrate):
-        lossWire_per_freq = {}
+        print(" calibration of SMBV, plug the power meter of the cal to J9")
+        # calibration of J3 - J9
+        self.equipement.Swtch.setSwitch(sw1=1, sw3=self.paths[pathJ3Jx]["sw3"], sw4=self.paths[pathJ3Jx]["sw4"])
         for freq in self.tab_freq:
-            self.equipement.RFSigGen.freq = freq
-            self.equipement.RFSigGen.power = self.OUTPUT_POWER_CALIBRATION
-            self.equipement.PwMeter.freq = freq
-            self.equipement.Swtch.setSwitch(sw1=1, sw3=self.paths[path]["sw3"], sw4=self.paths[path]["sw4"])
-            self.equipement.RFSigGen.status = 1
+            self.equipement.RFSigGenV.freq = freq
+            self.equipement.RFSigGenV.power = self.OUTPUT_POWER_CALIBRATION
+            # self.equipement.PowerMeterCal = freq
+            self.equipement.RFSigGenV.status = 1
             time.sleep(1)
-            lossWire_per_freq[freq] = self.OUTPUT_POWER_CALIBRATION - self.equipement.PwMeter.power - \
-                                      self.matSwtchLoss.read_cal(path_to_calibrate)
-            self.lossWires["input"][path_to_calibrate.split('-')[1]] = lossWire_per_freq
-            self.equipement.RFSigGen.status = 0
+            loss["J3"][freq] = self.OUTPUT_POWER_CALIBRATION  - self.equipement.PwrMeterCal.power(nbr_mes=1)
+            self.equipement.RFSigGenV.status = 0
+        self.loss["J3"]["J9"] = loss["J3"]
 
-    #mesure les pertes en fréquence de output
-    def msrLossFreqOUT(self, path, path_to_calibrate):
-        lossWire_per_freq = {}
+    def PwrMeterCal(self):
+        loss = {"J2": {}}
+
+        pathJ2Jx = self.pathlist[5]
+
+        print(" calibration of Power Meter, plug the RF generator cal to J9")
+        # calibration of J2 - J9
+        self.equipement.Swtch.setSwitch(sw1=1, sw3=self.paths[pathJ2Jx]["sw3"], sw4=self.paths[pathJ2Jx]["sw4"])
         for freq in self.tab_freq:
-            self.equipement.RFSigGen.freq = freq
-            self.equipement.RFSigGen.power = self.OUTPUT_POWER_CALIBRATION
-            self.equipement.PwMeter.freq = freq
-            self.equipement.Swtch.setSwitch(sw1=1, sw3=self.paths[path]["sw3"], sw4=self.paths[path]["sw4"])
-            self.equipement.RFSigGen.status = 1
+            # self.equipement.RFSigGenCal.freq = freq
+            # self.equipement.RFSigGenCal.power = self.OUTPUT_POWER_CALIBRATION
+            self.equipement.PwrMeter.freq = freq
             time.sleep(1)
-            lossWire_per_freq[freq] = self.OUTPUT_POWER_CALIBRATION - self.equipement.PwMeter.power - \
-                                      self.matSwtchLoss.read_cal(path_to_calibrate)
-            self.lossWires["output"][path_to_calibrate.split('-')[1]] = lossWire_per_freq
-            self.equipement.RFSigGen.status = 0
+            loss["J2"][freq] = self.OUTPUT_POWER_CALIBRATION - self.equipement.PwrMeter.power
+            # self.equipement.RFSigGenCal.status = 0
+        self.loss["J2"]["J9"] = loss["J2"]
+
+    def FSWCal(self):
+        loss = {"J5": {}}
+
+        pathJ2Jx = self.pathlist[4]
+        print(" calibration of FSW, plug the RF generator cal to J9")
+        # calibration of J5 - J9
+        self.equipement.Swtch.setSwitch(sw1=1, sw3=self.paths[pathJ2Jx]["sw3"], sw4=self.paths[pathJ2Jx]["sw4"])
+        for freq in self.tab_freq:
+            # self.equipement.RFSigGenCal.freq = freq
+            # self.equipement.RFSigGenCal.power = self.OUTPUT_POWER_CALIBRATION
+            # self.equipement.RFSigGenCal.status = 1
+            self.equipement.SpecAn.freqSpan = 10000000
+            pic = self.equipement.SpecAn.markerPeakSearch()
+            time.sleep(1)
+            loss["J5"][freq] = self.OUTPUT_POWER_CALIBRATION - pic[1]
+            # self.equipement.RFSigGenCal.status = 0
+        self.loss["J5"]["J9"] = loss["J5"]
+
+    ######### NON CODE ################
+    def NoiseCal(self):
+        loss = {"J18":{}}
+
+        pathJ18Jx = self.pathlist[0]
+        print(" calibration of Noise, plug the RF generator cal to J18 and the power meter to J9")
+        # calibration of J5 - J9
+        self.equipement.Swtch.setSwitch(sw1=1, sw3=self.paths[pathJ18Jx]["sw3"], sw4=self.paths[pathJ18Jx]["sw4"])
+        for freq in self.tab_freq:
+            loss["J18"][freq] = self.OUTPUT_POWER_CALIBRATION
+        self.loss["J18"]["J9"] = loss["J18"]
+
+    def makeDelta(self):
+        for channel in self.channels:
+            Jout = "J" + str(channel + 8)
+            delta_freq = {}
+            self.delta[Jout]= {}
+            for freq in self.tab_freq:
+                delta_freq[freq] = self.loss["J4"][Jout][freq] - self.loss["J4"]["J9"][freq]
+            self.delta[Jout]= delta_freq
+
+    def makeMatrixCal(self):
+        for Jin in self.loss.keys():
+            for channel in self.channels[1:]:
+                Jout = "J" + str(channel + 8)
+                self.loss[Jin][Jout] = {}
+                estimate_loss ={}
+                for freq in self.tab_freq:
+                     estimate_loss[freq] = self.loss[Jin]["J9"][freq] + self.delta[Jout][freq]
+                self.loss[Jin][Jout] = estimate_loss
+
+
 

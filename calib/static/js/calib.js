@@ -45,7 +45,6 @@ function get_listPorts() {
     return listPorts;
 }
 
-
 function get_listChannels() {
     let listChannels = [];
     let checkboxChannels = document.querySelectorAll("#portOUT");
@@ -73,9 +72,9 @@ function get_parametersWiresCalibration() {
 
 
 
-function switchCalibration() {
+function calibration() {
     $.ajax({
-            url: '/calib/calibswitch',
+            url: '/calib/calib',
             type: 'GET',
             success: function (data) {
 
@@ -88,23 +87,6 @@ function switchCalibration() {
 
 }
 
-
-function wiresCalibration() {
-    let setting = get_parametersWiresCalibration();
-    let setting_toJSON = JSON.stringify(setting);
-    $.ajax({
-            url: '/calib/calibwires',
-            type: 'GET',
-            dataType:'json',
-            data: {parameters : setting_toJSON},
-            success: function (data) {
-            },
-            error: function () {
-                alert("error ajax");
-            }
-        }
-    );
-}
 
 
 lightOff();

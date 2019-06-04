@@ -12,10 +12,12 @@ from django.views.decorators.csrf import csrf_exempt
 from conf.views import Configuration
 from .tasks import TaskScheduler
 
-CHANNELS = [1, 2, 3, 4, 5, 6, 7, 8]
+import configuration
+
 
 logger = get_logger("carac")
 
+CHANNELS = configuration.CHANNELS
 
 class Caracterisation(View):
 

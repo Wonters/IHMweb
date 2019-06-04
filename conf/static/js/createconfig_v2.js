@@ -1,6 +1,8 @@
 let field = ['bbFreq2', 'bbFreq1', 'bbFreqCal', 'inputAttCal', 'inputAtt', 'refLvl', 'rbw', 'vbw',
     'span', 'countAverage', 'pwmeter', 'searchLimit', 'name', 'radio_configuration'];
 
+let radioMode = ["rc1","rc2","rc3","rc4", "rc5", "rc6"];
+
 function createTab(parameter, element) {
     let tab = [];
     let nbiteration = (Number(parameter.max) - Number(parameter.min)) / Number(parameter.rang);
@@ -137,10 +139,12 @@ function createTc(mode) {
         element.setAttribute('class', 'conf');
         nameConfElement.style.fontWeight = "900";
         nameConfElement.id = "configurationTc";
-        nameConfElement.setAttribute('class','h3');
+        nameConfElement.setAttribute('class', 'h3');
+
         nameConfElement.appendChild(document.createTextNode(element.id + ":"));
         nameConfElement.appendChild(element);
 
+        // create the min max pas
         if (field.indexOf(element.name) === -1) {
             let list = createRange(element);
 
@@ -187,6 +191,37 @@ function createMode(mode) {
 
     return divMode;
 }
+
+
+// fonction en cours de développement ---> select sur la configuration radio <--------
+// function radioConf(){
+//
+//
+//     let selectRadio = document.createElement("select");
+//     selectRadio.id = "selectRadio";
+//
+//     for(let option in radioMode){
+//         let radioOption = document.createElement('option');
+//         radioOption.text = radioMode[option];
+//         radioOption.value =  radioMode[option];
+//         selectRadio.add(radioOption);
+//     }
+//     selectRadio.addEventListener("click",function (){addRadioConf(selectRadio.value)});
+//
+//     $('#radio_configuration').parent().append(selectRadio);
+//
+//
+// }
+//
+// function addRadioConf(value) {
+//     let inputRadioConfig = document.getElementById("radio_configuration");
+//     inputRadioConfig.disabled = true;
+//     let text = inputRadioConfig.value;
+//     text = text + "," + value;
+//     inputRadioConfig.value = text;
+// }
+//////////////
+
 
 var Module = (function(){
 

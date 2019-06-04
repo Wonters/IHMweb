@@ -10,20 +10,18 @@ from pymongo.errors import ServerSelectionTimeoutError, DuplicateKeyError
 
 from .forms import UploadFileForm
 
+import configuration
+
 # Create your views here.
 
 logger = get_logger('conf')
 
-DATABASE_IP = "127.0.0.1"
-DATABASE_PORT = "27017"
-DATABASE_NAME = "acbbs-configuration"
-DATABASE_MAXDELAY = 500
+DATABASE_IP = configuration.DATABASE_IP
+DATABASE_PORT = configuration.DATABASE_PORT
+DATABASE_NAME = configuration.DATABASE_NAME
+DATABASE_MAXDELAY = configuration.DATABASE_MAXDELAY
 
-CONFIGFILES = [
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/media/format_testcase/rxExcursion.json'),
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/media/format_testcase/txExcursion.json'),
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/media/format_testcase/txIM3Measurement.json'),
-]
+CONFIGFILES = configuration.CONFIGFILES
 
 
 class database(object):

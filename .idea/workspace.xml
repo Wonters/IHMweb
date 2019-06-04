@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c79180d6-eb0b-46d5-a5a9-c92cd82c1c0a" name="Default Changelist" comment="version2">
-      <change afterPath="$PROJECT_DIR$/calib/drivers/PwrMeterCal.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/calib/drivers/RFSigGenCal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calib/static/js/calib.js" beforeDir="false" afterPath="$PROJECT_DIR$/calib/static/js/calib.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calib/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/calib/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calib/templates/calib/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/calib/templates/calib/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calib/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/calib/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calib/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/calib/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf/static/js/createconfig_v2.js" beforeDir="false" afterPath="$PROJECT_DIR$/conf/static/js/createconfig_v2.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,75 +31,38 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/calib/templates/calib/home.html">
+        <entry file="file://$PROJECT_DIR$/static/media/configurationApp.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="99" selection-start-line="33" selection-start-column="99" selection-end-line="33" selection-end-column="99" />
+            <state relative-caret-position="165">
+              <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conf/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="15" lean-forward="true" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test_bench/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2160">
+              <caret line="144" selection-start-line="144" selection-end-line="144" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/calib/tasks.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1510">
-              <caret line="205" column="25" lean-forward="true" selection-start-line="205" selection-start-column="25" selection-end-line="205" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/calib/drivers/RFSigGenCal.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="123" column="46" lean-forward="true" selection-start-line="123" selection-start-column="46" selection-end-line="123" selection-end-column="46" />
-              <folding>
-                <element signature="e#15#65#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/calib/drivers/PwrMeterCal.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="65" column="13" lean-forward="true" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/calib/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/calib/static/js/calib.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="88" selection-start-line="88" selection-end-line="88" />
-              <folding>
-                <element signature="n#!!block;n#lightOnRed#0" />
-                <element signature="n#!!block;n#lightOnGreen#0" />
-                <element signature="n#!!block;n#lightOff#0" />
-                <element signature="n#!!block;n#checkInstrument#0" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/test_bench/configuration.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -116,16 +73,13 @@
         <option value="CSS File" />
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="package.json" />
         <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>btn btn-de</find>
-      <find>form-con</find>
-      <find>conf</find>
-      <find>conf=</find>
       <find>schConf</find>
       <find>showScheduler</find>
       <find>colonne2</find>
@@ -152,6 +106,10 @@
       <find>makeDelta</find>
       <find>self.delta</find>
       <find>RFSigGen</find>
+      <find>disabled</find>
+      <find>moreT</find>
+      <find>function</find>
+      <find>addE</find>
     </findStrings>
     <replaceStrings>
       <replace>configs</replace>
@@ -174,8 +132,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/home/views.py" />
-        <option value="$PROJECT_DIR$/testcase/static/home.css" />
         <option value="$PROJECT_DIR$/acbbs-config.py" />
         <option value="$PROJECT_DIR$/config/templates/config/showtc.html" />
         <option value="$PROJECT_DIR$/config/static/css/config.css" />
@@ -223,14 +179,18 @@
         <option value="$PROJECT_DIR$/calib/views.py" />
         <option value="$PROJECT_DIR$/calib/drivers/PwrMeterCal.py" />
         <option value="$PROJECT_DIR$/calib/tasks.py" />
+        <option value="$PROJECT_DIR$/conf/static/js/createconfig_v2.js" />
+        <option value="$PROJECT_DIR$/static/media/package.json" />
+        <option value="$PROJECT_DIR$/static/media/configurationApp.json" />
+        <option value="$PROJECT_DIR$/test_bench/configuration.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="65" />
     <option name="y" value="-4" />
-    <option name="width" value="928" />
-    <option name="height" value="1084" />
+    <option name="width" value="1830" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -238,6 +198,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="test_bench_version1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -248,18 +219,7 @@
             <path>
               <item name="test_bench_version4" type="b2602c69:ProjectViewProjectNode" />
               <item name="test_bench_version4" type="462c0819:PsiDirectoryNode" />
-              <item name="calib" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="test_bench_version1" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="test_bench" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -272,6 +232,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/venv" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -482,6 +443,7 @@
       <workItem from="1557840600402" duration="8951000" />
       <workItem from="1557928916009" duration="10397000" />
       <workItem from="1557993957579" duration="14835000" />
+      <workItem from="1559653349713" duration="733000" />
     </task>
     <task id="LOCAL-00001" summary="introduction du logger">
       <created>1552386158286</created>
@@ -494,7 +456,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="523299000" />
+    <option name="totallyTimeSpent" value="533331000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -509,12 +471,12 @@
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2305141" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.15533444" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.26854753" />
       <window_info anchor="bottom" id="Inspection Results" order="1" weight="0.20775028" />
       <window_info anchor="bottom" id="Database Changes" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="3" sideWeight="0.49751243" visible="true" weight="0.36050156" />
+      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.49751243" weight="0.35632184" />
       <window_info anchor="bottom" id="Version Control" order="4" weight="0.32810867" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50248754" side_tool="true" weight="0.2904911" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
@@ -536,12 +498,12 @@
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.21448314" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.15533444" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.26854753" />
       <window_info anchor="bottom" id="Inspection Results" order="1" weight="0.20775028" />
       <window_info anchor="bottom" id="Database Changes" order="2" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="3" sideWeight="0.49751243" visible="true" weight="0.30407524" />
+      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.49751243" visible="true" weight="0.35632184" />
       <window_info anchor="bottom" id="Version Control" order="4" weight="0.32810867" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50248754" side_tool="true" weight="0.2904911" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
@@ -583,25 +545,6 @@
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/home/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="25" column="4" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/acbbs/tools/log.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testcase/celery.py" />
-    <entry file="file://$PROJECT_DIR$/testcase/templates/testcase/progressBar.html" />
-    <entry file="file://$PROJECT_DIR$/config/templates/config/showtcform.html" />
-    <entry file="file://$PROJECT_DIR$/testcase/templates/testcase/home.html" />
-    <entry file="file://$PROJECT_DIR$/config/templates/config/home_v2.html" />
     <entry file="file://$PROJECT_DIR$/config/templates/config/createconfig.html" />
     <entry file="file://$PROJECT_DIR$/../test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/base.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -669,41 +612,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/calib/static/js/calib" />
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="12" lean-forward="true" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/carac/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/carac/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="37" lean-forward="true" selection-start-line="27" selection-start-column="37" selection-end-line="27" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#56#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.5/site-packages/acbbs/drivers/ate/RFSigGenV.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="36" column="43" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_bench/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="144" selection-start-line="144" selection-end-line="144" />
         </state>
       </provider>
     </entry>
@@ -728,17 +640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/carac/static/js/carac_home_v2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="160" column="41" lean-forward="true" selection-start-line="160" selection-start-column="41" selection-end-line="160" selection-end-column="41" />
-          <folding>
-            <element signature="n#!!block;n#plotSchedule#0" />
-            <element signature="n#!!block;n#showTempSetting#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../test_bench_version1/venv/lib/python3.5/site-packages/django/core/handlers/exception.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
@@ -748,16 +649,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/carac/urls.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/carac/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#36#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/calib/urls.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -786,16 +677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calib/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/calib/drivers/PwrMeterCal.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
@@ -816,15 +697,124 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/carac/static/js/carac_home_v2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="65" column="8" selection-start-line="65" selection-end-line="65" selection-end-column="8" />
+          <folding>
+            <element signature="n#!!block;n#showTempSetting#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/static/js/home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="32" selection-start-line="28" selection-start-column="32" selection-end-line="28" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/templates/config/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/static/js/createconfig_v2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="218" column="34" selection-start-line="218" selection-start-column="34" selection-end-line="218" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/templates/config/createconfig_v2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="14" lean-forward="true" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/calib/tasks.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1510">
-          <caret line="205" column="25" lean-forward="true" selection-start-line="205" selection-start-column="25" selection-end-line="205" selection-end-column="25" />
+        <state relative-caret-position="309">
+          <caret line="213" column="37" selection-start-line="213" selection-start-column="25" selection-end-line="213" selection-end-column="37" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/carac/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calib/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="20" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/carac/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#36#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/carac/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="e#0#56#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/media/configurationApp.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="15" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="15" lean-forward="true" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_bench/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2160">
+          <caret line="144" selection-start-line="144" selection-end-line="144" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_bench/configuration.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

@@ -16,6 +16,8 @@ from acbbs.tools.log import get_logger
 from .drivers.PwrMeterCal import PowerMeterCal
 from .drivers.RFSigGenCal import RFSigGenCal
 
+import configuration
+
 logger = get_logger('calib')
 
 if sys.platform == "win32":
@@ -31,56 +33,12 @@ ICMP_ECHO_REQUEST = 8  # Seems to be the same on Solaris.
 # avec ICMP, il est obligatioire de lancer le script en étant superutilisteur root
 # Pour piger avec des sockets sans être administrateur il faut compter sur des sockets AF_INET SOCK_STREAM
 
-CHANNELS = [1, 2, 3, 4, 5, 6, 7, 8]
-INPUTS = ["J2", "J3", "J4", "J4_20dB", "J5", "J18"]
+CHANNELS = configuration.CHANNELS
+INPUTS = configuration.INPUTS
 
-CONF_PATH = "/etc/acbbs/swtch_cal.json"
+CONF_PATH = configuration.CONF_PATH
 
-LIST_PATH = {
-    "Jx-J18": {
-        "port": "J18",
-        "min": 0,
-        "max": 5,
-        "sw3": 2,
-        "sw4": 1
-    },
-    "Jx-J4": {
-        "port": "J4",
-        "min": 0,
-        "max": 5,
-        "sw3": 3,
-        "sw4": 1
-    },
-    "Jx-J4_20dB": {
-        "port": "J4",
-        "min": 30,
-        "max": 40,
-        "sw3": 4,
-        "sw4": 2
-    },
-    "Jx-J3": {
-        "port": "J3",
-        "min": 70,
-        "max": 80,
-        "sw3": 3,
-        "sw4": 1
-    },
-    "Jx-J5": {
-        "port": "J5",
-        "min": 20,
-        "max": 28,
-        "sw3": 4,
-        "sw4": 1
-    },
-    "Jx-J2": {
-        "port": "J2",
-        "min": 5,
-        "max": 15,
-        "sw3": 2,
-        "sw4": 1
-    },
-}
-
+LIST_PATH = configuration.LIST_PATH
 
 class NetworkEquipment(object):
     def __init__(self, simu):

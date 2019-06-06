@@ -1,23 +1,34 @@
-
 import os
 
+#### settings pour la base de donnée mongo #############
 DATABASE_IP = "127.0.0.1"
 DATABASE_PORT = "27017"
 DATABASE_NAME = "acbbs-configuration"
+DATABASE_NAME_CALIB = "acbbs-calibration"
 DATABASE_MAXDELAY = 500
 
+
+##### fichiers mère de configuration de chaque testcase #######
 CONFIGFILES = [
     os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/media/format_testcase/rxExcursion.json'),
     os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/media/format_testcase/txExcursion.json'),
     os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/media/format_testcase/txIM3Measurement.json'),
+    #.... ajouter les chemins de nouveaux testcase ici
 ]
 
+#### tableau des channels disponibles ###########
 CHANNELS = [1, 2, 3, 4, 5, 6, 7, 8]
 
-INPUTS = ["J2", "J3", "J4", "J4_20dB", "J5", "J18"]
 
+#### Ce chemin n'est plus necéssaire, tout les fichiers de calibration sont enregistrer dans la base de donnée ######
 CONF_PATH = "/etc/acbbs/swtch_cal.json"
 
+#### Ports en entrée du switch ##############
+INPUTS = ["J2", "J3", "J4", "J4_20dB", "J5", "J18"]
+OUTPUTS = ["J9", "J10", "J11", "J12", "J13", "J14", "J15", "J16"]
+
+
+##### settings des chemins du switch matrix ###########
 LIST_PATH = {
     "Jx-J18": {
         "port": "J18",
@@ -62,3 +73,13 @@ LIST_PATH = {
         "sw4": 1
     },
 }
+
+####### port de connection des instruments ##########
+
+PORT_SMB = {"J4": {}, "J4_20dB": {}}
+PORT_SMBV = {"J3": {}}
+PORT_FSW =  {"J5": {}}
+PORT_PowerMeter = {"J2": {}}
+PORT_NOISE = {"J18":{}}
+
+

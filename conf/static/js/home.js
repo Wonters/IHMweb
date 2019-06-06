@@ -44,7 +44,7 @@ function addConf() {
     if (form.elements.file.files[0].type === "application/json") {
         form.submit();
     } else {
-        alert("the file selected is not an avalable configuration");
+        alert("the file selected is not an available configuration");
     }
 }
 

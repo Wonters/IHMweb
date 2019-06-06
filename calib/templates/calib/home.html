@@ -3,12 +3,26 @@
 {% block contents %}
     <link href="/static/css/home_calib.css" rel="stylesheet">
 
+
+    <input hidden id="portsIN" value="{{ portsIN }}">
+    <input hidden id="history" value="{{ history }}">
+    <input hidden id="channels" value="{{ channels }}">
+
     <div class="row">
-        <label class="form-control">Dernière calibraton: 15/03/2018 {{ date }} </label>
+        <label class="form-control"> Dernière calibraton: </label>
+        <div class="col">
+            <select id="selecthistory" class="form-control">
+                {% for cal in history %}
+                    <option value="{{ cal }}"> {{ cal }} </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col">
+        </div>
+        <div class="col">
+        </div>
     </div>
-    <div class="historique">
-        <label class="h3"> Historique des calibration </label>
-    </div>
+
 
     <div class="check">
         <div class="row">
@@ -27,14 +41,45 @@
     <div class="calib">
         <div class="row">
             <div class="col">
-                <label for="calibWireFreq" class="h6"> Frequency </label>
-                <input id="calibWireFreq" value="3,3,2,3,4,5">
-                <label for="calibWirePower" class="h6"> Power </label>
-                <input id="calibWirePower" value="30">
-                <button class="btn btn-calib btn-lg" onclick="calibration()"> Calibration </button>
+                <label for="calibFreq" class="h6"> Frequency </label>
+                <input id="calibFreq" value="3,3,3">
+                <label for="calibPower" class="h6"> Power </label>
+                <input id="calibPower" value="30">
+                <button class="btn btn-calib btn-lg" onclick="calibration()"> Calibration</button>
             </div>
         </div>
     </div>
+
+    <div id="selectPath" class="row">
+        <label class="form-control"> LOSS BODE PLOTTING </label>
+        <div class="col">
+            <select id="portIN" class="form-control">
+                {% for INPUT in portsIN %}
+                    <option value="{{ INPUT }}"> {{ INPUT }} </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col">
+            <select id="portOUT" class="form-control select">
+                {% for chan in channels %}
+                    <option value="{{ chan }}"> {{ chan }} </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col">
+        <button class="button btn-calib" onclick="getLossPath()"> PLOT LOSS </button>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+            <div class="row">
+
+            <div id="graph">
+
+            </div>
+        </div>
+
 
     <script src="/static/js/calib.js"></script>
 {% endblock %}

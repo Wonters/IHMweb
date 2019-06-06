@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.home),
     path('check', views.checkInstrument, name='check'),
     path('calib', views.start_calib, name='calib'),
+    path('getlosspath', views.getLossPath, name='losspath'),
 ]

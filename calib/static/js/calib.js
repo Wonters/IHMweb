@@ -34,50 +34,36 @@ function checkInstrument() {
 
 }
 
-function get_listPorts() {
-    let listPorts = [];
-    let checkboxInput = document.querySelectorAll("#portIN");
-    for (let i = 0; i < checkboxInput.length; i++) {
-        if (checkboxInput[i].checked === true) {
-            listPorts.push(checkboxInput[i].name);
-        }
+function get_listfreq(){
+    let listfreq ;
+    let inputFreq = document.getElementById("calibFreq");
+    listfreq = inputFreq.value.split(",");
+    for(let i = 0; i <listfreq.length; i++){
+        listfreq[i] = parseFloat(listfreq[i]);
     }
-    return listPorts;
+    return listfreq;
 }
 
-function get_listChannels() {
-    let listChannels = [];
-    let checkboxChannels = document.querySelectorAll("#portOUT");
-    for (let i = 0; i < checkboxChannels.length; i++) {
-        if (checkboxChannels[i].checked === true) {
-            listChannels.push(checkboxChannels[i].name);
-        }
-    }
-    return listChannels;
+function get_power(){
+    let inputPower = document.getElementById("calibPower");
+    let power = parseFloat(inputPower.value);
+    return power;
 }
 
-function get_parametersSwitchCalibration() {
+function history() {
 
 }
-
-function get_parametersWiresCalibration() {
-    let pwr = document.getElementById("calibWirePower").value;
-    let freq = document.getElementById("calibWireFreq").value;
-    let channels = get_listChannels();
-    let ports = get_listPorts();
-
-    return {'pwr':pwr,'freq': freq,'ports': ports,'channels': channels}
-
-}
-
-
 
 function calibration() {
+    let freq = get_listfreq();
+    let power = get_power();
     $.ajax({
             url: '/calib/calib',
             type: 'GET',
+            dataType: 'JSON',
+            data: {pwr:power, freq:JSON.stringify(freq)},
             success: function (data) {
-
+                document.location.href = "/calib/"
             },
             error: function () {
                 alert("error ajax");
@@ -86,7 +72,40 @@ function calibration() {
     );
 
 }
+function getLossPath() {
+    let calSelect = document.querySelector('#selecthistory');
+    let portINSelect = document.querySelector('#portIN');
+    let portOUTSelect = document.querySelector('#portOUT');
+    let date = calSelect.value;
+    let portIN = portINSelect.value;
+    let portOUT = portOUTSelect.value;
+    $.ajax({
+        url: '/calib/getlosspath',
+        type:'GET',
+        data: {portIN:portIN,portOUT:portOUT,date:date},
+        success: function (data) {
+            plotLoss(data["freq"],data["loss"]);
+        },
 
+        error: function () {
+
+        }
+
+}
+    )
+}
+function plotLoss(X,Y) {
+    let bode = {
+  x: X,
+  y: Y,
+  mode: 'markers',
+  type: 'scatter'
+};
+    let data = [bode];
+Plotly.newPlot('graph', data);
+
+}
 
 
 lightOff();
+history();

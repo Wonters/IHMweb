@@ -15,13 +15,18 @@ Including another URLconf
 """
 from django.urls import path
 
-from . import views
+from .views import CalView
+
+calib = CalView()
 
 # rajouter des fichiers url.py dans chaque applications pour éviter une surcharge du dictionnaire urlpatterns du projet
 
+
 urlpatterns = [
-    path('', views.home),
-    path('check', views.checkInstrument, name='check'),
-    path('calib', views.start_calib, name='calib'),
-    path('getlosspath', views.getLossPath, name='losspath'),
+    path('', calib.home),
+    path('check', calib.checkInstrument, name='check'),
+    path('calib', calib.start_calib, name='calib'),
+    path('getlosspath', calib.getLossPath, name='losspath'),
+    path('getprogress', calib.ProgressBackend, name='progress'),
+    path('response', calib.response, name='response')
 ]

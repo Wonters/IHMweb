@@ -17,17 +17,65 @@ function lightOff() {
     led1.style.background = "transparent";
 }
 
+function updateProgressBar(progressBarElement, progressBarMessageElement, progress, lenght) {
+    progressBarElement.style.width = progress.percent * lenght + "%";
+    progressBarMessageElement.innerHTML = progress.percent + '%';
+    if (progress.current === progress.total) {
+        progressBarElement.style.backgroundColor = "green";
+    } else {
+        progressBarElement.style.backgroundColor = "#747755";
+    }
+}
+
+function setBackGround() {
+    let bar = document.getElementById('progress-bar');
+    let barMessage = document.getElementById('progress-bar-message');
+    $.ajax({
+        url: '/calib/getprogress',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            let current = data.current;
+            let total = data.total;
+            console.log(current, total);
+            let percent = Math.round((current / total) * 100);
+            if(total != 0) {
+                updateProgressBar(bar, barMessage, {percent: percent, current: percent, total: 100}, 1);
+            }
+            if (data.message !=="") {
+                if(confirm(data.message)){
+                    $.ajax({
+                        url:"/calib/response",
+                        dataType: "JSON",
+                        type: "GET",
+                        data:{response:1}
+                    })
+                }
+
+            }
+        },
+        error: function (data) {
+            alert("Error ajax");
+        }
+    });
+}
+
 function checkInstrument() {
     $.ajax({
             url: '/calib/check',
             type: 'GET',
             success: function (data) {
                 console.log(data);
-                lightOnGreen();
+                if(data["msg"] === 0) {
+                    lightOnGreen();
+                }
+                else
+                lightOnRed();
+
 
             },
             error: function () {
-                lightOnRed();
             }
         }
     )
@@ -57,13 +105,15 @@ function history() {
 function calibration() {
     let freq = get_listfreq();
     let power = get_power();
+    let loop = setInterval(function(){ setBackGround()}, 800);
     $.ajax({
             url: '/calib/calib',
             type: 'GET',
             dataType: 'JSON',
             data: {pwr:power, freq:JSON.stringify(freq)},
             success: function (data) {
-                document.location.href = "/calib/"
+                document.location.href = "/calib/";
+                clearInterval(loop);
             },
             error: function () {
                 alert("error ajax");

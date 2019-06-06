@@ -8,6 +8,14 @@
     <input hidden id="history" value="{{ history }}">
     <input hidden id="channels" value="{{ channels }}">
 
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <div class="row">
         <label class="form-control"> Dernière calibraton: </label>
         <div class="col">
@@ -48,6 +56,14 @@
                 <button class="btn btn-calib btn-lg" onclick="calibration()"> Calibration</button>
             </div>
         </div>
+        <div class="row">
+            <div class="col" style="height: 50px; text-align: center;" role="progressbar">
+                <div class="span" id="progress-bar" style="background-color: blue; width: 0; opacity: 0.8">&nbsp;</div>
+                <div id="progress-bar-message" class="h4" style="text-align: center;">
+                    Waiting for progress to start...
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="selectPath" class="row">
@@ -67,18 +83,18 @@
             </select>
         </div>
         <div class="col">
-        <button class="button btn-calib" onclick="getLossPath()"> PLOT LOSS </button>
+            <button class="button btn-calib" onclick="getLossPath()"> PLOT LOSS</button>
         </div>
         <div class="col">
 
         </div>
     </div>
-            <div class="row">
+    <div class="row">
 
-            <div id="graph">
+        <div id="graph">
 
-            </div>
         </div>
+    </div>
 
 
     <script src="/static/js/calib.js"></script>

@@ -4,7 +4,7 @@ billiard==3.5.0.5
 certifi==2018.11.29
 chardet==3.0.4
 colorlog==4.0.2
-Django==2.1.7
+Django==2.1.10
 etaprogress==1.1.1
 httplib2==0.12.1
 idna==2.8

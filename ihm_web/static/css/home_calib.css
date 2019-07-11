@@ -1,0 +1,37 @@
+.rond{
+	width:30px;
+	height:30px;
+	background:chartreuse;
+	border: solid 2px #d7b08f;
+	-webkit-border-radius:100px;
+	-moz-border-radius:100px;
+	-o-border-radius:100px;
+	border-radius:100px;
+}
+
+.btn-calib{
+	background-color: #447e9b;
+	margin: 5px;
+
+}
+
+
+.form-custom{
+	color: #447e9b;
+	font-size: large;
+	background-color: #999999;
+	border-radius: 2px;
+
+}
+
+.custom-h1{
+
+    opacity: 1;
+    background-color: #41a1d7;
+    border-radius: 8px;
+    color: #5e5d5d;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+	padding: 10px 60px;
+}

@@ -1,0 +1,29 @@
+#!/usr/bin/python3 
+# coding=UTF-8
+from __future__ import unicode_literals
+
+from django.db import models
+from django import forms
+from django.forms import ModelForm
+import django.core.management as manage
+#sources
+
+# form
+
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+# Save data from manual set value
+class testcaseModel(models.Model):
+    testcase_simulation = models.BooleanField()
+    testcase_channel = models.IntegerField()
+    testcase_configFile = models.TextField(null=True)
+    testcase_nameCarac = models.TextField(null=True)
+    testcase_climChamber = models.BooleanField()
+    
+     
+
+    def __str__(self):
+        return self.testcase_nameCarac

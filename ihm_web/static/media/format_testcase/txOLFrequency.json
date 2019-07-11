@@ -1,0 +1,32 @@
+{
+  "txOLFrequency": {
+    "name": "txOLFrequency template",
+    "voltage": [
+      12
+    ],
+    "radio_configuration": [
+      "rc1",
+      "rc6"
+    ],
+    "freq_tx": [],
+    "freq_rx": [],
+    "filter_tx": [],
+    "filter_rx": [],
+    "bbFreq": [
+
+    ],
+    "att": [1,2
+
+    ],
+    "bbFreqCal": 50000,
+    "inputAttCal": 25,
+    "inputAtt": 45,
+    "refLvl": 42,
+    "rbw": 1000,
+    "vbw": 1000,
+    "span": 200000,
+    "countAverage": 10,
+    "pwmeter": 1,
+    "searchLimit": 1000
+  }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='fr'>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    {% block static %}
+        {% load static %}
+        <link rel="stylesheet" href="/static/css/home.css"/>
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+    {% endblock %}
+    <title>{% block title %}ACBBS{% endblock %}</title>
+    {% block script %}
+    {% endblock %}
+</head>
+
+<body>
+
+<!--commentaire corp du texte-->
+<section style="">
+    <div id="background"></div>
+    <nav class="navbar navbar-expand-lg">
+
+        <img src="/static/img/logo.png" width="820" height="360" alt="logo" style="align-content: center; opacity: 1; height: 10%; width: 10%">
+
+        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link h3" href="/home/help">HELP </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link h3" href="/carac/">CARACTERISATION</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link h3" href="/conf/">CONFIGURATION</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link h3" href="/calib/">CALIBRATION</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <article>
+        {% block contents %}
+
+        {% endblock %}
+    </article>
+</section>
+
+<!--commentaire pied de page-->
+<footer>
+    {% block footer %}
+
+    {% endblock %}
+        <p style="padding: 10px; text-align: center;">&copy; ACBBS</p>
+</footer>
+</body>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
+
+
+</html>

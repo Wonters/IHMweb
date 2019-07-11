@@ -1,0 +1,11 @@
+from django.db import models
+
+# Create your models here.
+
+
+
+
+class selectConfigDbModel(models.Model):
+	configDb = 
+	
+    	

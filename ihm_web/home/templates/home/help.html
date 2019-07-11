@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+
+{% block contents %}
+
+    <p class="h3"> L 'application se compose en trois partie: la calibration, la configuration, la caractérisation </p>
+    <div class="row col">
+        <p class="h3"> l'application caractérisation </p>
+        <p class="h3"> Pour lancer une caractérisation, il faut aller dans le mode carac. Les étapes sont les suivantes
+            :</p>
+        <img src="/static/img/Use_it_acbbs.png" alt="useIt" style="text-align: center;">
+        <p class="h3 row"> Cette application se charge de lancer une liste de testcase pour chaque températures de la
+            chambre climatique </p>
+    </div>
+    <div class="row col">
+        <p class="h3"> L'application config </p>
+        <p class="h3"> Cette application se charge d'afficher, d'ajouter ou de supprimer des fichier de configuration
+            dans la base de
+            donnée</p>
+    </div>
+    <div class="row col">
+        <p class="h3"> l'application calibration</p>
+        <p class="h3"> l'application calibration se charge </p>
+    </div>
+    <div class="row col">
+        <p> Ajout un nouveau testcase : il faut ajouter le fichier au format JSON du nouveau testcase dans
+            conf/media/format_testcase  </p>
+        <p> Ajouter dans carac/task la nouvelle lib du testcase</p>
+    </div>
+{% endblock %}
+
+{% block footer %}
+ <img src="/static/img/Rohde-Schwarz-Test-Equipment.jpg" alt="background" style="opacity: 0.5; align-content: center; height: 30%; width: 100%">
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+<appSettings>
+  <add key="aspnet:MaxJsonDeserializerMembers" value="150000" />
+</appSettings>
+
+
+{% block contents %}
+    <link href="/static/css/home_calib.css" rel="stylesheet">
+
+
+    <input hidden id="portsIN" value="{{ portsIN }}">
+    <input hidden id="history" value="{{ history }}">
+    <input hidden id="channels" value="{{ channels }}">
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="check">
+        <h1 class="custom-h1"> Check instruments connectivity </h1>
+        <div class="row">
+            <div class="col mx-auto">
+                <button class="btn btn-calib btn-lg" onclick="checkInstrument()"> CHECK</button>
+            </div>
+                            <div class="rond" id="led1"></div>
+
+        </div>
+    </div>
+
+    </div>
+
+    <div class="calib">
+        <h1 class="custom-h1"> Start calibration </h1>
+        <div class="row">
+            <div class="col">
+
+                <div> Frequency settings</div>
+                <div>
+                    <label for="min" class="h6"> Min </label>
+                    <input id="min" value="100">
+                    <label for="max" class="h6"> Max </label>
+                    <input id="max" value="100000">
+                    <label for="rang" class="h6"> Rang </label>
+                    <input id="rang" value="3">
+
+                </div>
+            </div>
+            <div class="col">
+                <div for="calibPower" class="h6"> Power</div>
+                <div><input id="calibPower" value="30">
+                </div>
+            </div>
+            <div class="col">
+                <button class="btn-lg btn-success" onclick="calibration()"> Calibration</button>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col" style="height: 50px; text-align: center;" role="progressbar">
+                <div class="span" id="progress-bar" style="background-color: blue; width: 0; opacity: 0.8">&nbsp;</div>
+                <div id="progress-bar-message" class="h4" style="text-align: center;">
+                    Calibration progress to start ....
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="history">
+        <h1 class="custom-h1"> History of the calibration </h1>
+        <div class="row">
+            <div class="col">
+                <select id="selecthistory" class="form-control">
+                    {% for cal in history %}
+                        <option value="{{ cal }}"> {{ cal }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+
+    <div class="plotting">
+        <h1 class="custom-h1"> LOSS BODE PLOTTING </h1>
+        <div id="selectPath" class="row">
+            <div class="col">
+                <select id="portIN" class="form-control">
+                    {% for INPUT in portsIN %}
+                        <option value="{{ INPUT }}"> {{ INPUT }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <select id="portOUT" class="form-control select">
+                    {% for chan in channels %}
+                        <option value="{{ chan }}"> {{ chan }} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <button class="btn btn-calib btn-lg" onclick="getLossPath()"> PLOT LOSS</button>
+            </div>
+            <div class="col">
+
+            </div>
+        </div>
+        <div class="row">
+
+            <div id="graph">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/calib.js"></script>
+{% endblock %}
+
+
+
+
+
+

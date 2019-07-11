@@ -17,20 +17,6 @@ Add your user in specific group :
 
     $ sudo usermod -a -G syslog user
 
-  
-
-## Configuration
-
-ACBBS will search its configuration from a database. So, before to launch ACBBS, you need to put at least one configuration into database. For it, you should use **acbbs-config**:
-
-For help :
-
-    $ acbbs-config -h
-
-For add configuration :
-  
-    $ acbbs-config -w configuration_TAPMV4.0.json
-
 ## Logs
 
 Scripts and drivers store all of theses log in **/var/log/acbbs/**.
@@ -39,23 +25,49 @@ To have all logs in real time in a specific terminal, enter this command :
 
     $ tail -f /var/log/acbbs/allCarac.log
 
-## Execute
 
-Use **acbbs-scheduler** for launch testcases. For display help :
+Install IHMWEB :
 
-    $ acbbs-scheduler -h
+    ## install nginx
+    $ sudo apt-get install nginx
+    ## configure nginx
+    touch /etc/nginx/sites-available/ihmweb-acbbs
+    cp the follow configuration:
+    server {	
+        listen 80; server_name 10.30.3.18; 
+        root /home/sigfox/git/ihmweb/ihmweb_acbbs/;
+	location = /favicon.ico { access_log off ; log_not_found off; }
+        location /static/ {
+                alias /home/sigfox/git/ihmweb/ihmweb_acbbs/static/;
+                autoindex on;
+        	}
+	location /ws/progress { 
+        	proxy_pass http://127.0.0.1:8000/ws/progress;
+		proxy_http_version 1.1;
+    		proxy_set_header Upgrade $http_upgrade;
+    		proxy_set_header Connection "Upgrade";
+        	}
+	location /ws/calibprogress {
+		proxy_pass http://127.0.0.1:8000/ws/calibprogress;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "Upgrade";
+		}
+	location / {
+        	proxy_set_header Host $http_host;
+        	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        	proxy_redirect off;
+        	proxy_pass http://127.0.0.1:8000;
+        	}
+	}
+     create a link with ln to /etc/nginx/sites-enable
+     start nginx with sudo service nginx start
+     ## run server
+     run  daphne in the virtual environnement of the project with the cmd : daphne -p 8000 -b 127.0.0.1 test_bench.asgi:application
 
-To launch it :
 
-    $ acbbs-scheduler -c configuration_TAPMV4.0 --channel 1,2 -m "TEST" --temp 0,25,55
+## ACCES TO THE IHM
 
-Where :
+    open your navigator on the local network with the follow url : 10.30.3.18/home/
 
- - --channel can be 1,2,3,4,5,6,7,8 and correspond of available channel.
- - -m is the comment.
- - -c is configuration we will use
- - --temp is the temperature of climatic chamber
 
-For list all available configuration use :
-
-    $ acbbs-config -l

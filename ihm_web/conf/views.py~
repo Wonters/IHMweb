@@ -1,0 +1,146 @@
+from django.shortcuts import render, render_to_response
+from django.http import HttpResponse
+# Create your views here.
+
+
+import argparse
+import sys
+import json
+
+from pprint import pprint 
+from pymongo import MongoClient
+from pymongo.errors import ServerSelectionTimeoutError, DuplicateKeyError
+
+from . import forms
+
+DATABASE_IP = "127.0.0.1"
+DATABASE_PORT = "27017"
+DATABASE_NAME = "acbbs-configuration"
+DATABASE_MAXDELAY = 500
+
+
+def home(request):
+	return render(request,'config/home.html')
+	
+#récupère le nom de la configuration dans la db mongo
+def get_selectConfigDbForm(request):
+	if request.method == 'POST':
+		if 'configname' in request.POST.keys(): 			# si la query à le nom configname 
+			configName = dict(request.POST)['configname']  # valeur du select config.html contient le nom du fichier de configuration de la database mongo
+														   #configName = forms.selectConfigDbForm(request.POST) il serait préférable de passer par un formulaire. sécurité + debug 
+														   #if configName.is_valid():
+															# it's a list 
+	else:
+		print("ERROR POST: select config file failed")
+	return configName 
+
+#affiche le fichier de configuration selectionné acbbs-config -r file
+def read(request):
+	d = database()
+	configName = get_selectConfigDbForm(request)
+	print("config selected : ",configName)
+														#for doc in d.get_collection(configName):
+														#        config = pprint(doc) 
+	for doc in d.get_collection(str(configName[0])):
+		configs = doc
+	scheduler = configs['scheduler']
+	del configs['_id']
+	del configs['scheduler']
+	return render(request,'config/showconfig.html',{'configs':configs,'name':configName[0],'scheduler':scheduler})														
+	#return HttpResponse("Template read à faire avec templates.views. Ce template doit afficher la configuration sectionnée (json dans mongo)",)
+
+#class configurationView(TemplateView)
+
+#écrit un fichier de configuration dans la base de donnée mongo
+def write(request):
+	if request.method == 'POST':
+		configToWrite=dict(request.POST)
+		for key in configToWrite.keys():
+			print(key)
+	else:
+		print("ERROR POST: saved config setup failed")
+	return HttpResponse("template de redirection à définir")
+	
+#def delete(request):
+		
+	
+
+class database(object):
+    def __init__(self):
+        self.__openDataBase()
+
+    def __openDataBase(self):
+        #get server, port and database from json configuration file
+        server = DATABASE_IP
+        port = DATABASE_PORT
+        database = DATABASE_NAME
+        maxSevSelDelay = DATABASE_MAXDELAY
+
+        try:
+            #open MongoDB server
+            self.client = MongoClient(server, int(port), serverSelectionTimeoutMS=maxSevSelDelay)
+
+            #check if connection is well
+            self.client.server_info()
+        except ServerSelectionTimeoutError as err:
+            print("{0}".format(err))
+            exit(0)
+
+        #open MongoDB database
+        self.db = self.client[database]
+
+    def get_available_collection(self):
+        return self.db.list_collection_names()
+
+    def get_collection(self, collection):
+        if collection not in self.get_available_collection():
+            print("Error: conf {0} does not exist. You can list available collection with --list".format(collection))
+            exit(0)
+        return self.db[collection].find({})
+
+    def writeDataBase(self, document, collection):
+        if collection in self.get_available_collection():
+            print("Error: conf {0} exist. You can delete it with --delete {0}".format(collection))
+            exit(0)
+
+        self.db_collection = self.db[collection]
+        try:
+            self.db_collection.insert_one(document).inserted_id
+        except DuplicateKeyError as err:
+            print("{0}".format(err))
+
+    def delete_collection(self, collection):
+        if collection not in self.get_available_collection():
+            print("Error: conf {0} does not exist. You can list available collection with --list".format(collection))
+            exit(0)
+        self.db.drop_collection(collection)
+
+# A SUPPRIMER !!!!!!
+def main(args):
+    d = database()
+
+    if args.list:
+        for col in d.get_available_collection():
+            print(col)
+
+    if args.write:
+        try:
+            with open(args.write) as json_file:
+                json_allConf = json.load(json_file)
+
+        except IOError as err:
+            print("{0}".format(err))
+            exit(0)
+        
+        else:
+            d.writeDataBase(json_allConf, args.write.split(".json")[0])
+
+    if args.delete:
+        d.delete_collection(args.delete)
+
+    if args.read:
+        for doc in d.get_collection(args.read):
+            pprint(doc)
+
+	
+

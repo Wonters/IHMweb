@@ -20,7 +20,7 @@ class SpecAn(object):
     def __init__(self, simulate = False, ip = None):
 
         #init logs
-        self.logger = get_logger(self.__class__.__name__)
+        self.log = get_logger(self.__class__.__name__)
 
         #get configuration
         if ip is None:
@@ -34,7 +34,7 @@ class SpecAn(object):
         self.simulate = simulate
 
         if not simulate:
-            self.logger.info("Init SpecAn")
+            self.log.info("Init SpecAn")
             try :
                 self.inst = Telnet(self.ip, 5025, 1)
                 self._readWrite("SYST:PRES")
@@ -43,7 +43,7 @@ class SpecAn(object):
                 raise AcbbsError("SpecAn Connection error: {0}".format(self.ip), log = self.logger)
 
         else :
-            self.logger.info("Init SpecAn in Simulate")
+            self.log.info("Init SpecAn in Simulate")
             self.inst = self._simulate()
 
         self.reference_var = None
@@ -51,14 +51,14 @@ class SpecAn(object):
 
     @property
     def info(self):
-        self.logger.debug("Get info")
+        self.log.debug("Get info")
         return {
             "version":self.version,
             "error":self.errors
         }
 
     def reset(self):
-        self.logger.debug("Reset")
+        self.log.debug("Reset")
         self._readWrite("SYST:PRES")
 
     @property
@@ -68,7 +68,7 @@ class SpecAn(object):
                 self.version_var = self._readWrite("SYST:VERS?")
             else:
                 self.version_var = "xxxx"
-        self.logger.debug("Get version : {}".format(self.version_var))
+        self.log.debug("Get version : {}".format(self.version_var))
         return self.version_var
 
     @property
@@ -85,7 +85,7 @@ class SpecAn(object):
 
         else:
             value = []
-        self.logger.debug("Get errors : {}".format(value))
+        self.log.debug("Get errors : {}".format(value))
         return value
 
     @property
@@ -94,12 +94,12 @@ class SpecAn(object):
             value = self._readWrite("FREQ:START?")
         else:
             value = 0.0
-        self.logger.debug("Get Freq Start: {}".format(value))
+        self.log.debug("Get Freq Start: {}".format(value))
         return value
 
     @freqStart.setter
     def freqStart(self, value):
-        self.logger.debug("Set Freq Start: {}".format(value))
+        self.log.debug("Set Freq Start: {}".format(value))
         return self._readWrite("FREQ:START", value)
 
     @property
@@ -108,12 +108,12 @@ class SpecAn(object):
             value = self._readWrite("FREQ:CENT?")
         else:
             value =  0.0
-        self.logger.debug("Set Freq Center : {}".format(value))
+        self.log.debug("Set Freq Center : {}".format(value))
         return value
 
     @freqCenter.setter
     def freqCenter(self, value):
-        self.logger.debug("Get Freq Center : {}".format(value))
+        self.log.debug("Get Freq Center : {}".format(value))
         return self._readWrite("FREQ:CENT", value)
 
     @property
@@ -122,12 +122,12 @@ class SpecAn(object):
             value = self._readWrite("FREQ:STOP?")
         else:
             value = 0.0
-        self.logger.debug("Get Freq Stop : {}".format(value))
+        self.log.debug("Get Freq Stop : {}".format(value))
         return value
 
     @freqStop.setter
     def freqStop(self, value):
-        self.logger.debug("Set Freq Stop : {}".format(value))
+        self.log.debug("Set Freq Stop : {}".format(value))
         return self._readWrite("FREQ:STOP", value)
 
     @property
@@ -136,12 +136,12 @@ class SpecAn(object):
             value = self._readWrite("FREQ:SPAN?")
         else:
             value = 0.0
-        self.logger.debug("Get Freq Span : {}".format(value))
+        self.log.debug("Get Freq Span : {}".format(value))
         return value
 
     @freqSpan.setter
     def freqSpan(self, value):
-        self.logger.debug("Set Freq Span : {}".format(value))
+        self.log.debug("Set Freq Span : {}".format(value))
         return self._readWrite("FREQ:SPAN", value)
 
     def freqTrack(self, status, center = None):
@@ -155,12 +155,12 @@ class SpecAn(object):
             value = self._readWrite("DISP:TRAC1:Y:RLEVel?")
         else:
             value = 0.0
-        self.logger.debug("Get Ref Lvl : {}".format(value))
+        self.log.debug("Get Ref Lvl : {}".format(value))
         return value
 
     @refLvl.setter
     def refLvl(self, value):
-        self.logger.debug("Set Ref Lvl : {}".format(value))
+        self.log.debug("Set Ref Lvl : {}".format(value))
         return self._readWrite("DISP:TRAC1:Y:RLEVel", value)
 
     @property
@@ -169,12 +169,12 @@ class SpecAn(object):
             value = self._readWrite("DISP:TRAC1:Y:RLEV:OFFS?")
         else:
             value = 0.0
-        self.logger.debug("Get Ref Lvl Offset : {}".format(value))
+        self.log.debug("Get Ref Lvl Offset : {}".format(value))
         return value
 
     @refLvlOffset.setter
     def refLvlOffset(self, value):
-        self.logger.debug("Set Ref Lvl Offset : {}".format(value))
+        self.log.debug("Set Ref Lvl Offset : {}".format(value))
         return self._readWrite("DISP:TRAC1:Y:RLEV:OFFS", value)
 
     @property
@@ -183,12 +183,12 @@ class SpecAn(object):
             value = self._readWrite("INP:ATT?")
         else:
             value = 0.0
-        self.logger.debug("Get Input Atten: {}".format(value))
+        self.log.debug("Get Input Atten: {}".format(value))
         return value
 
     @inputAtten.setter
     def inputAtten(self, value):
-        self.logger.debug("Set Input Atten : {}".format(value))
+        self.log.debug("Set Input Atten : {}".format(value))
         return self._readWrite("INP:ATT", value)
 
     @property
@@ -197,12 +197,12 @@ class SpecAn(object):
             value = self._readWrite("SENS:BWID:RES?")
         else:
             value = 0.0
-        self.logger.debug("Get RBW : {}".format(value))
+        self.log.debug("Get RBW : {}".format(value))
         return value
 
     @rbw.setter
     def rbw(self, value):
-        self.logger.debug("Set RBW : {}".format(value))
+        self.log.debug("Set RBW : {}".format(value))
         return self._readWrite("SENS:BWID:RES", value)
 
     @property
@@ -211,12 +211,12 @@ class SpecAn(object):
             value = self._readWrite("SENS:BWID:VID?")
         else:
             value = 0.0
-        self.logger.debug("Get VBW : {}".format(value))
+        self.log.debug("Get VBW : {}".format(value))
         return value
 
     @vbw.setter
     def vbw(self, value):
-        self.logger.debug("Set VBW : {}".format(value))
+        self.log.debug("Set VBW : {}".format(value))
         return self._readWrite("SENS:BWID:VID", value)
 
     @property
@@ -225,35 +225,35 @@ class SpecAn(object):
             value = self._readWrite("SENS:SWE:TIME?")
         else:
             value = 0.0
-        self.logger.debug("Get Sweep : {}".format(value))
+        self.log.debug("Get Sweep : {}".format(value))
         return value
 
     @sweep.setter
     def sweep(self, value):
-        self.logger.debug("Set Sweep : {}".format(value))
+        self.log.debug("Set Sweep : {}".format(value))
         return self._readWrite("SENS:SWE:TIME", value)
 
     def refreshDisplay(self):
-        self.logger.debug("Refresh Display")
+        self.log.debug("Refresh Display")
         self._readWrite("INIT:CONT OFF")
         self._readWrite("DISP:TRAC:MODE WRIT")
         self._readWrite("INIT:CONT ON")
 
     def averageCount(self, value):
-        self.logger.debug("Average Count")
+        self.log.debug("Average Count")
         self._readWrite("DISP:TRAC:MODE AVER")
         self._readWrite("INIT:CONT OFF")
         self._readWrite("AVER:COUN", value)
         self.runSingle()
 
     def maxHoldCount(self, value):
-        self.logger.debug("Max Hold Count")
+        self.log.debug("Max Hold Count")
         self._readWrite("INIT:CONT OFF")
         self._readWrite("SWE:COUN", value)
         self._readWrite("DISP:TRAC:MODE MAXH")
 
     def runSingle(self):
-        self.logger.debug("Run Single")
+        self.log.debug("Run Single")
         self._readWrite("INIT;*WAI")
 
     def markerPeakSearch(self, marker = 1):
@@ -262,7 +262,7 @@ class SpecAn(object):
         else:
             self._readWrite("CALC:MARK{0}:MAX".format(marker))
             value = [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
-        self.logger.debug("Get Marker peak at marker {} : {}".format(marker, value))
+        self.log.debug("Get Marker peak at marker {} : {}".format(marker, value))
         return value
 
     def markerSearch(self, marker = 1, dir = None):
@@ -276,11 +276,11 @@ class SpecAn(object):
             if dir == 'n':
                 self._readWrite("CALC:MARK{0}:MAX:NEXT".format(marker))
             value = [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
-        self.logger.debug("Get Marker Search at marker {}, dir {} : {}".format(marker, dir, value))
+        self.log.debug("Get Marker Search at marker {}, dir {} : {}".format(marker, dir, value))
         return value
 
     def markerSet(self, marker = 1, freq = None, status = 1):
-        self.logger.debug("Set Marker {} at {}Hz. (Status = {})".format(marker, freq, status))
+        self.log.debug("Set Marker {} at {}Hz. (Status = {})".format(marker, freq, status))
         if freq is not None:
             self._readWrite("CALC:MARK{0}:X".format(marker), freq)
         self._readWrite("CALC:MARK{0}".format(marker), status)
@@ -290,7 +290,7 @@ class SpecAn(object):
             value = [0.0, 0.0]
         else:
             value = [float(self._readWrite("CALC:MARK{0}:X?".format(marker))), float(self._readWrite("CALC:MARK{0}:Y?".format(marker)))]
-        self.logger.debug("Get Marker {} : {}".format(marker, value))
+        self.log.debug("Get Marker {} : {}".format(marker, value))
         return value
 
     def markerSetFreqAccuracy(self, status, marker = 1):
@@ -302,11 +302,11 @@ class SpecAn(object):
         else:
             self._readWrite("CALC:MARK{0}:COUN ON".format(marker))
             value = float(self._readWrite("CALC:MARK{0}:COUN:FREQ?".format(marker)))
-        self.logger.debug("Get Marker Frequency {} : {}".format(marker, value))
+        self.log.debug("Get Marker Frequency {} : {}".format(marker, value))
         return value
 
     def markerSearchLimit(self, marker = 1, freqleft = None, freqright = None, status = 1):
-        self.logger.debug("Set limit at marker {} : freqleft = {}, freqright = {}. (status = {})".format(marker, freqleft, freqright, status))
+        self.log.debug("Set limit at marker {} : freqleft = {}, freqright = {}. (status = {})".format(marker, freqleft, freqright, status))
         if not self.simulate:
             self._readWrite("CALC:MARK{0}:X:SLIM".format(marker), status)
             if freqleft is not None and freqright is not None:
@@ -323,7 +323,7 @@ class SpecAn(object):
                 self._readWrite("CALC:DELT{0}:X".format(marker), delta)
 
             value = float(self._readWrite("CALC:DELT{0}:Y?".format(marker)))
-        self.logger.debug("Get Marker Delta at marker {}, mode {}, delta {} : {}".format(marker, mode, delta, value))
+        self.log.debug("Get Marker Delta at marker {}, mode {}, delta {} : {}".format(marker, mode, delta, value))
 
     def display(self, mode = None):
         """
@@ -345,7 +345,7 @@ class SpecAn(object):
         pass
 
     def limitLineHSet(self, line = 1, power = None, status = None):
-        self.logger.debug("Set horizontal limit line {} at {}dBm. (status = {})".format(line, power, status))
+        self.log.debug("Set horizontal limit line {} at {}dBm. (status = {})".format(line, power, status))
         if status is not None:
             self._readWrite("CALC:DLIN{0}:STAT".format(line), status)
         else:
@@ -353,7 +353,7 @@ class SpecAn(object):
             self._readWrite("CALC:DLIN{0}".format(line), power)
 
     def limitLineVSet(self, line = 1, freq = None, status = None):
-        self.logger.debug("Set vertical limit line {} at {}Hz. (status = {})".format(line, freq, status))
+        self.log.debug("Set vertical limit line {} at {}Hz. (status = {})".format(line, freq, status))
         if status is not None:
             self._readWrite("CALC:FLIN{0}:STAT".format(line), status)
         else:
@@ -361,7 +361,7 @@ class SpecAn(object):
             self._readWrite("CALC:FLIN{0}".format(line), freq)
 
     def limitSet(self, limit = 1, freq = None, power = None, margin = 0):
-        self.logger.debug("Set limit at {}dBm, {}Hz, margin : {}".format(power, freq, margin))
+        self.log.debug("Set limit at {}dBm, {}Hz, margin : {}".format(power, freq, margin))
         if len(freq) != len(power):
             raise AcbbsError("freq and power not same size", log = self.logger)
 
@@ -384,12 +384,12 @@ class SpecAn(object):
         self._readWrite("CALC:LIM{0}:STAT ON".format(limit))
 
     def limitState(self, limit = 1, status = None):
-        self.logger.debug("Set limit state. (status = {})".format(status))
+        self.log.debug("Set limit state. (status = {})".format(status))
         self._readWrite("CALC:LIM{0}:STAT".format(limit), status)
 
     def limitCheck(self, limit = 1):
         value = self._readWrite("CALC:LIM{0}:FAIL?".format(limit))
-        self.logger.debug("Get limit {} check : {}".format(limit, value))
+        self.log.debug("Get limit {} check : {}".format(limit, value))
         return value
 
     def _wait(self):
@@ -397,11 +397,11 @@ class SpecAn(object):
         return
 
     def _readWrite(self, cmd = None, value = None):
-        self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
+        self.log.debug("Write command : {0} with value : {1}".format(cmd, value))
         if "?" in cmd:
             self.inst.write(("%s\n" % cmd).encode('ascii'))
             out = (self.inst.read_until(("\n").encode('ascii'), timeout=TIMEOUT)).decode("utf-8")[:-1]
-            self.logger.debug("out : {0}".format(out))
+            self.log.debug("out : {0}".format(out))
             try:
                 return float(out)
             except:

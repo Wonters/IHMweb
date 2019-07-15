@@ -29,14 +29,14 @@ class txPowVsFreq(baseTestCase):
 
         #calcul iterations number
         self.iterationsNumber = len(self.channel) * len(self.tcConf["voltage"]) * len_freq * len(self.tcConf["att"]) * len(self.tcConf["dFreq"])
-        self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
+        self.log.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
         #update status
         self.status = st().RUNNING
 
         #start loop
-        self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
+        self.log.info("Start loop of \"{0}\"".format(self.__class__.__name__))
         for chan in self.channel:
             if self.status is st().ABORTING:
                 break
@@ -82,8 +82,8 @@ class txPowVsFreq(baseTestCase):
 
                                 #update progress
                                 self.iteration += 1
-                                self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
-                                self.logger.info("input parameters : {0}C, chan {1}, {2}V, {3}Hz(DUT), atten {4}".format(self.temp, chan, vdd, freq_tx, att))
+                                self.log.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
+                                self.log.info("input parameters : {0}C, chan {1}, {2}V, {3}Hz(DUT), atten {4}".format(self.temp, chan, vdd, freq_tx, att))
 
                                 #configure DUT
                                 self.dut.playBBSine(freqBBHz = dfreq, atten = att)
@@ -123,7 +123,7 @@ class txPowVsFreq(baseTestCase):
         self.status = st().INIT
 
         #ate drivers init
-        self.logger.debug("Init ate")
+        self.log.debug("Init ate")
         self.DCPwr = DCPwr(simulate=self.simulate)
         self.SpecAn = SpecAn(simulate=self.simulate)
         self.Swtch = Swtch(simulate=self.simulate)

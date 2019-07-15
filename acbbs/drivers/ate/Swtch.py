@@ -44,7 +44,7 @@ class Swtch(object):
 
     def __init__(self, simulate = False):
         #init logs
-        self.logger = get_logger(self.__class__.__name__)
+        self.log = get_logger(self.__class__.__name__)
 
         #get configuration
         self.conf = configurationFile(file = self.__class__.__name__)
@@ -62,7 +62,7 @@ class Swtch(object):
             self.sw4 = 1
 
     def __connect(self):
-        self.logger.debug("Connect")
+        self.log.debug("Connect")
         if not self.simulate:
             self.tn = Telnet(self.swtchConf["ip"], 23, 2)
             self.tn.write(('enable \r\n').encode('ascii'))
@@ -76,13 +76,13 @@ class Swtch(object):
             self.tn = self._simulate()
 
     def __disconnect(self):
-        self.logger.debug("Disconnect")
+        self.log.debug("Disconnect")
         self.tn.write((chr(12)).encode('ascii'))
         self.tn.read_until(("#").encode('ascii'), 1)
         self.tn.close()
 
     def setSwitch(self, sw1 = None, sw2 = None, sw3 = None, sw4 = None):
-        self.logger.debug("Set switch : {}, {}, {}, {}".format(sw1, sw2, sw3, sw4))
+        self.log.debug("Set switch : {}, {}, {}, {}".format(sw1, sw2, sw3, sw4))
         if sw1 is not None:
             self.channel = sw1
         if not self.simulate:
@@ -138,5 +138,5 @@ class Swtch(object):
         else:
             raise commutRackException()
         
-        self.logger.debug("Get offset : {}".format(value))
+        self.log.debug("Get offset : {}".format(value))
         return value

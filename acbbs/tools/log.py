@@ -46,6 +46,7 @@ class log(logging.Logger):
         if "ch" in kwargs:
             channel = kwargs['ch']
             del kwargs['ch']
+
         kwargs['extra'] = {'channel': str(channel)}
         logging.Logger.error(self, msg, *args, **kwargs)
 
@@ -65,10 +66,11 @@ def get_logger(name, log_path = "/var/log/acbbs/"):
                                   'format': '%(levelname)s %(message)s'
                                   },
                        'customFormat': {
-                                        '()' : 'colorlog.ColoredFormatter',
-                                        'format':  '%(asctime)s [%(levelname)s] %(name)s %(channel)s : %(message_log_color)s%(message)s',
+                                        '()': 'colorlog.ColoredFormatter',
+                                        'format':  '%(asctime)s [%(levelname)s] %(name)s : %('
+                                                   'message_log_color)s%(message)s',
                                         'datefmt': '%a %d %H:%M:%S',
-                                        'secondary_log_colors' : {
+                                        'secondary_log_colors': {
                                                                   'message': {
                                                                               'INFO':    'green',
                                                                               'DEBUG':    'blue',

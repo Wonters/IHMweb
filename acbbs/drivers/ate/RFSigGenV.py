@@ -6,7 +6,7 @@ from telnetlib import Telnet
 
 TIMEOUT = 5
 
-class RFSigGen(object):
+class RFSigGenV(object):
     class _simulate(object):
         def __init__(self):
             return

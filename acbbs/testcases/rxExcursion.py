@@ -35,14 +35,14 @@ class rxExcursion(baseTestCase):
 
         #calcul iterations number
         self.iterationsNumber = len(self.channel) * len(self.tcConf["voltage"]) * len(self.tcConf["power"]) * len(self.tcConf["freq_rx"]) * len(self.tcConf["bbFreq"]) * len(self.tcConf["backoff"])
-        self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
+        self.log.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
         #update status
         self.status = st().RUNNING
 
         #start loop
-        self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
+        self.log.info("Start loop of \"{0}\"".format(self.__class__.__name__))
         for chan in self.channel:
             if self.status is st().ABORTING:
                 break
@@ -91,8 +91,8 @@ class rxExcursion(baseTestCase):
 
                                 #update progress
                                 self.iteration += 1
-                                self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
-                                self.logger.info("input parameters : {0}C, chan {1}, {2}V, {3}dBm, {4}Hz(Gen), {5}Hz(BBHz), {6}".format(self.temp, chan, vdd, power, freq_rx, dfreq, backoff))
+                                self.log.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
+                                self.log.info("input parameters : {0}C, chan {1}, {2}V, {3}dBm, {4}Hz(Gen), {5}Hz(BBHz), {6}".format(self.temp, chan, vdd, power, freq_rx, dfreq, backoff))
 
                                 #configure ATE
                                 self.dut.preamp0 = backoff[1]
@@ -136,7 +136,7 @@ class rxExcursion(baseTestCase):
         self.status = st().INIT
 
         #ate drivers init
-        self.logger.info("Init ate")
+        self.log.info("Init ate")
         self.DCPwr = DCPwr(simulate=self.simulate)
         self.RFSigGen = RFSigGen(simulate=self.simulate)
         self.Swtch = Swtch(simulate=self.simulate)

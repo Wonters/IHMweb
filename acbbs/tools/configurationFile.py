@@ -12,7 +12,7 @@ from pymongo.errors import ServerSelectionTimeoutError, DuplicateKeyError
 class dataBaseConfiguration(object):
     def __init__(self, ip, port, name, maxDelay):
         #init logs
-        self.logger = get_logger(self.__class__.__name__)
+        self.log = get_logger(self.__class__.__name__)
 
         self.databaseIP = ip
         self.databasePort = port
@@ -27,7 +27,7 @@ class dataBaseConfiguration(object):
         port = self.databasePort
         database = self.databaseName
         maxSevSelDelay = self.max_delay
-        self.logger.debug("Open MongoDB database \"{0}\" at : {1}:{2}".format(database, server, port))
+        self.log.debug("Open MongoDB database \"{0}\" at : {1}:{2}".format(database, server, port))
 
         try:
             #open MongoDB server
@@ -36,7 +36,7 @@ class dataBaseConfiguration(object):
             #check if connection is well
             self.client.server_info()
         except ServerSelectionTimeoutError as err:
-            self.logger.error(err)
+            self.log.error(err)
             exit(0)
 
         #open MongoDB database
@@ -46,9 +46,9 @@ class dataBaseConfiguration(object):
         return self.db.list_collection_names()
 
     def get_collection(self, collection):
-        self.logger.debug("Open collection {0}".format(collection))
+        self.log.debug("Open collection {0}".format(collection))
         if collection not in self.get_available_collection():
-            self.logger.error("conf {0} does not exist.".format(collection))
+            self.log.error("conf {0} does not exist.".format(collection))
             exit(0)
         else:
             return self.db[collection].find({})
@@ -56,11 +56,11 @@ class dataBaseConfiguration(object):
 class configurationFile(object):
     dutGlobal = None
     def __init__(self, file = None, simulate = False, taphw = None):
-        self.logger = get_logger(splitext(basename(__file__))[0])
+        self.log = get_logger(splitext(basename(__file__))[0])
         if simulate :
-            self.logger.debug("Init configurationFile in Simulate")
+            self.log.debug("Init configurationFile in Simulate")
         else :
-            self.logger.debug("Init configurationFile")
+            self.log.debug("Init configurationFile")
         if taphw is not None:
             configurationFile.dutGlobal = taphw
 
@@ -71,7 +71,7 @@ class configurationFile(object):
         self.__openDUTConfigurationFile()
 
     def getVersion(self):
-        self.logger.debug("Get Version")
+        self.log.debug("Get Version")
         return self.json_allConf["global"]["version"]
 
     def getConfKeys(self):
@@ -87,14 +87,14 @@ class configurationFile(object):
     def getConfiguration(self, file=None):
         if file is None:
             file = self.file
-        self.logger.debug("Get configuration for \"{0}\"".format(file))
+        self.log.debug("Get configuration for \"{0}\"".format(file))
         try :            
             return self.json_allConf[file]
         except:
             raise AcbbsError("Errors: Configuration {0} not present".format(file))   
 
     def getFrequencies(self, radioConfiguration):
-        self.logger.debug("Get frequencies for \"{0}\"".format(self.file))
+        self.log.debug("Get frequencies for \"{0}\"".format(self.file))
         try:
             freq_list_tx = []
             freq_list_rx = []
@@ -118,7 +118,7 @@ class configurationFile(object):
             raise AcbbsError("Errors: Frequencies {0} not present".format(self.file))  
 
     def getFilters(self, radioConfiguration):
-        self.logger.debug("Get filters for \"{0}\"".format(self.file))
+        self.log.debug("Get filters for \"{0}\"".format(self.file))
         try:
             filter_list_tx = []
             filter_list_rx = []

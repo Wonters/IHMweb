@@ -69,21 +69,21 @@ class Dut(object):
         Constructor
         '''
         #init logs
-        self.logger = get_logger(self.__class__.__name__)
+        self.log = get_logger(self.__class__.__name__)
 
         if ip is None and chan is None:
-            raise AcbbsError("Ip or Channel mandatory", log=self.logger)
+            raise AcbbsError("Ip or Channel mandatory", log=self.log)
 
         #simulation state
         self.simulate = simulate
 
         #case of simulate
         if simulate :
-            self.logger.info("Init dut in Simulate")
+            self.log.info("Init dut in Simulate")
             self.session = self._simulate()
 
         else :
-            self.logger.info("Init dut")
+            self.log.info("Init dut")
             self.session = requests.Session()
         
         if chan is not None:
@@ -93,7 +93,7 @@ class Dut(object):
             self.channel = ip
             self.address = "http://%s/factory" % ip
         
-        self.logger.info("New RadioDevice %s" % (self.address), ch=self.channel)
+        self.log.info("New RadioDevice %s" % (self.address), ch=self.channel)
 
         self.tapId_var = None
         self.tapHw_var = None
@@ -103,16 +103,16 @@ class Dut(object):
         self.tpmHw_var = None
         self.tpmVendor_var = None
 
-        self.logger.info("Check dut-ip : {0}".format(chan), ch = chan)
+        self.log.info("Check dut-ip : {0}".format(chan), ch = chan)
         if self.connected:
-            self.logger.info("DUT at {0} well connected".format(chan), ch = chan)
+            self.log.info("DUT at {0} well connected".format(chan), ch = chan)
         else:
-            raise AcbbsError("Connection Errors", ch=self.channel, log=self.logger)
+            raise AcbbsError("Connection Errors", ch=self.channel, log=self.log)
         if self.tapHw == "TAPMV4.0":
             self.preamp1 = "LNA"
 
     def __del__(self):
-        self.logger.info("dut off")
+        self.log.info("dut off")
         self.stopBBSine()
         self.stopBBNoise()
         self.mode = "RX"
@@ -120,14 +120,14 @@ class Dut(object):
     def _launchCmd(self, uri, get = True, payloadJson = None, payloadData = None, stream = False, callback = None):
         if get:
             resp = self.session.get(uri, auth=('factory', 'factory'), stream=stream, timeout=TIMEOUT)
-            self.logger.debug("GET %s %s" % (uri , resp.status_code), ch=self.channel)
+            self.log.debug("GET %s %s" % (uri , resp.status_code), ch=self.channel)
             if stream :
                 if "signal/record" not in uri:
                     raise AcbbsError("Stream is compatible only with signal/record request",
-                                      ch=self.channel, log=self.logger)
+                                      ch=self.channel, log=self.log)
                 if callback is None:
                     raise AcbbsError("Stream activate but there is no callback",
-                                     ch=self.channel, log=self.logger)
+                                     ch=self.channel, log=self.log)
                 nbChunk = 0
                 ret = 0
                 stoped = 0
@@ -142,10 +142,10 @@ class Dut(object):
             if resp.status_code not in [200, 204, 201]:
                 if resp.status_code == 500:
                     raise AcbbsError("Bad status code %u for GET on %s dump %s" %
-                                     (resp.status_code, uri, self._dumpErrors()), ch=self.channel, log=self.logger)
+                                     (resp.status_code, uri, self._dumpErrors()), ch=self.channel, log=self.log)
                 else:
                     raise AcbbsError("Bad status code %u for GET on %s" % (resp.status_code, uri),
-                                     ch=self.channel, log=self.logger)
+                                     ch=self.channel, log=self.log)
             if resp.status_code == 200:
                 return resp.json()
             if resp.status_code == 204:
@@ -158,7 +158,7 @@ class Dut(object):
                 resp = self.session.post(uri, data=payloadData, headers={'Content-Type': 'application/octet-stream'}, timeout=TIMEOUT, auth=('factory', 'factory'))
             else:
                 resp = self.session.post(uri, timeout=TIMEOUT, auth=('factory', 'factory'))
-            self.logger.debug("POST %s %s" % (uri , resp.status_code), ch=self.channel)
+            self.log.debug("POST %s %s" % (uri , resp.status_code), ch=self.channel)
             if resp.status_code not in [200, 204]:
                 if resp.status_code == 500:
                     raise AcbbsError("Bad status code %u for POST on %s dump %s" %
@@ -300,7 +300,7 @@ class Dut(object):
 
     @freqTx.setter
     def freqTx(self, value):
-        self.logger.info("Change tx to %s" % str(value), ch = self.channel)
+        self.log.info("Change tx to %s" % str(value), ch = self.channel)
         self._launchPostJson("%s/radio/freq/tx" % self.address, {"tx":value})
 
     @property
@@ -309,7 +309,7 @@ class Dut(object):
 
     @freqRx.setter
     def freqRx(self, value):
-        self.logger.info("Change rx to %s" % str(value), ch = self.channel)
+        self.log.info("Change rx to %s" % str(value), ch = self.channel)
         self._launchPostJson("%s/radio/freq/rx" % self.address, {"rx":value})
 
     @property
@@ -318,7 +318,7 @@ class Dut(object):
 
     @filterTx.setter
     def filterTx(self, value):
-        self.logger.info("Change tx to %s" % str(value), ch = self.channel)
+        self.log.info("Change tx to %s" % str(value), ch = self.channel)
         if self.tapHw == "TAPMV4.0":
             self._launchPostJson("%s/radio/filter?mode=tx&filter=%s" % (self.address, str(value)))
 
@@ -328,7 +328,7 @@ class Dut(object):
 
     @filterRx.setter
     def filterRx(self, value):
-        self.logger.info("Change rx to %s" % str(value), ch = self.channel)
+        self.log.info("Change rx to %s" % str(value), ch = self.channel)
         if self.tapHw == "TAPMV4.0":
             self._launchPostJson("%s/radio/filter?mode=rx&filter=%s" % (self.address, str(value)))
 
@@ -338,7 +338,7 @@ class Dut(object):
 
     @mode.setter
     def mode(self, value):
-        self.logger.info("Change mode to %s" % value, ch = self.channel )
+        self.log.info("Change mode to %s" % value, ch = self.channel )
         self._launchPostJson("%s/radio/mode" % self.address, {'mode':value})
 
     @property
@@ -351,7 +351,7 @@ class Dut(object):
     @preamp0.setter
     def preamp0(self, value):
         if self.tapHw != "TAPMV4.0":
-            self.logger.info("Change preamp0 to %s" % value, ch = self.channel )
+            self.log.info("Change preamp0 to %s" % value, ch = self.channel )
             self._launchPostJson("%s/radio/preamp?id=0" % (self.address), {'preamp':value})
 
     @property
@@ -363,7 +363,7 @@ class Dut(object):
 
     @preamp1.setter
     def preamp1(self, value):
-        self.logger.info("Change preamp1 to %s" % value, ch = self.channel )
+        self.log.info("Change preamp1 to %s" % value, ch = self.channel )
         self._launchPostJson("%s/radio/preamp?id=1" % (self.address), {'preamp':value})
         if self.tapHw == "TAPMV4.0":
             self.preamp1_var = value
@@ -378,7 +378,7 @@ class Dut(object):
     @preamp2.setter
     def preamp2(self, value):
         if self.tapHw != "TAPMV4.0":
-            self.logger.info("Change preamp2 to %s" % value, ch = self.channel )
+            self.log.info("Change preamp2 to %s" % value, ch = self.channel )
             self._launchPostJson("%s/radio/preamp?id=2" % (self.address), {'preamp':value})
 
     def nxpRegister(self, group = 0, index = 0, value=None):
@@ -387,7 +387,7 @@ class Dut(object):
         if value is None:
             return self._launchGetJson("%s/radio/nxp?group=%s&command=%s" % (self.address, group, index))['value']
         else:
-            self.logger.info("Set Register %s to %s" % (group, index), ch = self.channel)
+            self.log.info("Set Register %s to %s" % (group, index), ch = self.channel)
             self._launchPostJson("%s/radio/nxp?group=%s&command=%s&value=%s" % (self.address, group, index, value))
 
     def playBBSine(self, freqBBHz = 20000, timeSec = 1, atten = 10, dB = 0):
@@ -490,14 +490,14 @@ class Dut(object):
             status = False
             while status is False:
                 try:
-                    self.logger.debug("Get irrSin at freqBBHz = {0}".format(freqBBHz))
+                    self.log.debug("Get irrSin at freqBBHz = {0}".format(freqBBHz))
                     resp = self.session.get("%s/signal/record" % (self.address), auth=('factory', 'factory'), stream=True, timeout=3)
                     if resp.status_code not in [200, 204]:
                         if resp.status_code == 500:
                             raise AcbbsError("Errors To record signal Dump %s" % self.dumpErrors(),
-                                              ch=self.channel, log=self.logger)
+                                              ch=self.channel, log=self.log)
                         else:
-                            raise AcbbsError("Errors To record signal", ch=self.channel, log=self.logger)
+                            raise AcbbsError("Errors To record signal", ch=self.channel, log=self.log)
                     p = subprocess.Popen("%s/toolIQ -f %s --int-gain 0 --ext-gain 0" % (os.path.dirname(os.path.abspath(__file__)), freqBBHz), stdout=subprocess.PIPE, stdin=subprocess.PIPE, shell=True)
                     pout = p.stdout
                     acquire = True
@@ -511,24 +511,24 @@ class Dut(object):
                                     acquire = False
                     except:
                         self.stopBBSine()
-                        raise AcbbsError("No Chunk receive", ch=self.channel, log=self.logger)
+                        raise AcbbsError("No Chunk receive", ch=self.channel, log=self.log)
                     result = pout.readlines()[2].decode("utf-8").split(" ")
                     irr = {'dGain': float(result[7]), 'dPhase': float(result[9]), 'irr': float(result[11]), 'rssi': float(result[17])}
                     freq = float(result[14])
                     if ((freq > (int(freqBBHz) + 2000)) or (freq < (int(freqBBHz) - 2000))):
                         raise AcbbsError("ToolIQ bad freqBBHz freq read: %s expected: %s" % (freq, int(freqBBHz)),
-                                         ch=self.channel, log=self.logger)
+                                         ch=self.channel, log=self.log)
                     else:
-                        self.logger.debug("return = {0}".format(irr))
+                        self.log.debug("return = {0}".format(irr))
                         return irr
                 except:
                     if nbOfRetry >= maxRetry:
-                        self.logger.error("Bad BB frequency irrSin: 4 tries to receive the correct frequency", ch ="%s" % self.channel)
+                        self.log.error("Bad BB frequency irrSin: 4 tries to receive the correct frequency", ch ="%s" % self.channel)
                         return {'dGain': "NA", 'dPhase': "NA", 'irr': "NA", 'rssi': "NA"}
                     else:
                         if nbOfRetry == maxRetry -1 :
                             time.sleep(5)
-                            self.logger.debug("nbOfRetry rssiSin: %s" %nbOfRetry , ch ="%s" % self.channel)
+                            self.log.debug("nbOfRetry rssiSin: %s" %nbOfRetry , ch ="%s" % self.channel)
                         nbOfRetry = nbOfRetry + 1
                 else:
                     status = True

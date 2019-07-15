@@ -20,7 +20,7 @@ class PwrMeter(object):
     def __init__(self, simulate = False):
 
         #init logs
-        self.logger = get_logger(self.__class__.__name__)
+        self.log = get_logger(self.__class__.__name__)
 
         #get configuration
         self.conf = configurationFile(file = self.__class__.__name__)
@@ -30,35 +30,35 @@ class PwrMeter(object):
         self.simulate = simulate
 
         if not simulate:
-            self.logger.info("Init PwrMeter")
+            self.log.info("Init PwrMeter")
             try :
                 self.inst = Telnet(self.PwrMeterConf["ip"], 5025, 1)
                 self._readWrite("SENS:PMET:STAT 1")
                 self._readWrite("SENS:PMET:ROFF 0")
                 self._readWrite("SENS:PMET:MTIM:AVER", self.PwrMeterConf["avrCount"])
             except :
-                raise AcbbsError("PwrMeter Connection error: {0}".format(self.PwrMeterConf["ip"]), log = self.logger)
+                raise AcbbsError("PwrMeter Connection error: {0}".format(self.PwrMeterConf["ip"]), log = self.log)
         else :
-            self.logger.info("Init PwrMeter in Simulate")
+            self.log.info("Init PwrMeter in Simulate")
             self.inst = self._simulate()
 
         self.reference_var = None
         self.version_var = None
 
     def __del__(self):
-        self.logger.info("PwrMeter off")
+        self.log.info("PwrMeter off")
         self._readWrite("SENS:PMET:STAT 0")
 
     @property
     def info(self):
-        self.logger.debug("Get info")
+        self.log.debug("Get info")
         return {
             "version":self.version,
             "error":self.errors
         }
 
     def reset(self):
-        self.logger.debug("Reset")
+        self.log.debug("Reset")
         self._readWrite("SYST:PRES")
 
     @property
@@ -68,7 +68,7 @@ class PwrMeter(object):
                 self.version_var = self._readWrite("SYST:VERS?")
             else:
                 self.version_var = 0.0
-        self.logger.debug("Get version : {}".format(self.version_var))
+        self.log.debug("Get version : {}".format(self.version_var))
         return self.version_var
 
     @property
@@ -80,7 +80,7 @@ class PwrMeter(object):
                 err = self._readWrite("SYST:ERR?")
                 if "No error" not in err:
                     errList.append(err)
-                    raise AcbbsError("read error %s" % err, log = self.logger)
+                    raise AcbbsError("read error %s" % err, log = self.log)
             return errList
 
         else:
@@ -92,7 +92,7 @@ class PwrMeter(object):
             value = self._readWrite("SENS:PMET:STAT?")
         else:
             value = 0.0
-        self.logger.debug("Get status : {}".format(value))
+        self.log.debug("Get status : {}".format(value))
         return value
 
     @property
@@ -101,12 +101,12 @@ class PwrMeter(object):
             value = self._readWrite("SENS:PMET:FREQ?")
         else:
             value = 0.0
-        self.logger.debug("Get freq : {}".format(value))
+        self.log.debug("Get freq : {}".format(value))
         return value
 
     @freq.setter
     def freq(self, value):
-        self.logger.debug("Set freq : {}".format(value))
+        self.log.debug("Set freq : {}".format(value))
         self._readWrite("SENS:PMET:FREQ", value)
 
     @property
@@ -115,7 +115,7 @@ class PwrMeter(object):
             value = 0.0
         else:
             value = (self._readWrite("READ:PMET?"))
-        self.logger.debug("Get power : {}".format(value))
+        self.log.debug("Get power : {}".format(value))
         return value
 
     def _wait(self):
@@ -123,11 +123,11 @@ class PwrMeter(object):
         return
 
     def _readWrite(self, cmd = None, value = None):
-        self.logger.debug("Write command : {0} with value : {1}".format(cmd, value))
+        self.log.debug("Write command : {0} with value : {1}".format(cmd, value))
         if "?" in cmd:
             self.inst.write(("%s\n" % cmd).encode('ascii'))
             out = (self.inst.read_until(("\n").encode('ascii'), timeout=TIMEOUT)).decode("utf-8")[:-1]
-            self.logger.debug("out : {0}".format(out))
+            self.log.debug("out : {0}".format(out))
             try:
                 return float(out)
             except:

@@ -33,14 +33,14 @@ class txOLFrequency(baseTestCase):
 
         #calcul iterations number
         self.iterationsNumber = len(self.channel) * len(self.tcConf["voltage"]) * len(self.tcConf["freq_tx"])
-        self.logger.info("Number of iteration : {0}".format(self.iterationsNumber))
+        self.log.info("Number of iteration : {0}".format(self.iterationsNumber))
 
     def run(self):
         #update status
         self.status = st().RUNNING
 
         #start loop
-        self.logger.info("Start loop of \"{0}\"".format(self.__class__.__name__))
+        self.log.info("Start loop of \"{0}\"".format(self.__class__.__name__))
         for chan in self.channel:
             if self.status is st().ABORTING:
                 break
@@ -71,8 +71,8 @@ class txOLFrequency(baseTestCase):
 
                     #update progress
                     self.iteration += 1
-                    self.logger.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
-                    self.logger.info("input parameters : {}C, chan {}, {}V, {}Hz(DUT)".format(self.temp, chan, vdd, freq_tx))
+                    self.log.info("iteration : {0}/{1}".format(self.iteration, self.iterationsNumber))
+                    self.log.info("input parameters : {}C, chan {}, {}V, {}Hz(DUT)".format(self.temp, chan, vdd, freq_tx))
 
                     #configure DUT
                     self.dut.playBBSine(freqBBHz = 10000, atten = 28, dB = -80)
@@ -116,7 +116,7 @@ class txOLFrequency(baseTestCase):
         self.status = st().INIT
 
         #ate drivers init
-        self.logger.debug("Init ate")
+        self.log.debug("Init ate")
         self.DCPwr = DCPwr(simulate=self.simulate)
         self.SpecAn = SpecAn(simulate=self.simulate)
         self.Swtch = Swtch(simulate=self.simulate)

@@ -32,7 +32,7 @@ class baseTestCase(Thread):
         self.channel = channel
 
         #init logs
-        self.logger = get_logger(self.__class__.__name__)
+        self.log = get_logger(self.__class__.__name__)
 
         #init dataBase
         self.db = dataBase(file = self.__class__.__name__, simulate = simulate)
@@ -55,7 +55,7 @@ class baseTestCase(Thread):
         raise NotImplementedError()
 
     def abort(self):
-        self.logger.debug("Aborting \"{0}\"........".format(self.__class__.__name__))
+        self.log.debug("Aborting \"{0}\"........".format(self.__class__.__name__))
         self.status = st().ABORTING
 
     def tcInit(self):

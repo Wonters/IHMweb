@@ -34,7 +34,7 @@ INSTALL_REQUIRES = [
     'Django==2.0',
     'django-bootstrap3==11.0.0',
     'etaprogress==1.1.1',
-    'gpib==1.0',
+    #'gpib==1.0',
     'hiredis==1.0.0',
     'hyperlink==19.0.0',
     'idna==2.8',

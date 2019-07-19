@@ -25,7 +25,7 @@ SECRET_KEY = '*#k_1y_@a%zw-0o3lu6bz^v57h58%(8#znf5%ca%2c4bg#^hc_'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','10.30.3.18']
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'home',
     'carac',
     'conf',
-    'calib',
+    #'calib',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +66,7 @@ TEMPLATES = [
                  os.path.join(BASE_DIR, 'carac/templates'),
                  os.path.join(BASE_DIR, 'conf/templates'),
                  os.path.join(BASE_DIR, 'home/templates'),
-                 os.path.join(BASE_DIR, 'calib/templates'),
+                 #os.path.join(BASE_DIR, 'calib/templates'),
                  os.path.join(BASE_DIR, 'switch/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -146,7 +146,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'home/static'),
     os.path.join(BASE_DIR, 'conf/static'),
     os.path.join(BASE_DIR, 'carac/static'),
-    os.path.join(BASE_DIR, 'calib/static'),
+    #os.path.join(BASE_DIR, 'calib/static'),
 )
 
 

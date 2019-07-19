@@ -19,10 +19,10 @@ from django.urls import path, include, re_path
 # url of the project ---> redicection to urls.py of each application
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('carac/', include('carac.urls')),
     path('conf/', include('conf.urls')),
-    path('calib/', include('calib.urls')),
-    path('home/', include('home.urls')),
+    #path('calib/', include('calib.urls')),
+    path('', include('home.urls')),
 ]
 
